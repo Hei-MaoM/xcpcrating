@@ -1,0 +1,18 @@
+.venv/
+.claude/
+output/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.DS_Store
+web/node_modules/
+web/dist/
+# 测试代码：保留在本地，不纳入 git（用户指定 git 只留产品代码）
+tests/
+web/e2e/
+web/playwright.config.ts
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx

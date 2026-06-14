@@ -1,0 +1,3 @@
+[submodule "vendor/srk-collection"]
+	path = vendor/srk-collection
+	url = https://github.com/algoux/srk-collection.git

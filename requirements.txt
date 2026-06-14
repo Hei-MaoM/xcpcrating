@@ -1,0 +1,5 @@
+numpy
+pytest
+# scipy is optional. validate.py falls back to a pure-numpy Spearman
+# implementation when scipy is not importable.
+scipy
