@@ -635,6 +635,12 @@ a { color: inherit; text-decoration: none; }
   flex-wrap: wrap;
 }
 .foot__note { color: var(--ink-3); font-size: 12.5px; max-width: 52ch; line-height: 1.7; }
+.foot__repo {
+  display: inline-block; margin-top: 12px; color: var(--ink-3);
+  font-size: 12.5px; letter-spacing: 0.01em;
+  border-bottom: 1px solid transparent; transition: color .18s, border-color .18s;
+}
+.foot__repo:hover { color: var(--oxford-2); border-color: var(--oxford-line); }
 .foot__links { display: flex; gap: 18px; }
 .foot__links a { color: var(--ink-2); font-size: 13px; border-bottom: 1px solid transparent; transition: all .18s; cursor: pointer; }
 .foot__links a:hover { color: var(--oxford-2); border-color: var(--oxford-line); }
