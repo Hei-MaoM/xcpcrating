@@ -41,6 +41,10 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/algoux/srk-collection /tmp/srk-collection
 
+      - name: Overlay locally-curated srk (online preliminaries not in upstream)
+        run: |
+          cp -R srk-extra/official/. /tmp/srk-collection/official/
+
       - name: Export the static data bundle
         run: |
           PYTHONPATH=src python -m xcpc_rating.export_web \

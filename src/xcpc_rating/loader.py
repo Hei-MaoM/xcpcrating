@@ -33,6 +33,16 @@ DEDUP_MIN_OVERLAP = 0.5
 # identical team count. Lower index wins (is kept).
 DEDUP_CATEGORY_PRIORITY = ("icpc", "ccpc", "provincial")
 
+# Online preliminaries (网络预选赛 / 网络选拔赛 / "... Online Contest") are
+# nationwide qualifiers that share a large fraction of their roster with every
+# onsite contest held around the same date, so the member-overlap heuristic would
+# wrongly collapse a real onsite board into the (much larger) online board. They
+# are never a dual board of anything, so they are excluded from the same-venue
+# dedup entirely. Matched case-insensitively against the title.
+DEDUP_PRELIM_TITLE_MARKERS = (
+    "网络预选", "网络选拔", "online contest", "online qualification",
+)
+
 
 class SkippedContest:
     """A contest that did not make it into the final set.
@@ -352,6 +362,12 @@ def _is_same_venue(keys_a: set, keys_b: set) -> bool:
     return overlap >= DEDUP_MIN_OVERLAP
 
 
+def _is_online_prelim(contest: Contest) -> bool:
+    """True for a nationwide online preliminary (excluded from venue dedup)."""
+    title = (contest.title or "").lower()
+    return any(marker in title for marker in DEDUP_PRELIM_TITLE_MARKERS)
+
+
 def _keep_winner(a: Contest, b: Contest) -> tuple:
     """Pick which of two same-venue boards to keep.
 
@@ -393,9 +409,14 @@ def _group_same_venue(contests: list) -> list:
 
     keys = [_member_keys(c) for c in contests]
     dates = [c.start_at.date() for c in contests]
+    prelim = [_is_online_prelim(c) for c in contests]
 
     for i in range(n):
+        if prelim[i]:
+            continue
         for j in range(i + 1, n):
+            if prelim[j]:
+                continue
             if abs((dates[i] - dates[j]).days) > DEDUP_MAX_DAY_GAP:
                 continue
             if _is_same_venue(keys[i], keys[j]):

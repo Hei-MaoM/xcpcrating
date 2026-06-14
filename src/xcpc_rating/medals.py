@@ -67,7 +67,7 @@ from decimal import Decimal
 from typing import Optional
 
 from .identity import clean_org, is_coach, player_key, resolve_i18n
-from .loader import SRK_SUFFIX, load_contests
+from .loader import SRK_SUFFIX, _is_online_prelim, load_contests
 from .model import Contest
 from .tier import (
     TIER_FINAL,
@@ -538,7 +538,8 @@ def collect_medals(
 ) -> dict:
     """Scan the in-scope boards and aggregate medals per member per tier.
 
-    The scan set is the 161 boards the rating pipeline actually consumes:
+    The scan set is the boards the rating pipeline actually consumes
+    (online preliminaries excluded -- they are qualifiers, awarding no medals):
 
     * every **scored** contest (``LoadResult.contests``) -- bucketed by its own
       prestige tier (a co-branded "X邀请赛暨Y省赛" classifies as invitational and
@@ -570,6 +571,11 @@ def collect_medals(
 
     # Scored boards -- each in its own classified tier.
     for contest in load_result.contests:
+        # Online preliminaries are qualifiers, not medal-awarding events: skip
+        # them so the ICPC default-ratio fallback does not mint phantom medals
+        # for a top-10% finish in an online round.
+        if _is_online_prelim(contest):
+            continue
         srk_dict = _load_srk(data_root, contest.id)
         tier = _classify_id(contest.id, srk_dict, contest.category)
         for member_key, color in allocate_medals(srk_dict).items():
