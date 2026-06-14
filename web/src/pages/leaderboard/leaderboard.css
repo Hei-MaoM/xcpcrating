@@ -1,0 +1,324 @@
+/*
+ * Leaderboard page (route: #/). Owns only its own surface; consumes shared
+ * tokens and the ui kit. No magic values — everything routes through tokens.
+ */
+
+/* ---------------------------- Header ---------------------------- */
+.lb__head {
+  margin-bottom: var(--space-5);
+}
+
+.lb__head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-1);
+}
+
+.lb__title {
+  font-size: var(--text-2xl);
+  margin: 0;
+}
+
+.lb__lede {
+  margin-top: var(--space-2);
+  max-width: 52ch;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+}
+
+/* --------------------------- Toolbar ---------------------------- */
+.lb__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.lb__result-count {
+  font-size: var(--text-sm);
+}
+
+/* ---------------------- School filter dropdown ------------------ */
+.school-filter {
+  position: relative;
+  display: inline-block;
+}
+
+/* Bordered shell holding the trigger and (when filtered) the clear button so
+ * the pair reads as one control. */
+.school-filter__control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.school-filter__control:hover {
+  border-color: var(--color-hairline-strong);
+}
+
+.school-filter__control[data-open='true'] {
+  border-color: var(--color-accent);
+}
+
+.school-filter__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.school-filter__trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Muted micro-label so the control reads as a school selector at a glance. */
+.school-filter__trigger-tag {
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  color: var(--color-ink-faint);
+}
+
+.school-filter__trigger-value {
+  font-weight: 600;
+  color: var(--color-ink-strong);
+  max-width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-filter__chevron {
+  flex-shrink: 0;
+  color: var(--color-ink-faint);
+  transition: transform var(--duration-fast) var(--ease-standard);
+}
+
+.school-filter__control[data-open='true'] .school-filter__chevron {
+  transform: rotate(180deg);
+}
+
+.school-filter__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: 0 var(--space-3);
+  font-size: var(--text-md);
+  line-height: 1;
+  color: var(--color-ink-faint);
+  border-left: 1px solid var(--color-hairline);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.school-filter__clear:hover {
+  color: var(--color-accent);
+}
+
+.school-filter__panel {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  z-index: var(--z-dropdown);
+  width: min(22rem, 86vw);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-pop);
+  padding: var(--space-2);
+  animation: school-filter-pop var(--duration-fast) var(--ease-out);
+}
+
+/* Entrance slides only — opacity stays 1 so the opaque surface never goes
+ * translucent over the busy table mid-animation. */
+@keyframes school-filter-pop {
+  from {
+    transform: translateY(-4px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.school-filter__search {
+  padding: var(--space-1) var(--space-1) var(--space-2);
+}
+
+.school-filter__input {
+  width: 100%;
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+
+.school-filter__input:focus {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.school-filter__input::placeholder {
+  color: var(--color-ink-faint);
+}
+
+.school-filter__list {
+  max-height: 18rem;
+  overflow-y: auto;
+}
+
+.school-filter__option {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.school-filter__option:hover,
+.school-filter__option--active {
+  background: var(--color-accent-soft);
+}
+
+.school-filter__option-name {
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.school-filter__option--selected .school-filter__option-name {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.school-filter__option-count {
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+}
+
+.school-filter__more,
+.school-filter__empty {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .school-filter__chevron,
+  .school-filter__panel {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* ------------------------- Table cells -------------------------- */
+
+/* Rank: large serif numeral. */
+.lb-rank {
+  display: inline-block;
+  font-size: var(--text-md);
+  color: var(--color-ink-strong);
+  min-width: 1.5ch;
+}
+
+.lb-name {
+  font-weight: 600;
+  color: var(--color-ink-strong);
+}
+
+/* School cell is an inline filter affordance. */
+.lb-org {
+  font: inherit;
+  color: var(--color-ink-muted);
+  text-align: left;
+  border-bottom: 1px dashed transparent;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.lb-org:hover,
+.lb-org:focus-visible {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* Primary score: slightly heavier so the ranking metric reads first. */
+.lb-rating {
+  font-weight: 700;
+  color: var(--color-ink-strong);
+}
+
+/* σ is deliberately weakened — secondary, muted, never competes with rank. */
+.lb-sigma {
+  color: var(--color-ink-faint);
+  font-size: var(--text-xs);
+}
+
+/* --------------------------- Skeleton --------------------------- */
+.lb-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-top: 1px solid var(--color-hairline-strong);
+}
+
+.lb-skeleton__row {
+  height: 3rem;
+  border-bottom: 1px solid var(--color-hairline);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-sunken) 0%,
+    var(--color-surface-hover) 50%,
+    var(--color-surface-sunken) 100%
+  );
+  background-size: 200% 100%;
+  animation: lb-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes lb-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-skeleton__row {
+    animation: none;
+    background: var(--color-surface-sunken);
+  }
+}
+
+/* --------------------------- Responsive ------------------------- */
+@media (max-width: 768px) {
+  .lb__head-row {
+    align-items: flex-start;
+  }
+  .lb__title {
+    font-size: var(--text-xl);
+  }
+}

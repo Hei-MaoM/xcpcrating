@@ -1,0 +1,5 @@
+/*
+ * The ui/ kit styling now lives in the Light Luxury design system
+ * (src/styles/global.css) since the 2026 redesign. This file is intentionally
+ * empty — kept only so the existing import in main.tsx stays valid.
+ */

@@ -1,0 +1,63 @@
+/*
+ * xcpc · rating — Light Luxury / Competition Yearbook design tokens.
+ * 全部浅色 · 冷调雪白 · 深牛津蓝单一强调 · 金银铜奖牌金属.
+ */
+
+:root {
+  /* ---- Paper / surfaces (cool alabaster — 冷调雪白) ---- */
+  --paper:        oklch(98.7% 0.004 252);   /* page base — cool white */
+  --paper-2:      oklch(96.8% 0.006 252);   /* section band */
+  --paper-sunk:   oklch(95.2% 0.008 252);   /* hover / sunken */
+  --card:         oklch(99.5% 0.0025 252);  /* raised card, near-white cool */
+
+  /* ---- Ink ---- */
+  --ink:          oklch(26% 0.013 258);     /* primary text — deep cool-neutral */
+  --ink-2:        oklch(43% 0.011 258);     /* secondary */
+  --ink-3:        oklch(60% 0.009 256);     /* tertiary / eyebrow */
+  --ink-4:        oklch(72% 0.007 256);     /* faintest / placeholder */
+
+  /* ---- Hairlines ---- */
+  --line:         oklch(90% 0.005 252);
+  --line-2:       oklch(85% 0.007 252);
+  --line-strong:  oklch(77% 0.009 252);
+
+  /* ---- Accent: deep Oxford blue ---- */
+  --oxford:       oklch(37% 0.072 252);
+  --oxford-deep:  oklch(30% 0.066 254);
+  --oxford-2:     oklch(46% 0.082 250);
+  --oxford-tint:  oklch(95.5% 0.022 250);  /* selected row wash */
+  --oxford-line:  oklch(88% 0.030 250);
+
+  /* ---- Medal metals ---- */
+  --gold:         oklch(70% 0.108 82);
+  --gold-deep:    oklch(58% 0.098 78);
+  --silver:       oklch(74% 0.014 250);
+  --silver-deep:  oklch(62% 0.012 252);
+  --bronze:       oklch(60% 0.085 56);
+  --bronze-deep:  oklch(50% 0.078 54);
+
+  /* ---- Semantic, colorblind-safe (Okabe-Ito derived) ---- */
+  --up:           oklch(56% 0.105 168);    /* better than expected — bluish green */
+  --up-soft:      oklch(94% 0.040 168);
+  --down:         oklch(57% 0.155 42);     /* worse — vermillion */
+  --down-soft:    oklch(94% 0.045 45);
+
+  /* ---- Radius ---- */
+  --r-xs: 2px;
+  --r-sm: 3px;
+  --r-md: 5px;
+  --r-pill: 999px;
+
+  /* ---- Shadows — nearly invisible float ---- */
+  --shadow-sm: 0 1px 2px oklch(40% 0.02 60 / 0.05);
+  --shadow-md: 0 12px 30px -16px oklch(35% 0.03 60 / 0.20), 0 2px 6px -2px oklch(35% 0.03 60 / 0.06);
+  --shadow-lg: 0 28px 60px -28px oklch(32% 0.03 60 / 0.30), 0 4px 12px -4px oklch(35% 0.03 60 / 0.08);
+
+  /* ---- Type ---- */
+  --serif: "Noto Serif SC", "Songti SC", serif;
+  --sans:  "Noto Sans SC", -apple-system, "PingFang SC", system-ui, sans-serif;
+
+  /* ---- Editorial measure ---- */
+  --measure: 1240px;
+  --gutter: 88px;
+}

@@ -1,0 +1,359 @@
+/*
+ * Player detail page styles. Newspaper data direction — serif name display,
+ * tabular numerals, hairline dividers, single Oxford-blue accent.
+ * All values pull from tokens.css.
+ */
+
+.player-page > * + * {
+  margin-top: var(--space-7);
+}
+
+/* ============================ Header ============================ */
+.player-header {
+  border-bottom: 1px solid var(--color-hairline-strong);
+  padding-bottom: var(--space-5);
+}
+
+.player-header__name {
+  font-family: var(--font-serif);
+  font-size: var(--text-display);
+  font-weight: 900;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--color-ink-strong);
+  margin-top: var(--space-1);
+}
+
+.player-header__org {
+  font-size: var(--text-md);
+  margin-top: var(--space-1);
+}
+
+/* ---- Score card (C / elo_mmr) ---- */
+.player-scores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.player-score {
+  flex: 1 1 12rem;
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.player-score--c {
+  border-left: 3px solid var(--color-accent);
+}
+
+.player-score__tag {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+}
+
+.player-score__value {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--color-ink-strong);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.player-score__hint {
+  font-size: var(--text-xs);
+  color: var(--color-ink-faint);
+}
+
+/* ---- Metric strip ---- */
+.player-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5) var(--space-7);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.player-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-metric__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.player-metric__value {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.player-metric__sub {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+/* ---- Tiered medals (金 / 银 / 铜 by prestige tier) ---- */
+.player-medals {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-hairline);
+}
+
+.player-medals__label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.player-medals__empty {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+}
+
+.player-medals__rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.player-medals__row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
+
+.player-medals__tier {
+  flex: 0 0 4.5rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.player-medals__chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* A single 金/银/铜 chip: small semantic-color dot + label + tabular count.
+   The award color is restrained to the dot and the count digits; no big
+   color blocks (per the design brief). Zero counts dim to a faint dash-like
+   state so the row keeps a stable three-color shape. */
+.medal-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4ch;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.medal-chip__dot {
+  align-self: center;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.medal-chip__label {
+  color: var(--color-ink-muted);
+  font-weight: 600;
+}
+
+.medal-chip__count {
+  font-weight: 700;
+}
+
+.medal-chip--gold .medal-chip__dot {
+  background: var(--color-gold);
+}
+.medal-chip--gold .medal-chip__count {
+  color: var(--color-gold);
+}
+
+.medal-chip--silver .medal-chip__dot {
+  background: var(--color-silver);
+}
+.medal-chip--silver .medal-chip__count {
+  color: var(--color-silver);
+}
+
+.medal-chip--bronze .medal-chip__dot {
+  background: var(--color-bronze);
+}
+.medal-chip--bronze .medal-chip__count {
+  color: var(--color-bronze);
+}
+
+/* Zero in this color: drain the accent so the eye reads it as "none" without
+   removing the chip (keeps金银铜 columns aligned across rows). */
+.medal-chip.is-empty .medal-chip__dot {
+  background: var(--color-hairline-strong);
+}
+.medal-chip.is-empty .medal-chip__count {
+  color: var(--color-ink-faint);
+}
+
+/* ============================ Sections ============================ */
+.player-section__head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.player-section__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-ink-strong);
+}
+
+.player-section__caption {
+  font-size: var(--text-sm);
+}
+
+/* ============================ Chart ============================ */
+.rating-chart {
+  width: 100%;
+  height: clamp(300px, 24rem + 4vw, 420px);
+}
+
+.rating-chart--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: clamp(220px, 18rem, 280px);
+  border: 1px dashed var(--color-hairline-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+  text-align: center;
+  padding: var(--space-5);
+}
+
+.rating-chart__empty-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.rating-chart__empty-hint {
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  max-width: 28rem;
+}
+
+/* ============================ History table cells ============================ */
+.link-contest {
+  color: var(--color-ink);
+  border-bottom: 1px solid transparent;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.link-contest:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.hist-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5ch;
+}
+
+.hist-rank__sep {
+  color: var(--color-ink-faint);
+}
+
+.hist-perf {
+  font-weight: 600;
+  color: var(--color-ink-strong);
+}
+
+/* ============================ Shared links / 404 ============================ */
+.link-accent {
+  color: var(--color-accent);
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.link-accent:hover {
+  color: var(--color-accent-hover);
+}
+
+.player-404__code {
+  font-size: var(--text-display);
+  font-weight: 900;
+  color: var(--color-hairline-strong);
+  letter-spacing: 0.02em;
+  margin-top: var(--space-1);
+}
+
+.player-404__key {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--color-surface-sunken);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.4em;
+}
+
+.player-404__actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.player-404__hint {
+  font-size: var(--text-sm);
+}
+
+/* ============================ Responsive ============================ */
+@media (max-width: 768px) {
+  .player-meta {
+    gap: var(--space-4) var(--space-5);
+  }
+  .player-section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+}
