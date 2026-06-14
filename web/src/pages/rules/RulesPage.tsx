@@ -73,7 +73,7 @@ export default function RulesPage() {
           <div className="frow">
             <span className="frow__label">步长 k</span>
             <div className="frow__eq serif">
-              k = min( 0.50 × w,&nbsp; 0.85 )
+              k = min( 0.40 × w,&nbsp; 0.85 )
             </div>
           </div>
           <div className="frow">

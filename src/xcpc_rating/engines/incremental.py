@@ -107,7 +107,7 @@ INITIAL_EXPECT = 1400.0
 # Base step size toward each contest's performance, scaled by the tier prestige
 # weight. Larger = faster climbing (bigger per-contest swings); the per-tier net
 # target (see TIER_NET_TARGET) governs how much the pool inflates regardless.
-K_BASE = 0.50
+K_BASE = 0.40
 
 # Newcomer step boost (adaptive K): a player's n-th contest uses
 #   k_eff = K_BASE * tier_weight * (1 + EARLY_BOOST * EARLY_FADE^n)
