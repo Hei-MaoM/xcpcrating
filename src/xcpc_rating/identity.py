@@ -13,6 +13,11 @@ import unicodedata
 # or not) and used to drop the member from the team entirely.
 _COACH_RE = re.compile(r"(教练|教練|领队|領隊|coach|advisor)", re.IGNORECASE)
 
+# Member roles that mark a non-contestant. Newer datasets carry an explicit
+# ``role`` field on each member (e.g. {"name": ..., "role": "coach"}) instead
+# of tagging the name; matched case-insensitively against the same markers.
+_COACH_ROLES = {"coach", "advisor", "manager", "mentor", "教练", "教練", "领队", "領隊"}
+
 # Parenthetical segments to strip from identity names: both CJK full-width
 # brackets （...） and ASCII (...), including the brackets themselves.
 _PAREN_RE = re.compile(r"（[^（）]*）|\([^()]*\)")
@@ -59,10 +64,14 @@ def strip_parens(text: str) -> str:
 def is_coach(member: dict) -> bool:
     """Return True if a raw member dict represents a coach / advisor.
 
-    Detected via a truthy ``coach`` field on the member dict, or a coach
-    marker anywhere in the resolved raw name (inside or outside brackets).
+    Detected via a truthy ``coach`` field, an explicit ``role`` field
+    (e.g. "coach"), or a coach marker anywhere in the resolved raw name
+    (inside or outside brackets).
     """
     if member.get("coach"):
+        return True
+    role = resolve_i18n(member.get("role")).strip().lower()
+    if role in _COACH_ROLES:
         return True
     raw_name = resolve_i18n(member.get("name"))
     return bool(_COACH_RE.search(raw_name))
