@@ -177,11 +177,7 @@ export default function LeaderboardPage() {
                         }
                       >
                         <td>
-                          {r.rank <= 3 ? (
-                            <span className={`medal-rank medal-rank--${r.rank}`}>{r.rank}</span>
-                          ) : (
-                            <span className="rank">{r.rank}</span>
-                          )}
+                          <span className="rank">{r.rank}</span>
                         </td>
                         <td>
                           <span className="player-name">{r.name}</span>

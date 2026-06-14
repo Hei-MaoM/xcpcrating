@@ -39,11 +39,7 @@ function MemberList({ members }: { members: ContestTeam['members'] }) {
 }
 
 function RankCell({ rank }: { rank: number }) {
-  return rank <= 3 ? (
-    <span className={`medal-rank medal-rank--${rank}`}>{rank}</span>
-  ) : (
-    <span className="rank">{rank}</span>
-  )
+  return <span className="rank">{rank}</span>
 }
 
 function ResultsTable({ teams }: { teams: ContestTeam[] }) {
