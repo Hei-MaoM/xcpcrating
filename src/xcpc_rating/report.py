@@ -245,13 +245,12 @@ def _final_config_summary():
     those engines were removed -- only the incremental ladder remains.
     """
     from .engines import incremental as c
-    from .engines.incremental import IncrementalEngine
     from . import tier
 
     weights = tier.TIER_WEIGHTS
     gates = c.TIER_GATES
     floors = c.TIER_FIELD_FLOOR
-    injection = getattr(IncrementalEngine(), "final_avg_injection", None)
+    net_target = c.TIER_NET_TARGET
 
     def _v(value):
         """Render a gate/floor value, or 无 (none) for an absent threshold."""
@@ -266,20 +265,16 @@ def _final_config_summary():
     )
     lines.append(
         f"| 记分引擎 | incremental（阶梯） | 人人从 E={c.INITIAL_EXPECT:g} 起步，"
-        "逐场 E += K·权重·(表现分 − E)，展示分从 0 爬升 |"
+        "逐场 E += K·权重·(表现分 − E)，展示分即 E |"
     )
     lines.append(
-        f"| 表现分 | CF 纯口径（几何均值反解） | "
-        f"冠军额外 self-excluded top-{c.CHAMP_TOPK} 锚点 solve |"
+        "| 表现分 | CF 纯口径（几何均值反解） | "
+        "全场名次统一走 m=√(seed×名次) 反解，无冠军特判；"
+        "显示为减去团队偏移后的个人表现分 |"
     )
     lines.append(
-        f"| 步长 K | 基础 {c.K_BASE:g} / 新秀提速 ×{c.EARLY_BOOST:g}"
-        f"（衰减 {c.EARLY_FADE:g}）/ 上限 {c.K_MAX:g} | "
-        "少场次精英更快收敛 |"
-    )
-    lines.append(
-        f"| 新秀展示偏移 | {c.NEWCOMER_OFFSET:g}·{c.NEWCOMER_FADE:g}^n | "
-        "展示分 = max(0, E − 偏移)，约 3-4 场收敛到 E |"
+        f"| 步长 K | 基础 {c.K_BASE:g} / 上限 {c.K_MAX:g} | "
+        "步长与场次无关，相同近况收敛到同一分 |"
     )
     lines.append(
         f"| 层级系数 | final {weights[tier.TIER_FINAL]:g} / "
@@ -297,16 +292,19 @@ def _final_config_summary():
         f"| 场强地板 field floor | 区域赛 {_v(floors['regional'])} / "
         f"邀请赛 {_v(floors['invitational'])} / "
         f"省赛 {_v(floors['provincial'])} / final {_v(floors['final'])} | "
-        "弱尾队伍强度抬升至地板后再反解表现分，拉开区域赛/邀请赛区分度 |"
+        "已停用（与零和防通胀冲突，改用按档净注入） |"
     )
     lines.append(
-        f"| Final 均值注入 | 全员步长平移使本场平均变化 ≈ 人数×{_v(injection)} | "
-        "保证打 Final 的整体上分 |"
+        f"| 防通胀 / 按档净注入 | final {net_target[tier.TIER_FINAL]:g} / "
+        f"regional {net_target[tier.TIER_REGIONAL]:g} / "
+        f"invitational {net_target[tier.TIER_INVITATIONAL]:g} / "
+        f"provincial {net_target[tier.TIER_PROVINCIAL]:g} | "
+        "全场调整统一平移使本场净和=该档目标；省赛 0（零和守恒），高档注入正分 |"
     )
     lines.append("")
     lines.append(
-        "> 语义：人人从 0 起步、逐场累积的阶梯分。低于预期不涨分（达预期不扣分），"
-        "整体偏通缩；省赛/邀请赛设 gate 与 field floor 拉开层级区分度。\n"
+        "> 语义：人人从 1400 起步、逐场累积的阶梯分。达预期（名次≤预测）不扣分；"
+        "防通胀按档净注入 —— 省赛零和守恒、高档注入正分，配合权重与 gate 拉开层级区分度。\n"
     )
     return lines
 

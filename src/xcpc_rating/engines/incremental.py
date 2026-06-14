@@ -1,14 +1,14 @@
 """Incremental ladder rating engine (the single scoring rule).
 
-Everyone displays from 0 and carries an internal expected performance ``E``; the
-score is built up contest by contest. Per contest the rating takes one bounded
-step toward the performance the player achieved, so old results fade
-geometrically (each update keeps ``1 - K`` of the past) rather than being
-dropped, and a single number fully describes a player.
+Everyone starts at 1400; the displayed score is the internal expected
+performance ``E`` itself. Per contest the rating takes one bounded step toward
+the performance the player achieved, so old results fade geometrically (each
+update keeps ``1 - K`` of the past) rather than being dropped, and a single
+number fully describes a player.
 
 The rules (one line of the update each)
 ---------------------------------------
-* **Internal expectation** ``E`` starts at ``INITIAL_EXPECT`` (1500). Everything
+* **Internal expectation** ``E`` starts at ``INITIAL_EXPECT`` (1400). Everything
   field-related uses ``E``: LSE team strength, seeds / performance inversion
   (shared :mod:`xcpc_rating.perf`), predicted ranks, and ``predict_scores``.
 * **Update**: ``E += K * tier_weight * (perf - E)`` -- a bounded step toward this
@@ -19,16 +19,19 @@ The rules (one line of the update each)
 * **达预期不扣分**: a team whose actual rank <= pre-contest predicted rank has its
   step floored at 0 -- meeting or beating expectation never deducts. Champions
   always qualify; under-performers take the full signed step.
+* **Anti-inflation injection**: after the raw steps, the whole field is shifted
+  uniformly so the contest nets the tier's target (``TIER_NET_TARGET``). A
+  provincial nets 0 -- strictly zero-sum, so the mean stays at 1400 and merely
+  meeting expectation breaks even -- while regionals / invitationals / finals
+  inject net points, making a higher-prestige tier worth more over a season.
 * **Eligibility gates**: a provincial contest only counts for players whose
   pre-contest ``E`` is below the provincial gate, an invitational below the
   invitational gate; regionals and finals are unrestricted. A gated-out row
   changes nothing (no step, no rated-contest count) but stays visible with its
-  performance. ``contests`` counts rated contests (drives the boost and the
-  newcomer fade); ``played`` counts all participation (the public 场次).
-* **Display from 0**: ``display = max(0, E - NEWCOMER_OFFSET * NEWCOMER_FADE^n)``
-  where ``n`` is rated contests played, so a fresh player displays exactly 0 and
-  the offset fades geometrically until a veteran displays ~``E``. Expectation and
-  prediction always use ``E``, never the display value.
+  performance. ``contests`` counts rated contests; ``played`` counts all
+  participation (the public 场次).
+* **Display**: the displayed score is the raw ``E`` itself (a fresh player shows
+  1400). Expectation and prediction use the same ``E``.
 
 Geometric forgetting is built into the update, so nothing is ever deleted; an
 optional idle-decay term regresses a long-idle ``E`` toward the prior.
@@ -44,7 +47,7 @@ from .base import PlayerRating, RatingEngine
 # Final-tier opponent-field floor. Used only on Final-tier performance solves,
 # and only behind the off-by-default ``use_final_floor`` switch and the
 # non-cf-pure champion-anchor branch, so a default Final never touches it.
-FINAL_FIELD_FLOOR = 2800.0
+FINAL_FIELD_FLOOR = 2700.0
 
 
 def rerank_1224(teams) -> list:
@@ -97,19 +100,21 @@ def predicted_ranks(strengths) -> list:
         prev_strength = s
     return ranks
 
-# Initial expected performance: a fresh player's internal expectation, used for
-# team strength / seeding / prediction from contest one.
-INITIAL_EXPECT = 1500.0
+# Initial expected performance: a fresh player's internal expectation and starting
+# displayed score, used for team strength / seeding / prediction from contest one.
+INITIAL_EXPECT = 1400.0
 
 # Base step size toward each contest's performance, scaled by the tier prestige
-# weight.
-K_BASE = 0.30
+# weight. Larger = faster climbing (bigger per-contest swings); the per-tier net
+# target (see TIER_NET_TARGET) governs how much the pool inflates regardless.
+K_BASE = 0.50
 
 # Newcomer step boost (adaptive K): a player's n-th contest uses
 #   k_eff = K_BASE * tier_weight * (1 + EARLY_BOOST * EARLY_FADE^n)
-# capped at K_MAX. Early contests move the expectation fast so a few-contest elite
-# converges quickly; veterans settle to the steady K. Boost of 0 disables.
-EARLY_BOOST = 1.5
+# capped at K_MAX. Disabled (0) so step size is experience-independent: two players
+# with identical recent results converge to the same rating regardless of how many
+# earlier contests each has played.
+EARLY_BOOST = 0.0
 EARLY_FADE = 0.5
 K_MAX = 0.85
 
@@ -120,22 +125,15 @@ K_MAX = 0.85
 # the newcomer boost, and capped at K_MAX:
 #   k_eff = K_BASE * tier_weight * (1 + EARLY_BOOST*EARLY_FADE^n + gap_boost)
 #   gap_boost = GAP_BOOST_MAX * (1 - 0.5^(beyond_grace_days / GAP_HALFLIFE_DAYS))
-# A gap within GAP_GRACE_DAYS adds nothing, so normal multi-event seasons are
-# untouched; only a genuine long absence inflates the step. GAP_BOOST_MAX = 0
-# disables. Values are tunable via the constructor.
-GAP_BOOST_MAX = 1.0
+# A gap within GAP_GRACE_DAYS adds nothing; only a genuine long absence would
+# inflate the step. Disabled by default (0) -- step size depends only on results,
+# not on how long a player was away. Tunable via the constructor.
+GAP_BOOST_MAX = 0.0
 GAP_GRACE_DAYS = 200.0
 GAP_HALFLIFE_DAYS = 180.0
 
 # Champion-solve opponent pool size (used only on the non-cf-pure branch).
 CHAMP_TOPK = 10
-
-# Newcomer display offset: display = max(0, E - OFFSET * FADE^n). OFFSET equals
-# INITIAL_EXPECT so contest count 0 displays exactly 0; FADE sets how many
-# contests it takes to surface a player's real level (a debut leaves 600, ~38
-# after the 4th contest).
-NEWCOMER_OFFSET = 1500.0
-NEWCOMER_FADE = 0.4
 
 # Idle decay: E regresses toward INITIAL_EXPECT by this factor per 30 idle days
 # beyond the grace period, so a long-retired player fades off the board head
@@ -164,21 +162,41 @@ TEAM_SCALE_OFFSET = perf.lse_aggregate([INITIAL_EXPECT] * GHOST_TEAM_SIZE) - INI
 TIER_GATES = {
     "final": None,
     "regional": None,
-    "invitational": 2150.0,
-    "provincial": 1950.0,
+    "invitational": 2000.0,
+    "provincial": 1800.0,
 }
 
-# Tiered field floor: before reverse-solving performance, lift every team's
-# pre-contest LSE strength to ``max(S, floor_t)`` for tier t (None = no floor).
-# Only the weak tail is raised; teams above the floor keep their own strength.
-# Treating a regional as a structurally stronger pool than an invitational lets
-# the same rank reverse-solve a higher performance, so the tiers pull apart in
-# discrimination. This is not FINAL_FIELD_FLOOR, which raised every team uniformly.
+# Tiered field floor: optionally lift every team's pre-contest LSE strength to
+# ``max(S, floor_t)`` for tier t before solving performance (None = no floor).
+# Disabled by default: under the zero-sum anti-inflation pass a uniform field
+# lift is cancelled out (and a partial lift just redistributes from the top to
+# the floored tail), so a floor cannot durably pull the tiers apart. A caller
+# may still pass an explicit dict.
 TIER_FIELD_FLOOR = {
     "final": None,
-    "regional": 1900.0,
-    "invitational": 1600.0,
+    "regional": None,
+    "invitational": None,
     "provincial": None,
+}
+
+# Per-tier net injection: the total rating points a single contest of this tier
+# adds to the pool, shared uniformly across its participants by the first
+# anti-inflation pass. 0 reproduces the strict zero-sum behaviour (the mean is
+# conserved, nobody is taxed just for showing up); a positive value makes the
+# tier worth net points so its players drift up over a season -- the high-prestige
+# events (regionals, finals) inject, the rest stay conserved.
+TIER_NET_TARGET = {
+    "final": 20000.0,
+    "regional": 15000.0,
+    "invitational": 10000.0,
+    "provincial": 0.0,
+}
+
+# Voided contests: displayed in full (standings, performance) but producing no
+# rating change for anyone -- every row is treated as display-only participation.
+# Maps contest id to the reason shown on the contest page.
+UNRATED_CONTESTS = {
+    "ccpc/ccpc2026/ccpc2026invitational-guizhou": "本场比赛存在假题，记分 unrated",
 }
 
 
@@ -221,14 +239,9 @@ def predicted_ranks_midpoint(strengths) -> list:
     return ranks
 
 
-def newcomer_offset(contests: int) -> float:
-    """The display deduction after ``contests`` rated contests (fades to ~0)."""
-    return NEWCOMER_OFFSET * (NEWCOMER_FADE ** contests)
-
-
 def display_score(expect: float, contests: int) -> float:
-    """User-facing score: expectation minus the fading newcomer offset, >= 0."""
-    return max(0.0, expect - newcomer_offset(contests))
+    """User-facing score: the raw internal expectation ``E`` (starts at 1400)."""
+    return expect
 
 
 class IncrementalEngine(RatingEngine):
@@ -245,10 +258,11 @@ class IncrementalEngine(RatingEngine):
                  use_final_floor: bool = False,
                  final_avg_injection: float | None = 10.0,
                  team_relative_step: bool = False,
-                 # When True the recorded/displayed performance is also shifted
-                 # onto the individual scale; by default it stays team-scale and
-                 # only the step is rebased (via individual_gain below).
-                 member_scale_perf: bool = False,
+                 # When True the recorded / displayed performance is shifted onto
+                 # the individual scale (team performance minus the per-team-size
+                 # offset), so the shown 表现分 is directly comparable to player
+                 # ratings. The step is identical either way. Production default.
+                 member_scale_perf: bool = True,
                  baseline_floor: bool = False,
                  # When True the step (加减分) is computed on the individual scale:
                  # it subtracts the team LSE offset so a member is judged by whether
@@ -269,6 +283,8 @@ class IncrementalEngine(RatingEngine):
                  tier_field_floor: dict | None = None,
                  gate_removes_from_field: bool = True,
                  tier_gates: dict | None = None,
+                 # Per-tier net injection (see TIER_NET_TARGET). None => default.
+                 tier_net_target: dict | None = None,
                  gap_boost_max: float = GAP_BOOST_MAX,
                  gap_grace_days: float = GAP_GRACE_DAYS,
                  gap_halflife_days: float = GAP_HALFLIFE_DAYS,
@@ -342,6 +358,10 @@ class IncrementalEngine(RatingEngine):
         # caller may pass its own dict.
         self.tier_gates = (
             tier_gates if tier_gates is not None else TIER_GATES
+        )
+        # Per-tier net injection (see TIER_NET_TARGET). None => module default.
+        self.tier_net_target = (
+            tier_net_target if tier_net_target is not None else TIER_NET_TARGET
         )
         # Time-gap step boost parameters (see GAP_* constants). gap_boost_max=0
         # disables the mechanism.
@@ -461,6 +481,9 @@ class IncrementalEngine(RatingEngine):
         k_tier = self.k_base * TIER_WEIGHTS[tier]
         cap = TIER_CAPS[tier]
         is_final = tier == TIER_FINAL
+        # Voided contest: keep every team in the field (standings / performance
+        # still render) but apply no rating step to anyone below.
+        unrated = contest.id in UNRATED_CONTESTS
 
         # Gate-removes-from-field: when gates are on and the switch is set, a team
         # fully above the tier gate (every member's pre-contest E >= gate) is
@@ -468,7 +491,7 @@ class IncrementalEngine(RatingEngine):
         # or enter the performance inversion. Such a team still counts as played
         # but records no performance and never scores. Ghost / roster-less teams
         # are always kept (they seed the pool).
-        if self.use_gates and self.gate_removes_from_field:
+        if self.use_gates and self.gate_removes_from_field and not unrated:
             gate = self.tier_gates[tier]
             in_field = []
             removed = []
@@ -535,12 +558,19 @@ class IncrementalEngine(RatingEngine):
         for team, perf_i, rank_i, predicted, strength_i in zip(
                 teams, performances, ranks, predictions, strengths):
             perf_value = float(perf_i)
+            # Team -> individual scale offset for THIS team's actual roster size
+            # (400*log10(n): 1-person 0, 2-person ~120.4, 3-person ~190.85). Must
+            # be per-team -- a fixed 3-person offset over-penalizes 1-/2-person
+            # teams (their performance gets too much subtracted, so even a winner
+            # can lose points).
+            n_members = len(team.members)
+            team_offset = perf.lse_aggregate([0.0] * n_members) if n_members else 0.0
             if self.member_scale_perf:
                 # Re-base the team-scale performance onto the individual scale so
                 # the step is measured against a comparable quantity. Uniform
                 # shift => seeds / predicted ranks unchanged; recorded as last_perf
                 # too (individual-scale export).
-                perf_value -= TEAM_SCALE_OFFSET
+                perf_value -= team_offset
             met = rank_i <= predicted
             for member in team.members:
                 state = self._players.get(member.key)
@@ -565,6 +595,11 @@ class IncrementalEngine(RatingEngine):
                 # Idle decay materializes on touch: the update steps from the
                 # decayed level, and last_at advances to this contest.
                 expect = self._decayed_expect(state, now)
+                if unrated:
+                    # Voided contest: display-only for everyone (perf recorded
+                    # above, but no step and no rated-contest count).
+                    state["last_at"] = now
+                    continue
                 if self.use_gates:
                     # Eligibility gate: this tier only counts below its gate;
                     # otherwise nothing happens (no step, no rated count -- the row
@@ -620,7 +655,7 @@ class IncrementalEngine(RatingEngine):
                     # member_scale_perf already rebased perf_value.
                     gain_perf = perf_value
                     if self.individual_gain and not self.member_scale_perf:
-                        gain_perf = perf_value - TEAM_SCALE_OFFSET
+                        gain_perf = perf_value - team_offset
                     step = k_eff * (gain_perf - expect)
                 if met and step < 0.0:
                     # 达预期不扣分: meeting or beating expectation never deducts.
@@ -652,30 +687,35 @@ class IncrementalEngine(RatingEngine):
                     step = min(expect + step, ceiling) - expect
                 pending.append((state, expect, step))
 
-        # Final-tier average-change injection: shift every counted member's step
-        # uniformly so the mean step equals ``final_avg_injection``. Applied after
-        # the met-expectation floor, so a met team can move slightly negative on a
-        # Final when the field ran hot while the pool's growth stays at n*x.
-        inc = 0.0
-        if (is_final and self.final_avg_injection is not None and pending):
-            mean_step = sum(s for _st, _e, s in pending) / len(pending)
-            inc = self.final_avg_injection - mean_step
-        for state, expect, step in pending:
-            state["expect"] = expect + step + inc
-            state["contests"] += 1
-            state["last_at"] = now
+        # Anti-inflation adjustment, applied to EVERY contest: shift every change
+        # uniformly so the field nets to the tier's target injection. With a target
+        # of 0 the contest is strictly zero-sum (mean conserved, nobody taxed just
+        # for showing up); a positive target makes the whole field net that many
+        # points, shared uniformly, so a high-prestige tier is worth net rating
+        # while the distribution still spreads freely (over-performers rise faster
+        # than under-performers fall). 达预期不扣分 stays meaningful since there is
+        # no flat tax eating the floored step.
+        n = len(pending)
+        if n:
+            target = self.tier_net_target[tier]
+            inc = (target - sum(s for _st, _e, s in pending)) / n
+            for state, expect, step in pending:
+                state["expect"] = expect + step + inc
+                state["contests"] += 1
+                state["last_at"] = now
 
     def leaderboard(self, min_contests: int = 1) -> list:
         entries = []
         for key, state in self._players.items():
             # The public 场次 is every participated contest (gated display-only
-            # rows included), matching the player page's history length; the
-            # newcomer fade still runs on rated contests only.
+            # rows included), matching the player page's history length;
+            # ``contests`` separately counts only rated contests.
             played = state.get("played", state["contests"])
             if played < min_contests:
                 continue
-            # Board semantics: current state as of the corpus's latest contest --
-            # idle players decay toward the initial expectation.
+            # Board semantics: current state as of the corpus's latest contest.
+            # Idle decay (off by default) would regress a long-idle E toward the
+            # prior; while disabled, _decayed_expect returns E unchanged.
             expect = self._decayed_expect(state, self._now)
             entries.append(
                 PlayerRating(

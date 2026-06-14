@@ -54,15 +54,17 @@ TIER_INVITATIONAL = "invitational"
 TIER_PROVINCIAL = "provincial"
 
 # Per-tier prestige weight: the multiplier on a contest's step before it updates
-# a member's rating. ``regional`` is the 1.0 baseline. A Final moves a rating
-# faster than other tiers (both up and down); regional / invitational / provincial
-# all sit at 1.0, since the eligibility gates already express tier admission and
-# the weight should not double-compress the mid-tier population.
+# a member's rating. It scales how far a single result moves a rating (both up and
+# down), so a high-prestige tier separates the field faster while a low-prestige
+# tier moves ratings little. Finals and regionals -- the events strong players
+# actually contest every season -- carry the most weight; invitationals and
+# provincials are damped so they barely shift a rating (provincials are gated as
+# well). This is what pulls the tiers apart in the standings.
 TIER_WEIGHTS = {
     TIER_FINAL: 1.5,
-    TIER_REGIONAL: 1.0,
-    TIER_INVITATIONAL: 1.0,
-    TIER_PROVINCIAL: 1.0,
+    TIER_REGIONAL: 1.3,
+    TIER_INVITATIONAL: 0.8,
+    TIER_PROVINCIAL: 0.7,
 }
 
 # Per-tier rating ceiling (legacy cap mechanism). A contest of tier ``t`` cannot

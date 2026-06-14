@@ -22,8 +22,9 @@ _COACH_ROLES = {"coach", "advisor", "manager", "mentor", "教练", "教練", "�
 # brackets （...） and ASCII (...), including the brackets themselves.
 _PAREN_RE = re.compile(r"（[^（）]*）|\([^()]*\)")
 
-# i18n preference order when a field is an internationalization dict.
-_I18N_ORDER = ("fallback", "zh-CN", "en")
+# i18n preference order when a field is an internationalization dict: prefer the
+# Simplified-Chinese form when present, then the fallback, then English.
+_I18N_ORDER = ("zh-CN", "fallback", "en")
 
 
 def resolve_i18n(value) -> str:

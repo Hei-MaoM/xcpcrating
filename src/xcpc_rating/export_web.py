@@ -47,6 +47,7 @@ from datetime import datetime, timezone
 from . import perf
 from .engines.incremental import INITIAL_EXPECT as PRIOR_MU
 from .engines.incremental import (
+    UNRATED_CONTESTS,
     IncrementalEngine,
     display_score,
     rerank_1224,
@@ -226,8 +227,8 @@ def _perf_tail(engine: IncrementalEngine, member_key: str):
 def _display_state(engine: IncrementalEngine, member_key: str):
     """Ladder ``(display, expect, contests)`` for a member, or ``None``.
 
-    ``display`` is the user-facing score (expectation minus the fading newcomer
-    offset, "从0开始"); ``expect`` is the internal expectation E.
+    ``display`` is the user-facing score, which is the raw expectation ``E``
+    itself (everyone starts at 1400); ``expect`` is that same internal ``E``.
     """
     state = engine._players.get(member_key)  # noqa: SLF001 - read-only snapshot
     if state is None:
@@ -275,12 +276,11 @@ def _team_mu_delta(
 
     ``pre_member_expect`` maps member key -> that member's pre-update expectation
     ``E`` (INITIAL_EXPECT for never-seen players). The post-update ``E`` is read
-    back from the engine after it processed the contest, so the 变化 column is
-    the team's *real* internal movement -- not the newcomer "display unlock" (a
-    debut's display jumping ~+600 as the fading offset peels off). A member gated
-    out of the contest keeps the same ``E`` and so contributes 0, matching the
-    existing behaviour. Returns the mean per-member delta, or ``None`` for a
-    ghost team (no roster).
+    back from the engine after it processed the contest, so the 变化 column is the
+    team's real internal movement (display == ``E``, so this is also the displayed
+    change). A member gated out of the contest keeps the same ``E`` and so
+    contributes 0. Returns the mean per-member delta, or ``None`` for a ghost team
+    (no roster).
     """
     if not team.members:
         return None
@@ -472,6 +472,8 @@ def replay_and_collect(contests, data_root: str):
                 "category": contest.category,
                 "teamCount": len(contest.teams),
                 "concordance": _round(conc) if conc is not None else None,
+                "unrated": contest.id in UNRATED_CONTESTS,
+                "unratedNote": UNRATED_CONTESTS.get(contest.id),
                 "teams": team_docs,
                 "_champion": champion,
             }
@@ -787,6 +789,7 @@ def write_bundle(out_dir, contest_docs, records, engine, official_board=None):
                 "category": doc["category"],
                 "teamCount": doc["teamCount"],
                 "champion": doc["_champion"],
+                "unrated": doc.get("unrated", False),
             }
         )
         detail = {k: v for k, v in doc.items() if k != "_champion"}
