@@ -382,6 +382,19 @@ a { color: inherit; text-decoration: none; }
 .team-name { font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--ink); }
 .members { font-size: 13.5px; }
 .detail-tbl tbody td { height: 58px; }
+
+/* voided-contest notice (e.g. leaked problems → scored unrated) */
+.unrated-banner {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 18px; border-radius: var(--r-md);
+  background: oklch(95% 0.04 56); border: 1px solid oklch(86% 0.06 56);
+  color: var(--bronze-deep); font-size: 14px; font-weight: 500;
+}
+.unrated-banner__tag {
+  flex-shrink: 0; height: 22px; padding: 0 9px; display: inline-flex; align-items: center;
+  border-radius: var(--r-xs); background: var(--bronze-deep); color: var(--paper);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+}
 .tabpane { animation: pageIn .35s cubic-bezier(.2,.7,.2,1) both; }
 .legend { display: flex; gap: 22px; padding: 18px 4px 0; color: var(--ink-3); font-size: 12.5px; }
 .legend__item { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }

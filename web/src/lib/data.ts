@@ -47,6 +47,8 @@ export interface ContestIndexEntry {
   category: string
   teamCount: number
   champion: Champion
+  /** Voided contest (e.g. leaked problems): displayed but scored unrated. */
+  unrated?: boolean
 }
 
 /* ------------------------------------------------------------------ *
@@ -107,6 +109,10 @@ export interface ContestDetail {
   teamCount: number
   /** Pre-contest prediction hit-rate for this contest; null when undefined. */
   concordance: number | null
+  /** Voided contest (e.g. leaked problems): displayed but scored unrated. */
+  unrated?: boolean
+  /** Reason shown on the contest page when unrated. */
+  unratedNote?: string | null
   teams: ContestTeam[]
 }
 

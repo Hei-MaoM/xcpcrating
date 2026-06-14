@@ -290,6 +290,15 @@ export default function ContestDetailPage() {
         </div>
       </section>
 
+      {contest.unrated ? (
+        <section className="wrap" style={{ paddingBottom: 12 }}>
+          <div className="unrated-banner" role="note">
+            <span className="unrated-banner__tag">UNRATED</span>
+            <span>{contest.unratedNote ?? '本场比赛记分 unrated'}</span>
+          </div>
+        </section>
+      ) : null}
+
       <section className="wrap">
         <div className="detail-toolbar">
           <div className="tabs" role="tablist">
