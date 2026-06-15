@@ -133,14 +133,16 @@ def _icpc_default_segments(eligible_total: int) -> list:
 # --------------------------------------------------------------------------- #
 
 
-def _find_medal_series(srk_dict: dict) -> Optional[dict]:
-    """Return the series whose segments carry gold/silver/bronze styles, or None.
+def _all_medal_series(srk_dict: dict) -> list:
+    """Every series whose segments carry gold/silver/bronze styles, in order.
 
-    A board's medal series is identified purely by its segment ``style`` values
-    (not its title), so a renamed title ("Gold Medalist" vs "金奖") never matters.
-    The first matching series wins; non-medal series (rank-only ``R#``, org-unique
-    ``S#``) are ignored.
+    A board may define more than one award scheme -- a co-branded event ships an
+    ``邀请赛#`` series and one or more ``省赛#`` / ``东北赛#`` series, each with its
+    own ``filter.byMarker`` and counts. Medal series are identified purely by their
+    segment ``style`` values (not titles); non-medal series (``R#``, ``S#``) are
+    skipped.
     """
+    out = []
     for series in srk_dict.get("series") or []:
         if not isinstance(series, dict):
             continue
@@ -150,8 +152,14 @@ def _find_medal_series(srk_dict: dict) -> Optional[dict]:
             if isinstance(seg, dict)
         }
         if styles & set(MEDAL_COLORS):
-            return series
-    return None
+            out.append(series)
+    return out
+
+
+def _find_medal_series(srk_dict: dict) -> Optional[dict]:
+    """The board's first medal series, or None (back-compat single-series view)."""
+    series = _all_medal_series(srk_dict)
+    return series[0] if series else None
 
 
 def _accumulate(segments) -> list:
@@ -172,7 +180,7 @@ def _accumulate(segments) -> list:
 
 
 def _cumulative_cutoffs(
-    srk_dict: dict,
+    series: Optional[dict],
     eligible_total: int,
     scored_total: int,
     submitted_total: Optional[int] = None,
@@ -194,7 +202,6 @@ def _cumulative_cutoffs(
     * no count/ratio under an ICPC preset -- default segments
       (:func:`_icpc_default_segments`); any other preset awards nothing.
     """
-    series = _find_medal_series(srk_dict)
     if series is None:
         return None
 
@@ -258,15 +265,16 @@ def parse_medal_rule(srk_dict: dict) -> Optional[list]:
     (eligible / scored totals) to stay self-contained. :func:`allocate_medals`
     performs the authoritative allocation directly over the standings.
     """
-    if _find_medal_series(srk_dict) is None:
+    series = _find_medal_series(srk_dict)
+    if series is None:
         return None
 
-    eligible_rows = _eligible_rows(srk_dict)
+    eligible_rows = _eligible_rows(srk_dict, series)
     eligible_total = len(eligible_rows)
     scored_total = sum(1 for row in eligible_rows if _row_scored(row))
     submitted_total = sum(1 for row in eligible_rows if _row_submitted(row))
 
-    resolved = _cumulative_cutoffs(srk_dict, eligible_total, scored_total, submitted_total)
+    resolved = _cumulative_cutoffs(series, eligible_total, scored_total, submitted_total)
     if resolved is None:
         return None
     cutoffs, _no_tied = resolved
@@ -282,9 +290,8 @@ def parse_medal_rule(srk_dict: dict) -> Optional[list]:
 # --------------------------------------------------------------------------- #
 
 
-def _marker_filter(srk_dict: dict) -> Optional[str]:
-    """Return the ``filter.byMarker`` marker id for the medal series, or None."""
-    series = _find_medal_series(srk_dict)
+def _marker_filter(series: Optional[dict]) -> Optional[str]:
+    """Return the ``filter.byMarker`` marker id for a medal series, or None."""
     if series is None:
         return None
     options = (series.get("rule") or {}).get("options") or {}
@@ -337,16 +344,16 @@ def _row_submitted(row: dict) -> bool:
     return _row_scored(row)
 
 
-def _eligible_rows(srk_dict: dict) -> list:
-    """The medal-eligible standings rows, in standings order.
+def _eligible_rows(srk_dict: dict, series: Optional[dict]) -> list:
+    """The medal-eligible standings rows for one series, in standings order.
 
-    A row is eligible iff it is official **and** (when the board carries a
+    A row is eligible iff it is official **and** (when the series carries a
     ``filter.byMarker``) it carries that marker. Starred / non-marker teams are
     dropped entirely, so they neither hold a slot nor receive a medal -- exactly
     srk's rendering. Order is preserved (rows are already in rank order).
     """
     rows = srk_dict.get("rows") or []
-    marker = _marker_filter(srk_dict)
+    marker = _marker_filter(series)
     eligible = []
     for row in rows:
         if not isinstance(row, dict):
@@ -442,22 +449,23 @@ def _team_member_keys(row: dict, seen: set, dedup_warnings: list) -> list:
 # --------------------------------------------------------------------------- #
 
 
-def allocate_medals(srk_dict: dict) -> dict:
-    """Allocate medals for one parsed srk dict.
+def _allocate_series(srk_dict: dict, series: Optional[dict]) -> dict:
+    """Allocate one medal series over its (marker-filtered) eligible pool.
 
     Returns ``{member_key: 'gold'|'silver'|'bronze'}``. The eligible pool (official
-    teams, optionally marker-filtered) is walked in rank order; cumulative cutoffs
-    (count or ratio, tie-extended unless ``noTied``) partition it into the three
-    colors. Every competitor on a medaling team gets that team's color, with
-    coaches removed and in-contest identity dedup applied. A board with no medal
-    series or all-zero counts returns ``{}``.
+    teams carrying the series' ``byMarker`` if any) is walked in rank order;
+    cumulative cutoffs (count or ratio, tie-extended unless ``noTied``) partition
+    it into the three colors. Coaches removed, in-contest identity dedup applied.
+    A missing series or all-zero counts returns ``{}``.
     """
-    eligible = _eligible_rows(srk_dict)
+    if series is None:
+        return {}
+    eligible = _eligible_rows(srk_dict, series)
     eligible_total = len(eligible)
     scored_total = sum(1 for row in eligible if _row_scored(row))
     submitted_total = sum(1 for row in eligible if _row_submitted(row))
 
-    resolved = _cumulative_cutoffs(srk_dict, eligible_total, scored_total, submitted_total)
+    resolved = _cumulative_cutoffs(series, eligible_total, scored_total, submitted_total)
     if resolved is None:
         return {}
     cutoffs, no_tied = resolved
@@ -489,6 +497,42 @@ def allocate_medals(srk_dict: dict) -> dict:
         for key in _team_member_keys(row, seen_keys, dedup_warnings):
             medals[key] = color
     return medals
+
+
+def allocate_medals(srk_dict: dict) -> dict:
+    """Allocate the board's first medal series (back-compat single-series view)."""
+    return _allocate_series(srk_dict, _find_medal_series(srk_dict))
+
+
+def _series_tier(series: dict, board_tier: str) -> str:
+    """Tier a medal series belongs to, from its title.
+
+    A co-branded board pairs an ``邀请赛#`` scheme (invitational) with one or more
+    ``省赛#`` / ``东北赛#`` / ``省赛高校#`` schemes (provincial). A generic single
+    ``#`` series carries no sub-contest hint and falls back to the board's own
+    classified tier.
+    """
+    title = series.get("title") or ""
+    if "邀请" in title:
+        return TIER_INVITATIONAL
+    if "省" in title or "东北" in title:
+        return TIER_PROVINCIAL
+    return board_tier
+
+
+def allocate_by_tier(srk_dict: dict, board_tier: str) -> dict:
+    """Allocate every medal series on a board, bucketed by the tier each implies.
+
+    Returns ``{tier: {member_key: color}}``. A board with one generic series maps
+    to ``board_tier`` (unchanged behaviour); a co-branded board splits its medals
+    so the 邀请赛 scheme lands in the invitational tier and each 省赛 scheme in the
+    provincial tier -- a player carrying both markers earns one medal in each.
+    """
+    by_tier: dict[str, dict] = {}
+    for series in _all_medal_series(srk_dict):
+        tier = _series_tier(series, board_tier)
+        by_tier.setdefault(tier, {}).update(_allocate_series(srk_dict, series))
+    return by_tier
 
 
 # --------------------------------------------------------------------------- #
@@ -578,8 +622,11 @@ def collect_medals(
             continue
         srk_dict = _load_srk(data_root, contest.id)
         tier = _classify_id(contest.id, srk_dict, contest.category)
-        for member_key, color in allocate_medals(srk_dict).items():
-            tally[member_key][tier][color] += 1
+        # A board may carry several award schemes (邀请赛 + 省赛); allocate each
+        # into the tier its series implies, not just the board's own tier.
+        for series_tier, alloc in allocate_by_tier(srk_dict, tier).items():
+            for member_key, color in alloc.items():
+                tally[member_key][series_tier][color] += 1
 
     # Duplicate-of provincial copies of co-branded events.
     for skipped in load_result.skipped:
