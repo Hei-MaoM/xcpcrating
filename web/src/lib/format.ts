@@ -53,6 +53,12 @@ export function formatScore(value: number | null | undefined): string {
   return value.toFixed(1)
 }
 
+/** Rating as a whole number (四舍五入). Null renders as a dash. */
+export function formatScoreInt(value: number | null | undefined): string {
+  if (value === null || value === undefined || Number.isNaN(value)) return '—'
+  return String(Math.round(value))
+}
+
 /** A signed score delta with explicit + / − sign, one decimal. */
 export function formatScoreDelta(value: number | null | undefined): string {
   if (value === null || value === undefined || Number.isNaN(value)) return '—'

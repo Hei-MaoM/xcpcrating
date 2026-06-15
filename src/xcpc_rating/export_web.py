@@ -715,6 +715,49 @@ def build_players_index(records) -> list[list]:
     return rows
 
 
+def _yyyymmdd(iso: str) -> int:
+    """Compact integer date ``YYYYMMDD`` from an ISO start-time string.
+
+    The raw value looks like ``2024-05-12T09:00:00+08:00``; only the leading
+    ``YYYY-MM-DD`` is kept and the dashes dropped, giving a chronologically
+    sortable integer the frontend can range-compare without parsing dates.
+    """
+    return int(iso[:10].replace("-", ""))
+
+
+def build_period_index(records) -> list[list]:
+    """Per-player official-participation timeline for the 时间段 (period) board.
+
+    The period board answers "who officially competed inside [from, to], and
+    what was their official rating at the end of that window". Both questions are
+    served by a single compact timeline per player: only **official**
+    participations (rows with a non-null ``ratingAfterOfficial`` — a 打星/非正式
+    appearance has none) are kept, as two parallel arrays in chronological order:
+
+    * ``dates``   — ``YYYYMMDD`` ints (ascending; the contest dates)
+    * ``ratings`` — the official-board display rating *after* each of those
+      contests, rounded to one decimal to match the site's ``formatScore``.
+
+    Row form: ``[key, name, org, dates, ratings]``. Players with zero official
+    participations are omitted entirely (they can never appear on this board).
+    The file is loaded lazily, only when the 时间段 tab is opened.
+    """
+    rows: list[list] = []
+    for record in records.values():
+        dates: list[int] = []
+        ratings: list[float] = []
+        for row in record["history"]:
+            rating_official = row.get("ratingAfterOfficial")
+            if rating_official is None:
+                continue
+            dates.append(_yyyymmdd(row["startAt"]))
+            ratings.append(round(rating_official, 1))
+        if not dates:
+            continue
+        rows.append([record["key"], record["name"], record["org"], dates, ratings])
+    return rows
+
+
 def build_leaderboard(engine, min_contests=MIN_RATED_CONTESTS):
     """Build the ladder leaderboard from the engine's own ``leaderboard``.
 
@@ -803,6 +846,12 @@ def write_bundle(out_dir, contest_docs, records, engine, official_board=None):
     # players-index.json
     _dump_json(
         os.path.join(out_dir, "players-index.json"), build_players_index(records)
+    )
+    file_count += 1
+
+    # period-index.json (official-participation timelines for the 时间段 board)
+    _dump_json(
+        os.path.join(out_dir, "period-index.json"), build_period_index(records)
     )
     file_count += 1
 

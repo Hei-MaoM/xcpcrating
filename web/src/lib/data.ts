@@ -315,6 +315,26 @@ export interface LeaderboardRow {
 }
 
 /* ------------------------------------------------------------------ *
+ * period-index.json  (array-compressed official-participation timelines)
+ * ------------------------------------------------------------------ */
+
+/**
+ * One player's official-participation timeline, array-compressed:
+ * `[key, name, org, dates, ratings]`. `dates` are `YYYYMMDD` ints in ascending
+ * (chronological) order; `ratings` is the parallel array of official-board
+ * display ratings *after* each of those contests (one decimal). Players with no
+ * official participation are absent from the file entirely. Drives the 时间段
+ * (period) board — see `pages/leaderboard/period.ts`.
+ */
+export type PeriodRow = [
+  key: string,
+  name: string,
+  org: string,
+  dates: number[],
+  ratings: number[],
+]
+
+/* ------------------------------------------------------------------ *
  * Fetch layer with in-memory caching
  * ------------------------------------------------------------------ */
 
@@ -421,6 +441,15 @@ export function getLeaderboard(official = false): Promise<LeaderboardRow[]> {
   return fetchJson<LeaderboardRow[]>(
     official ? 'leaderboard_official.json' : 'leaderboard.json',
   )
+}
+
+/**
+ * Official-participation timelines for the 时间段 (period) board. One row per
+ * player who has at least one official participation; lazily fetched (and then
+ * cached) only when the period view is opened.
+ */
+export function getPeriodIndex(): Promise<PeriodRow[]> {
+  return fetchJson<PeriodRow[]>('period-index.json')
 }
 
 /**
