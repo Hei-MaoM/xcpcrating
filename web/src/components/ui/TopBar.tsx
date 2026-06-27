@@ -16,6 +16,9 @@ export function TopBar() {
           <NavLink to="/" end className={({ isActive }) => (isActive ? 'is-active' : '')}>
             榜单
           </NavLink>
+          <NavLink to="/schools" className={({ isActive }) => (isActive ? 'is-active' : '')}>
+            学校
+          </NavLink>
           <NavLink to="/contests" className={({ isActive }) => (isActive ? 'is-active' : '')}>
             比赛
           </NavLink>

@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom'
 import { RuleDraw } from '../../components/ui'
 
 /**
- * 积分规则页（route: #/rules）。以公式为主说明算法：选手从 1400 起步、逐场累积。
- * 公式中的常量与 `src/xcpc_rating/engines/incremental.py` 保持一致 —— 调整引擎
- * 参数时应同步本页。
+ * 积分规则页（route: #/rules）。以公式为主说明算法：选手从 1400 起步、逐场累积，
+ * 末尾另说明学校榜的贝叶斯零和规则（各校从 1500 起步）。公式中的常量分别与
+ * `src/xcpc_rating/engines/incremental.py`（选手）与 `engines/school.py`（学校）
+ * 保持一致 —— 调整引擎参数时应同步本页。
  */
 export default function RulesPage() {
   return (
@@ -238,6 +239,117 @@ export default function RulesPage() {
           未声明分界时采用 ICPC 默认：金牌为正式参赛人数前 <span className="tnum">10%</span>（向上取整），
           银牌为金牌数 2 倍、铜牌 3 倍。<strong>网络预选赛是资格赛、不颁奖牌</strong>，因此计分但不计入奖牌统计。
         </p>
+      </section>
+
+      {/* 学校榜 */}
+      <section className="band--2">
+        <div className="wrap" style={{ paddingTop: 56, paddingBottom: 56 }}>
+          <div className="section-label">
+            <span className="eyebrow">学校榜</span>
+            <RuleDraw className="section-label__rule" />
+          </div>
+          <p className="rules-lead">
+            除选手榜外另设<strong>学校榜</strong>，与选手榜相互独立。把每所学校当作一名“选手”，
+            用<strong>贝叶斯零和</strong>逐场累积评分 —— 一所学校的强弱看的是它<strong>每一场</strong>相对其他学校的发挥，
+            而非靠某位明星选手把分拉高。各校从 <span className="tnum">1500</span> 起步，全场均值恒定。
+          </p>
+
+          <p className="formula-cap">① 校排（每场每校取最强一队）</p>
+          <div className="formula-stack">
+            <div className="frow">
+              <span className="frow__label">学校名次</span>
+              <div className="frow__eq serif">
+                每校只取其<strong>最强一支正式队伍</strong>的名次，再在参赛学校间重排（并列同名次）
+              </div>
+            </div>
+          </div>
+
+          <p className="formula-cap">② 反推表现分（校排 → P）</p>
+          <div className="formula-stack">
+            <div className="frow">
+              <span className="frow__label">学校表现分</span>
+              <div className="frow__eq serif">
+                以参赛各校当前评分为对手场，按与选手榜相同的名次反推公式求 P（强而深的学校场中夺冠更值钱）
+              </div>
+            </div>
+            <div className="frow">
+              <span className="frow__label">表现分封顶</span>
+              <div className="frow__eq serif">
+                P ≤ 全场<strong>次强学校</strong>评分 + 200，且按名次单调不增（赢弱场刷不出虚高，强弱悬殊的省赛冠亚军不被拉开过大）
+              </div>
+            </div>
+          </div>
+
+          <p className="formula-cap">③ 贝叶斯零和更新（每所学校）</p>
+          <div className="formula-stack">
+            <div className="frow">
+              <span className="frow__label">学习率</span>
+              <div className="frow__eq serif">α = 1 / ( κ + n )，　κ = 4，n 为该校累计场次（含本场）</div>
+            </div>
+            <div className="frow">
+              <span className="frow__label">单场调整</span>
+              <div className="frow__eq serif">调整 = w × α × ( P − S )</div>
+            </div>
+            <div className="frow">
+              <span className="frow__label">零和微调</span>
+              <div className="frow__eq serif">
+                微调 = − 全场调整均值　⇒　Σ( 调整 + 微调 ) = 0（只再分配，不通胀）
+              </div>
+            </div>
+            <div className="frow">
+              <span className="frow__label">更新</span>
+              <div className="frow__eq serif">S ← S + 调整 + 微调</div>
+            </div>
+          </div>
+
+          <div className="legend-grid">
+            <div><b>S</b>学校当前评分，初始 1500；超出表现则升、不及则降</div>
+            <div><b>α</b>学习率随场次递减：老牌学校（n 大）单场几乎不动，新学校适应快</div>
+            <div><b>κ</b>先验强度 = 4，越大越稳、越向 1500 收敛</div>
+            <div><b>n</b>该校累计正式参赛场次（含本场）</div>
+            <div><b>w</b>比赛权重（与选手榜不同，见下表）</div>
+            <div><b>口径</b>仅正式参赛队伍计入；不足两所学校的场次跳过</div>
+          </div>
+
+          <div className="board-card" style={{ marginTop: 22 }}>
+            <table className="tbl">
+              <colgroup>
+                <col />
+                <col style={{ width: '130px' }} />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>级别</th>
+                  <th className="right">学校权重 w</th>
+                  <th>说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>决赛</b></td>
+                  <td className="right score-strong">1.5×</td>
+                  <td className="muted">含金量最高，拉开学校身位最快</td>
+                </tr>
+                <tr>
+                  <td><b>区域赛</b></td>
+                  <td className="right score-strong">1.0×</td>
+                  <td className="muted">基准权重</td>
+                </tr>
+                <tr>
+                  <td><b>邀请赛</b></td>
+                  <td className="right">0.8×</td>
+                  <td className="muted">略低</td>
+                </tr>
+                <tr>
+                  <td><b>省赛</b></td>
+                  <td className="right">0.5×</td>
+                  <td className="muted">场子弱、含金量低，对评分牵引最小</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </section>
 
       {/* 结尾 */}

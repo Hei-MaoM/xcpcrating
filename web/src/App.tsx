@@ -1,6 +1,8 @@
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { TopBar, Footer } from './components/ui'
 import LeaderboardPage from './pages/leaderboard/LeaderboardPage'
+import SchoolsPage from './pages/schools/SchoolsPage'
+import SchoolPage from './pages/schools/SchoolPage'
 import ContestsPage from './pages/contests/ContestsPage'
 import ContestDetailPage from './pages/contests/ContestDetailPage'
 import PlayerPage from './pages/player/PlayerPage'
@@ -22,6 +24,8 @@ export default function App() {
         <main id="main" className="app-main">
           <Routes>
             <Route path="/" element={<LeaderboardPage />} />
+            <Route path="/schools" element={<SchoolsPage />} />
+            <Route path="/school/:org" element={<SchoolPage />} />
             <Route path="/contests" element={<ContestsPage />} />
             <Route path="/contest/:slug" element={<ContestDetailPage />} />
             <Route path="/player/:key" element={<PlayerPage />} />

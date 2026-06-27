@@ -199,6 +199,10 @@ export interface PlayerDetail {
   contests: number
   /** Display ladder rating; null when unrated or not yet exported. */
   rating: number | null
+  /** Precomputed standings (so the player page needs no leaderboard fetch). */
+  allRank: number | null
+  officialRank: number | null
+  officialRating: number | null
   /**
    * Tiered gold/silver/bronze medals, keyed by prestige tier. Optional and
    * Partial: the exporter omits the field entirely for medal-less players and
@@ -259,6 +263,9 @@ function normalizePlayerDetail(raw: PlayerDetail): PlayerDetail {
   return {
     ...raw,
     rating: nullableNumber(raw.rating),
+    allRank: nullableNumber(raw.allRank),
+    officialRank: nullableNumber(raw.officialRank),
+    officialRating: nullableNumber(raw.officialRating),
     history: raw.history.map((h) => ({
       ...h,
       official: h.official ?? true,
@@ -312,6 +319,54 @@ export interface LeaderboardRow {
   org: string
   rating: number
   contests: number
+}
+
+/** Array-compressed leaderboard row: `[key, name, org, rating, contests]`. */
+export type LeaderboardRowRaw = [
+  key: string,
+  name: string,
+  org: string,
+  rating: number,
+  contests: number,
+]
+
+function decodeLeaderboardRow(row: LeaderboardRowRaw): LeaderboardRow {
+  const [key, name, org, rating, contests] = row
+  return { key, name, org, rating, contests }
+}
+
+/* ------------------------------------------------------------------ *
+ * schools.json
+ * ------------------------------------------------------------------ */
+
+/**
+ * One school's standing on the 学校榜, ordered by `rating` descending. `rating`
+ * is the conservative TrueSkill-family estimate (μ − kσ) from the school rating
+ * engine; `contests` is how many contests the school officially competed in.
+ */
+export interface SchoolRow {
+  org: string
+  rating: number
+  contests: number
+}
+
+/**
+ * One contest in a school's 学校成绩 history (newest first). `teamRank` is the
+ * school's best official team's placement among all teams; `schoolRank` is the
+ * school's standing among the contest's schools; `perf` is the performance that
+ * drove the school's rating that contest. From `school-history/<shard>.json`.
+ */
+export interface SchoolResultRow {
+  slug: string
+  title: string
+  startAt: string
+  teamRank: number
+  teamCount: number
+  schoolRank: number
+  schoolCount: number
+  perf: number
+  /** Change in the school's rating (reliable level) from this contest. */
+  delta: number
 }
 
 /* ------------------------------------------------------------------ *
@@ -437,10 +492,11 @@ export async function getPlayersIndex(): Promise<PlayerIndexEntry[]> {
  * board counts all participation; the official board (`official: true`) counts
  * only official participation (打星 / unofficial appearances excluded).
  */
-export function getLeaderboard(official = false): Promise<LeaderboardRow[]> {
-  return fetchJson<LeaderboardRow[]>(
+export async function getLeaderboard(official = false): Promise<LeaderboardRow[]> {
+  const rows = await fetchJson<LeaderboardRowRaw[]>(
     official ? 'leaderboard_official.json' : 'leaderboard.json',
   )
+  return rows.map(decodeLeaderboardRow)
 }
 
 /**
@@ -450,6 +506,24 @@ export function getLeaderboard(official = false): Promise<LeaderboardRow[]> {
  */
 export function getPeriodIndex(): Promise<PeriodRow[]> {
   return fetchJson<PeriodRow[]>('period-index.json')
+}
+
+/** The 学校榜 (school ranking), ordered by conservative rating descending. */
+export function getSchools(): Promise<SchoolRow[]> {
+  return fetchJson<SchoolRow[]>('schools.json')
+}
+
+/**
+ * A school's per-contest results (学校成绩), newest first. Derives the md5 shard
+ * from the org, loads it once (cached), then indexes by org; an org with no
+ * history (or absent shard) yields an empty list.
+ */
+export async function getSchoolHistory(org: string): Promise<SchoolResultRow[]> {
+  const shard = shardForKey(org)
+  const data = await fetchJson<Record<string, SchoolResultRow[]>>(
+    `school-history/${shard}.json`,
+  )
+  return data[org] ?? []
 }
 
 /**

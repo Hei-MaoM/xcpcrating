@@ -52,6 +52,7 @@ from .engines.incremental import (
     display_score,
     rerank_1224,
 )
+from .engines.school import SchoolEngine
 from .identity import clean_org, display_name, resolve_i18n
 from .loader import SRK_SUFFIX, load_contests
 from .medals import MEDAL_COLORS, collect_medals
@@ -623,11 +624,19 @@ def _compact_medals(per_tier) -> dict:
     return compact
 
 
-def build_player_records(players, engine, medals=None, official_history=None):
+def build_player_records(
+    players, engine, medals=None, official_history=None, board_ranks=None
+):
     """Build the full per-player detail records (terminal state + history).
 
     ``rating`` is ``None`` for players below the ``MIN_RATED_CONTESTS`` gate.
     Returns a dict key -> record.
+
+    ``board_ranks`` is the optional ``{"all": {key: rank}, "official": {key: rank},
+    "officialRating": {key: rating}}`` from the two finished leaderboards. When
+    supplied, each record carries ``allRank`` / ``officialRank`` /
+    ``officialRating`` (null when the player is absent from that board), so the
+    player page renders its standings without downloading the full boards.
 
     ``medals`` is the optional ``{key: {tier: {gold,silver,bronze}}}`` tally from
     :func:`xcpc_rating.medals.collect_medals`. When supplied, a player who earned
@@ -645,6 +654,10 @@ def build_player_records(players, engine, medals=None, official_history=None):
     """
     medals = medals or {}
     official_history = official_history or {}
+    board_ranks = board_ranks or {}
+    all_rank_map = board_ranks.get("all") or {}
+    official_rank_map = board_ranks.get("official") or {}
+    official_rating_map = board_ranks.get("officialRating") or {}
     records: dict[str, dict] = {}
     for key, acc in players.items():
         contests = len(acc.history)
@@ -680,6 +693,10 @@ def build_player_records(players, engine, medals=None, official_history=None):
             "org": acc.org,
             "contests": contests,
             "rating": rating,
+            # Precomputed standings so the player page needs no leaderboard fetch.
+            "allRank": all_rank_map.get(key),
+            "officialRank": official_rank_map.get(key),
+            "officialRating": official_rating_map.get(key),
             "history": history,
         }
         # Per-tier medal tally (gold/silver/bronze), zero-medal tiers omitted.
@@ -713,6 +730,72 @@ def build_players_index(records) -> list[list]:
     # null ratings keeps them last while a stable key tiebreaker stays stable.)
     rows.sort(key=lambda row: (-(row[4] if row[4] is not None else float("-inf")), row[0]))
     return rows
+
+
+def replay_schools(contests):
+    """Run the school rating engine over the contests (same set as the boards).
+
+    Voided contests (``UNRATED_CONTESTS``) are skipped so a leaked-problem board
+    never moves a school's belief, matching the player boards' 口径. Returns
+    ``(engine, history)`` where ``history`` maps org -> the school's per-contest
+    result rows (newest first) for the 学校成绩 view.
+    """
+    engine = SchoolEngine()
+    history: dict[str, list[dict]] = {}
+    # Each school's rating after its previous contest; a school's rating only
+    # moves when it competes, so this is exactly its pre-contest rating. The
+    # baseline before a school's first contest is the prior reliable level.
+    prior = engine.prior_rating()
+    prev_rating: dict[str, float] = {}
+    for contest in contests:
+        if contest.id in UNRATED_CONTESTS:
+            continue
+        results = engine.score_contest(contest)
+        if not results:
+            continue
+        slug = contest_slug(contest.id)
+        title = contest.title
+        start_at = _isoformat(contest.start_at)
+        team_count = len(contest.teams)
+        for result in results:
+            org = result.org
+            before = prev_rating.get(org, prior)
+            after = engine.rating(org)
+            prev_rating[org] = after
+            history.setdefault(org, []).append(
+                {
+                    "slug": slug,
+                    "title": title,
+                    "startAt": start_at,
+                    "teamRank": result.team_rank,
+                    "teamCount": team_count,
+                    "schoolRank": result.school_rank,
+                    "schoolCount": result.school_count,
+                    "perf": _round(result.perf),
+                    "delta": _round(after - before),
+                }
+            )
+    # Newest first, matching the player history table's order.
+    for rows in history.values():
+        rows.reverse()
+    return engine, history
+
+
+def build_schools(school_engine, min_contests=MIN_RATED_CONTESTS) -> list[dict]:
+    """Build the 学校榜 rows: ``{org, rating, contests}`` ordered by rating desc.
+
+    ``rating`` is the conservative TrueSkill-family score (``mu - k*sigma``)
+    rounded to the contract precision; the engine's leaderboard already sorts by
+    full-precision rating, so the order is stable.
+    """
+    return [
+        {
+            "org": standing.org,
+            "rating": _round(standing.rating),
+            "contests": standing.contests,
+        }
+        for standing in school_engine.leaderboard(min_contests=min_contests)
+    ]
 
 
 def _yyyymmdd(iso: str) -> int:
@@ -784,6 +867,18 @@ def build_leaderboard(engine, min_contests=MIN_RATED_CONTESTS):
 # --------------------------------------------------------------------------- #
 
 
+def _compress_board(board) -> list[list]:
+    """Array-compress a leaderboard (list of dicts) to tuples for a smaller file.
+
+    Row form: ``[key, name, org, rating, contests]`` — the same shape the frontend
+    ``getLeaderboard`` decoder expects. Dropping the repeated object keys roughly
+    halves the on-disk size and the browser's parse time for a 60k-row board.
+    """
+    return [
+        [r["key"], r["name"], r["org"], r["rating"], r["contests"]] for r in board
+    ]
+
+
 def _dump_json(path: str, obj) -> int:
     """Write ``obj`` as compact UTF-8 JSON; return the byte size written."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -794,12 +889,24 @@ def _dump_json(path: str, obj) -> int:
     return len(data)
 
 
-def write_bundle(out_dir, contest_docs, records, engine, official_board=None):
+def write_bundle(
+    out_dir,
+    contest_docs,
+    records,
+    engine,
+    official_board=None,
+    main_board=None,
+    schools=None,
+    school_history=None,
+):
     """Write the entire contract bundle under ``out_dir``. Returns file count.
 
-    ``official_board`` is the optional second leaderboard (only-official-
-    participation replay); when provided it is written to
-    ``leaderboard_official.json`` alongside the main board.
+    Both leaderboards are written array-compressed (tuples, not objects) for a
+    smaller download and parse. ``main_board`` is the all-participation board
+    (rebuilt from ``engine`` when omitted); ``official_board`` is the official-only
+    board. ``schools`` is the optional 学校榜 (``schools.json``); ``school_history``
+    is the optional per-school results map (org -> rows), sharded into
+    ``school-history/<shard>.json``.
     """
     os.makedirs(out_dir, exist_ok=True)
     file_count = 0
@@ -863,10 +970,12 @@ def write_bundle(out_dir, contest_docs, records, engine, official_board=None):
         _dump_json(os.path.join(out_dir, "players", shard + ".json"), bucket)
         file_count += 1
 
-    # leaderboard.json (main board: all participation)
+    # leaderboard.json (main board: all participation; array-compressed)
+    if main_board is None:
+        main_board = build_leaderboard(engine)
     _dump_json(
         os.path.join(out_dir, "leaderboard.json"),
-        build_leaderboard(engine),
+        _compress_board(main_board),
     )
     file_count += 1
 
@@ -874,9 +983,25 @@ def write_bundle(out_dir, contest_docs, records, engine, official_board=None):
     if official_board is not None:
         _dump_json(
             os.path.join(out_dir, "leaderboard_official.json"),
-            official_board,
+            _compress_board(official_board),
         )
         file_count += 1
+
+    # schools.json (学校榜: Bayesian reliable-level school ranking)
+    if schools is not None:
+        _dump_json(os.path.join(out_dir, "schools.json"), schools)
+        file_count += 1
+
+    # school-history/<shard>.json (per-school 学校成绩 rows, sharded by md5(org))
+    if school_history is not None:
+        shards: dict[str, dict] = {}
+        for org, rows in school_history.items():
+            shards.setdefault(player_shard(org), {})[org] = rows
+        for shard, bucket in shards.items():
+            _dump_json(
+                os.path.join(out_dir, "school-history", shard + ".json"), bucket
+            )
+            file_count += 1
 
     return file_count
 
@@ -932,7 +1057,22 @@ def run(args) -> int:
         load.contests
     )
     official_board = build_leaderboard(engine_official)
+    main_board = build_leaderboard(engine)
     print(f"Official-only board: {len(official_board)} rated players.", flush=True)
+
+    # Precompute each player's standings on both boards so the player page renders
+    # its rank/rating without downloading the (multi-MB) leaderboards.
+    board_ranks = {
+        "all": {row["key"]: i + 1 for i, row in enumerate(main_board)},
+        "official": {row["key"]: i + 1 for i, row in enumerate(official_board)},
+        "officialRating": {row["key"]: row["rating"] for row in official_board},
+    }
+
+    # 学校榜: Bayesian reliable-level school rating over the same contest set,
+    # plus each school's per-contest results for the 学校成绩 view.
+    school_engine, school_history = replay_schools(load.contests)
+    schools = build_schools(school_engine)
+    print(f"School board: {len(schools)} rated schools.", flush=True)
 
     # Merge the official-only per-team fields into each contest doc's teams, so the
     # contest page's 仅正式 view can render official ranks / predictions / perf. A
@@ -948,10 +1088,21 @@ def run(args) -> int:
             team["rankOfficial"] = o["rank"] if o else None
 
     records = build_player_records(
-        players, engine, medals=medals, official_history=official_history
+        players,
+        engine,
+        medals=medals,
+        official_history=official_history,
+        board_ranks=board_ranks,
     )
     file_count = write_bundle(
-        args.out, contest_docs, records, engine, official_board=official_board
+        args.out,
+        contest_docs,
+        records,
+        engine,
+        official_board=official_board,
+        main_board=main_board,
+        schools=schools,
+        school_history=school_history,
     )
 
     elapsed = time.perf_counter() - started

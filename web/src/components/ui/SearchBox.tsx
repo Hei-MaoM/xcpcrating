@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import {
   getContestsIndex,
   getPlayersIndex,
+  getSchools,
   type ContestIndexEntry,
   type PlayerIndexEntry,
+  type SchoolRow,
 } from '../../lib/data'
 import { useDebounce } from '../../lib/useDebounce'
 import { SearchIcon } from './primitives'
@@ -19,6 +21,13 @@ interface PlayerHit {
   meta: string
 }
 
+interface SchoolHit {
+  kind: 'school'
+  org: string
+  title: string
+  meta: string
+}
+
 interface ContestHit {
   kind: 'contest'
   slug: string
@@ -26,18 +35,64 @@ interface ContestHit {
   meta: string
 }
 
-type Hit = PlayerHit | ContestHit
+type Hit = SchoolHit | PlayerHit | ContestHit
 
-function matchPlayers(players: PlayerIndexEntry[], query: string): PlayerHit[] {
-  const q = query.toLowerCase()
+/*
+ * Search-optimized rows: the lowercased haystack (`hay`) is precomputed once when
+ * the index loads, so filtering 60k+ players on every keystroke is a single
+ * `includes` per row instead of two `toLowerCase()` allocations per row.
+ */
+interface SearchPlayer {
+  key: string
+  name: string
+  org: string
+  contests: number
+  hay: string
+}
+interface SearchSchool {
+  org: string
+  rating: number
+  contests: number
+  hay: string
+}
+interface SearchContest {
+  slug: string
+  title: string
+  category: string
+  hay: string
+}
+
+function toSearchPlayer(p: PlayerIndexEntry): SearchPlayer {
+  return { key: p.key, name: p.name, org: p.org, contests: p.contests, hay: `${p.name}${p.org}`.toLowerCase() }
+}
+function toSearchSchool(s: SchoolRow): SearchSchool {
+  return { org: s.org, rating: s.rating, contests: s.contests, hay: s.org.toLowerCase() }
+}
+function toSearchContest(c: ContestIndexEntry): SearchContest {
+  return { slug: c.slug, title: c.title, category: c.category, hay: `${c.title}${c.category}`.toLowerCase() }
+}
+
+// `q` is already lowercased/trimmed by the caller.
+function matchPlayers(players: SearchPlayer[], q: string): PlayerHit[] {
   const hits: PlayerHit[] = []
   for (const p of players) {
-    if (p.name.toLowerCase().includes(q) || p.org.toLowerCase().includes(q)) {
+    if (p.hay.includes(q)) {
+      hits.push({ kind: 'player', key: p.key, title: p.name, meta: `${p.org} · ${p.contests} 场` })
+      if (hits.length >= MAX_PER_GROUP) break
+    }
+  }
+  return hits
+}
+
+function matchSchools(schools: SearchSchool[], q: string): SchoolHit[] {
+  const hits: SchoolHit[] = []
+  for (const s of schools) {
+    if (s.hay.includes(q)) {
       hits.push({
-        kind: 'player',
-        key: p.key,
-        title: p.name,
-        meta: `${p.org} · ${p.contests} 场`,
+        kind: 'school',
+        org: s.org,
+        title: s.org,
+        meta: `学校 · ${Math.round(s.rating)} 分 · ${s.contests} 场`,
       })
       if (hits.length >= MAX_PER_GROUP) break
     }
@@ -45,11 +100,10 @@ function matchPlayers(players: PlayerIndexEntry[], query: string): PlayerHit[] {
   return hits
 }
 
-function matchContests(contests: ContestIndexEntry[], query: string): ContestHit[] {
-  const q = query.toLowerCase()
+function matchContests(contests: SearchContest[], q: string): ContestHit[] {
   const hits: ContestHit[] = []
   for (const c of contests) {
-    if (c.title.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)) {
+    if (c.hay.includes(q)) {
       hits.push({ kind: 'contest', slug: c.slug, title: c.title, meta: c.category })
       if (hits.length >= MAX_PER_GROUP) break
     }
@@ -67,17 +121,22 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [players, setPlayers] = useState<PlayerIndexEntry[] | null>(null)
-  const [contests, setContests] = useState<ContestIndexEntry[] | null>(null)
+  const [players, setPlayers] = useState<SearchPlayer[] | null>(null)
+  const [schools, setSchools] = useState<SearchSchool[] | null>(null)
+  const [contests, setContests] = useState<SearchContest[] | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   const debounced = useDebounce(query.trim(), DEBOUNCE_MS)
 
   useEffect(() => {
     if (!open) return
-    if (players === null) getPlayersIndex().then(setPlayers).catch(() => setPlayers([]))
-    if (contests === null) getContestsIndex().then(setContests).catch(() => setContests([]))
-  }, [open, players, contests])
+    if (players === null)
+      getPlayersIndex().then((r) => setPlayers(r.map(toSearchPlayer))).catch(() => setPlayers([]))
+    if (schools === null)
+      getSchools().then((r) => setSchools(r.map(toSearchSchool))).catch(() => setSchools([]))
+    if (contests === null)
+      getContestsIndex().then((r) => setContests(r.map(toSearchContest))).catch(() => setContests([]))
+  }, [open, players, schools, contests])
 
   useEffect(() => {
     if (!open) return
@@ -90,10 +149,15 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
 
   const { hits } = useMemo(() => {
     if (debounced.length === 0) return { hits: [] as Hit[] }
-    const ph = players ? matchPlayers(players, debounced) : []
-    const ch = contests ? matchContests(contests, debounced) : []
-    return { hits: [...ph, ...ch] as Hit[] }
-  }, [debounced, players, contests])
+    // Lowercase the query once; rows carry a precomputed lowercased haystack.
+    const q = debounced.toLowerCase()
+    // Schools first so typing a school name surfaces its page above the (often
+    // many) players that share its org; player-name queries match no school.
+    const sh = schools ? matchSchools(schools, q) : []
+    const ph = players ? matchPlayers(players, q) : []
+    const ch = contests ? matchContests(contests, q) : []
+    return { hits: [...sh, ...ph, ...ch] as Hit[] }
+  }, [debounced, schools, players, contests])
 
   const safeActive = hits.length === 0 ? 0 : Math.min(activeIndex, hits.length - 1)
 
@@ -101,6 +165,7 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
     setOpen(false)
     setQuery('')
     if (hit.kind === 'player') navigate(`/player/${encodeURIComponent(hit.key)}`)
+    else if (hit.kind === 'school') navigate(`/school/${encodeURIComponent(hit.org)}`)
     else navigate(`/contest/${hit.slug}`)
   }
 
@@ -150,7 +215,13 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
           ) : (
             hits.map((hit, idx) => (
               <button
-                key={hit.kind === 'player' ? `p-${hit.key}` : `c-${hit.slug}`}
+                key={
+                  hit.kind === 'player'
+                    ? `p-${hit.key}`
+                    : hit.kind === 'school'
+                      ? `s-${hit.org}`
+                      : `c-${hit.slug}`
+                }
                 type="button"
                 role="option"
                 aria-selected={idx === safeActive}
@@ -160,7 +231,7 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
               >
                 <b>{hit.title}</b>
                 <span className="meta">
-                  {hit.kind === 'player' ? hit.meta : `比赛 · ${hit.meta}`}
+                  {hit.kind === 'contest' ? `比赛 · ${hit.meta}` : hit.meta}
                 </span>
               </button>
             ))

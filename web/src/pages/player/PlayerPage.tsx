@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link, useSearchParams } from 'react-router-dom'
 import {
   getPlayer,
-  getLeaderboard,
   DataError,
   type MedalTier,
   type PlayerDetail,
@@ -62,12 +61,6 @@ function MedalWall({ player }: { player: PlayerDetail }) {
   )
 }
 
-interface Standings {
-  allRank: number | null
-  officialRank: number | null
-  officialRating: number | null
-}
-
 type BoardKind = 'all' | 'official'
 
 function Dossier({ player }: { player: PlayerDetail }) {
@@ -75,34 +68,6 @@ function Dossier({ player }: { player: PlayerDetail }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const board: BoardKind = searchParams.get('board') === 'all' ? 'all' : 'official'
   const isOfficial = board === 'official'
-
-  const [standings, setStandings] = useState<Standings>({
-    allRank: null,
-    officialRank: null,
-    officialRating: null,
-  })
-
-  // Resolve the player's rank/rating on BOTH boards (the per-contest official
-  // trajectory rides along inside player.history). A player absent from the
-  // official board (only 打星 appearances) shows no official standing.
-  useEffect(() => {
-    let active = true
-    Promise.all([getLeaderboard(false), getLeaderboard(true)])
-      .then(([all, official]) => {
-        if (!active) return
-        const ai = all.findIndex((r) => r.key === player.key)
-        const oi = official.findIndex((r) => r.key === player.key)
-        setStandings({
-          allRank: ai >= 0 ? ai + 1 : null,
-          officialRank: oi >= 0 ? oi + 1 : null,
-          officialRating: oi >= 0 ? official[oi].rating : null,
-        })
-      })
-      .catch(() => {})
-    return () => {
-      active = false
-    }
-  }, [player.key])
 
   function selectBoard(next: BoardKind) {
     setSearchParams(
@@ -134,8 +99,9 @@ function Dossier({ player }: { player: PlayerDetail }) {
   }, [isOfficial, player.history, officialRows])
   const contestsCount = isOfficial ? officialRows.length : player.contests
 
-  const boardRating = isOfficial ? standings.officialRating : player.rating
-  const boardRank = isOfficial ? standings.officialRank : standings.allRank
+  // Standings come precomputed on the player record — no leaderboard fetch.
+  const boardRating = isOfficial ? player.officialRating : player.rating
+  const boardRank = isOfficial ? player.officialRank : player.allRank
   const hasBoardRating = boardRating !== null
 
   // Chart follows the caliber and plots only RATED contests (an unrated /
