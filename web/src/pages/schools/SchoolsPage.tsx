@@ -7,7 +7,6 @@ import { tiedRanks } from '../../lib/rank'
 import { useDebounce } from '../../lib/useDebounce'
 
 const PAGE_SIZE = 100
-const RISE_ROWS = 14 // cascade-animate only the first screenful
 
 /** A school row carrying its full-board rank (1224 ties on the rounded score). */
 interface RankedSchool extends SchoolRow {
@@ -138,15 +137,13 @@ export default function SchoolsPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {pageRows.map((r, i) => {
-                      const rise = clampedPage === 1 && i < RISE_ROWS
+                    {pageRows.map((r) => {
                       const goto = () =>
                         navigate(`/school/${encodeURIComponent(r.org)}`)
                       return (
                         <tr
                           key={r.org}
-                          className={`row-link ${rise ? 'row-rise' : ''}`}
-                          style={rise ? { animationDelay: `${i * 45}ms` } : undefined}
+                          className="row-link"
                           tabIndex={0}
                           onClick={goto}
                           onKeyDown={(e) => e.key === 'Enter' && goto()}

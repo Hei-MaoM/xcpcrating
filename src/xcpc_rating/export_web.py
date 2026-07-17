@@ -39,7 +39,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import os
+import shutil
 import sys
 import time
 from datetime import datetime, timezone
@@ -70,6 +72,10 @@ MIN_RATED_CONTESTS = 1
 
 # Player detail files are sharded into 256 buckets by md5(key)[:2].
 SHARD_HEX_LEN = 2
+
+# Leaderboard pages are the exact size rendered by the frontend. The initial
+# route therefore downloads one page instead of the complete 50k+ player board.
+LEADERBOARD_PAGE_SIZE = 100
 
 # Default I/O, resolved relative to the repo root (this file lives at
 # src/xcpc_rating/export_web.py). Source data is a git submodule
@@ -107,6 +113,11 @@ def player_shard(key: str) -> str:
     """Return the 2-hex-char shard bucket for a player key (md5 prefix)."""
     digest = hashlib.md5(key.encode("utf-8")).hexdigest()
     return digest[:SHARD_HEX_LEN]
+
+
+def _key_digest(key: str) -> str:
+    """Return a full stable md5 filename for exact-key static data files."""
+    return hashlib.md5(key.encode("utf-8")).hexdigest()
 
 
 def _round(value):
@@ -879,6 +890,94 @@ def _compress_board(board) -> list[list]:
     ]
 
 
+def _display_round(value: float) -> int:
+    """Match JavaScript ``Math.round`` for the positive rating domain."""
+    return math.floor(value + 0.5)
+
+
+def build_leaderboard_assets(board, page_size=LEADERBOARD_PAGE_SIZE):
+    """Build metadata, numbered pages, and exact-school leaderboard shards.
+
+    Compact row form is ``[key, name, org, rating, contests, globalRank]``. The
+    rank is computed over the complete board using the same rounded-score 1224
+    rule as the former browser implementation, so page and school shards never
+    need the full dataset to recover a correct global rank.
+    """
+    if page_size <= 0:
+        raise ValueError("page_size must be positive")
+
+    ranked_rows: list[list] = []
+    previous_score = None
+    current_rank = 0
+    for index, row in enumerate(board):
+        score = _display_round(row["rating"])
+        if previous_score is None or score != previous_score:
+            current_rank = index + 1
+        ranked_rows.append(
+            [
+                row["key"],
+                row["name"],
+                row["org"],
+                row["rating"],
+                row["contests"],
+                current_rank,
+            ]
+        )
+        previous_score = score
+
+    pages = [
+        ranked_rows[start : start + page_size]
+        for start in range(0, len(ranked_rows), page_size)
+    ]
+    school_rows: dict[str, list[list]] = {}
+    for row in ranked_rows:
+        org = row[2].strip()
+        if org:
+            school_rows.setdefault(org, []).append(row)
+
+    school_counts = sorted(
+        [[org, len(rows)] for org, rows in school_rows.items()],
+        key=lambda item: (-item[1], item[0]),
+    )
+    meta = {
+        "total": len(ranked_rows),
+        "pageSize": page_size,
+        "pageCount": len(pages),
+        "schools": school_counts,
+    }
+    return meta, pages, school_rows
+
+
+def build_player_search_shards(records) -> dict[str, list[list]]:
+    """Build compact player shards keyed by name/org prefix-character hash.
+
+    A player is indexed under the normalized first character of both their name
+    and organization. The browser derives the same two-hex md5 shard from the
+    query's first character, then performs the existing substring match inside
+    that much smaller candidate set.
+    """
+    shards: dict[str, list[list]] = {}
+    for record in records.values():
+        row = [
+            record["key"],
+            record["name"],
+            record["org"],
+            record["contests"],
+        ]
+        prefixes = {
+            value.strip().lower()[:1]
+            for value in (record["name"], record["org"])
+            if value and value.strip()
+        }
+        # Multiple prefix characters can hash into the same two-hex bucket; a
+        # per-record set prevents duplicate search results in that collision.
+        for shard in {player_shard(prefix) for prefix in prefixes}:
+            shards.setdefault(shard, []).append(row)
+    for rows in shards.values():
+        rows.sort(key=lambda row: (row[1].lower(), row[2].lower(), row[0]))
+    return shards
+
+
 def _dump_json(path: str, obj) -> int:
     """Write ``obj`` as compact UTF-8 JSON; return the byte size written."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -887,6 +986,30 @@ def _dump_json(path: str, obj) -> int:
     with open(path, "wb") as handle:
         handle.write(data)
     return len(data)
+
+
+def _reset_dir(path: str) -> None:
+    """Recreate one generated-data directory without leaving stale shards."""
+    if os.path.isdir(path):
+        shutil.rmtree(path)
+    os.makedirs(path, exist_ok=True)
+
+
+def _write_leaderboard_assets(out_dir: str, kind: str, board) -> int:
+    """Write one leaderboard's metadata, pages, and exact-school shards."""
+    root = os.path.join(out_dir, "leaderboards", kind)
+    meta, pages, schools = build_leaderboard_assets(board)
+    _dump_json(os.path.join(root, "meta.json"), meta)
+    file_count = 1
+    for page_number, rows in enumerate(pages, start=1):
+        _dump_json(os.path.join(root, "pages", f"{page_number}.json"), rows)
+        file_count += 1
+    for org, rows in schools.items():
+        _dump_json(
+            os.path.join(root, "schools", _key_digest(org) + ".json"), rows
+        )
+        file_count += 1
+    return file_count
 
 
 def write_bundle(
@@ -901,12 +1024,11 @@ def write_bundle(
 ):
     """Write the entire contract bundle under ``out_dir``. Returns file count.
 
-    Both leaderboards are written array-compressed (tuples, not objects) for a
-    smaller download and parse. ``main_board`` is the all-participation board
-    (rebuilt from ``engine`` when omitted); ``official_board`` is the official-only
-    board. ``schools`` is the optional 学校榜 (``schools.json``); ``school_history``
-    is the optional per-school results map (org -> rows), sharded into
-    ``school-history/<shard>.json``.
+    Leaderboards are written as metadata + 100-row pages + exact-school shards.
+    Player search is independently prefix-sharded, so neither feature downloads
+    the former multi-megabyte global indexes. ``main_board`` is the
+    all-participation board (rebuilt from ``engine`` when omitted);
+    ``official_board`` is the official-only board.
     """
     os.makedirs(out_dir, exist_ok=True)
     file_count = 0
@@ -950,11 +1072,23 @@ def write_bundle(
     _dump_json(os.path.join(out_dir, "contests-index.json"), index)
     file_count += 1
 
-    # players-index.json
-    _dump_json(
-        os.path.join(out_dir, "players-index.json"), build_players_index(records)
-    )
-    file_count += 1
+    # search/players/<prefix-hash>.json. Reset generated shards first so a data
+    # shrink cannot leave stale candidates from an older export.
+    search_root = os.path.join(out_dir, "search", "players")
+    _reset_dir(search_root)
+    for shard, rows in build_player_search_shards(records).items():
+        _dump_json(os.path.join(search_root, shard + ".json"), rows)
+        file_count += 1
+
+    # Delete superseded monolithic indexes when exporting over an older bundle.
+    for legacy_name in (
+        "players-index.json",
+        "leaderboard.json",
+        "leaderboard_official.json",
+    ):
+        legacy_path = os.path.join(out_dir, legacy_name)
+        if os.path.isfile(legacy_path):
+            os.remove(legacy_path)
 
     # period-index.json (official-participation timelines for the 时间段 board)
     _dump_json(
@@ -970,22 +1104,17 @@ def write_bundle(
         _dump_json(os.path.join(out_dir, "players", shard + ".json"), bucket)
         file_count += 1
 
-    # leaderboard.json (main board: all participation; array-compressed)
+    # Paged leaderboards. Reset the root to avoid stale high-numbered pages or
+    # schools when the source dataset shrinks between deployments.
+    _reset_dir(os.path.join(out_dir, "leaderboards"))
     if main_board is None:
         main_board = build_leaderboard(engine)
-    _dump_json(
-        os.path.join(out_dir, "leaderboard.json"),
-        _compress_board(main_board),
-    )
-    file_count += 1
+    file_count += _write_leaderboard_assets(out_dir, "all", main_board)
 
-    # leaderboard_official.json (second board: official participation only)
     if official_board is not None:
-        _dump_json(
-            os.path.join(out_dir, "leaderboard_official.json"),
-            _compress_board(official_board),
+        file_count += _write_leaderboard_assets(
+            out_dir, "official", official_board
         )
-        file_count += 1
 
     # schools.json (学校榜: Bayesian reliable-level school ranking)
     if schools is not None:

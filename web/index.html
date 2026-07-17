@@ -13,13 +13,21 @@
     <link rel="icon" type="image/png" sizes="256x256" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Fonts: only the two declared families, with display=swap. Preconnect to
-         cut the handshake cost of the critical font request. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Start the default board before React boots. These requests are reused by
+         the fetch cache when RatingsBoard mounts. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="./data/leaderboards/official/meta.json"
+      as="fetch"
+      crossorigin
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      href="./data/leaderboards/official/pages/1.json"
+      as="fetch"
+      crossorigin
+      fetchpriority="high"
     />
 
     <title>xcpc rating | 选手积分与赛事数据</title>

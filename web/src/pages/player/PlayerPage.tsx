@@ -288,8 +288,7 @@ function Dossier({ player }: { player: PlayerDetail }) {
                 return (
                   <tr
                     key={`${h.contestId}-${i}`}
-                    className={`row-link ${i < 14 ? 'row-rise' : ''}`}
-                    style={i < 14 ? { animationDelay: `${i * 45}ms` } : undefined}
+                    className="row-link"
                     tabIndex={0}
                     onClick={() => window.location.assign(`#/contest/${h.contestId}`)}
                     onKeyDown={(e) =>

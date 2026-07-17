@@ -37,8 +37,8 @@ const COLOR = {
   surface: 'oklch(99.5% 0.0025 252)',
 } as const
 
-const SANS = "'Noto Sans SC', -apple-system, sans-serif"
-const SERIF = "'Noto Serif SC', serif"
+const SANS = "-apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif"
+const SERIF = "ui-serif, 'Songti SC', STSong, serif"
 
 const MIN_POINTS = 2
 

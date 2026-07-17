@@ -11,7 +11,13 @@
  * static serving.
  */
 
-import { shardForKey } from './md5'
+import { md5Hex, shardForKey } from './md5'
+import {
+  decodePlayerSearchRows,
+  playerSearchShard,
+  type PlayerSearchEntry,
+  type PlayerSearchRow,
+} from './search'
 
 /* ------------------------------------------------------------------ *
  * meta.json
@@ -114,36 +120,6 @@ export interface ContestDetail {
   /** Reason shown on the contest page when unrated. */
   unratedNote?: string | null
   teams: ContestTeam[]
-}
-
-/* ------------------------------------------------------------------ *
- * players-index.json  (array-compressed, full roster)
- * ------------------------------------------------------------------ */
-
-/**
- * Compressed player row: [key, name, org, contests, rating]. `rating` is null
- * when the player has no rated contest yet.
- */
-export type PlayerIndexRow = [
-  key: string,
-  name: string,
-  org: string,
-  contests: number,
-  rating: number | null,
-]
-
-export interface PlayerIndexEntry {
-  key: string
-  name: string
-  org: string
-  contests: number
-  /** Display ladder rating; null when unrated. */
-  rating: number | null
-}
-
-function decodePlayerRow(row: PlayerIndexRow): PlayerIndexEntry {
-  const [key, name, org, contests, rating] = row
-  return { key, name, org, contests, rating: rating ?? null }
 }
 
 /* ------------------------------------------------------------------ *
@@ -319,20 +295,32 @@ export interface LeaderboardRow {
   org: string
   rating: number
   contests: number
+  /** Full-board 1224 rank, precomputed by the exporter. */
+  rank: number
 }
 
-/** Array-compressed leaderboard row: `[key, name, org, rating, contests]`. */
+/** Array-compressed row: `[key, name, org, rating, contests, globalRank]`. */
 export type LeaderboardRowRaw = [
   key: string,
   name: string,
   org: string,
   rating: number,
   contests: number,
+  rank: number,
 ]
 
 function decodeLeaderboardRow(row: LeaderboardRowRaw): LeaderboardRow {
-  const [key, name, org, rating, contests] = row
-  return { key, name, org, rating, contests }
+  const [key, name, org, rating, contests, rank] = row
+  return { key, name, org, rating, contests, rank }
+}
+
+export type LeaderboardSchoolRaw = [org: string, count: number]
+
+export interface LeaderboardMeta {
+  total: number
+  pageSize: number
+  pageCount: number
+  schools: LeaderboardSchoolRaw[]
 }
 
 /* ------------------------------------------------------------------ *
@@ -394,10 +382,10 @@ export type PeriodRow = [
  * ------------------------------------------------------------------ */
 
 /** Base path for all data assets, honoring vite `base`. */
-function dataUrl(path: string): string {
+export function dataUrl(path: string): string {
   const base = import.meta.env.BASE_URL || './'
   const trimmed = base.endsWith('/') ? base : `${base}/`
-  return `${trimmed}data/${path}`
+  return new URL(`${trimmed}data/${path}`, document.baseURI).href
 }
 
 /**
@@ -476,27 +464,51 @@ export async function getContest(slug: string): Promise<ContestDetail> {
   return normalizeContestDetail(raw)
 }
 
-/** Raw (array-compressed) players index. */
-export function getPlayersIndexRaw(): Promise<PlayerIndexRow[]> {
-  return fetchJson<PlayerIndexRow[]>('players-index.json')
+function leaderboardRoot(official: boolean): string {
+  return `leaderboards/${official ? 'official' : 'all'}`
 }
 
-/** Decoded players index — object rows for ergonomic consumption. */
-export async function getPlayersIndex(): Promise<PlayerIndexEntry[]> {
-  const rows = await getPlayersIndexRaw()
-  return rows.map(decodePlayerRow)
+export function getLeaderboardMeta(official = false): Promise<LeaderboardMeta> {
+  return fetchJson<LeaderboardMeta>(`${leaderboardRoot(official)}/meta.json`)
 }
 
-/**
- * A leaderboard (incremental ladder), ordered by rating descending. The main
- * board counts all participation; the official board (`official: true`) counts
- * only official participation (打星 / unofficial appearances excluded).
- */
-export async function getLeaderboard(official = false): Promise<LeaderboardRow[]> {
+/** Load exactly one 100-row leaderboard page. */
+export async function getLeaderboardPage(
+  official: boolean,
+  page: number,
+): Promise<LeaderboardRow[]> {
   const rows = await fetchJson<LeaderboardRowRaw[]>(
-    official ? 'leaderboard_official.json' : 'leaderboard.json',
+    `${leaderboardRoot(official)}/pages/${page}.json`,
   )
   return rows.map(decodeLeaderboardRow)
+}
+
+/** Load one school's complete board slice; rows retain their global ranks. */
+export async function getLeaderboardSchool(
+  official: boolean,
+  org: string,
+): Promise<LeaderboardRow[]> {
+  const rows = await fetchJson<LeaderboardRowRaw[]>(
+    `${leaderboardRoot(official)}/schools/${md5Hex(org)}.json`,
+  )
+  return rows.map(decodeLeaderboardRow)
+}
+
+/** Load only the player candidate shard selected by the query's first char. */
+export async function getPlayerSearchPrefix(
+  query: string,
+): Promise<PlayerSearchEntry[]> {
+  const shard = playerSearchShard(query)
+  if (!shard) return []
+  try {
+    const rows = await fetchJson<PlayerSearchRow[]>(
+      `search/players/${shard}.json`,
+    )
+    return decodePlayerSearchRows(rows)
+  } catch (error: unknown) {
+    if (error instanceof DataError && error.status === 404) return []
+    throw error
+  }
 }
 
 /**
@@ -504,10 +516,6 @@ export async function getLeaderboard(official = false): Promise<LeaderboardRow[]
  * player who has at least one official participation; lazily fetched (and then
  * cached) only when the period view is opened.
  */
-export function getPeriodIndex(): Promise<PeriodRow[]> {
-  return fetchJson<PeriodRow[]>('period-index.json')
-}
-
 /** The 学校榜 (school ranking), ordered by conservative rating descending. */
 export function getSchools(): Promise<SchoolRow[]> {
   return fetchJson<SchoolRow[]>('schools.json')

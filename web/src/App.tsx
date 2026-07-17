@@ -1,12 +1,18 @@
+import { lazy, Suspense } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { TopBar, Footer } from './components/ui'
 import LeaderboardPage from './pages/leaderboard/LeaderboardPage'
-import SchoolsPage from './pages/schools/SchoolsPage'
-import SchoolPage from './pages/schools/SchoolPage'
-import ContestsPage from './pages/contests/ContestsPage'
-import ContestDetailPage from './pages/contests/ContestDetailPage'
-import PlayerPage from './pages/player/PlayerPage'
-import RulesPage from './pages/rules/RulesPage'
+
+const SchoolsPage = lazy(() => import('./pages/schools/SchoolsPage'))
+const SchoolPage = lazy(() => import('./pages/schools/SchoolPage'))
+const ContestsPage = lazy(() => import('./pages/contests/ContestsPage'))
+const ContestDetailPage = lazy(
+  () => import('./pages/contests/ContestDetailPage'),
+)
+// PlayerPage owns ECharts, so route splitting keeps the chart runtime entirely
+// out of the leaderboard's critical JavaScript chunk.
+const PlayerPage = lazy(() => import('./pages/player/PlayerPage'))
+const RulesPage = lazy(() => import('./pages/rules/RulesPage'))
 
 /**
  * Application shell + route table. HashRouter keeps deploys configuration-free
@@ -22,16 +28,24 @@ export default function App() {
         </a>
         <TopBar />
         <main id="main" className="app-main">
-          <Routes>
-            <Route path="/" element={<LeaderboardPage />} />
-            <Route path="/schools" element={<SchoolsPage />} />
-            <Route path="/school/:org" element={<SchoolPage />} />
-            <Route path="/contests" element={<ContestsPage />} />
-            <Route path="/contest/:slug" element={<ContestDetailPage />} />
-            <Route path="/player/:key" element={<PlayerPage />} />
-            <Route path="/rules" element={<RulesPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Suspense
+            fallback={
+              <div className="state" role="status">
+                页面加载中…
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<LeaderboardPage />} />
+              <Route path="/schools" element={<SchoolsPage />} />
+              <Route path="/school/:org" element={<SchoolPage />} />
+              <Route path="/contests" element={<ContestsPage />} />
+              <Route path="/contest/:slug" element={<ContestDetailPage />} />
+              <Route path="/player/:key" element={<PlayerPage />} />
+              <Route path="/rules" element={<RulesPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>

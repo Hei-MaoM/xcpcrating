@@ -1,33 +1,25 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Caret } from '../../components/ui'
-import { getPeriodIndex, type PeriodRow } from '../../lib/data'
+import { dataUrl } from '../../lib/data'
 import { formatScoreInt } from '../../lib/format'
-import { buildSchoolOptions } from './schools'
 import { SchoolFilter } from './SchoolFilter'
 import { EndDatePicker } from './EndDatePicker'
 import { useLeaderboardParams } from './useLeaderboardParams'
-import { buildPeriodBoard, dateToInt, type PeriodBoardRow } from './period'
+import { dateToInt } from './period'
+import type { PeriodPageResult } from './periodWorkerCore'
+import type {
+  PeriodBounds,
+  PeriodWorkerRequest,
+  PeriodWorkerResponse,
+} from './periodWorkerProtocol'
 
 const PAGE_SIZE = 100
-const RISE_ROWS = 14
 
 /** `YYYYMMDD` int → `YYYY-MM-DD` string. */
 function intToDate(value: number): string {
   const s = String(value)
   return `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`
-}
-
-/** Earliest / latest official-participation date present in the timelines. */
-function dataBounds(rows: PeriodRow[]): { lo: number; hi: number } | null {
-  let lo = Infinity
-  let hi = -Infinity
-  for (const [, , , dates] of rows) {
-    if (dates.length === 0) continue
-    if (dates[0] < lo) lo = dates[0]
-    if (dates[dates.length - 1] > hi) hi = dates[dates.length - 1]
-  }
-  return Number.isFinite(lo) ? { lo, hi } : null
 }
 
 /**
@@ -42,50 +34,73 @@ export function PeriodBoard() {
   const navigate = useNavigate()
   const { page, org, to, setPage, setOrg, setTo } = useLeaderboardParams()
 
-  const [rows, setRows] = useState<PeriodRow[] | null>(null)
+  const workerRef = useRef<Worker | null>(null)
+  const requestIdRef = useRef(0)
+  const [bounds, setBounds] = useState<PeriodBounds | null>(null)
+  const [result, setResult] = useState<PeriodPageResult | null>(null)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    let active = true
-    getPeriodIndex()
-      .then((data) => {
-        if (active) setRows(data)
-      })
-      .catch((err: unknown) => {
-        if (active)
-          setError(err instanceof Error ? err.message : '时间段数据加载失败')
-      })
+    const worker = new Worker(new URL('./period.worker.ts', import.meta.url), {
+      type: 'module',
+    })
+    workerRef.current = worker
+    worker.onmessage = (event: MessageEvent<PeriodWorkerResponse>) => {
+      const message = event.data
+      if (message.type === 'loaded') {
+        setBounds(message.bounds)
+      } else if (message.type === 'result') {
+        if (message.id !== requestIdRef.current) return
+        setResult(message)
+        setLoading(false)
+      } else if (message.id === undefined || message.id === requestIdRef.current) {
+        setError(message.message)
+        setLoading(false)
+      }
+    }
+    worker.onerror = () => {
+      setError('时间段数据加载失败')
+      setLoading(false)
+    }
+    const request: PeriodWorkerRequest = {
+      type: 'load',
+      url: dataUrl('period-index.json'),
+    }
+    worker.postMessage(request)
     return () => {
-      active = false
+      worker.terminate()
+      workerRef.current = null
     }
   }, [])
 
-  const bounds = useMemo(() => (rows ? dataBounds(rows) : null), [rows])
   const minDate = bounds ? intToDate(bounds.lo) : ''
   const maxDate = bounds ? intToDate(bounds.hi) : ''
-
-  // Effective end date: URL value when present (and in range), else the latest.
   const toStr = to ?? maxDate
 
-  // Open-ended board: from = 0 means "everyone on-or-before `to`" (cumulative).
-  const fullBoard = useMemo<PeriodBoardRow[]>(() => {
-    if (!rows || !bounds) return []
-    const toInt = dateToInt(toStr) ?? bounds.hi
-    return buildPeriodBoard(rows, 0, toInt)
-  }, [rows, bounds, toStr])
+  useEffect(() => {
+    if (!bounds || !workerRef.current) return
+    const id = requestIdRef.current + 1
+    requestIdRef.current = id
+    setLoading(true)
+    setError(null)
+    const request: PeriodWorkerRequest = {
+      type: 'query',
+      id,
+      toInt: dateToInt(toStr) ?? bounds.hi,
+      org,
+      page,
+      pageSize: PAGE_SIZE,
+    }
+    workerRef.current.postMessage(request)
+  }, [bounds, toStr, org, page])
 
-  const schoolOptions = useMemo(() => buildSchoolOptions(fullBoard), [fullBoard])
-
-  const filtered = useMemo<PeriodBoardRow[]>(
-    () => (org ? fullBoard.filter((r) => r.org === org) : fullBoard),
-    [fullBoard, org],
-  )
-
-  const total = filtered.length
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE))
-  const clampedPage = Math.min(Math.max(1, page), totalPages)
+  const schoolOptions = result?.schoolOptions ?? []
+  const total = result?.total ?? 0
+  const totalPages = result?.pageCount ?? 1
+  const clampedPage = result?.page ?? page
   const start = (clampedPage - 1) * PAGE_SIZE
-  const pageRows = filtered.slice(start, start + PAGE_SIZE)
+  const pageRows = result?.rows ?? []
 
   const atLatest = !to || to === maxDate
 
@@ -123,10 +138,10 @@ export function PeriodBoard() {
           onChange={(next) => {
             setOrg(next)
           }}
-          disabled={rows === null}
+          disabled={bounds === null}
         />
         <span className="toolbar__count">
-          截至该日 <span className="tnum">{fullBoard.length.toLocaleString('en-US')}</span> 名正式参赛选手
+          截至该日 <span className="tnum">{(result?.overallTotal ?? 0).toLocaleString('en-US')}</span> 名正式参赛选手
           {org ? (
             <>
               {' '}· 当前 {org} <span className="tnum">{total}</span> 人
@@ -140,7 +155,7 @@ export function PeriodBoard() {
           <p className="state__title">无法加载时间段榜单</p>
           <p>{error}</p>
         </div>
-      ) : rows === null ? (
+      ) : result === null ? (
         <div className="state" role="status">
           时间段数据加载中…
         </div>
@@ -166,13 +181,11 @@ export function PeriodBoard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {pageRows.map((r, i) => {
-                    const rise = clampedPage === 1 && i < RISE_ROWS
+                  {pageRows.map((r) => {
                     return (
                       <tr
                         key={r.key}
-                        className={`row-link ${rise ? 'row-rise' : ''}`}
-                        style={rise ? { animationDelay: `${i * 45}ms` } : undefined}
+                        className="row-link"
                         tabIndex={0}
                         onClick={() => navigate(`/player/${encodeURIComponent(r.key)}`)}
                         onKeyDown={(e) =>
@@ -229,7 +242,7 @@ export function PeriodBoard() {
               <div className="pager__ctrl">
                 <button
                   className="pager__btn"
-                  disabled={clampedPage <= 1}
+                  disabled={loading || clampedPage <= 1}
                   aria-label="上一页"
                   onClick={() => setPage(clampedPage - 1)}
                 >
@@ -237,7 +250,7 @@ export function PeriodBoard() {
                 </button>
                 <button
                   className="pager__btn"
-                  disabled={clampedPage >= totalPages}
+                  disabled={loading || clampedPage >= totalPages}
                   aria-label="下一页"
                   onClick={() => setPage(clampedPage + 1)}
                 >

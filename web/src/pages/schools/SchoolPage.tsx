@@ -23,7 +23,6 @@ function DeltaCell({ delta }: { delta: number }) {
 }
 
 const PAGE_SIZE = 50
-const RISE_ROWS = 14
 
 /** One labelled metric in the school header strip. */
 function Metric({ label, value }: { label: string; value: React.ReactNode }) {
@@ -161,13 +160,11 @@ function SchoolPageView({ org }: { org: string }) {
                   </thead>
                   <tbody>
                     {pageRows.map((r, i) => {
-                      const rise = clampedPage === 1 && i < RISE_ROWS
                       const goto = () => navigate(`/contest/${r.slug}`)
                       return (
                         <tr
                           key={`${r.slug}-${i}`}
-                          className={`row-link ${rise ? 'row-rise' : ''}`}
-                          style={rise ? { animationDelay: `${i * 45}ms` } : undefined}
+                          className="row-link"
                           tabIndex={0}
                           onClick={goto}
                           onKeyDown={(e) => e.key === 'Enter' && goto()}

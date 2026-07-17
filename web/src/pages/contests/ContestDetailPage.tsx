@@ -73,8 +73,6 @@ function ResultsTable({ teams }: { teams: ContestTeam[] }) {
         {teams.map((t, i) => (
           <tr
             key={`${t.rank}-${t.name}-${i}`}
-            className={i < 14 ? 'row-rise' : undefined}
-            style={i < 14 ? { animationDelay: `${i * 45}ms` } : undefined}
           >
             <td>
               <RankCell rank={t.rank} />
@@ -137,8 +135,6 @@ function PredictionsTable({ teams }: { teams: ContestTeam[] }) {
           return (
             <tr
               key={`${t.rank}-${t.name}-${i}`}
-              className={i < 14 ? 'row-rise' : undefined}
-              style={i < 14 ? { animationDelay: `${i * 45}ms` } : undefined}
             >
               <td className="right rank" style={{ fontSize: 17 }}>
                 {t.predictedRank ?? '—'}
