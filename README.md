@@ -124,12 +124,8 @@ rating/
 ## 数据来源与口径
 
 - 主数据源为 `vendor/srk-collection` submodule（algoux/srk-collection）。
-- 此外 12 场**网络预选赛**（2022–2025 的 ICPC / CCPC 在线预选）上游 submodule 没有，
-  由爬虫抓取后以标准 srk 存放在仓库内 `srk-extra/official/`（纳入版本管理）：
-  `scripts/pta_to_srk.py <pintia-rankings-id>`（pintia）与
-  `scripts/xcpcio_to_srk.py <xcpcio-board-path>`（xcpcio）。导出前 `srk-extra/official/`
-  会被叠加进 srk-collection 的 `official/`（本地见 `scripts/update_data.sh`、CI 见
-  `.github/workflows/pages.yml`），故本地与线上口径一致。
+- 网络预选赛统一使用上游 `srk-collection` 收录的数据；仓库和 CI 不再叠加本地赛事文件，
+  避免同一场比赛以不同 ID 重复进入评分。
 - 只计入 `icpc / ccpc / provincial` 三类官方榜单；一场比赛只要至少有 1 行带有效队员名单即计入，
   整场无名单（覆盖率 0）则跳过。无名单的单行作为打星保留在展示中、不参与个人评分。
 - **同场去重**：同一物理比赛的双榜（如邀请赛 + 省赛切片，同日、队员高度重叠）只保留一份。

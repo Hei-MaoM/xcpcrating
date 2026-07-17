@@ -27,6 +27,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify upstream-only data source
+        run: python scripts/verify_upstream_only.py
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -40,13 +43,6 @@ jobs:
       - name: Shallow-clone the official srk-collection
         run: |
           git clone --depth 1 https://github.com/algoux/srk-collection /tmp/srk-collection
-
-      - name: Overlay locally-curated srk (online preliminaries not yet in upstream)
-        run: |
-          # Most online preliminaries now ship from upstream (PR #63). srk-extra
-          # only carries the ones upstream still lacks (currently the 2025 EC /
-          # CCPC online rounds); drop each here once upstream adds it.
-          cp -R srk-extra/official/. /tmp/srk-collection/official/
 
       - name: Export the static data bundle
         run: |
