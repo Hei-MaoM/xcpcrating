@@ -20,5 +20,4 @@ export {
   Delta,
   Deviation,
   MedalGroup,
-  prefersReduced,
 } from './primitives'

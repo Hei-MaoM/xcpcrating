@@ -1,7 +1,7 @@
 # srk rating · 前端数据站
 
-竞赛选手天梯与赛事数据的纯静态网页：成就榜（A / elo_cf）、实力榜（B / openskill）、
-赛前预测（A/B 引擎可切换）、实际结果、选手表现分轨迹与逐场历史。
+竞赛选手天梯与赛事数据的纯静态网页：正式/全部参赛榜、历史时间段榜、学校榜、
+赛前预测、实际结果、选手表现分轨迹与逐场历史。
 
 报刊风视觉：白底、Swiss 网格、衬线标题、tabular-nums 数字、单一强调色牛津蓝、奖牌金银铜
 语义色，不使用任何 UI 组件库。
@@ -12,6 +12,9 @@
 - react-router-dom（HashRouter，GitHub Pages 免配置）
 - ECharts（`echarts/core` 按需注册，禁止全量引入）
 - Vitest（单元测试）
+
+非首页路由使用 `React.lazy` 拆包，ECharts 只随选手页加载；中文排版使用系统字体，
+不依赖阻塞式外部字体服务。
 
 ## 开发
 
@@ -41,7 +44,8 @@ cd dist && python -m http.server 8080
 npm run test         # 运行 vitest 单元测试
 ```
 
-当前覆盖 `lib/md5` 的分片契约：MD5 实现与 Python 导出器的
+测试覆盖 MD5 分片契约、榜单/搜索分片、学校筛选、时间段计算和 Worker 分页核心。
+MD5 实现与 Python 导出器的
 `hashlib.md5(key.encode("utf-8")).hexdigest()[:2]` 必须逐字节一致，否则按分片加载选手数据
 会静默 404。测试用 Python 生成的真实摘要做基准。
 
@@ -50,7 +54,7 @@ npm run test         # 运行 vitest 单元测试
 所有数据由 Python 管线导出，**不要手工编辑** `public/data/`：
 
 ```bash
-python -m xcpc_rating.export_web
+PYTHONPATH=src python3 -m xcpc_rating.export_web
 ```
 
 导出器（`src/xcpc_rating/export_web.py`）是数据契约的唯一真实来源，字段名与
@@ -61,18 +65,19 @@ python -m xcpc_rating.export_web
 - `slug` = 比赛 id 中 `/` 替换为 `__`
 - `shard` = `md5(key)` 前 2 位十六进制（256 片）
 - `predictedRank` = 各引擎赛前 `predict_scores` 降序名次（1-based，稳定排序，无泄漏）
-- `players-index.json` 数组压缩为 `[key, name, org, contests, ratingA, ratingB]`，
-  场次不足（< 3）时 `ratingB` 为 `null`
+- 榜单页为 100 人一片，行结构为 `[key, name, org, rating, contests, globalRank]`
+- 搜索只加载查询首字符对应的选手候选分片
+- 时间段索引由 Web Worker 下载、解析、排序和分页，主线程只接收当前 100 行
 
 ## 目录结构
 
 ```
 src/
   main.tsx                       入口；按序引入 tokens → typography → global → ui 样式
-  App.tsx                        HashRouter 路由表（scaffold 后冻结，页面 agent 不改）
+  App.tsx                        HashRouter 路由表；非首页路由按需加载
   styles/
     tokens.css                   设计 token：oklch 色板、clamp 字号、间距、强调色、奖牌色
-    typography.css               Noto Serif SC / Noto Sans SC 层级、tabular-nums
+    typography.css               排版层级、tabular-nums
     global.css                   reset、focus-visible、reduced-motion、布局容器
   lib/
     data.ts                      数据契约 TS 类型 + 带缓存的 fetch 层
@@ -94,7 +99,9 @@ src/
 
 | 路径 | 页面 |
 | --- | --- |
-| `#/` | 榜单页（A 成就榜 / B 实力榜） |
+| `#/` | 选手榜（正式 / 全部 / 时间段） |
+| `#/schools` | 学校榜 |
+| `#/school/:org` | 学校详情 |
 | `#/contests` | 比赛列表 |
 | `#/contest/:slug` | 比赛详情（结果 / 预测，引擎可切换） |
 | `#/player/:key` | 选手详情（表现分轨迹 + 逐场历史） |

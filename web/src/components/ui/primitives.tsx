@@ -11,7 +11,7 @@ import {
 } from 'react'
 
 /** True when the user asked the OS to minimise motion. */
-export function prefersReduced(): boolean {
+function prefersReduced(): boolean {
   return (
     typeof window !== 'undefined' &&
     typeof window.matchMedia === 'function' &&
@@ -55,15 +55,13 @@ interface CountUpProps {
 
 export function CountUp({ value, decimals = 0, duration = 1100, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const [display, setDisplay] = useState(() => (prefersReduced() ? value : 0))
+  const reducedMotion = prefersReduced()
+  const [display, setDisplay] = useState(0)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (prefersReduced()) {
-      setDisplay(value)
-      return
-    }
+    if (reducedMotion) return
     let raf = 0
     let t0 = 0
     const ease = (t: number) => 1 - Math.pow(1 - t, 3)
@@ -91,9 +89,9 @@ export function CountUp({ value, decimals = 0, duration = 1100, className }: Cou
       io.disconnect()
       cancelAnimationFrame(raf)
     }
-  }, [value, duration])
+  }, [value, duration, reducedMotion])
 
-  const text = Number(display).toLocaleString('en-US', {
+  const text = Number(reducedMotion ? value : display).toLocaleString('en-US', {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
     useGrouping: false,
@@ -128,14 +126,11 @@ export function Reveal({
   ...rest
 }: RevealProps) {
   const ref = useRef<HTMLElement>(null)
-  const [shown, setShown] = useState(false)
+  const [shown, setShown] = useState(prefersReduced)
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (prefersReduced()) {
-      setShown(true)
-      return
-    }
+    if (prefersReduced()) return
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -165,14 +160,11 @@ export function Reveal({
 /** A hairline rule that "draws in" (oxford wipe) when scrolled into view. */
 export function RuleDraw({ className = '' }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
-  const [shown, setShown] = useState(false)
+  const [shown, setShown] = useState(prefersReduced)
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (prefersReduced()) {
-      setShown(true)
-      return
-    }
+    if (prefersReduced()) return
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {

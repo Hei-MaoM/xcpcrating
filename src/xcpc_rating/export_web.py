@@ -115,11 +115,6 @@ def player_shard(key: str) -> str:
     return digest[:SHARD_HEX_LEN]
 
 
-def _key_digest(key: str) -> str:
-    """Return a full stable md5 filename for exact-key static data files."""
-    return hashlib.md5(key.encode("utf-8")).hexdigest()
-
-
 def _round(value):
     """Round floats to the contract precision; pass other values through."""
     if isinstance(value, float):
@@ -878,25 +873,13 @@ def build_leaderboard(engine, min_contests=MIN_RATED_CONTESTS):
 # --------------------------------------------------------------------------- #
 
 
-def _compress_board(board) -> list[list]:
-    """Array-compress a leaderboard (list of dicts) to tuples for a smaller file.
-
-    Row form: ``[key, name, org, rating, contests]`` — the same shape the frontend
-    ``getLeaderboard`` decoder expects. Dropping the repeated object keys roughly
-    halves the on-disk size and the browser's parse time for a 60k-row board.
-    """
-    return [
-        [r["key"], r["name"], r["org"], r["rating"], r["contests"]] for r in board
-    ]
-
-
 def _display_round(value: float) -> int:
     """Match JavaScript ``Math.round`` for the positive rating domain."""
     return math.floor(value + 0.5)
 
 
 def build_leaderboard_assets(board, page_size=LEADERBOARD_PAGE_SIZE):
-    """Build metadata, numbered pages, and exact-school leaderboard shards.
+    """Build metadata, numbered pages, and per-school leaderboard slices.
 
     Compact row form is ``[key, name, org, rating, contests, globalRank]``. The
     rank is computed over the complete board using the same rounded-score 1224
@@ -996,7 +979,7 @@ def _reset_dir(path: str) -> None:
 
 
 def _write_leaderboard_assets(out_dir: str, kind: str, board) -> int:
-    """Write one leaderboard's metadata, pages, and exact-school shards."""
+    """Write one leaderboard's metadata, pages, and school hash buckets."""
     root = os.path.join(out_dir, "leaderboards", kind)
     meta, pages, schools = build_leaderboard_assets(board)
     _dump_json(os.path.join(root, "meta.json"), meta)
@@ -1004,10 +987,11 @@ def _write_leaderboard_assets(out_dir: str, kind: str, board) -> int:
     for page_number, rows in enumerate(pages, start=1):
         _dump_json(os.path.join(root, "pages", f"{page_number}.json"), rows)
         file_count += 1
+    school_buckets: dict[str, dict[str, list[list]]] = {}
     for org, rows in schools.items():
-        _dump_json(
-            os.path.join(root, "schools", _key_digest(org) + ".json"), rows
-        )
+        school_buckets.setdefault(player_shard(org), {})[org] = rows
+    for shard, bucket in school_buckets.items():
+        _dump_json(os.path.join(root, "schools", shard + ".json"), bucket)
         file_count += 1
     return file_count
 
@@ -1024,7 +1008,7 @@ def write_bundle(
 ):
     """Write the entire contract bundle under ``out_dir``. Returns file count.
 
-    Leaderboards are written as metadata + 100-row pages + exact-school shards.
+    Leaderboards are written as metadata + 100-row pages + school hash buckets.
     Player search is independently prefix-sharded, so neither feature downloads
     the former multi-megabyte global indexes. ``main_board`` is the
     all-participation board (rebuilt from ``engine`` when omitted);

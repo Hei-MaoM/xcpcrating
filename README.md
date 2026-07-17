@@ -38,8 +38,9 @@ npm run dev          # 开发服务器（HMR）
 ```
 
 导出产物（`web/public/data/`）：`meta.json`、`contests-index.json`、
-`contests/<slug>.json`、`players-index.json`、`players/<shard>.json`、
-`leaderboard.json`（全部参赛）、`leaderboard_official.json`（仅正式参赛）。
+`contests/<slug>.json`、`players/<shard>.json`、选手搜索前缀分片、
+每页 100 人的 `leaderboards/<kind>/pages/<n>.json`、学校哈希桶，以及由
+Web Worker 消费的 `period-index.json`。完整契约见 `web/public/data/README.md`。
 
 ### 一键更新
 

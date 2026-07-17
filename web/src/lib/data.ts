@@ -11,7 +11,7 @@
  * static serving.
  */
 
-import { md5Hex, shardForKey } from './md5'
+import { shardForKey } from './md5'
 import {
   decodePlayerSearchRows,
   playerSearchShard,
@@ -286,7 +286,7 @@ function normalizeContestDetail(raw: ContestDetail): ContestDetail {
 }
 
 /* ------------------------------------------------------------------ *
- * leaderboard.json
+ * leaderboards/<kind>/{meta,pages,schools}
  * ------------------------------------------------------------------ */
 
 export interface LeaderboardRow {
@@ -488,10 +488,10 @@ export async function getLeaderboardSchool(
   official: boolean,
   org: string,
 ): Promise<LeaderboardRow[]> {
-  const rows = await fetchJson<LeaderboardRowRaw[]>(
-    `${leaderboardRoot(official)}/schools/${md5Hex(org)}.json`,
+  const bucket = await fetchJson<Record<string, LeaderboardRowRaw[]>>(
+    `${leaderboardRoot(official)}/schools/${shardForKey(org)}.json`,
   )
-  return rows.map(decodeLeaderboardRow)
+  return (bucket[org] ?? []).map(decodeLeaderboardRow)
 }
 
 /** Load only the player candidate shard selected by the query's first char. */
@@ -511,11 +511,6 @@ export async function getPlayerSearchPrefix(
   }
 }
 
-/**
- * Official-participation timelines for the 时间段 (period) board. One row per
- * player who has at least one official participation; lazily fetched (and then
- * cached) only when the period view is opened.
- */
 /** The 学校榜 (school ranking), ordered by conservative rating descending. */
 export function getSchools(): Promise<SchoolRow[]> {
   return fetchJson<SchoolRow[]>('schools.json')

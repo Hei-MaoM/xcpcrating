@@ -34,7 +34,7 @@ interface RowsLoadState {
 
 /**
  * The current-rating leaderboard. Metadata carries total/school counts; the
- * browser fetches only the current 100-row page or one exact-school shard.
+ * browser fetches only the current 100-row page or one small school hash bucket.
  * Every row already carries its global rank from the exporter.
  */
 export function RatingsBoard({ official }: RatingsBoardProps) {

@@ -40,7 +40,7 @@ export default function RulesPage() {
           <div className="frow">
             <span className="frow__label">期望名次</span>
             <div className="frow__eq serif">
-              g(R) = 1 + Σ 1 / ( 1 + 10^((R − R<sub>j</sub>) / 400) )，　seed = g(R<sub>本队</sub>)
+              g(R) = 1 + Σ 1 / ( 1 + 10^((R − R<sub>j</sub>) / 400) )， seed = g(R<sub>本队</sub>)
             </div>
           </div>
           <div className="frow">
@@ -54,7 +54,7 @@ export default function RulesPage() {
           <div className="frow">
             <span className="frow__label">个人表现分</span>
             <div className="frow__eq serif">
-              表现分 = P − 团队偏移　（团队偏移 = 400 × log<sub>10</sub> 队伍人数）
+              表现分 = P − 团队偏移 （团队偏移 = 400 × log<sub>10</sub> 队伍人数）
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function RulesPage() {
           <div className="frow">
             <span className="frow__label">达预期不扣分</span>
             <div className="frow__eq serif">
-              名次 ≤ 预测名次　⇒　调整 = max( 调整,&nbsp; 0 )
+              名次 ≤ 预测名次 ⇒ 调整 = max( 调整,&nbsp; 0 )
             </div>
           </div>
           <div className="frow">
@@ -89,7 +89,7 @@ export default function RulesPage() {
           </div>
           <div className="frow">
             <span className="frow__label">显示分</span>
-            <div className="frow__eq serif">显示分 = E　（人人从 1400 起步）</div>
+            <div className="frow__eq serif">显示分 = E （人人从 1400 起步）</div>
           </div>
         </div>
 
@@ -284,7 +284,7 @@ export default function RulesPage() {
           <div className="formula-stack">
             <div className="frow">
               <span className="frow__label">学习率</span>
-              <div className="frow__eq serif">α = 1 / ( κ + n )，　κ = 4，n 为该校累计场次（含本场）</div>
+              <div className="frow__eq serif">α = 1 / ( κ + n )， κ = 4，n 为该校累计场次（含本场）</div>
             </div>
             <div className="frow">
               <span className="frow__label">单场调整</span>
@@ -293,7 +293,7 @@ export default function RulesPage() {
             <div className="frow">
               <span className="frow__label">零和微调</span>
               <div className="frow__eq serif">
-                微调 = − 全场调整均值　⇒　Σ( 调整 + 微调 ) = 0（只再分配，不通胀）
+                微调 = − 全场调整均值 ⇒ Σ( 调整 + 微调 ) = 0（只再分配，不通胀）
               </div>
             </div>
             <div className="frow">
