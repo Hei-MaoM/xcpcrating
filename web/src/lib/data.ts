@@ -27,6 +27,7 @@ export interface MetaCounts {
   contests: number
   players: number
   ratedPlayers: number
+  predictions?: number
 }
 
 export interface Meta {
@@ -120,6 +121,91 @@ export interface ContestDetail {
   /** Reason shown on the contest page when unrated. */
   unratedNote?: string | null
   teams: ContestTeam[]
+}
+
+/* ------------------------------------------------------------------ *
+ * predictions-index.json + predictions/<slug>.json
+ * ------------------------------------------------------------------ */
+
+export interface PredictionIndexEntry {
+  id: string
+  slug: string
+  title: string
+  shortTitle: string
+  startAt: string
+  category: string
+  teamCount: number
+  officialTeamCount: number
+  starredTeamCount: number
+  totalMembers: number
+  matchedMembers: number
+}
+
+export interface PredictionMember {
+  key: string
+  name: string
+  matched: boolean
+  matchedOfficial: boolean
+  rating: number
+  officialRating: number
+}
+
+export interface PredictionTeam {
+  number: number
+  name: string
+  org: string
+  seat: string
+  official: boolean
+  members: PredictionMember[]
+  matchedMembers: number
+  matchedOfficialMembers: number
+  allStrength: number
+  officialStrength: number
+  allRank: number
+  officialRank: number | null
+  historicalMedals?: {
+    gold: number
+    silver: number
+    bronze: number
+  }
+  historicalMedalsByTier?: Record<
+    'final' | 'regional' | 'invitational' | 'provincial',
+    {
+      gold: number
+      silver: number
+      bronze: number
+    }
+  >
+  medalRank?: number | null
+}
+
+export interface PredictionSchool {
+  rank: number
+  org: string
+  teamNumber: number
+  teamName: string
+  strength: number
+  award: string | null
+}
+
+export interface PredictionPrize {
+  schoolBestTeamOnly?: boolean
+  eligibleScope?: string
+  awards?: Array<{ label: string; count: number }>
+}
+
+export interface PredictionDetail extends PredictionIndexEntry {
+  source: string
+  sourceDate: string | null
+  ratingCutoff: string
+  ratedContestCount: number
+  officialMembers: number
+  matchedOfficialMembers: number
+  priorRating: number
+  prize: PredictionPrize
+  schools: PredictionSchool[]
+  teams: PredictionTeam[]
+  notes: string[]
 }
 
 /* ------------------------------------------------------------------ *
@@ -457,6 +543,14 @@ export function getMeta(): Promise<Meta> {
 
 export function getContestsIndex(): Promise<ContestIndexEntry[]> {
   return fetchJson<ContestIndexEntry[]>('contests-index.json')
+}
+
+export function getPredictionsIndex(): Promise<PredictionIndexEntry[]> {
+  return fetchJson<PredictionIndexEntry[]>('predictions-index.json')
+}
+
+export function getPrediction(slug: string): Promise<PredictionDetail> {
+  return fetchJson<PredictionDetail>(`predictions/${slug}.json`)
 }
 
 export async function getContest(slug: string): Promise<ContestDetail> {

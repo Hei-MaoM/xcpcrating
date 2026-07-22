@@ -22,6 +22,9 @@ export function TopBar() {
           <NavLink to="/contests" className={({ isActive }) => (isActive ? 'is-active' : '')}>
             比赛
           </NavLink>
+          <NavLink to="/predictions" className={({ isActive }) => (isActive ? 'is-active' : '')}>
+            预测
+          </NavLink>
           <NavLink to="/rules" className={({ isActive }) => (isActive ? 'is-active' : '')}>
             规则
           </NavLink>

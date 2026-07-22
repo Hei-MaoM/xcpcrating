@@ -58,6 +58,7 @@ from .engines.school import SchoolEngine
 from .identity import clean_org, display_name, resolve_i18n
 from .loader import SRK_SUFFIX, load_contests
 from .medals import MEDAL_COLORS, collect_medals
+from .prediction import build_predictions, prediction_index_entry
 from .validate import pairwise_concordance
 
 # Single scoring engine: the incremental ladder (see the README, 评分算法).
@@ -83,6 +84,7 @@ LEADERBOARD_PAGE_SIZE = 100
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_DATA = os.path.join(_REPO_ROOT, "vendor", "srk-collection", "official")
 DEFAULT_OUT = os.path.join(_REPO_ROOT, "web", "public", "data")
+PREDICTION_SPECS = os.path.join(_REPO_ROOT, "predictions")
 
 # Numeric rounding for compact, stable JSON (ratings/perf to 2 dp).
 _ROUND_DP = 2
@@ -1005,6 +1007,7 @@ def write_bundle(
     main_board=None,
     schools=None,
     school_history=None,
+    predictions=None,
 ):
     """Write the entire contract bundle under ``out_dir``. Returns file count.
 
@@ -1021,6 +1024,7 @@ def write_bundle(
     rated_players = sum(
         1 for r in records.values() if len(r["history"]) >= MIN_RATED_CONTESTS
     )
+    predictions = predictions or []
     meta = {
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "engine": ENGINE,
@@ -1028,6 +1032,7 @@ def write_bundle(
             "contests": len(contest_docs),
             "players": len(records),
             "ratedPlayers": rated_players,
+            "predictions": len(predictions),
         },
     }
     _dump_json(os.path.join(out_dir, "meta.json"), meta)
@@ -1116,6 +1121,21 @@ def write_bundle(
             )
             file_count += 1
 
+    # Upcoming-contest predictions. Reset generated details so removing a
+    # roster specification cannot leave a stale public page behind.
+    prediction_root = os.path.join(out_dir, "predictions")
+    _reset_dir(prediction_root)
+    prediction_index = []
+    for document in predictions:
+        prediction_index.append(prediction_index_entry(document))
+        _dump_json(
+            os.path.join(prediction_root, document["slug"] + ".json"),
+            document,
+        )
+        file_count += 1
+    _dump_json(os.path.join(out_dir, "predictions-index.json"), prediction_index)
+    file_count += 1
+
     return file_count
 
 
@@ -1173,6 +1193,9 @@ def run(args) -> int:
     main_board = build_leaderboard(engine)
     print(f"Official-only board: {len(official_board)} rated players.", flush=True)
 
+    prediction_docs = build_predictions(PREDICTION_SPECS, load.contests, medals=medals)
+    print(f"Upcoming predictions: {len(prediction_docs)} contest(s).", flush=True)
+
     # Precompute each player's standings on both boards so the player page renders
     # its rank/rating without downloading the (multi-MB) leaderboards.
     board_ranks = {
@@ -1216,6 +1239,7 @@ def run(args) -> int:
         main_board=main_board,
         schools=schools,
         school_history=school_history,
+        predictions=prediction_docs,
     )
 
     elapsed = time.perf_counter() - started

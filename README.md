@@ -68,12 +68,14 @@ rating/
 │   │   ├── base.py             # RatingEngine 抽象基类 + PlayerRating
 │   │   └── incremental.py      # 唯一评分引擎：阶梯分
 │   ├── medals.py               # 奖牌统计（standard-ranklist 规范）
+│   ├── prediction.py           # 赛前名单预测（积分排序 + 分级奖牌排序）
 │   ├── validate.py             # 时间序回测框架 + 指标（concordance/spearman）
 │   ├── report.py               # 榜单 / 对比报告（CLI 用）
 │   ├── export_web.py           # 导出前端 JSON 契约（两个榜 + 逐场轨迹）
 │   └── cli.py / __main__.py    # python -m xcpc_rating（回放 + 回测 + 报告）
 ├── scripts/
 │   └── update_data.sh          # 一键更新数据并重跑管线
+├── predictions/                # 即将举行比赛的公开参赛名单 JSON
 ├── tests/                      # pytest（AAA 结构）
 ├── vendor/srk-collection/      # 数据源（git submodule，只读）
 ├── web/                        # 静态数据站（Vite + React + TS）
@@ -120,6 +122,14 @@ rating/
   银 2×、铜 3×）。**网络预选赛是资格赛、不发奖牌**，故不参与奖牌统计。
 
 网页「规则」页是这套算法的权威说明；改引擎参数时请同步该页。
+
+## 赛前预测
+
+`predictions/*.json` 保存公开参赛名单。导出器会在每场比赛的 `startAt` 之前截断
+历史回放，以选手赛前积分计算正式队伍强度；同时汇总队员历史奖牌，依次按
+决赛、区域赛、邀请赛、省赛以及各级别内金、银、铜生成第二种排序。未匹配到
+历史记录的选手按 1400 分新人先验处理。结果写入
+`web/public/data/predictions-index.json` 和 `predictions/<slug>.json`。
 
 ## 数据来源与口径
 

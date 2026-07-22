@@ -24,6 +24,8 @@ PYTHONPATH=src python3 -m xcpc_rating.export_web
 | `period-index.json` | 正式参赛历史时间线；由 Web Worker 下载并计算时间段榜单 |
 | `schools.json` | 学校评分榜 |
 | `school-history/<shard>.json` | 学校逐场历史哈希桶 |
+| `predictions-index.json` | 即将举行比赛的赛前预测索引 |
+| `predictions/<slug>.json` | 正式队伍积分排序、分级奖牌排序与预计奖牌线数据 |
 
 首页只预加载 `official/meta.json` 与 `official/pages/1.json`；全量榜单和全量选手
 搜索索引不再进入首屏请求链路。
