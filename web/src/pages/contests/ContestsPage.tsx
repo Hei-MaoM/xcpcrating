@@ -5,11 +5,12 @@ import { formatDate, formatYear } from '../../lib/format'
 import { Caret, Reveal } from '../../components/ui'
 import {
   SERIES_FILTERS,
-  categoryLabel,
+  contestCategoryBadgeLabel,
   isSeriesFilter,
   seriesLabel,
   type SeriesFilter,
 } from './categories'
+import { ContestSectionNav } from './ContestSectionNav'
 
 /** Initial render budget; large archives reveal the rest via "load more". */
 const INITIAL_VISIBLE = 60
@@ -21,10 +22,15 @@ interface YearGroup {
 }
 
 /** Category badge mapped to the Light Luxury palette (taxonomy, never medals). */
-function CatBadge({ category }: { category: string }) {
+function CatBadge({ contest }: { contest: ContestIndexEntry }) {
+  const { category } = contest
   const cls =
     category === 'icpc' ? 'icpc' : category === 'ccpc' ? 'ccpc' : 'prov'
-  return <span className={`badge badge--${cls}`}>{categoryLabel(category)}</span>
+  return (
+    <span className={`badge badge--${cls}`}>
+      {contestCategoryBadgeLabel(contest)}
+    </span>
+  )
 }
 
 /** Filter by series, sort by date desc, group by year (years desc). */
@@ -109,6 +115,7 @@ export default function ContestsPage() {
         <p className="subtle">
           收录 ICPC、CCPC 与各省省赛共 {contests?.length ?? '—'} 场，按年份归档。
         </p>
+        <ContestSectionNav />
       </section>
 
       <section className="wrap" style={{ paddingBottom: 40 }}>
@@ -166,7 +173,7 @@ export default function ContestsPage() {
                       <span className="crow__date tnum">{formatDate(c.startAt)}</span>
                       <span className="crow__title">{c.title}</span>
                       <span className="crow__cat">
-                        <CatBadge category={c.category} />
+                        <CatBadge contest={c} />
                       </span>
                       <span className="crow__teams tnum">
                         <b>{c.teamCount}</b> 队

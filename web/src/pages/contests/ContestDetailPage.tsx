@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { getContest, type ContestDetail, type ContestTeam } from '../../lib/data'
+import {
+  getContest,
+  type ContestDetail,
+  type ContestMetrics,
+  type ContestStrengthScores,
+  type ContestTeam,
+} from '../../lib/data'
 import { formatDate, formatPenalty, formatScore } from '../../lib/format'
 import { Caret, Delta, Deviation } from '../../components/ui'
 import { categoryLabel } from './categories'
@@ -40,6 +46,53 @@ function MemberList({ members }: { members: ContestTeam['members'] }) {
 
 function RankCell({ rank }: { rank: number }) {
   return <span className="rank">{rank}</span>
+}
+
+const STRENGTH_METRICS: ReadonlyArray<{
+  key: keyof ContestStrengthScores
+  label: string
+}> = [
+  { key: 'bronze', label: '铜牌难度' },
+  { key: 'silver', label: '银牌难度' },
+  { key: 'gold', label: '金牌难度' },
+  { key: 'top3', label: '前三难度' },
+  { key: 'top10', label: '前十难度' },
+  { key: 'overall', label: '整体难度' },
+]
+
+function formatMetric(value: number | null | undefined): string {
+  return typeof value === 'number' && Number.isFinite(value) ? value.toFixed(1) : '—'
+}
+
+function ContestMetricsStrip({ metrics }: { metrics?: ContestMetrics }) {
+  if (!metrics) return null
+  const visibleStrengths = metrics.awardsMedals === false
+    ? STRENGTH_METRICS.filter(
+        ({ key }) => key === 'top3' || key === 'top10' || key === 'overall',
+      )
+    : STRENGTH_METRICS
+
+  return (
+    <section className="wrap contest-metrics-wrap" aria-label="比赛强度">
+      <dl
+        className={`contest-metrics${metrics.awardsMedals === false ? ' contest-metrics--no-medals' : ''}`}
+      >
+        {visibleStrengths.map(({ key, label }) => (
+          <div
+            className="contest-metric"
+            key={key}
+            title={`${label}的真实赛前阵容分；仅供同一竞赛年内比较`}
+          >
+            <dt className="contest-metric__label">{label}</dt>
+            <dd className="contest-metric__value">
+              {formatMetric(metrics.strength?.[key])}
+              <span className="contest-metric__scale"> 分</span>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )
 }
 
 function ResultsTable({ teams }: { teams: ContestTeam[] }) {
@@ -285,6 +338,8 @@ export default function ContestDetailPage() {
           </div>
         </div>
       </section>
+
+      <ContestMetricsStrip metrics={contest.contestMetrics} />
 
       {contest.unrated ? (
         <section className="wrap" style={{ paddingBottom: 12 }}>

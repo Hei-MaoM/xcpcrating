@@ -1,4 +1,5 @@
 import type { BadgeVariant } from '../../components/ui'
+import type { ContestIndexEntry } from '../../lib/data'
 
 /**
  * Contest series taxonomy. The exporter emits three category ids; everything
@@ -35,6 +36,24 @@ export function categoryLabel(category: string): string {
   if (category === 'ccpc') return 'CCPC'
   if (category === 'provincial') return '省赛'
   return category
+}
+
+/** Precise contest badge without folding an online preliminary into a regional. */
+export function contestCategoryBadgeLabel(
+  contest: Pick<
+    ContestIndexEntry,
+    'category' | 'tier' | 'onlinePreliminary'
+  >,
+): string {
+  const series = categoryLabel(contest.category)
+  if (
+    !contest.onlinePreliminary &&
+    (contest.category === 'icpc' || contest.category === 'ccpc')
+  ) {
+    if (contest.tier === 'regional') return `${series} 区域赛`
+    if (contest.tier === 'invitational') return `${series} 邀请赛`
+  }
+  return series
 }
 
 /**

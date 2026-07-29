@@ -48,6 +48,8 @@ Public surface
 --------------
 * :func:`parse_medal_rule` -- one file's per-segment ``[gold, silver, bronze]``
   counts, or ``None`` if it has no medal series.
+* :func:`has_medal_data` -- whether the file carries an explicit, positive
+  medal rule over a non-empty eligible field (placeholder fallback excluded).
 * :func:`allocate_medals` -- ``{member_key: 'gold'|'silver'|'bronze'}`` for one
   parsed srk dict (coaches dropped, in-contest key dedup).
 * :func:`collect_medals` -- scan the in-scope boards (scored boards plus
@@ -366,6 +368,68 @@ def _eligible_rows(srk_dict: dict, series: Optional[dict]) -> list:
     return eligible
 
 
+def _has_positive_values(node: dict) -> bool:
+    """Whether one raw count/ratio option contains an explicit positive value."""
+    values = node.get("value")
+    if not isinstance(values, (list, tuple)):
+        return False
+    for value in values:
+        try:
+            if float(value) > 0.0:
+                return True
+        except (TypeError, ValueError):
+            continue
+    return False
+
+
+def _explicit_medal_option(options: dict) -> Optional[dict]:
+    """Return the usable explicit ratio/count node selected by srk precedence."""
+    for name in ("ratio", "count"):
+        node = options.get(name)
+        if isinstance(node, dict) and isinstance(
+            node.get("value"), (list, tuple)
+        ):
+            return node
+    return None
+
+
+def has_medal_data(srk_dict: dict) -> bool:
+    """Whether a board has an explicit medal rule that can award a medal.
+
+    This is deliberately stricter than :func:`parse_medal_rule`: an ICPC medal
+    series with a missing or all-zero ``count`` is a renderer placeholder that
+    the player-medal pipeline may resolve through its historical 10/20/30
+    fallback, but it is *not* explicit medal data and must not admit a contest
+    to the public medal-difficulty leaderboards.
+
+    A series qualifies only when the rule's effective option (ratio takes
+    precedence over count, matching :func:`_cumulative_cutoffs`) contains a
+    positive raw value, its official/marker-filtered field is non-empty, and
+    the resolved rule produces at least one positive cutoff. Any qualifying
+    series is sufficient on a multi-series board.
+    """
+    for series in _all_medal_series(srk_dict):
+        options = (series.get("rule") or {}).get("options") or {}
+        if not isinstance(options, dict):
+            continue
+        explicit_option = _explicit_medal_option(options)
+        if explicit_option is None or not _has_positive_values(explicit_option):
+            continue
+
+        eligible = _eligible_rows(srk_dict, series)
+        if not eligible:
+            continue
+        resolved = _cumulative_cutoffs(
+            series,
+            len(eligible),
+            sum(1 for row in eligible if _row_scored(row)),
+            sum(1 for row in eligible if _row_submitted(row)),
+        )
+        if resolved is not None and any(cutoff > 0 for cutoff in resolved[0]):
+            return True
+    return False
+
+
 # --------------------------------------------------------------------------- #
 # Tie-aware color cutoffs
 # --------------------------------------------------------------------------- #
@@ -550,6 +614,22 @@ def _load_srk(data_root: str, contest_id: str) -> dict:
     path = os.path.join(data_root, contest_id + SRK_SUFFIX)
     with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def collect_medal_contest_ids(data_root: str, contests) -> set[str]:
+    """Return scored contest ids eligible for medal-difficulty metrics.
+
+    Network preliminaries never award medals in this product, even when their
+    raw renderer data carries a placeholder medal series. Every other contest
+    must pass :func:`has_medal_data`; no default-ratio fallback is applied.
+    """
+    result = set()
+    for contest in contests:
+        if _is_online_prelim(contest):
+            continue
+        if has_medal_data(_load_srk(data_root, contest.id)):
+            result.add(contest.id)
+    return result
 
 
 def _classify_id(contest_id: str, srk_dict: dict, category: str) -> str:

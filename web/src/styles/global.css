@@ -201,6 +201,27 @@ a { color: inherit; text-decoration: none; }
 .phead h1 { font-size: 64px; }
 .phead .subtle { margin-top: 22px; }
 
+/* Local section navigation: keeps the global top bar compact. */
+.contest-subnav {
+  display: flex; align-items: center; gap: 26px;
+  margin-top: 26px;
+}
+.contest-subnav a {
+  position: relative; padding-bottom: 7px;
+  color: var(--ink-3); font-size: 13.5px; font-weight: 500;
+  transition: color .18s;
+}
+.contest-subnav a + a::before {
+  content: ""; position: absolute; left: -13px; top: 4px;
+  width: 1px; height: 14px; background: var(--line-2);
+}
+.contest-subnav a:hover { color: var(--ink); }
+.contest-subnav a.is-active { color: var(--oxford-deep); font-weight: 600; }
+.contest-subnav a.is-active::after {
+  content: ""; position: absolute; right: 0; bottom: 0; left: 0;
+  height: 2px; border-radius: 2px; background: var(--oxford);
+}
+
 /* ============================================================
    Buttons / chips / dropdown
    ============================================================ */
@@ -499,6 +520,31 @@ a { color: inherit; text-decoration: none; }
 .members { font-size: 13.5px; }
 .detail-tbl tbody td { height: 58px; }
 
+/* Contest profile: six pre-contest strength dimensions. */
+.contest-metrics-wrap { padding-bottom: 28px; }
+.contest-metrics {
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px;
+  margin: 0; padding: 0; overflow: hidden;
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  background: var(--line); box-shadow: var(--shadow-sm);
+}
+.contest-metrics--no-medals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.contest-metric {
+  min-width: 0; padding: 16px 20px 15px; background: var(--card);
+}
+.contest-metric__label {
+  color: var(--ink-3); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; white-space: nowrap;
+}
+.contest-metric__value {
+  margin: 5px 0 0; color: var(--ink);
+  font-family: var(--serif); font-size: 24px; font-weight: 700;
+  line-height: 1.15; font-variant-numeric: tabular-nums;
+}
+.contest-metric__scale {
+  color: var(--ink-4); font-family: var(--sans); font-size: 10px; font-weight: 500;
+  white-space: nowrap;
+}
 /* voided-contest notice (e.g. leaked problems → scored unrated) */
 .unrated-banner {
   display: flex; align-items: center; gap: 12px;
@@ -910,6 +956,7 @@ a { color: inherit; text-decoration: none; }
   :root { --gutter: 24px; }
   .phead h1 { font-size: 44px; }
   .detail-title { font-size: 40px; }
+  .contest-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .dossier-hero { grid-template-columns: 1fr; gap: 32px; }
   .dossier-name { font-size: 60px; }
   .honor-card__num { font-size: 60px; }
@@ -927,6 +974,11 @@ a { color: inherit; text-decoration: none; }
   :root { --gutter: 16px; }
 
   /* top bar → row 1: brand + nav, row 2: full-width search */
+  .topbar {
+    background: var(--paper);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
   .topbar__inner {
     height: auto; min-height: 56px; flex-wrap: wrap;
     gap: 10px 14px; padding-top: 10px; padding-bottom: 10px;
@@ -956,6 +1008,9 @@ a { color: inherit; text-decoration: none; }
 
   /* contest detail head */
   .detail-meta { flex-wrap: wrap; gap: 8px 10px; margin-top: 14px; }
+  .contest-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .contest-metric { padding: 14px 15px 13px; }
+  .contest-metric__value { font-size: 21px; }
 
   /* data tables — scroll sideways inside their card, tighter cells */
   .tbl thead th { padding: 10px 12px; }

@@ -46,16 +46,56 @@ export interface Champion {
   org: string
 }
 
+export interface ContestStrengthScores {
+  bronze: number | null
+  silver: number | null
+  gold: number | null
+  top3: number | null
+  top10: number | null
+  overall: number | null
+}
+
+export interface ContestMedalCutoffs {
+  gold: number
+  silver: number
+  bronze: number
+}
+
+export interface ContestMetrics {
+  version: string
+  /** False when the source has no explicit medal data or for online preliminaries. */
+  awardsMedals: boolean
+  /** All official participating teams used as equal-weight strength samples. */
+  effectiveTeamCount: number
+  /** Strength samples with no member carrying pre-contest official history. */
+  zeroHistoryTeamCount: number
+  /** Strength samples with one or two members carrying pre-contest history. */
+  partialHistoryTeamCount: number
+  /** Teams whose three members all carry pre-contest history; used by weirdness. */
+  weirdnessTeamCount: number
+  /** Complete-history teams among all strength samples, in [0, 1]. */
+  historyCoverage: number
+  medalCutoffs: ContestMedalCutoffs
+  /** Six pre-contest team-rating values; compare only within one Sep–Aug season. */
+  strength: ContestStrengthScores
+  /** Prediction/result divergence on a 0–100 scale; null when undefined. */
+  weirdness: number | null
+}
+
 export interface ContestIndexEntry {
   id: string
   slug: string
   title: string
   startAt: string
   category: string
+  tier: MedalTier
+  onlinePreliminary: boolean
   teamCount: number
   champion: Champion
   /** Voided contest (e.g. leaked problems): displayed but scored unrated. */
   unrated?: boolean
+  /** Absent in legacy exports generated before contest metrics were introduced. */
+  contestMetrics?: ContestMetrics
 }
 
 /* ------------------------------------------------------------------ *
@@ -105,6 +145,8 @@ export interface ContestTeam {
   muDeltaOfficial: number | null
   /** Rank among official teams only (1224 over the official subset). */
   rankOfficial: number | null
+  /** Members (0–3) with official rating history before this contest. */
+  knownMembersOfficial: number | null
 }
 
 export interface ContestDetail {
@@ -113,6 +155,8 @@ export interface ContestDetail {
   title: string
   startAt: string
   category: string
+  tier: MedalTier
+  onlinePreliminary: boolean
   teamCount: number
   /** Pre-contest prediction hit-rate for this contest; null when undefined. */
   concordance: number | null
@@ -120,6 +164,8 @@ export interface ContestDetail {
   unrated?: boolean
   /** Reason shown on the contest page when unrated. */
   unratedNote?: string | null
+  /** Absent in legacy exports generated before contest metrics were introduced. */
+  contestMetrics?: ContestMetrics
   teams: ContestTeam[]
 }
 
@@ -360,6 +406,7 @@ function normalizeContestTeam(raw: ContestTeam): ContestTeam {
     preRatingOfficial: nullableNumber(raw.preRatingOfficial),
     muDeltaOfficial: nullableNumber(raw.muDeltaOfficial),
     rankOfficial: nullableNumber(raw.rankOfficial),
+    knownMembersOfficial: nullableNumber(raw.knownMembersOfficial),
   }
 }
 

@@ -45,8 +45,10 @@ import shutil
 import sys
 import time
 from datetime import datetime, timezone
+from itertools import groupby
 
 from . import perf
+from .contest_metrics import MetricTeam, compute_contest_metrics
 from .engines.incremental import INITIAL_EXPECT as PRIOR_MU
 from .engines.incremental import (
     UNRATED_CONTESTS,
@@ -56,9 +58,10 @@ from .engines.incremental import (
 )
 from .engines.school import SchoolEngine
 from .identity import clean_org, display_name, resolve_i18n
-from .loader import SRK_SUFFIX, load_contests
-from .medals import MEDAL_COLORS, collect_medals
+from .loader import SRK_SUFFIX, _is_online_prelim, load_contests
+from .medals import MEDAL_COLORS, collect_medal_contest_ids, collect_medals
 from .prediction import build_predictions, prediction_index_entry
+from .tier import classify_tier
 from .validate import pairwise_concordance
 
 # Single scoring engine: the incremental ladder (see the README, 评分算法).
@@ -479,6 +482,8 @@ def replay_and_collect(contests, data_root: str):
                 "title": contest.title,
                 "startAt": _isoformat(contest.start_at),
                 "category": contest.category,
+                "tier": classify_tier(contest),
+                "onlinePreliminary": _is_online_prelim(contest),
                 "teamCount": len(contest.teams),
                 "concordance": _round(conc) if conc is not None else None,
                 "unrated": contest.id in UNRATED_CONTESTS,
@@ -491,8 +496,8 @@ def replay_and_collect(contests, data_root: str):
     return contest_docs, players, engine
 
 
-def replay_official(contests):
-    """Official-only replay: board, per-player rows, and per-contest team docs.
+def replay_official(contests, medal_contest_ids=None):
+    """Official-only replay: board, histories, team docs, and contest metrics.
 
     Runs the engine with ``official_only=True`` so 打星 / official:false teams are
     absent from the field entirely (no rank, no score, no influence). Produces
@@ -504,75 +509,161 @@ def replay_official(contests):
       (``rated``; a gated-out row is unrated).
     * ``contest_teams[slug][team_index]`` -- per official team: ``predictedRank``
       (1224 over official strengths), ``perf``, ``preRating``, ``muDelta``, and
-      ``rank`` (among official teams), so the contest page can render the
-      official-only standings / predictions.
+      ``rank`` (among official teams), plus the count of members who had rated
+      official history before the contest.
+    * ``contest_metrics[slug]`` -- the six pre-contest field-strength scores
+      and the post-contest result weirdness. Strength admits every official
+      participating team at equal weight, including wholly unknown rosters.
+      Weirdness only compares teams whose three members all have history.
 
-    Returns ``(history, contest_teams, engine)``; ``engine`` is the terminal
-    official engine (for the board).
+    ``medal_contest_ids`` is the set whose raw SRK files carry an explicit,
+    positive medal rule. When omitted, direct callers retain the historical
+    non-network default; the production exporter always supplies the set.
+
+    Contests sharing the exact same ``start_at`` are all snapshotted before any
+    of them updates the engine. This prevents an arbitrary ID/order tie-break
+    from leaking one simultaneous result into another contest's prediction or
+    strength metrics.
+
+    Returns ``(history, contest_teams, contest_metrics, engine)``; ``engine`` is
+    the terminal official engine (for the board).
     """
     engine = IncrementalEngine(official_only=True)
     history: dict[str, dict[str, dict]] = {}
     contest_teams: dict[str, dict[int, dict]] = {}
-    for contest in contests:
-        slug = contest_slug(contest.id)
-        # Official subset (in standings order) and its indices in the full board.
-        official_idx = [
-            i for i, team in enumerate(contest.teams)
-            if engine._counts(team)  # noqa: SLF001
-        ]
-        counted = [contest.teams[i] for i in official_idx]
+    contest_metrics: dict[str, dict] = {}
 
-        # Predict before update: strengths of the official teams, then 1224 ranks
-        # among them (the predicted rank "among official teams").
-        scores = engine.predict_scores(contest)
-        official_scores = [scores[i] for i in official_idx]
-        pred_official = predicted_ranks(official_scores)
-        official_ranks = rerank_1224(counted)
-        official_count = len(counted)
+    for _, simultaneous in groupby(contests, key=lambda contest: contest.start_at):
+        snapshots = []
 
-        # Pre-update snapshots over the official members (for muDelta / rated).
-        pre_member_expect: dict[str, float] = {}
-        pre_contests: dict[str, int] = {}
-        for team in counted:
-            for member in team.members:
-                mu = _member_mu(engine, member.key)
-                pre_member_expect[member.key] = mu if mu is not None else PRIOR_MU
-                st = engine._players.get(member.key)  # noqa: SLF001
-                pre_contests[member.key] = st["contests"] if st else 0
-        pre_team_rating = [_team_pre_rating(engine, team) for team in counted]
+        # Freeze every pre-contest view in this timestamp group first.
+        for contest in simultaneous:
+            slug = contest_slug(contest.id)
+            official_idx = [
+                i
+                for i, team in enumerate(contest.teams)
+                if engine._counts(team)  # noqa: SLF001
+            ]
+            counted = [contest.teams[i] for i in official_idx]
+            scores = engine.predict_scores(contest)
+            official_scores = [scores[i] for i in official_idx]
+            pred_official = predicted_ranks(official_scores)
+            official_ranks = rerank_1224(counted)
 
-        engine.process_contest(contest)
+            pre_member_expect: dict[str, float] = {}
+            pre_contests: dict[str, int] = {}
+            known_members = []
+            for team in counted:
+                known = 0
+                for member in team.members:
+                    mu = _member_mu(engine, member.key)
+                    pre_member_expect[member.key] = (
+                        mu if mu is not None else PRIOR_MU
+                    )
+                    state = engine._players.get(member.key)  # noqa: SLF001
+                    contests_before = state["contests"] if state else 0
+                    pre_contests[member.key] = contests_before
+                    if contests_before > 0:
+                        known += 1
+                known_members.append(known)
 
-        team_map: dict[int, dict] = {}
-        for j, team in enumerate(counted):
-            i = official_idx[j]
-            team_perf = _perf_tail(engine, team.members[0].key) if team.members else None
-            mu_delta = _team_mu_delta(engine, team, pre_member_expect)
-            pre_rating = pre_team_rating[j]
-            team_map[i] = {
-                "predictedRank": pred_official[j],
-                "perf": _round(team_perf) if team_perf is not None else None,
-                "preRating": _round(pre_rating) if pre_rating is not None else None,
-                "muDelta": _round(mu_delta) if mu_delta is not None else None,
-                "rank": official_ranks[j],
-            }
-            for member in team.members:
-                disp = _display_state(engine, member.key)
-                if disp is None:
-                    continue
-                member_perf = _perf_tail(engine, member.key)
-                st = engine._players.get(member.key)  # noqa: SLF001
-                rated = bool(st) and st["contests"] > pre_contests.get(member.key, 0)
-                history.setdefault(member.key, {})[slug] = {
-                    "perf": _round(member_perf) if member_perf is not None else None,
-                    "rating_after": _round(disp[0]),
-                    "mu_after": _round(disp[1]),
-                    "rank": official_ranks[j],
-                    "team_count": official_count,
-                    "rated": rated,
+            pre_team_rating = [_team_pre_rating(engine, team) for team in counted]
+            metric_teams = [
+                MetricTeam(
+                    rating=official_scores[j],
+                    actual_rank=official_ranks[j],
+                    known_members=known_members[j],
+                )
+                for j in range(len(counted))
+            ]
+            if medal_contest_ids is None:
+                awards_medals = not _is_online_prelim(contest)
+            else:
+                awards_medals = (
+                    contest.id in medal_contest_ids
+                    and not _is_online_prelim(contest)
+                )
+            contest_metrics[slug] = compute_contest_metrics(
+                metric_teams,
+                awards_medals=awards_medals,
+            )
+            snapshots.append(
+                {
+                    "contest": contest,
+                    "slug": slug,
+                    "official_idx": official_idx,
+                    "counted": counted,
+                    "predicted": pred_official,
+                    "ranks": official_ranks,
+                    "pre_member_expect": pre_member_expect,
+                    "pre_contests": pre_contests,
+                    "pre_team_rating": pre_team_rating,
+                    "known_members": known_members,
                 }
-        contest_teams[slug] = team_map
-    return history, contest_teams, engine
+            )
+
+        # Preserve the established rating engine's chronological update order,
+        # using only the frozen data above for public pre-contest fields.
+        for snapshot in snapshots:
+            contest = snapshot["contest"]
+            slug = snapshot["slug"]
+            official_idx = snapshot["official_idx"]
+            counted = snapshot["counted"]
+            pred_official = snapshot["predicted"]
+            official_ranks = snapshot["ranks"]
+            pre_member_expect = snapshot["pre_member_expect"]
+            pre_contests = snapshot["pre_contests"]
+            pre_team_rating = snapshot["pre_team_rating"]
+            known_members = snapshot["known_members"]
+            official_count = len(counted)
+
+            engine.process_contest(contest)
+
+            team_map: dict[int, dict] = {}
+            for j, team in enumerate(counted):
+                i = official_idx[j]
+                team_perf = (
+                    _perf_tail(engine, team.members[0].key)
+                    if team.members
+                    else None
+                )
+                mu_delta = _team_mu_delta(engine, team, pre_member_expect)
+                pre_rating = pre_team_rating[j]
+                team_map[i] = {
+                    "predictedRank": pred_official[j],
+                    "perf": _round(team_perf) if team_perf is not None else None,
+                    "preRating": (
+                        _round(pre_rating) if pre_rating is not None else None
+                    ),
+                    "muDelta": _round(mu_delta) if mu_delta is not None else None,
+                    "rank": official_ranks[j],
+                    "knownMembers": known_members[j],
+                }
+                for member in team.members:
+                    disp = _display_state(engine, member.key)
+                    if disp is None:
+                        continue
+                    member_perf = _perf_tail(engine, member.key)
+                    state = engine._players.get(member.key)  # noqa: SLF001
+                    rated = (
+                        bool(state)
+                        and state["contests"] > pre_contests.get(member.key, 0)
+                    )
+                    history.setdefault(member.key, {})[slug] = {
+                        "perf": (
+                            _round(member_perf)
+                            if member_perf is not None
+                            else None
+                        ),
+                        "rating_after": _round(disp[0]),
+                        "mu_after": _round(disp[1]),
+                        "rank": official_ranks[j],
+                        "team_count": official_count,
+                        "rated": rated,
+                    }
+            contest_teams[slug] = team_map
+
+    return history, contest_teams, contest_metrics, engine
 
 
 def _champion(team_docs: list[dict]) -> dict:
@@ -1048,9 +1139,12 @@ def write_bundle(
                 "title": doc["title"],
                 "startAt": doc["startAt"],
                 "category": doc["category"],
+                "tier": doc["tier"],
+                "onlinePreliminary": doc["onlinePreliminary"],
                 "teamCount": doc["teamCount"],
                 "champion": doc["_champion"],
                 "unrated": doc.get("unrated", False),
+                "contestMetrics": doc.get("contestMetrics"),
             }
         )
         detail = {k: v for k, v in doc.items() if k != "_champion"}
@@ -1178,17 +1272,25 @@ def run(args) -> int:
     # standings. Reuse the existing LoadResult so medals share the pipeline's
     # scan, dedup, and coverage decisions instead of re-loading from disk.
     medals = collect_medals(args.data, min_coverage=args.min_coverage, load_result=load)
+    medal_contest_ids = collect_medal_contest_ids(args.data, load.contests)
     medalists = sum(1 for tally in medals.values() if _compact_medals(tally))
     print(f"Collected medals for {medalists} medalists.", flush=True)
+    print(
+        f"Explicit medal data: {len(medal_contest_ids)} contest(s).",
+        flush=True,
+    )
 
     # Second board: replay again counting only official participation (打星 /
     # official:false teams treated as absent -- no field, no rank, no score). The
     # same replay collects each player's per-contest official perf/rating and the
     # per-contest official team docs, so the player and contest pages can render
     # the official-only 口径.
-    official_history, official_contest_teams, engine_official = replay_official(
-        load.contests
-    )
+    (
+        official_history,
+        official_contest_teams,
+        official_contest_metrics,
+        engine_official,
+    ) = replay_official(load.contests, medal_contest_ids=medal_contest_ids)
     official_board = build_leaderboard(engine_official)
     main_board = build_leaderboard(engine)
     print(f"Official-only board: {len(official_board)} rated players.", flush=True)
@@ -1215,6 +1317,7 @@ def run(args) -> int:
     # 打星 team has no official entry -> its *Official fields stay null.
     for doc in contest_docs:
         off_teams = official_contest_teams.get(doc["slug"], {})
+        doc["contestMetrics"] = official_contest_metrics.get(doc["slug"])
         for i, team in enumerate(doc["teams"]):
             o = off_teams.get(i)
             team["predictedRankOfficial"] = o["predictedRank"] if o else None
@@ -1222,6 +1325,7 @@ def run(args) -> int:
             team["preRatingOfficial"] = o["preRating"] if o else None
             team["muDeltaOfficial"] = o["muDelta"] if o else None
             team["rankOfficial"] = o["rank"] if o else None
+            team["knownMembersOfficial"] = o["knownMembers"] if o else None
 
     records = build_player_records(
         players,
