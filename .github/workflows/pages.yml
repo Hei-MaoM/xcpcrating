@@ -40,14 +40,65 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Shallow-clone the official srk-collection
+      - name: Resolve the official srk-collection revision
+        id: srk-revision
+        shell: bash
         run: |
-          git clone --depth 1 https://github.com/algoux/srk-collection /tmp/srk-collection
+          set -euo pipefail
+          srk_sha="$(
+            git ls-remote https://github.com/algoux/srk-collection.git \
+              refs/heads/master | cut -f1
+          )"
+          test -n "$srk_sha"
+          echo "sha=$srk_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Restore the srk-collection Git object cache
+        id: srk-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ runner.temp }}/srk-collection.git
+          key: srk-collection-git-${{ runner.os }}-${{ steps.srk-revision.outputs.sha }}
+          restore-keys: |
+            srk-collection-git-${{ runner.os }}-
+
+      - name: Incrementally update the official srk-collection
+        shell: bash
+        env:
+          SRK_GIT_DIR: ${{ runner.temp }}/srk-collection.git
+          SRK_WORKTREE: ${{ runner.temp }}/srk-collection
+          SRK_SHA: ${{ steps.srk-revision.outputs.sha }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! -f "$SRK_GIT_DIR/HEAD" ]]; then
+            git init --bare "$SRK_GIT_DIR"
+            git --git-dir="$SRK_GIT_DIR" remote add origin \
+              https://github.com/algoux/srk-collection.git
+          else
+            git --git-dir="$SRK_GIT_DIR" remote set-url origin \
+              https://github.com/algoux/srk-collection.git
+          fi
+
+          if ! git --git-dir="$SRK_GIT_DIR" cat-file -e "${SRK_SHA}^{commit}"; then
+            git --git-dir="$SRK_GIT_DIR" fetch --depth 1 origin "$SRK_SHA"
+          fi
+
+          mkdir -p "$SRK_WORKTREE"
+          git --git-dir="$SRK_GIT_DIR" archive "$SRK_SHA" official |
+            tar -x -C "$SRK_WORKTREE"
+          test -d "$SRK_WORKTREE/official"
+
+      - name: Save the srk-collection Git object cache
+        if: steps.srk-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/srk-collection.git
+          key: srk-collection-git-${{ runner.os }}-${{ steps.srk-revision.outputs.sha }}
 
       - name: Export the static data bundle
         run: |
           PYTHONPATH=src python -m xcpc_rating.export_web \
-            --data /tmp/srk-collection/official \
+            --data "${RUNNER_TEMP}/srk-collection/official" \
             --out  web/public/data
 
       - name: Set up Node
