@@ -81,7 +81,7 @@ function ContestMetricsStrip({ metrics }: { metrics?: ContestMetrics }) {
           <div
             className="contest-metric"
             key={key}
-            title={`${label}的真实赛前阵容分；仅供同一竞赛年内比较`}
+            title={`${label}的真实赛前阵容分`}
           >
             <dt className="contest-metric__label">{label}</dt>
             <dd className="contest-metric__value">
