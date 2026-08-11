@@ -7,6 +7,10 @@ import {
 import { formatDateTime } from '../../lib/format'
 import './prediction.css'
 
+function predictionSchedule(startAt: string | null): string {
+  return startAt ? formatDateTime(startAt) : '时间待定'
+}
+
 export default function PredictionsPage() {
   const navigate = useNavigate()
   const [predictions, setPredictions] = useState<PredictionIndexEntry[] | null>(
@@ -64,7 +68,7 @@ export default function PredictionsPage() {
                   onClick={() => navigate(`/prediction/${prediction.slug}`)}
                 >
                   <span className="prediction-index__date tnum">
-                    {formatDateTime(prediction.startAt)}
+                    {predictionSchedule(prediction.startAt)}
                   </span>
                   <span className="prediction-index__main">
                     <b>{prediction.shortTitle}</b>

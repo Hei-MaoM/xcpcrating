@@ -178,7 +178,7 @@ export interface PredictionIndexEntry {
   slug: string
   title: string
   shortTitle: string
-  startAt: string
+  startAt: string | null
   category: string
   teamCount: number
   officialTeamCount: number

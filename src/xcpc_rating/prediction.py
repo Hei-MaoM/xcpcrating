@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import os
+from collections.abc import Callable
 from datetime import datetime
 
 from .engines.incremental import INITIAL_EXPECT, IncrementalEngine
@@ -52,11 +53,32 @@ def load_prediction_specs(spec_dir: str) -> list[dict]:
     return specs
 
 
+def _parse_spec_datetime(value, field: str, path: str) -> datetime:
+    """Parse one required timezone-aware ISO timestamp from a prediction spec."""
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{path}: {field} must be a timezone-aware ISO datetime")
+    try:
+        parsed = datetime.fromisoformat(value)
+    except ValueError as exc:
+        raise ValueError(
+            f"{path}: {field} must be a timezone-aware ISO datetime"
+        ) from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError(f"{path}: {field} must include a timezone offset")
+    return parsed
+
+
 def _validate_spec(spec: dict, path: str = "<prediction>") -> None:
-    required = ("id", "slug", "title", "startAt", "category", "teams")
+    required = ("id", "slug", "title", "category", "teams")
     missing = [key for key in required if not spec.get(key)]
     if missing:
         raise ValueError(f"{path}: missing prediction fields: {', '.join(missing)}")
+    if not spec.get("startAt") and not spec.get("ratingCutoff"):
+        raise ValueError(f"{path}: startAt or ratingCutoff is required")
+    if spec.get("startAt") is not None:
+        _parse_spec_datetime(spec["startAt"], "startAt", path)
+    if "ratingCutoff" in spec:
+        _parse_spec_datetime(spec["ratingCutoff"], "ratingCutoff", path)
 
     teams = spec["teams"]
     if not isinstance(teams, list) or not teams:
@@ -270,7 +292,7 @@ def build_prediction(
         "slug": spec["slug"],
         "title": spec["title"],
         "shortTitle": spec.get("shortTitle", spec["title"]),
-        "startAt": spec["startAt"],
+        "startAt": spec.get("startAt"),
         "category": spec["category"],
         "source": spec.get("source", ""),
         "sourceDate": spec.get("sourceDate"),
@@ -286,7 +308,7 @@ def build_prediction(
         "schools": school_rows,
         "teams": teams,
         "notes": [
-            "预测只使用比赛开始前已经收录的历史积分，不使用未来赛果。",
+            "预测只使用评分截点前已经收录的历史积分，不使用未来赛果。",
             "队伍强度与评分引擎一致，按队员积分在 Elo 胜率空间做 LSE 聚合。",
             "未匹配到历史记录的选手按新人先验 1400 分处理。",
             "奖牌排序依次比较决赛、区域赛、邀请赛、省赛；每级内按金、银、铜比较，完全相同时按积分排序。",
@@ -294,23 +316,38 @@ def build_prediction(
     }
 
 
-def build_predictions(spec_dir: str, contests, medals: dict | None = None) -> list[dict]:
-    """Build predictions from rating snapshots strictly before each start time.
+def _prediction_cutoff(spec: dict) -> str:
+    """Return the hidden rating cutoff, falling back to the known start time."""
+    return spec.get("ratingCutoff") or spec["startAt"]
+
+
+def build_predictions(
+    spec_dir: str,
+    contests,
+    medals: dict | None = None,
+    medal_history_provider: Callable[[frozenset[str]], dict] | None = None,
+) -> list[dict]:
+    """Build predictions from rating snapshots strictly before each cutoff.
 
     Specifications are processed chronologically while a pair of engines advances
-    once through the historical corpus. This keeps regeneration safe after the
-    predicted event has happened: later contests can never leak into its forecast.
+    once through the historical corpus. A spec with an unknown schedule may leave
+    ``startAt`` null and supply an internal ``ratingCutoff`` instead. This keeps
+    regeneration safe after the predicted event has happened: later contests can
+    never leak into its forecast.
     """
     specs = sorted(
         load_prediction_specs(spec_dir),
-        key=lambda spec: datetime.fromisoformat(spec["startAt"]),
+        key=lambda spec: _parse_spec_datetime(
+            _prediction_cutoff(spec), "rating cutoff", "<prediction>"
+        ),
     )
     engine = IncrementalEngine()
     official_engine = IncrementalEngine(official_only=True)
     contest_index = 0
     documents = []
     for spec in specs:
-        cutoff = datetime.fromisoformat(spec["startAt"])
+        cutoff_value = _prediction_cutoff(spec)
+        cutoff = _parse_spec_datetime(cutoff_value, "rating cutoff", "<prediction>")
         while (
             contest_index < len(contests)
             and contests[contest_index].start_at < cutoff
@@ -319,13 +356,18 @@ def build_predictions(spec_dir: str, contests, medals: dict | None = None) -> li
             engine.process_contest(contest)
             official_engine.process_contest(contest)
             contest_index += 1
+        prediction_medals = medals
+        if medal_history_provider is not None:
+            prediction_medals = medal_history_provider(
+                frozenset(contest.id for contest in contests[:contest_index])
+            )
         document = build_prediction(
             spec,
             rating_snapshot(engine),
             rating_snapshot(official_engine),
-            medals=medals,
+            medals=prediction_medals,
         )
-        document["ratingCutoff"] = spec["startAt"]
+        document["ratingCutoff"] = cutoff_value
         document["ratedContestCount"] = contest_index
         documents.append(document)
     return documents

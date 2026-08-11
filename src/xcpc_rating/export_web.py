@@ -1295,7 +1295,24 @@ def run(args) -> int:
     main_board = build_leaderboard(engine)
     print(f"Official-only board: {len(official_board)} rated players.", flush=True)
 
-    prediction_docs = build_predictions(PREDICTION_SPECS, load.contests, medals=medals)
+    prediction_medal_cache = {}
+
+    def prediction_medal_history(included_contest_ids):
+        if included_contest_ids not in prediction_medal_cache:
+            prediction_medal_cache[included_contest_ids] = collect_medals(
+                args.data,
+                min_coverage=args.min_coverage,
+                load_result=load,
+                included_contest_ids=included_contest_ids,
+            )
+        return prediction_medal_cache[included_contest_ids]
+
+    prediction_docs = build_predictions(
+        PREDICTION_SPECS,
+        load.contests,
+        medals=medals,
+        medal_history_provider=prediction_medal_history,
+    )
     print(f"Upcoming predictions: {len(prediction_docs)} contest(s).", flush=True)
 
     # Precompute each player's standings on both boards so the player page renders

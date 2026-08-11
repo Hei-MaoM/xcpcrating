@@ -659,6 +659,7 @@ def collect_medals(
     data_root: str,
     min_coverage: float = 0.70,
     load_result=None,
+    included_contest_ids: set[str] | frozenset[str] | None = None,
 ) -> dict:
     """Scan the in-scope boards and aggregate medals per member per tier.
 
@@ -687,6 +688,9 @@ def collect_medals(
     Returns ``{member_key: {tier: {gold, silver, bronze}}}`` with a uniform
     all-tier shape per member. ``load_result`` may be passed to reuse an existing
     :class:`~xcpc_rating.loader.LoadResult` (avoids a second disk scan).
+    ``included_contest_ids`` optionally limits aggregation to an already chosen
+    historical contest set, allowing a prediction to share the rating engine's
+    strict time cutoff without reimplementing timestamp comparisons here.
     """
     if load_result is None:
         load_result = load_contests(data_root, min_coverage=min_coverage)
@@ -695,6 +699,11 @@ def collect_medals(
 
     # Scored boards -- each in its own classified tier.
     for contest in load_result.contests:
+        if (
+            included_contest_ids is not None
+            and contest.id not in included_contest_ids
+        ):
+            continue
         # Online preliminaries are qualifiers, not medal-awarding events: skip
         # them so the ICPC default-ratio fallback does not mint phantom medals
         # for a top-10% finish in an online round.
@@ -714,6 +723,11 @@ def collect_medals(
         if not reason.startswith("duplicate-of:"):
             continue
         source_id = reason.split("duplicate-of:", 1)[1].strip()
+        if (
+            included_contest_ids is not None
+            and source_id not in included_contest_ids
+        ):
+            continue
         dup_srk = _load_srk(data_root, skipped.id)
         try:
             source_srk = _load_srk(data_root, source_id)

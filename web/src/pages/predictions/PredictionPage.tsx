@@ -9,12 +9,17 @@ import {
 import { formatDateTime, formatScoreInt } from '../../lib/format'
 import {
   predictionMedalCounts,
-  predictionMedalForRank,
+  predictionRankingRows,
   type PredictionMedal,
+  type PredictionRankingMethod,
 } from './medals'
 import './prediction.css'
 
-type Method = 'rating' | 'medals'
+function predictionSchedule(startAt: string | null): string {
+  return startAt ? formatDateTime(startAt) : '时间待定'
+}
+
+type Method = PredictionRankingMethod
 
 const MEDAL_LABEL: Record<PredictionMedal, string> = {
   gold: '金牌',
@@ -30,13 +35,10 @@ const MEDAL_TIER_ORDER = [
 ] as const
 
 function PredictionMedalBadge({
-  rank,
-  officialTeamCount,
+  medal,
 }: {
-  rank: number | null
-  officialTeamCount: number
+  medal: PredictionMedal | null
 }) {
-  const medal = predictionMedalForRank(rank, officialTeamCount)
   if (!medal) return <span className="prediction-medal-empty">—</span>
   return (
     <span className={`prediction-medal prediction-medal--${medal}`}>
@@ -95,20 +97,17 @@ function AwardCutoffTable({ prediction }: { prediction: PredictionDetail }) {
       rank: counts.gold + counts.silver + counts.bronze,
     },
   ]
-  const ratingTeams = prediction.teams
-    .filter((team) => team.official)
-    .sort(
-      (a, b) =>
-        (a.officialRank ?? Number.MAX_SAFE_INTEGER) -
-        (b.officialRank ?? Number.MAX_SAFE_INTEGER),
-    )
-  const medalTeams = prediction.teams
-    .filter((team) => team.official)
-    .sort(
-      (a, b) =>
-        (a.medalRank ?? Number.MAX_SAFE_INTEGER) -
-        (b.medalRank ?? Number.MAX_SAFE_INTEGER),
-    )
+  const officialTeams = prediction.teams.filter((team) => team.official)
+  const ratingTeams = predictionRankingRows(
+    officialTeams,
+    'rating',
+    prediction.officialTeamCount,
+  ).map(({ team }) => team)
+  const medalTeams = predictionRankingRows(
+    officialTeams,
+    'medals',
+    prediction.officialTeamCount,
+  ).map(({ team }) => team)
 
   return (
     <section className="wrap prediction-cutoff-section">
@@ -211,33 +210,18 @@ function TeamTable({
 }) {
   const rows = useMemo(() => {
     const needle = query.trim().toLowerCase()
-    return prediction.teams
-      .filter((team) => team.official)
-      .filter((team) => {
-        if (!needle) return true
-        return [team.name, team.org, ...team.members.map((member) => member.name)]
-          .join('\n')
-          .toLowerCase()
-          .includes(needle)
-      })
-      .sort((a, b) => {
-        const rankA =
-          method === 'rating' ? a.officialRank : (a.medalRank ?? a.officialRank)
-        const rankB =
-          method === 'rating' ? b.officialRank : (b.medalRank ?? b.officialRank)
-        return (
-          (rankA ?? Number.MAX_SAFE_INTEGER) -
-            (rankB ?? Number.MAX_SAFE_INTEGER) ||
-          a.number - b.number
-        )
-      })
-  }, [method, prediction.teams, query])
-
-  function rank(team: PredictionTeam) {
-    return method === 'rating'
-      ? team.officialRank
-      : (team.medalRank ?? team.officialRank)
-  }
+    return predictionRankingRows(
+      prediction.teams.filter((team) => team.official),
+      method,
+      prediction.officialTeamCount,
+    ).filter(({ team }) => {
+      if (!needle) return true
+      return [team.name, team.org, ...team.members.map((member) => member.name)]
+        .join('\n')
+        .toLowerCase()
+        .includes(needle)
+    })
+  }, [method, prediction.officialTeamCount, prediction.teams, query])
 
   return (
     <div className="board-card prediction-table-card">
@@ -262,14 +246,11 @@ function TeamTable({
             </tr>
           </thead>
           <tbody>
-            {rows.map((team) => (
+            {rows.map(({ team, rank, medal }) => (
               <tr key={team.number}>
-                <td className="prediction-col-rank"><span className="rank">{rank(team)}</span></td>
+                <td className="prediction-col-rank"><span className="rank">{rank}</span></td>
                 <td className="prediction-col-award">
-                  <PredictionMedalBadge
-                    rank={rank(team)}
-                    officialTeamCount={prediction.officialTeamCount}
-                  />
+                  <PredictionMedalBadge medal={medal} />
                 </td>
                 <td className="prediction-col-team">
                   <span className="prediction-team-name">
@@ -355,7 +336,7 @@ export default function PredictionPage() {
         <h1 className="display">{prediction.shortTitle}</h1>
         <p className="prediction-detail__full-title">{prediction.title}</p>
         <div className="prediction-detail__meta">
-          <span>{formatDateTime(prediction.startAt)}</span>
+          <span>{predictionSchedule(prediction.startAt)}</span>
           <span>{prediction.teamCount} 支队伍</span>
           <span>{prediction.officialTeamCount} 支正式队伍</span>
           <span>名单更新于 {prediction.sourceDate ?? '—'}</span>

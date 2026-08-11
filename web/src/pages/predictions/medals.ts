@@ -1,9 +1,22 @@
 export type PredictionMedal = 'gold' | 'silver' | 'bronze'
+export type PredictionRankingMethod = 'rating' | 'medals'
 
 export interface PredictionMedalCounts {
   gold: number
   silver: number
   bronze: number
+}
+
+interface PredictionRankFields {
+  number: number
+  officialRank: number | null
+  medalRank?: number | null
+}
+
+export interface PredictionRankingRow<T> {
+  team: T
+  rank: number | null
+  medal: PredictionMedal | null
 }
 
 /**
@@ -25,16 +38,51 @@ export function predictionMedalCounts(
   }
 }
 
-/** Return the medal for a one-based official rank, or null outside the slots. */
-export function predictionMedalForRank(
-  officialRank: number | null,
+/** Return the medal for a one-based position, or null outside the slots. */
+export function predictionMedalForPosition(
+  position: number | null,
   officialTeamCount: number,
 ): PredictionMedal | null {
-  if (officialRank === null || officialRank < 1) return null
+  if (position === null || position < 1) return null
 
   const counts = predictionMedalCounts(officialTeamCount)
-  if (officialRank <= counts.gold) return 'gold'
-  if (officialRank <= counts.gold + counts.silver) return 'silver'
-  if (officialRank <= counts.gold + counts.silver + counts.bronze) return 'bronze'
+  if (position <= counts.gold) return 'gold'
+  if (position <= counts.gold + counts.silver) return 'silver'
+  if (position <= counts.gold + counts.silver + counts.bronze) return 'bronze'
   return null
+}
+
+function displayedRank(
+  team: PredictionRankFields,
+  method: PredictionRankingMethod,
+): number | null {
+  return method === 'rating'
+    ? team.officialRank
+    : (team.medalRank ?? team.officialRank)
+}
+
+/**
+ * Sort official teams for one prediction method and assign fixed medal slots.
+ * Displayed ranks may tie; medals deliberately use the stable sorted position.
+ */
+export function predictionRankingRows<T extends PredictionRankFields>(
+  teams: readonly T[],
+  method: PredictionRankingMethod,
+  officialTeamCount: number,
+): PredictionRankingRow<T>[] {
+  return [...teams]
+    .sort((a, b) => {
+      const rankA = displayedRank(a, method)
+      const rankB = displayedRank(b, method)
+      return (
+        (rankA ?? Number.MAX_SAFE_INTEGER) -
+          (rankB ?? Number.MAX_SAFE_INTEGER) ||
+        a.number - b.number
+      )
+    })
+    .map((team, index) => ({
+      team,
+      rank: displayedRank(team, method),
+      medal: predictionMedalForPosition(index + 1, officialTeamCount),
+    }))
 }
