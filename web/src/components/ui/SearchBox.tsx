@@ -12,7 +12,9 @@ import {
   type PlayerSearchEntry,
 } from '../../lib/search'
 import { useDebounce } from '../../lib/useDebounce'
+import { pinyinInitials } from '../../lib/pinyin'
 import { SearchIcon } from './primitives'
+import { shouldLoadSearchIndexes } from './searchPresentation'
 
 const DEBOUNCE_MS = 180
 const MAX_PER_GROUP = 6
@@ -54,10 +56,10 @@ interface SearchContest {
 }
 
 function toSearchSchool(s: SchoolRow): SearchSchool {
-  return { org: s.org, rating: s.rating, contests: s.contests, hay: s.org.toLowerCase() }
+  return { org: s.org, rating: s.rating, contests: s.contests, hay: `${s.org} ${pinyinInitials(s.org)}`.toLowerCase() }
 }
 function toSearchContest(c: ContestIndexEntry): SearchContest {
-  return { slug: c.slug, title: c.title, category: c.category, hay: `${c.title}${c.category}`.toLowerCase() }
+  return { slug: c.slug, title: c.title, category: c.category, hay: `${c.title}${c.category}${pinyinInitials(c.title)}${pinyinInitials(c.category)}`.toLowerCase() }
 }
 
 function matchSchools(schools: SearchSchool[], q: string): SchoolHit[] {
@@ -107,12 +109,12 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
   const debounced = useDebounce(query.trim(), DEBOUNCE_MS)
 
   useEffect(() => {
-    if (!open) return
+    if (!shouldLoadSearchIndexes(open, query)) return
     if (schools === null)
       getSchools().then((r) => setSchools(r.map(toSearchSchool))).catch(() => setSchools([]))
     if (contests === null)
       getContestsIndex().then((r) => setContests(r.map(toSearchContest))).catch(() => setContests([]))
-  }, [open, schools, contests])
+  }, [open, query, schools, contests])
 
   useEffect(() => {
     if (!open || debounced.length === 0) return

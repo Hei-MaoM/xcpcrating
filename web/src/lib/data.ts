@@ -12,8 +12,11 @@
  */
 
 import { shardForKey } from './md5'
+import { decodeSkillLeaderboardRows } from './skillLeaderboardCodec'
 import {
   decodePlayerSearchRows,
+  filterPlayerSearchEntries,
+  looksLikePinyinQuery,
   playerSearchShard,
   type PlayerSearchEntry,
   type PlayerSearchRow,
@@ -25,6 +28,7 @@ import {
 
 export interface MetaCounts {
   contests: number
+  archiveContests?: number
   players: number
   ratedPlayers: number
   predictions?: number
@@ -35,6 +39,15 @@ export interface Meta {
   /** Provenance only ("incremental"); never shown in the UI. */
   engine: string
   counts: MetaCounts
+  skillScoreScale?: 'rating' | 'percent'
+  dataSource?: {
+    repository: string
+    commit: string
+    sourceBoards: number
+    scoringContests: number
+    archiveContests: number
+    deduplicatedBoards: number
+  }
 }
 
 /* ------------------------------------------------------------------ *
@@ -92,8 +105,9 @@ export interface ContestIndexEntry {
   onlinePreliminary: boolean
   teamCount: number
   champion: Champion
-  /** Voided contest (e.g. leaked problems): displayed but scored unrated. */
+  /** Displayed without rating updates, including archives without a roster. */
   unrated?: boolean
+  archiveOnly?: boolean
   /** Absent in legacy exports generated before contest metrics were introduced. */
   contestMetrics?: ContestMetrics
 }
@@ -149,6 +163,44 @@ export interface ContestTeam {
   knownMembersOfficial: number | null
 }
 
+export type ContestProblemStatus = 'classified' | 'unknown' | 'conflict'
+export type ContestProblemDifficultyKey =
+  | 'veryEasy'
+  | 'easy'
+  | 'easyMid'
+  | 'mid'
+  | 'midHard'
+  | 'hard'
+  | 'veryHard'
+  | 'unknown'
+
+/** Problem-level metadata joined from the raw contest and the type manifest. */
+export interface ContestProblem {
+  alias: string
+  title: string | null
+  canonicalId: string | null
+  /** Public statement or contest URL for the problem, when available. */
+  problemUrl?: string | null
+  typeKeys: SkillAxisKey[]
+  typeLabels: string[]
+  /** Canonical fine-grained algorithm labels; one name per knowledge point. */
+  detailTags?: string[]
+  status: ContestProblemStatus
+  confidence: number
+  accepted: number | null
+  submitted: number | null
+  eligibleTeams: number
+  /** Smoothed expected solve rate, not the player's own result. */
+  solveRate: number | null
+  problemRating: number | null
+  posteriorSd: number | null
+  ratingSampleCount: number
+  /** Sum of observation weights after down-weighting no-attempt rows. */
+  ratingEffectiveSampleCount: number
+  ratingAcCount: number
+  expectedPassRateAtReference: number | null
+}
+
 export interface ContestDetail {
   id: string
   slug: string
@@ -160,12 +212,15 @@ export interface ContestDetail {
   teamCount: number
   /** Pre-contest prediction hit-rate for this contest; null when undefined. */
   concordance: number | null
-  /** Voided contest (e.g. leaked problems): displayed but scored unrated. */
+  /** Displayed without rating updates, including archives without a roster. */
   unrated?: boolean
+  archiveOnly?: boolean
   /** Reason shown on the contest page when unrated. */
   unratedNote?: string | null
   /** Absent in legacy exports generated before contest metrics were introduced. */
   contestMetrics?: ContestMetrics
+  /** Absent in legacy exports without problem-level metadata. */
+  problems?: ContestProblem[]
   teams: ContestTeam[]
 }
 
@@ -318,6 +373,8 @@ export interface PlayerDetail {
    * `medals` key — read defensively.
    */
   medals?: PlayerMedals
+  /** Per-tier problem-type skill profile. Optional until the taxonomy bundle is deployed. */
+  skillPanel?: PlayerSkillPanel
   history: PlayerHistoryEntry[]
 }
 
@@ -331,6 +388,7 @@ export interface PlayerDetail {
  * The UI renders them in this display order (most to least prestigious).
  */
 export type MedalTier = 'final' | 'regional' | 'invitational' | 'provincial'
+export type PanelScope = 'overall'
 
 /** Display order for medal tiers (most prestigious first). */
 export const MEDAL_TIER_ORDER: readonly MedalTier[] = [
@@ -339,6 +397,191 @@ export const MEDAL_TIER_ORDER: readonly MedalTier[] = [
   'invitational',
   'provincial',
 ]
+
+/** Five-dimension rating badge, including the composite top-ten surprises. */
+export type PanelGrade = 'SSS' | 'SS' | 'S' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
+
+export type PanelMetricKey =
+  | 'avgAc'
+  | 'dirt'
+  | 'rankPercent'
+  | 'firstATime'
+  | 'lastHourSolved'
+
+export interface PlayerPanelMetric {
+  value: number | null
+  /** Mid-rank percentile in the same tier cohort; a smaller number is better. */
+  topPercent: number | null
+  grade: PanelGrade | null
+  /** Contest count that supplied this metric (missing raw detail is excluded). */
+  validContests: number
+}
+
+export interface PlayerPanelOverall {
+  topPercent: number
+  grade: PanelGrade
+  rank: number
+  total: number
+  validMetrics: number
+}
+
+export interface PlayerPanelTier {
+  contests: number
+  metrics: Record<PanelMetricKey, PlayerPanelMetric>
+  overall: PlayerPanelOverall | null
+}
+
+export type PlayerPanelMode = Partial<Record<MedalTier | PanelScope, PlayerPanelTier>>
+
+export interface PlayerPanel {
+  all: PlayerPanelMode
+  official: PlayerPanelMode
+}
+
+/** Compact wire format stored in player shards; expanded after fetch. */
+export type PlayerPanelMetricRaw = [
+  value: number | null,
+  topPercent: number | null,
+  grade: PanelGrade | null,
+  validContests: number,
+]
+
+export type PlayerPanelOverallRaw = [
+  topPercent: number,
+  grade: PanelGrade,
+  rank: number,
+  total: number,
+  validMetrics: number,
+]
+
+export type PlayerPanelTierRaw = [
+  contests: number,
+  metrics: PlayerPanelMetricRaw[],
+  overall: PlayerPanelOverallRaw | null,
+]
+
+export type PlayerPanelModeRaw = Partial<Record<MedalTier | PanelScope, PlayerPanelTierRaw>>
+
+export interface PlayerPanelRaw {
+  all: PlayerPanelModeRaw
+  official: PlayerPanelModeRaw
+}
+
+export type SkillAxisKey =
+  | 'dataStructure'
+  | 'graph'
+  | 'dp'
+  | 'math'
+  | 'string'
+  | 'geometry'
+  | 'basic'
+
+export const SKILL_AXIS_ORDER: readonly SkillAxisKey[] = [
+  'dataStructure',
+  'graph',
+  'dp',
+  'math',
+  'string',
+  'geometry',
+  'basic',
+]
+
+export const SKILL_AXIS_LABELS: Record<SkillAxisKey, string> = {
+  dataStructure: '数据结构',
+  graph: '图论与网络',
+  dp: '动态规划',
+  math: '数学',
+  string: '字符串',
+  geometry: '几何',
+  basic: '基础算法',
+}
+
+export interface PlayerSkillAxis {
+  /** Original ability rating, on the problem-rating scale; null when absent. */
+  score: number | null
+  /** Calibrated posterior mastery, relative to the cohort's expected difficulty. */
+  mastery: number | null
+  topPercent: number | null
+  grade: PanelGrade | null
+  coverage: number
+  uniqueProblems: number
+  successWeight: number
+  exposureWeight: number
+  validContests: number
+  rawMastery?: number | null
+  rankScore?: number | null
+  effectiveProblems?: number
+  confidence?: number
+  evidenceLevel?: 'missing' | 'exploratory' | 'provisional' | 'established' | 'legacy'
+  rankEligible?: boolean
+  /** Weighted expected solve rate for the observed problem set. */
+  expectedMastery?: number | null
+  /** Original sequential-IRT ability rating and diagnostic uncertainty. */
+  ability?: number | null
+  posteriorSd?: number | null
+  /** Exact competition rank within the axis cohort, when available. */
+  rank?: number | null
+}
+
+export interface PlayerSkillTier {
+  taxonomyVersion: string
+  scoreModel?: string
+  scoreScale?: 'rating' | 'percent'
+  contests: number
+  coverage: number
+  classifiedExposure: number
+  unknownExposure: number
+  uniqueProblems: number
+  axes: Record<SkillAxisKey, PlayerSkillAxis>
+}
+
+export type PlayerSkillMode = Partial<Record<MedalTier | PanelScope, PlayerSkillTier>>
+
+export interface PlayerSkillPanel {
+  all: PlayerSkillMode
+  official: PlayerSkillMode
+}
+
+export type PlayerSkillAxisRaw = [
+  score: number | null,
+  mastery: number | null,
+  topPercent: number | null,
+  grade: PanelGrade | null,
+  coverage: number,
+  uniqueProblems: number,
+  successWeight: number,
+  exposureWeight: number,
+  validContests: number,
+  rankScore?: number | null,
+  rawMastery?: number | null,
+  effectiveProblems?: number,
+  confidence?: number,
+  evidenceLevel?: 'missing' | 'exploratory' | 'provisional' | 'established' | 'legacy',
+  rankEligible?: boolean,
+  expectedMastery?: number | null,
+  ability?: number | null,
+  posteriorSd?: number | null,
+  rank?: number | null,
+]
+
+export interface PlayerSkillTierRaw {
+  taxonomyVersion: string
+  scoreModel?: string
+  scoreScale?: 'rating' | 'percent'
+  contests: number
+  coverage: number
+  classifiedExposure: number
+  unknownExposure: number
+  uniqueProblems: number
+  axes: PlayerSkillAxisRaw[]
+}
+
+export type PlayerSkillModeRaw = Partial<Record<MedalTier | PanelScope, PlayerSkillTierRaw>>
+
+export interface PlayerSkillPanelRaw {
+  all: PlayerSkillModeRaw
+  official: PlayerSkillModeRaw
+}
 
 /** One tier's gold / silver / bronze medal counts. */
 export interface MedalCounts {
@@ -355,8 +598,14 @@ export interface MedalCounts {
  */
 export type PlayerMedals = Partial<Record<MedalTier, MedalCounts>>
 
-/** A shard file is a map of player key -> detail. */
-export type PlayerShard = Record<string, PlayerDetail>
+/** Raw player detail differs only in its compact panel wire format. */
+export type PlayerDetailRaw = Omit<PlayerDetail, 'panel' | 'skillPanel'> & {
+  panel?: PlayerPanelRaw | PlayerPanel
+  skillPanel?: PlayerSkillPanelRaw | PlayerSkillPanel
+}
+
+/** A shard file is a map of player key -> compact detail. */
+export type PlayerShard = Record<string, PlayerDetailRaw>
 
 /**
  * Coerce a possibly-undefined numeric field to a strict `number | null`, so a
@@ -366,14 +615,159 @@ function nullableNumber(value: unknown): number | null {
   return typeof value === 'number' && !Number.isNaN(value) ? value : null
 }
 
+const PANEL_METRIC_ORDER: readonly PanelMetricKey[] = [
+  'avgAc',
+  'dirt',
+  'rankPercent',
+  'firstATime',
+  'lastHourSolved',
+]
+
+function decodePanelTier(raw: PlayerPanelTierRaw): PlayerPanelTier {
+  const [contests, rawMetrics, rawOverall] = raw
+  const metrics = {} as Record<PanelMetricKey, PlayerPanelMetric>
+  PANEL_METRIC_ORDER.forEach((key, index) => {
+    const metric = rawMetrics[index]
+    metrics[key] = metric
+      ? {
+          value: nullableNumber(metric[0]),
+          topPercent: nullableNumber(metric[1]),
+          grade: metric[2],
+          validContests: metric[3],
+        }
+      : { value: null, topPercent: null, grade: null, validContests: 0 }
+  })
+  return {
+    contests,
+    metrics,
+    overall: rawOverall
+      ? {
+          topPercent: rawOverall[0],
+          grade: rawOverall[1],
+          rank: rawOverall[2],
+          total: rawOverall[3],
+          validMetrics: rawOverall[4],
+        }
+      : null,
+  }
+}
+
+function decodeSkillTier(raw: PlayerSkillTierRaw): PlayerSkillTier {
+  const metrics = {} as Record<SkillAxisKey, PlayerSkillAxis>
+  SKILL_AXIS_ORDER.forEach((key, index) => {
+    const metric = raw.axes?.[index]
+    metrics[key] = metric
+      ? {
+          score: nullableNumber(metric[0]),
+          mastery: nullableNumber(metric[1]),
+          topPercent: nullableNumber(metric[2]),
+          grade: metric[3],
+          coverage: typeof metric[4] === 'number' ? metric[4] : 0,
+          uniqueProblems: typeof metric[5] === 'number' ? metric[5] : 0,
+          successWeight: typeof metric[6] === 'number' ? metric[6] : 0,
+          exposureWeight: typeof metric[7] === 'number' ? metric[7] : 0,
+          validContests: typeof metric[8] === 'number' ? metric[8] : 0,
+          rankScore: nullableNumber(metric[9]),
+          rawMastery: nullableNumber(metric[10]),
+          effectiveProblems: typeof metric[11] === 'number' ? metric[11] : (typeof metric[5] === 'number' ? metric[5] : 0),
+          confidence: typeof metric[12] === 'number' ? metric[12] : 1,
+          evidenceLevel: metric[13] ?? 'legacy',
+          rankEligible: metric[14] !== false,
+          expectedMastery: nullableNumber(metric[15]),
+          ability: nullableNumber(metric[16]),
+          posteriorSd: nullableNumber(metric[17]),
+          rank: typeof metric[18] === 'number' ? metric[18] : null,
+        }
+      : {
+          score: null,
+          mastery: null,
+          topPercent: null,
+          grade: null,
+          coverage: 0,
+          uniqueProblems: 0,
+          successWeight: 0,
+          exposureWeight: 0,
+          validContests: 0,
+          rawMastery: null,
+          rankScore: null,
+          effectiveProblems: 0,
+          confidence: 0,
+          evidenceLevel: 'missing',
+          rankEligible: false,
+          expectedMastery: null,
+          ability: null,
+          posteriorSd: null,
+          rank: null,
+        }
+  })
+  return {
+    taxonomyVersion: raw.taxonomyVersion,
+    scoreModel: raw.scoreModel,
+    scoreScale: raw.scoreScale,
+    contests: raw.contests,
+    coverage: raw.coverage,
+    classifiedExposure: raw.classifiedExposure,
+    unknownExposure: raw.unknownExposure,
+    uniqueProblems: raw.uniqueProblems,
+    axes: metrics,
+  }
+}
+
+/** Expand a compact player-shard panel, while accepting a verbose dev fixture. */
+export function decodePlayerPanel(
+  raw: PlayerPanelRaw | PlayerPanel | undefined,
+): PlayerPanel | undefined {
+  if (!raw) return undefined
+  const result: PlayerPanel = { all: {}, official: {} }
+  for (const mode of ['all', 'official'] as const) {
+    for (const tier of ['overall', ...MEDAL_TIER_ORDER] as const) {
+      const value = raw[mode]?.[tier]
+      if (!value) continue
+      result[mode][tier] = Array.isArray(value)
+        ? decodePanelTier(value as PlayerPanelTierRaw)
+        : (value as PlayerPanelTier)
+    }
+    // Legacy bundles only contain tiered panels. Keep the page usable until
+    // the next export writes a true cross-tier overall aggregate.
+    if (!result[mode].overall) {
+      const fallback = result[mode].regional ?? result[mode].final ?? result[mode].invitational ?? result[mode].provincial
+      if (fallback) result[mode].overall = fallback
+    }
+  }
+  return result
+}
+
+/** Expand a compact problem-type skill panel, tolerating legacy absence. */
+export function decodePlayerSkillPanel(
+  raw: PlayerSkillPanelRaw | PlayerSkillPanel | undefined,
+): PlayerSkillPanel | undefined {
+  if (!raw) return undefined
+  const result: PlayerSkillPanel = { all: {}, official: {} }
+  for (const mode of ['all', 'official'] as const) {
+    for (const tier of ['overall', ...MEDAL_TIER_ORDER] as const) {
+      const value = raw[mode]?.[tier]
+      if (!value) continue
+      result[mode][tier] = Array.isArray((value as PlayerSkillTierRaw).axes)
+        ? decodeSkillTier(value as PlayerSkillTierRaw)
+        : (value as PlayerSkillTier)
+    }
+    if (!result[mode].overall) {
+      const fallback = result[mode].regional ?? result[mode].final ?? result[mode].invitational ?? result[mode].provincial
+      if (fallback) result[mode].overall = fallback
+    }
+  }
+  return result
+}
+
 /** Normalize a raw shard player so every nullable field is present as number|null. */
-function normalizePlayerDetail(raw: PlayerDetail): PlayerDetail {
+function normalizePlayerDetail(raw: PlayerDetailRaw): PlayerDetail {
   return {
     ...raw,
     rating: nullableNumber(raw.rating),
     allRank: nullableNumber(raw.allRank),
     officialRank: nullableNumber(raw.officialRank),
     officialRating: nullableNumber(raw.officialRating),
+    skillPanel: decodePlayerSkillPanel(raw.skillPanel),
     history: raw.history.map((h) => ({
       ...h,
       official: h.official ?? true,
@@ -415,6 +809,7 @@ function normalizeContestDetail(raw: ContestDetail): ContestDetail {
   return {
     ...raw,
     teams: raw.teams.map(normalizeContestTeam),
+    problems: Array.isArray(raw.problems) ? raw.problems : undefined,
   }
 }
 
@@ -526,6 +921,24 @@ export function dataUrl(path: string): string {
  * concurrent requests for the same resource into a single network fetch.
  */
 const cache = new Map<string, Promise<unknown>>()
+const MAX_CACHED_PLAYER_SHARDS = 8
+
+function isPlayerShardPath(path: string): boolean {
+  return path.startsWith('players/') && path.endsWith('.json')
+}
+
+function trimPlayerShardCache(): void {
+  let playerShardCount = 0
+  for (const key of cache.keys()) {
+    if (isPlayerShardPath(key)) playerShardCount += 1
+  }
+  while (playerShardCount > MAX_CACHED_PLAYER_SHARDS) {
+    const oldest = Array.from(cache.keys()).find(isPlayerShardPath)
+    if (!oldest) return
+    cache.delete(oldest)
+    playerShardCount -= 1
+  }
+}
 
 class DataError extends Error {
   readonly path: string
@@ -569,7 +982,13 @@ async function fetchJson<T>(path: string): Promise<T> {
 
   // Cache the in-flight promise; evict on failure so retries can re-fetch.
   cache.set(path, promise)
-  promise.catch(() => cache.delete(path))
+  // Player shards are large and user navigation can touch many of them. Keep
+  // only a small hot set so a long browsing session does not retain hundreds
+  // of megabytes of parsed JSON.
+  if (isPlayerShardPath(path)) trimPlayerShardCache()
+  promise.catch(() => {
+    if (cache.get(path) === promise) cache.delete(path)
+  })
   return promise
 }
 
@@ -590,6 +1009,104 @@ export function getMeta(): Promise<Meta> {
 
 export function getContestsIndex(): Promise<ContestIndexEntry[]> {
   return fetchJson<ContestIndexEntry[]>('contests-index.json')
+}
+
+/** A searchable row from the flat problem explorer index. */
+export interface ProblemIndexRow {
+  contestSlug: string
+  contestTitle: string
+  startAt: string
+  category: string
+  tier: MedalTier
+  alias: string
+  title: string | null
+  canonicalId: string | null
+  /** Public statement or contest URL for the problem, when available. */
+  problemUrl?: string | null
+  typeKeys: SkillAxisKey[]
+  typeLabels: string[]
+  /** Canonical fine-grained algorithm labels; one name per knowledge point. */
+  detailTags?: string[]
+  status: ContestProblemStatus
+  confidence: number
+  solveRate: number | null
+  problemRating: number | null
+  accepted: number | null
+  submitted: number | null
+  eligibleTeams: number
+}
+
+/**
+ * Path fragments that can never be part of one problem's statement URL.
+ * Mirrors `_BAD_URL_PARTS` in `scripts/merge_problem_audit.py`.
+ */
+const BAD_URL_PARTS = ['/rank', '/standings', '/ranking', '/download', '/tutorial', '/attachment', '.pdf'] as const
+
+/**
+ * Whether a URL points at one problem rather than a contest/rank/tutorial page.
+ *
+ * Faithful port of `individual_url()` in `scripts/merge_problem_audit.py`, the
+ * classifier the audit pipeline uses to decide whether a candidate link is a
+ * real single-problem statement, so the problem bank lists exactly the rows the
+ * audit accepts as directly openable.
+ */
+export function isIndividualProblemUrl(value: string | null | undefined): boolean {
+  const text = value?.trim()
+  if (!text) return false
+  let url: URL
+  try {
+    url = new URL(text)
+  } catch {
+    return false
+  }
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return false
+  if (!url.hostname) return false
+  let path: string
+  try {
+    path = decodeURIComponent(url.pathname).replace(/\/+$/, '').toLowerCase()
+  } catch {
+    path = url.pathname.replace(/\/+$/, '').toLowerCase()
+  }
+  if (BAD_URL_PARTS.some((token) => path.includes(token))) return false
+  const parts = path.split('/').filter(Boolean)
+  const host = url.hostname.toLowerCase()
+
+  if (host.endsWith('codeforces.com')) {
+    return (
+      /\/gym\/\d+\/problem\/[a-z0-9][a-z0-9_-]*$/.test(path) ||
+      /\/contest\/\d+\/problem\/[a-z0-9][a-z0-9_-]*$/.test(path)
+    )
+  }
+  if (host.endsWith('qoj.ac') || host.endsWith('ucup.ac') || host.endsWith('jiang.ly')) {
+    return /\/problem\/\d+$/.test(path) || /\/contest\/\d+\/problem\/\d+$/.test(path)
+  }
+  if (host.endsWith('nowcoder.com')) {
+    return (
+      /\/acm\/contest\/\d+\/[a-z0-9][a-z0-9_-]*$/.test(path) ||
+      /\/acm\/problem\/[a-z0-9][a-z0-9_-]*$/.test(path)
+    )
+  }
+  if (host.endsWith('luogu.com.cn')) return /\/problem\/p\d+$/.test(path)
+  if (host.endsWith('vjudge.net')) return path.includes('/problem/') || path.includes('/problemset/')
+  if (host.endsWith('pintia.cn')) return path.includes('/problem-sets/') && path.includes('/problems/')
+  // Atuer/Hydro exposes one problem as `/p/<problem-id>`.
+  if (host.endsWith('atuer.cn')) return /^\/p\/[a-z0-9][a-z0-9_-]*$/.test(path)
+  if (parts.includes('problem') && parts.length >= 2) return true
+  // Some official mirrors only put the alias last, behind a problem-ish noun.
+  const parent = parts.length >= 2 ? parts[parts.length - 2] : ''
+  return /problem|question|task/.test(parent)
+}
+
+/** Load the flat problem index used by the problem browser filters.
+ *
+ * The problem bank only lists problems whose link actually opens that one
+ * statement. A row with no URL, or with a contest/rank/tutorial URL standing in
+ * for a statement, is not offered here (the contest pages still show it).
+ */
+export function getProblemsIndex(): Promise<ProblemIndexRow[]> {
+  return fetchJson<ProblemIndexRow[]>('problems-index.json').then((rows) =>
+    rows.filter((row) => isIndividualProblemUrl(row.problemUrl)),
+  )
 }
 
 export function getPredictionsIndex(): Promise<PredictionIndexEntry[]> {
@@ -635,7 +1152,7 @@ export async function getLeaderboardSchool(
   return (bucket[org] ?? []).map(decodeLeaderboardRow)
 }
 
-/** Load only the player candidate shard selected by the query's first char. */
+/** Load the candidate shard selected by the query, with a pinyin fallback. */
 export async function getPlayerSearchPrefix(
   query: string,
 ): Promise<PlayerSearchEntry[]> {
@@ -645,7 +1162,28 @@ export async function getPlayerSearchPrefix(
     const rows = await fetchJson<PlayerSearchRow[]>(
       `search/players/${shard}.json`,
     )
-    return decodePlayerSearchRows(rows)
+    const direct = decodePlayerSearchRows(rows)
+    if (!looksLikePinyinQuery(query) || query.trim().length > 6 || filterPlayerSearchEntries(direct, query).length > 0) {
+      return direct
+    }
+
+    // Pinyin initials do not share the original Chinese first-character shard.
+    // Only pay the broader lookup cost after a short, letter-only query misses.
+    const shards = Array.from({ length: 256 }, (_, index) => index.toString(16).padStart(2, '0'))
+    const results = await Promise.allSettled(
+      shards.map((candidate) => fetchJson<PlayerSearchRow[]>(`search/players/${candidate}.json`)),
+    )
+    const seen = new Set<string>()
+    const merged: PlayerSearchEntry[] = []
+    for (const result of results) {
+      if (result.status !== 'fulfilled') continue
+      for (const entry of decodePlayerSearchRows(result.value)) {
+        if (seen.has(entry.key)) continue
+        seen.add(entry.key)
+        merged.push(entry)
+      }
+    }
+    return merged
   } catch (error: unknown) {
     if (error instanceof DataError && error.status === 404) return []
     throw error
@@ -683,4 +1221,89 @@ export async function getPlayer(key: string): Promise<PlayerDetail> {
     throw new DataError(`未找到选手：${key}`, `players/${shard}.json`)
   }
   return normalizePlayerDetail(detail)
+}
+
+/** Minimal player row used by the on-demand problem-type leaderboard. */
+export interface SkillLeaderboardPlayerData {
+  key: string
+  name: string
+  org: string
+  skillPanel?: PlayerSkillPanel
+}
+
+/** One precomputed row from a single problem-type leaderboard. */
+export interface SkillLeaderboardIndexRow {
+  key: string
+  name: string
+  org: string
+  score: number
+  topPercent: number | null
+  grade: PanelGrade | null
+  uniqueProblems: number
+  coverage: number
+  rankScore?: number
+  effectiveProblems?: number
+  evidenceLevel?: string
+  confidence?: number
+}
+
+export interface SkillLeaderboardIndex {
+  version: string
+  mode: 'all' | 'official'
+  tier: MedalTier | PanelScope
+  axis: SkillAxisKey
+  rows: SkillLeaderboardIndexRow[]
+}
+
+/**
+ * Expand the compact axis board written by the exporter.
+ *
+ * The implementation lives in ``skillLeaderboardCodec`` so the skill-board Web
+ * Worker can decode rows without importing this whole module; re-exported here
+ * for the main-thread fallback and for the tests.
+ */
+export { decodeSkillLeaderboardRows } from './skillLeaderboardCodec'
+
+/** Load one precomputed axis board; unlike the legacy fallback this is one small request. */
+export function getSkillLeaderboardIndex(
+  mode: 'all' | 'official',
+  tier: MedalTier | PanelScope,
+  axis: SkillAxisKey,
+): Promise<SkillLeaderboardIndex> {
+  return fetchJson<SkillLeaderboardIndex & { rowFields?: unknown }>(
+    `skill-leaderboards/${mode}/${tier}/${axis}.json`,
+  )
+    .then(decodeSkillLeaderboardRows)
+    .catch((error) => {
+      if (tier !== 'overall') throw error
+      return fetchJson<SkillLeaderboardIndex & { rowFields?: unknown }>(
+        `skill-leaderboards/${mode}/regional/${axis}.json`,
+      ).then(decodeSkillLeaderboardRows)
+    })
+}
+
+/**
+ * Load the skill-bearing player shards for the optional global leaderboard.
+ *
+ * The current static contract has no separate skill index, so this is an
+ * explicit on-demand fallback. Missing legacy shards are ignored; callers can
+ * present an unavailable state when no shard contains a skill panel.
+ */
+export async function getSkillLeaderboardPlayers(): Promise<SkillLeaderboardPlayerData[]> {
+  const shards = Array.from({ length: 256 }, (_, index) =>
+    index.toString(16).padStart(2, '0'),
+  )
+  const results = await Promise.allSettled(
+    shards.map((shard) => fetchJson<PlayerShard>(`players/${shard}.json`)),
+  )
+  const players: SkillLeaderboardPlayerData[] = []
+  for (const result of results) {
+    if (result.status !== 'fulfilled') continue
+    for (const [key, raw] of Object.entries(result.value)) {
+      const skillPanel = decodePlayerSkillPanel(raw.skillPanel)
+      if (!skillPanel) continue
+      players.push({ key, name: raw.name, org: raw.org, skillPanel })
+    }
+  }
+  return players
 }

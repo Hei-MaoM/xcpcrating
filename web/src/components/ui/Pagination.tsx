@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 interface PaginationProps {
   page: number // 1-based
   pageSize: number
@@ -5,27 +7,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
-const SIBLINGS = 1
-
-/** Build a compact page list with ellipses, e.g. 1 … 4 5 [6] 7 8 … 20. */
-function buildPages(current: number, total: number): (number | 'gap')[] {
-  if (total <= 7) {
-    return Array.from({ length: total }, (_, i) => i + 1)
-  }
-
-  const pages: (number | 'gap')[] = [1]
-  const start = Math.max(2, current - SIBLINGS)
-  const end = Math.min(total - 1, current + SIBLINGS)
-
-  if (start > 2) pages.push('gap')
-  for (let p = start; p <= end; p++) pages.push(p)
-  if (end < total - 1) pages.push('gap')
-
-  pages.push(total)
-  return pages
-}
-
-/** Numeric pager with prev/next and ellipsis collapsing. */
+/** Compact pager with previous/next controls and direct page input. */
 export function Pagination({
   page,
   pageSize,
@@ -33,12 +15,21 @@ export function Pagination({
   onPageChange,
 }: PaginationProps) {
   const totalPages = Math.max(1, Math.ceil(totalItems / pageSize))
+  const [draft, setDraft] = useState<string | null>(null)
   if (totalPages <= 1) return null
 
   const clamped = Math.min(Math.max(1, page), totalPages)
   const from = (clamped - 1) * pageSize + 1
   const to = Math.min(clamped * pageSize, totalItems)
-  const pages = buildPages(clamped, totalPages)
+  function commit() {
+    if (draft === null || draft === '') {
+      setDraft(null)
+      return
+    }
+    const next = Math.min(totalPages, Math.max(1, Number(draft)))
+    if (Number.isFinite(next)) onPageChange(next)
+    setDraft(null)
+  }
 
   return (
     <nav className="pagination" aria-label="分页">
@@ -55,25 +46,31 @@ export function Pagination({
         >
           ‹
         </button>
-        {pages.map((p, i) =>
-          p === 'gap' ? (
-            <span key={`gap-${i}`} className="pagination__ellipsis">
-              …
-            </span>
-          ) : (
-            <button
-              key={p}
-              type="button"
-              className={`pagination__btn${
-                p === clamped ? ' pagination__btn--active' : ''
-              }`}
-              onClick={() => onPageChange(p)}
-              aria-current={p === clamped ? 'page' : undefined}
-            >
-              {p}
-            </button>
-          ),
-        )}
+        <label className="pagination__jump">
+          <span>跳转至</span>
+          <input
+            type="number"
+            inputMode="numeric"
+            min={1}
+            max={totalPages}
+            value={draft ?? clamped}
+            aria-label={`输入页码，共 ${totalPages} 页`}
+            onChange={(event) => setDraft(event.target.value.replace(/\D/g, ''))}
+            onBlur={commit}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                commit()
+                event.currentTarget.blur()
+              }
+              if (event.key === 'Escape') {
+                setDraft(null)
+                event.currentTarget.blur()
+              }
+            }}
+          />
+          <span>/ {totalPages}</span>
+        </label>
         <button
           type="button"
           className="pagination__btn"

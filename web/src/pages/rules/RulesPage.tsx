@@ -165,7 +165,7 @@ export default function RulesPage() {
         </div>
         <p className="rules-lead">
           当选手内部水平 E 达到一定高度后，低级别比赛不再纳入计分（既不加分亦不扣分），
-          亦不计入其成绩记录 —— 高水平选手在低级别赛事中取胜属预期之内。
+          参赛记录和公开场次仍保留，这一场不会增加计分场次。
         </p>
         <div className="board-card" style={{ marginTop: 22 }}>
           <table className="tbl">

@@ -2,12 +2,19 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import {
   getContest,
+  type ContestProblem,
   type ContestDetail,
   type ContestMetrics,
   type ContestStrengthScores,
   type ContestTeam,
 } from '../../lib/data'
-import { formatDate, formatPenalty, formatScore } from '../../lib/format'
+import {
+  formatDate,
+  formatPenalty,
+  formatScore,
+  formatScoreInt,
+  formatSolveRate,
+} from '../../lib/format'
 import { Caret, Delta, Deviation } from '../../components/ui'
 import { categoryLabel } from './categories'
 
@@ -91,6 +98,104 @@ function ContestMetricsStrip({ metrics }: { metrics?: ContestMetrics }) {
           </div>
         ))}
       </dl>
+    </section>
+  )
+}
+
+function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
+  if (!problems?.length) return null
+
+  return (
+    <section className="wrap contest-problems-wrap" aria-labelledby="contest-problems-title">
+      <div className="section-label">
+        <h2 id="contest-problems-title" className="section-label__text">
+          题目概览
+        </h2>
+        <span className="section-label__rule" />
+        <span className="contest-problems-count">共 {problems.length} 题</span>
+      </div>
+      <p className="contest-problems__hint">
+        题目分与队伍赛前分使用同一尺度；两者相等时模型预计通过概率为 50%。题型来自 2023 年后的题解分类。
+      </p>
+      <div className="table-scroll contest-problems-table-wrap">
+        <table className="tbl contest-problems-table">
+          <colgroup>
+            <col style={{ width: '72px' }} />
+            <col />
+            <col style={{ width: '250px' }} />
+            <col style={{ width: '120px' }} />
+            <col style={{ width: '150px' }} />
+            <col style={{ width: '150px' }} />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>题号</th>
+              <th>题目</th>
+              <th>题型</th>
+              <th>题目分</th>
+              <th className="right">预计通过率</th>
+              <th className="right">通过队伍</th>
+            </tr>
+          </thead>
+          <tbody>
+            {problems.map((problem) => {
+              const typeLabels = problem.typeLabels.length > 0
+                ? problem.typeLabels
+                : ['未分类']
+              const accepted = problem.accepted === null
+                ? '—'
+                : `${problem.accepted} / ${problem.eligibleTeams}`
+              return (
+                <tr key={problem.alias}>
+                  <td>
+                    <span className="contest-problem-alias">{problem.alias}</span>
+                  </td>
+                  <td>
+                    {problem.problemUrl ? (
+                      <a
+                        className="contest-problem-title contest-problem-title--link"
+                        href={problem.problemUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={`打开题目：${problem.title ?? problem.alias}`}
+                      >
+                        {problem.title ?? '未命名题目'}
+                        <span className="contest-problem-external" aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      <span className="contest-problem-title" title={problem.title ?? undefined}>
+                        {problem.title ?? '未命名题目'}
+                      </span>
+                    )}
+                  </td>
+                  <td>
+                    <div className="contest-problem-types">
+                      {typeLabels.map((label) => (
+                        <span
+                          className={`contest-problem-type${label === '未分类' ? ' is-unknown' : ''}`}
+                          key={label}
+                        >
+                          {label}
+                        </span>
+                      ))}
+                    </div>
+                  </td>
+                  <td className="tnum">
+                    {formatScoreInt(problem.problemRating)}
+                  </td>
+                  <td className="right tnum">{formatSolveRate(problem.solveRate)}</td>
+                  <td
+                    className="right tnum"
+                    title={problem.submitted === null ? undefined : `全场提交 ${problem.submitted} 次`}
+                  >
+                    {accepted}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </section>
   )
 }
@@ -349,6 +454,8 @@ export default function ContestDetailPage() {
           </div>
         </section>
       ) : null}
+
+      <ContestProblemsTable problems={contest.problems} />
 
       <section className="wrap">
         <div className="detail-toolbar">

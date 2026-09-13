@@ -1,0 +1,301 @@
+
+/* Per-tier problem-type skill profile (seven-axis radar). */
+.skill-panel {
+  padding-top: 8px;
+  padding-bottom: 64px;
+}
+
+.skill-panel__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px 32px;
+}
+
+.skill-panel__caption,
+.skill-panel__note {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 13px;
+  text-align: right;
+}
+.skill-panel__note { text-align: left; }
+
+.skill-panel__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.skill-panel__empty {
+  margin-top: 26px;
+  padding: 34px 24px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-md);
+  color: var(--ink-3);
+  background: var(--paper-2);
+  text-align: center;
+  font-size: 14px;
+}
+
+.skill-panel__note {
+  margin: 16px 2px 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.skill-tier-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.skill-tier-card--empty {
+  box-shadow: none;
+  background: color-mix(in oklch, var(--card) 74%, var(--paper-2));
+}
+
+.skill-tier-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 24px 19px;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, var(--card), var(--paper-2));
+}
+
+.skill-tier-card__title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 23px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.skill-tier-card__summary {
+  margin: 6px 0 0;
+  color: var(--ink-3);
+  font-size: 12px;
+}
+
+.skill-tier-card__version {
+  flex: 0 0 auto;
+  color: var(--ink-4);
+  font-family: var(--mono, var(--sans));
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.skill-radar {
+  margin: 0;
+  padding: 15px 18px 12px;
+  border-bottom: 1px solid var(--line);
+  background: radial-gradient(circle at 50% 47%, color-mix(in oklch, var(--oxford-tint) 54%, transparent), transparent 56%), var(--card);
+}
+
+.skill-radar__svg {
+  display: block;
+  width: 100%;
+  max-width: 410px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.skill-radar__grid,
+.skill-radar__spoke {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-radar__grid--outer {
+  stroke: var(--line-2);
+  stroke-width: 1.2;
+}
+
+.skill-radar__spoke {
+  stroke-dasharray: 2.5 3.5;
+}
+
+.skill-radar__shape {
+  fill: var(--oxford);
+  fill-opacity: 0.18;
+  stroke: var(--oxford-2);
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+  filter: drop-shadow(0 5px 8px color-mix(in oklch, var(--oxford) 18%, transparent));
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-radar__point {
+  fill: var(--oxford-2);
+  stroke: var(--card);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.skill-radar__point--missing {
+  fill: var(--card);
+  stroke: var(--ink-4);
+  stroke-dasharray: 1.5 1.5;
+}
+
+.skill-radar__label {
+  fill: var(--ink-2);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.skill-radar__level {
+  fill: var(--ink-4);
+  font-family: var(--mono, var(--sans));
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.skill-radar__caption {
+  margin-top: -2px;
+  color: var(--ink-4);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+.skill-axis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Desktop: keep the radar and its seven summaries side by side. */
+.skill-tier-card__body {
+  display: grid;
+  grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr);
+  min-width: 0;
+  align-items: stretch;
+}
+.skill-tier-card__body > * { min-width: 0; }
+.skill-tier-card__body .skill-radar { border-right: 1px solid var(--line); border-bottom: 0; display: grid; align-content: center; }
+.skill-tier-card__body .skill-axis-grid { min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: stretch; }
+
+.skill-axis {
+  min-width: 0;
+  padding: 13px 16px 12px;
+  border-top: 1px solid var(--line);
+}
+
+.skill-axis:nth-child(odd) {
+  border-right: 1px solid var(--line);
+}
+
+.skill-axis__head,
+.skill-axis__body {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.skill-axis__label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.skill-axis__rank {
+  display: inline-block;
+  min-width: 21px;
+  margin-right: 4px;
+  color: var(--ink-4);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.skill-axis__body {
+  align-items: baseline;
+  margin-top: 8px;
+}
+
+.skill-axis__score {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.skill-axis__score small {
+  margin-left: 2px;
+  color: var(--ink-4);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.skill-axis__percent {
+  color: var(--ink-3);
+  font-size: 10px;
+}
+
+.skill-axis__percent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 920px) {
+
+  .skill-panel__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-panel__caption {
+    text-align: left;
+  }
+
+  .skill-panel__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .skill-tier-card__body { display: block; }
+  .skill-tier-card__body .skill-radar { border-right: 0; border-bottom: 1px solid var(--line); }
+
+  .skill-panel {
+    padding-bottom: 48px;
+  }
+
+  .skill-tier-card__head {
+    padding-right: 17px;
+    padding-left: 17px;
+  }
+
+  .skill-radar {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .skill-axis,
+  .skill-axis:nth-child(odd) {
+    padding-right: 17px;
+    padding-left: 17px;
+    border-right: none;
+  }
+
+  .skill-axis-grid { grid-template-columns: 1fr; }
+}

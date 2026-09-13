@@ -16,3 +16,32 @@ web/playwright.config.ts
 *.test.tsx
 *.spec.ts
 *.spec.tsx
+# 工作区与一次性抓取/调试产物：同理，只留产品代码与审核后的数据
+work/
+tmp/
+.pytest-run/
+/_srkraw/
+/tmp_*
+/tmp-*
+/.tmp-*
+/_tmp_*
+/chrome-cdp-*/
+/chrome-*-profile*/
+/*chrome-profile*/
+/search*.html
+/sogou*
+/zh*.jpg
+/fzu_img*.png
+# 导出产物：这个 88MB 的汇总索引前端已不再请求（页面改为按维度读取各 axis 文件）
+/web/public/data/skill-leaderboards/index.json
+# 题目审核过程数据：只提交最终题目数据（两份审核意见 / root 裁定留在本地）
+# data/problem/**          每场比赛的审核文档（含 review 证据链）
+# data/problem-types/*.json 审核用的中间 manifest（2025 pilot、agent 批次）
+/data/problem/
+/data/problem-types/2025.json
+/data/problem-types/agent-*.json
+# 审核进度快照（前端审计页已下线，站点不再请求）
+/web/public/data/problem-audit-progress.json
+
+# 审核证据的本地压缩备份（由 publish 脚本写入 work/，work/ 已整体忽略）
+*.full.json.gz

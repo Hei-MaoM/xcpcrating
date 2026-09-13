@@ -1,1 +1,4871 @@
-{"id":"icpc/icpc2025/icpc2025hongkong","slug":"icpc__icpc2025__icpc2025hongkong","title":"The 50th ICPC Asia Hong Kong Regional Contest","startAt":"2025-11-30T09:00:00+08:00","category":"icpc","teamCount":136,"concordance":0.77,"unrated":false,"unratedNote":null,"teams":[{"rank":1,"name":"Naive Birds","org":"北京大学","solved":8,"penalty":894,"official":true,"members":[{"key":"王蔚澄@北京大学","name":"王蔚澄"},{"key":"朱剑枫@北京大学","name":"朱剑枫"},{"key":"李羿辰@北京大学","name":"李羿辰"}],"predictedRank":1,"perf":2902.42,"preRating":3015.55,"muDelta":62.35,"predictedRankOfficial":1,"perfOfficial":2950.17,"preRatingOfficial":3066.3,"muDeltaOfficial":63.56,"rankOfficial":1},{"rank":2,"name":"DeepSleep","org":"复旦大学","solved":8,"penalty":932,"official":true,"members":[{"key":"张圣皓@复旦大学","name":"张圣皓"},{"key":"王瑞藻@复旦大学","name":"王瑞藻"},{"key":"朱翔宇@复旦大学","name":"朱翔宇"}],"predictedRank":6,"perf":2501.95,"preRating":2465.03,"muDelta":140.36,"predictedRankOfficial":7,"perfOfficial":2500.98,"preRatingOfficial":2416.58,"muDeltaOfficial":167.83,"rankOfficial":2},{"rank":3,"name":"Stella Primus","org":"上海交通大学","solved":8,"penalty":1348,"official":true,"members":[{"key":"杨崇烨@上海交通大学","name":"杨崇烨"},{"key":"李俊毅@上海交通大学","name":"李俊毅"},{"key":"唐星珣@上海交通大学","name":"唐星珣"}],"predictedRank":3,"perf":2485.58,"preRating":2555.67,"muDelta":84.83,"predictedRankOfficial":4,"perfOfficial":2518.47,"preRatingOfficial":2583.57,"muDeltaOfficial":90.22,"rankOfficial":3},{"rank":4,"name":"CQOI Flames","org":"哈尔滨工业大学","solved":7,"penalty":1082,"official":true,"members":[{"key":"杜沛键@哈尔滨工业大学","name":"杜沛键"},{"key":"方智鉴@哈尔滨工业大学","name":"方智鉴"},{"key":"雷钧森@哈尔滨工业大学","name":"雷钧森"}],"predictedRank":7,"perf":2373.19,"preRating":2410.85,"muDelta":101.63,"predictedRankOfficial":6,"perfOfficial":2424.14,"preRatingOfficial":2478.08,"muDeltaOfficial":95.95,"rankOfficial":4},{"rank":5,"name":"Mynoghra","org":"香港中文大学(深圳)","solved":6,"penalty":679,"official":true,"members":[{"key":"周莫非@香港中文大学(深圳)","name":"周莫非"},{"key":"陈嘉年@香港中文大学(深圳)","name":"陈嘉年"},{"key":"王泽诚@香港中文大学(深圳)","name":"王泽诚"}],"predictedRank":10,"perf":2280.35,"preRating":2283.74,"muDelta":119.49,"predictedRankOfficial":10,"perfOfficial":2329.55,"preRatingOfficial":2348.68,"muDeltaOfficial":114.11,"rankOfficial":5},{"rank":6,"name":"Nice Nature","org":"厦门理工学院","solved":6,"penalty":764,"official":true,"members":[{"key":"洪世炜@厦门理工学院","name":"洪世炜"},{"key":"张子漠@厦门理工学院","name":"张子漠"}],"predictedRank":36,"perf":2121.29,"preRating":1838.93,"muDelta":231.59,"predictedRankOfficial":36,"perfOfficial":2156.05,"preRatingOfficial":1862.87,"muDeltaOfficial":239.97,"rankOfficial":6},{"rank":7,"name":"Hot Kpop Union","org":"香港大学","solved":6,"penalty":785,"official":true,"members":[{"key":"李其轩@香港大学","name":"李其轩"},{"key":"吴语晨@香港大学","name":"吴语晨"},{"key":"夏铭飞@香港大学","name":"夏铭飞"}],"predictedRank":15,"perf":2186.12,"preRating":2195.61,"muDelta":128.87,"predictedRankOfficial":15,"perfOfficial":2218.5,"preRatingOfficial":2224.99,"muDeltaOfficial":133.74,"rankOfficial":7},{"rank":8,"name":"The Defect","org":"吉林大学","solved":6,"penalty":804,"official":true,"members":[{"key":"于之航@吉林大学","name":"于之航"},{"key":"陈鹏旭@吉林大学","name":"陈鹏旭"},{"key":"徐梓博@吉林大学","name":"徐梓博"}],"predictedRank":4,"perf":2326.38,"preRating":2530.83,"muDelta":14.86,"predictedRankOfficial":3,"perfOfficial":2373.8,"preRatingOfficial":2593.44,"muDeltaOfficial":9.74,"rankOfficial":8},{"rank":9,"name":"SUSTech-Lyaki","org":"南方科技大学","solved":6,"penalty":829,"official":true,"members":[{"key":"易楚曦@南方科技大学","name":"易楚曦"},{"key":"蒲韦坤@南方科技大学","name":"蒲韦坤"},{"key":"陈恺桉@南方科技大学","name":"陈恺桉"}],"predictedRank":16,"perf":2121.41,"preRating":2146.32,"muDelta":111.2,"predictedRankOfficial":18,"perfOfficial":2155.65,"preRatingOfficial":2181.67,"muDeltaOfficial":113.54,"rankOfficial":9},{"rank":10,"name":"Rinsed to Remote","org":"西安交通大学","solved":6,"penalty":851,"official":true,"members":[{"key":"陈儒恒@西安交通大学","name":"陈儒恒"},{"key":"殷嘉鹏@西安交通大学","name":"殷嘉鹏"},{"key":"方亦晨@西安交通大学","name":"方亦晨"}],"predictedRank":13,"perf":2145.57,"preRating":2234.39,"muDelta":75.0,"predictedRankOfficial":13,"perfOfficial":2176.69,"preRatingOfficial":2265.61,"muDeltaOfficial":77.74,"rankOfficial":10},{"rank":11,"name":"Wine-filled Fishball Pie","org":"香港中文大学","solved":6,"penalty":932,"official":false,"members":[{"key":"hsieh chong ho@香港中文大学","name":"Hsieh Chong Ho"},{"key":"wong chun@香港中文大学","name":"Wong Chun"},{"key":"lu yi fung@香港中文大学","name":"Lu Yi Fung"}],"predictedRank":39,"perf":1937.07,"preRating":1823.38,"muDelta":233.6,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":12,"name":"Fear WA, all in implementation","org":"香港科技大学(广州)","solved":5,"penalty":378,"official":true,"members":[{"key":"王向前@香港科技大学(广州)","name":"王向前"},{"key":"罗浩@香港科技大学(广州)","name":"罗浩"},{"key":"储文皓@香港科技大学(广州)","name":"储文皓"}],"predictedRank":8,"perf":2202.2,"preRating":2410.82,"muDelta":12.68,"predictedRankOfficial":8,"perfOfficial":2231.13,"preRatingOfficial":2411.17,"muDeltaOfficial":30.33,"rankOfficial":11},{"rank":13,"name":"HDU-T05","org":"杭州电子科技大学","solved":5,"penalty":475,"official":true,"members":[{"key":"杨钧昊@杭州电子科技大学","name":"杨钧昊"},{"key":"徐中天@杭州电子科技大学","name":"徐中天"},{"key":"蔡睿诚@杭州电子科技大学","name":"蔡睿诚"}],"predictedRank":11,"perf":2112.13,"preRating":2256.23,"muDelta":46.23,"predictedRankOfficial":11,"perfOfficial":2160.69,"preRatingOfficial":2297.93,"muDeltaOfficial":52.59,"rankOfficial":12},{"rank":14,"name":"lemonade factory","org":"北京航空航天大学","solved":5,"penalty":495,"official":true,"members":[{"key":"董和军@北京航空航天大学","name":"董和军"},{"key":"王大禹@北京航空航天大学","name":"王大禹"},{"key":"蒋槟阳@北京航空航天大学","name":"蒋槟阳"}],"predictedRank":2,"perf":2280.38,"preRating":2609.47,"muDelta":-49.96,"predictedRankOfficial":2,"perfOfficial":2325.26,"preRatingOfficial":2647.28,"muDeltaOfficial":-43.5,"rankOfficial":13},{"rank":15,"name":"Twilight","org":"东南大学","solved":5,"penalty":507,"official":true,"members":[{"key":"杜岩旭@东南大学","name":"杜岩旭"},{"key":"颜熙@东南大学","name":"颜熙"},{"key":"周天一@东南大学","name":"周天一"}],"predictedRank":12,"perf":2087.06,"preRating":2254.71,"muDelta":33.98,"predictedRankOfficial":12,"perfOfficial":2130.62,"preRatingOfficial":2291.63,"muDeltaOfficial":40.22,"rankOfficial":14},{"rank":16,"name":"Anohana","org":"南京大学","solved":5,"penalty":535,"official":true,"members":[{"key":"张瑞珉@南京大学","name":"张瑞珉"},{"key":"朱羽宽@南京大学","name":"朱羽宽"},{"key":"陈子达@南京大学","name":"陈子达"}],"predictedRank":5,"perf":2195.22,"preRating":2487.93,"muDelta":-31.05,"predictedRankOfficial":5,"perfOfficial":2262.57,"preRatingOfficial":2572.09,"muDeltaOfficial":-37.01,"rankOfficial":15},{"rank":17,"name":"The Affiliated High School of Shanxi University","org":"南开大学","solved":5,"penalty":724,"official":true,"members":[{"key":"车昱辉@南开大学","name":"车昱辉"},{"key":"杨澍@南开大学","name":"杨澍"},{"key":"王治中@南开大学","name":"王治中"}],"predictedRank":19,"perf":1994.5,"preRating":2110.84,"muDelta":60.74,"predictedRankOfficial":19,"perfOfficial":2036.41,"preRatingOfficial":2147.99,"muDeltaOfficial":66.01,"rankOfficial":16},{"rank":18,"name":"HFOI2018","org":"清华大学","solved":5,"penalty":838,"official":true,"members":[{"key":"区庆亮@清华大学","name":"区庆亮"},{"key":"贺睿杰@清华大学","name":"贺睿杰"},{"key":"罗以彬@清华大学","name":"罗以彬"}],"predictedRank":30,"perf":1901.01,"preRating":1938.86,"muDelta":101.48,"predictedRankOfficial":30,"perfOfficial":1929.11,"preRatingOfficial":1947.9,"muDeltaOfficial":114.18,"rankOfficial":17},{"rank":19,"name":"SYSU_Fate of Waves","org":"中山大学","solved":5,"penalty":894,"official":true,"members":[{"key":"何宇扬@中山大学","name":"何宇扬"},{"key":"杨立伟@中山大学","name":"杨立伟"},{"key":"覃锐麟@中山大学","name":"覃锐麟"}],"predictedRank":18,"perf":1975.6,"preRating":2112.5,"muDelta":50.02,"predictedRankOfficial":20,"perfOfficial":2013.23,"preRatingOfficial":2145.3,"muDeltaOfficial":55.32,"rankOfficial":18},{"rank":20,"name":"1+1","org":"中国人民大学","solved":4,"penalty":362,"official":true,"members":[{"key":"晏艺桓@中国人民大学","name":"晏艺桓"},{"key":"房子珈@中国人民大学","name":"房子珈"},{"key":"孙奕豪@中国人民大学","name":"孙奕豪"}],"predictedRank":14,"perf":2014.83,"preRating":2209.78,"muDelta":20.04,"predictedRankOfficial":14,"perfOfficial":2056.77,"preRatingOfficial":2253.5,"muDeltaOfficial":21.94,"rankOfficial":19},{"rank":21,"name":"blossom of snow","org":"南京航空航天大学","solved":4,"penalty":383,"official":true,"members":[{"key":"胡昊天@南京航空航天大学","name":"胡昊天"},{"key":"赵乐坤@南京航空航天大学","name":"赵乐坤"},{"key":"匡显然@南京航空航天大学","name":"匡显然"}],"predictedRank":9,"perf":2057.05,"preRating":2309.94,"muDelta":-10.31,"predictedRankOfficial":9,"perfOfficial":2100.22,"preRatingOfficial":2357.07,"muDeltaOfficial":-9.59,"rankOfficial":20},{"rank":22,"name":"GNOSIA","org":"北京邮电大学","solved":4,"penalty":499,"official":true,"members":[{"key":"谭怡萱@北京邮电大学","name":"谭怡萱"},{"key":"许智彬@北京邮电大学","name":"许智彬"},{"key":"邢瑞林@北京邮电大学","name":"邢瑞林"}],"predictedRank":17,"perf":1961.63,"preRating":2137.0,"muDelta":145.0,"predictedRankOfficial":16,"perfOfficial":2005.87,"preRatingOfficial":2188.73,"muDeltaOfficial":156.56,"rankOfficial":21},{"rank":23,"name":"HKOI 1","org":"Hong Kong Olympiad in Informatics","solved":4,"penalty":530,"official":false,"members":[{"key":"mak chun hin ivan@Hong Kong Olympiad in Informatics","name":"Mak Chun Hin Ivan"},{"key":"choy tsz chai berton@Hong Kong Olympiad in Informatics","name":"Choy Tsz Chai Berton"},{"key":"lai hong tung honrich@Hong Kong Olympiad in Informatics","name":"Lai Hong Tung Honrich"}],"predictedRank":54,"perf":1754.65,"preRating":1713.17,"muDelta":143.87,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":24,"name":"UESTC_lyc_fan_club","org":"电子科技大学","solved":4,"penalty":536,"official":true,"members":[{"key":"周蛰粼@电子科技大学","name":"周蛰粼"},{"key":"赵城尧@电子科技大学","name":"赵城尧"},{"key":"徐明君@电子科技大学","name":"徐明君"}],"predictedRank":46,"perf":1772.94,"preRating":1775.81,"muDelta":119.76,"predictedRankOfficial":45,"perfOfficial":1803.79,"preRatingOfficial":1784.03,"muDeltaOfficial":134.33,"rankOfficial":22},{"rank":25,"name":"example pass=AC","org":"同济大学","solved":4,"penalty":541,"official":true,"members":[{"key":"郑梓健@同济大学","name":"郑梓健"},{"key":"张丞玮@同济大学","name":"张丞玮"},{"key":"邓双南@同济大学","name":"邓双南"}],"predictedRank":34,"perf":1797.42,"preRating":1847.15,"muDelta":95.3,"predictedRankOfficial":37,"perfOfficial":1828.06,"preRatingOfficial":1857.98,"muDeltaOfficial":108.39,"rankOfficial":23},{"rank":26,"name":"Wenhua Road East","org":"山东大学(威海)","solved":4,"penalty":557,"official":true,"members":[{"key":"张智航@山东大学(威海)","name":"张智航"},{"key":"童延@山东大学(威海)","name":"童延"},{"key":"陆柯旭@山东大学(威海)","name":"陆柯旭"}],"predictedRank":32,"perf":1798.77,"preRating":1865.75,"muDelta":86.44,"predictedRankOfficial":33,"perfOfficial":1832.6,"preRatingOfficial":1885.9,"muDeltaOfficial":96.39,"rankOfficial":24},{"rank":27,"name":"Team name ddl today","org":"香港大学","solved":4,"penalty":638,"official":true,"members":[{"key":"杨明天@香港大学","name":"杨明天"},{"key":"罗简@香港大学","name":"罗简"},{"key":"刘彦呈@香港大学","name":"刘彦呈"}],"predictedRank":50,"perf":1730.59,"preRating":1729.21,"muDelta":126.56,"predictedRankOfficial":49,"perfOfficial":1763.86,"preRatingOfficial":1751.13,"muDeltaOfficial":135.84,"rankOfficial":25},{"rank":28,"name":"Hongkong Uncle","org":"湘潭大学","solved":4,"penalty":652,"official":true,"members":[{"key":"卓越@湘潭大学","name":"卓越"},{"key":"李子熙@湘潭大学","name":"李子熙"},{"key":"曾庆鑫@湘潭大学","name":"曾庆鑫"}],"predictedRank":20,"perf":1890.58,"preRating":2081.71,"muDelta":22.33,"predictedRankOfficial":17,"perfOfficial":1963.0,"preRatingOfficial":2183.58,"muDeltaOfficial":17.87,"rankOfficial":26},{"rank":29,"name":"manbo and hajimi","org":"南京邮电大学","solved":4,"penalty":674,"official":true,"members":[{"key":"胡乐安@南京邮电大学","name":"胡乐安"},{"key":"王普立@南京邮电大学","name":"王普立"},{"key":"田晓亮@南京邮电大学","name":"田晓亮"}],"predictedRank":23,"perf":1826.04,"preRating":1964.58,"muDelta":49.27,"predictedRankOfficial":24,"perfOfficial":1863.48,"preRatingOfficial":1998.41,"muDeltaOfficial":54.01,"rankOfficial":27},{"rank":30,"name":"no brain just nom nom nom","org":"香港中文大学","solved":4,"penalty":677,"official":true,"members":[{"key":"wong tsz him@香港中文大学","name":"Wong Tsz Him"},{"key":"wong man pai angus@香港中文大学","name":"Wong Man Pai Angus"},{"key":"poonyapat sriroth@香港中文大学","name":"Poonyapat Sriroth"}],"predictedRank":57,"perf":1701.64,"preRating":1708.67,"muDelta":137.7,"predictedRankOfficial":52,"perfOfficial":1729.86,"preRatingOfficial":1725.56,"muDeltaOfficial":150.84,"rankOfficial":28},{"rank":31,"name":"Byd Fan Club","org":"暨南大学","solved":3,"penalty":223,"official":true,"members":[{"key":"曹哲睿@暨南大学","name":"曹哲睿"},{"key":"谢正心@暨南大学","name":"谢正心"},{"key":"潘城樟@暨南大学","name":"潘城樟"}],"predictedRank":52,"perf":1701.0,"preRating":1722.54,"muDelta":110.07,"predictedRankOfficial":56,"perfOfficial":1718.77,"preRatingOfficial":1716.38,"muDeltaOfficial":125.19,"rankOfficial":29},{"rank":32,"name":"N^3","org":"蒙古国立大学","solved":3,"penalty":230,"official":true,"members":[{"key":"dugarjantsan bilguun@蒙古国立大学","name":"Dugarjantsan Bilguun"},{"key":"dalaitseren ganbold@蒙古国立大学","name":"Dalaitseren Ganbold"},{"key":"bilguun erkhembayar@蒙古国立大学","name":"Bilguun Erkhembayar"}],"predictedRank":90,"perf":1644.39,"preRating":1590.85,"muDelta":149.0,"predictedRankOfficial":89,"perfOfficial":1664.59,"preRatingOfficial":1590.85,"muDeltaOfficial":162.29,"rankOfficial":30},{"rank":33,"name":"gugugaga","org":"Pui Ching Middle School","solved":3,"penalty":234,"official":false,"members":[{"key":"ng hang chi@Pui Ching Middle School","name":"NG Hang Chi"},{"key":"wang ziyan@Pui Ching Middle School","name":"WANG Ziyan"},{"key":"to chak seng@Pui Ching Middle School","name":"TO Chak Seng"}],"predictedRank":90,"perf":1638.1,"preRating":1590.85,"muDelta":145.73,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":34,"name":"two-thirds","org":"西南科技大学","solved":3,"penalty":237,"official":true,"members":[{"key":"刘诗璐@西南科技大学","name":"刘诗璐"},{"key":"钟妍@西南科技大学","name":"钟妍"},{"key":"柯涵@西南科技大学","name":"柯涵"}],"predictedRank":66,"perf":1664.33,"preRating":1677.83,"muDelta":114.2,"predictedRankOfficial":62,"perfOfficial":1695.82,"preRatingOfficial":1694.4,"muDeltaOfficial":124.72,"rankOfficial":31},{"rank":35,"name":"Genesis in Hong Kong","org":"惠州学院","solved":3,"penalty":256,"official":true,"members":[{"key":"冼健民@惠州学院","name":"冼健民"},{"key":"孙昊@惠州学院","name":"孙昊"},{"key":"钟志杰@惠州学院","name":"钟志杰"}],"predictedRank":45,"perf":1702.48,"preRating":1780.06,"muDelta":97.49,"predictedRankOfficial":42,"perfOfficial":1739.55,"preRatingOfficial":1810.59,"muDeltaOfficial":106.65,"rankOfficial":32},{"rank":35,"name":"Phoenix","org":"井冈山大学","solved":3,"penalty":256,"official":true,"members":[{"key":"王琼@井冈山大学","name":"王琼"},{"key":"杨文源@井冈山大学","name":"杨文源"},{"key":"陈柏伟@井冈山大学","name":"陈柏伟"}],"predictedRank":78,"perf":1639.41,"preRating":1628.46,"muDelta":126.86,"predictedRankOfficial":74,"perfOfficial":1668.8,"preRatingOfficial":1642.28,"muDeltaOfficial":137.76,"rankOfficial":32},{"rank":37,"name":"from here","org":"哈尔滨工业大学(深圳)","solved":3,"penalty":300,"official":true,"members":[{"key":"赵飞羽@哈尔滨工业大学(深圳)","name":"赵飞羽"},{"key":"陈彦波@哈尔滨工业大学(深圳)","name":"陈彦波"},{"key":"蔡易轩@哈尔滨工业大学(深圳)","name":"蔡易轩"}],"predictedRank":35,"perf":1722.71,"preRating":1846.5,"muDelta":56.81,"predictedRankOfficial":35,"perfOfficial":1755.04,"preRatingOfficial":1870.13,"muDeltaOfficial":64.11,"rankOfficial":34},{"rank":38,"name":"Russian Roulette","org":"福州大学","solved":3,"penalty":317,"official":true,"members":[{"key":"黄佳鹏@福州大学","name":"黄佳鹏"},{"key":"肖羽石@福州大学","name":"肖羽石"},{"key":"张仁杰@福州大学","name":"张仁杰"}],"predictedRank":42,"perf":1692.09,"preRating":1792.55,"muDelta":78.3,"predictedRankOfficial":43,"perfOfficial":1720.16,"preRatingOfficial":1808.78,"muDeltaOfficial":87.84,"rankOfficial":35},{"rank":39,"name":"Explosion!","org":"西南交通大学","solved":3,"penalty":323,"official":true,"members":[{"key":"刘俊豪@西南交通大学","name":"刘俊豪"},{"key":"李欣珂@西南交通大学","name":"李欣珂"},{"key":"陈义达@西南交通大学","name":"陈义达"}],"predictedRank":56,"perf":1649.48,"preRating":1708.77,"muDelta":94.33,"predictedRankOfficial":53,"perfOfficial":1676.69,"preRatingOfficial":1724.83,"muDeltaOfficial":103.21,"rankOfficial":36},{"rank":40,"name":"HKOI 2","org":"Hong Kong Olympiad in Informatics","solved":3,"penalty":324,"official":false,"members":[{"key":"xu adam@Hong Kong Olympiad in Informatics","name":"Xu Adam"},{"key":"su yat long rayson@Hong Kong Olympiad in Informatics","name":"Su Yat Long Rayson"},{"key":"ho shun ngai@Hong Kong Olympiad in Informatics","name":"Ho Shun Ngai"}],"predictedRank":90,"perf":1597.94,"preRating":1590.85,"muDelta":124.85,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":41,"name":"Thank you Bing Zhang","org":"武汉大学","solved":3,"penalty":337,"official":true,"members":[{"key":"刘尚源@武汉大学","name":"刘尚源"},{"key":"袁振宇@武汉大学","name":"袁振宇"},{"key":"洪阳@武汉大学","name":"洪阳"}],"predictedRank":67,"perf":1625.94,"preRating":1677.17,"muDelta":94.54,"predictedRankOfficial":65,"perfOfficial":1653.07,"preRatingOfficial":1682.55,"muDeltaOfficial":108.63,"rankOfficial":37},{"rank":42,"name":"One pull one hit","org":"成都信息工程大学","solved":3,"penalty":338,"official":true,"members":[{"key":"季璨@成都信息工程大学","name":"季璨"},{"key":"李奕乐@成都信息工程大学","name":"李奕乐"},{"key":"王宇欣@成都信息工程大学","name":"王宇欣"}],"predictedRank":41,"perf":1683.27,"preRating":1815.75,"muDelta":80.62,"predictedRankOfficial":40,"perfOfficial":1719.51,"preRatingOfficial":1843.83,"muDeltaOfficial":97.68,"rankOfficial":38},{"rank":43,"name":"Team is Powerful","org":"东莞理工学院","solved":3,"penalty":349,"official":true,"members":[{"key":"黄海@东莞理工学院","name":"黄海"},{"key":"林恬烁@东莞理工学院","name":"林恬烁"},{"key":"林志龙@东莞理工学院","name":"林志龙"}],"predictedRank":25,"perf":1750.55,"preRating":1961.42,"muDelta":11.51,"predictedRankOfficial":26,"perfOfficial":1784.11,"preRatingOfficial":1985.94,"muDeltaOfficial":18.99,"rankOfficial":39},{"rank":44,"name":"Hajimi","org":"广州大学","solved":3,"penalty":378,"official":true,"members":[{"key":"李轩@广州大学","name":"李轩"},{"key":"周昊焌@广州大学","name":"周昊焌"},{"key":"杨尚华@广州大学","name":"杨尚华"}],"predictedRank":87,"perf":1580.41,"preRating":1599.13,"muDelta":111.43,"predictedRankOfficial":85,"perfOfficial":1606.96,"preRatingOfficial":1608.27,"muDeltaOfficial":123.27,"rankOfficial":40},{"rank":45,"name":"SCUT Chireden","org":"华南理工大学","solved":3,"penalty":402,"official":true,"members":[{"key":"郑理耀@华南理工大学","name":"郑理耀"},{"key":"袁昊朗@华南理工大学","name":"袁昊朗"},{"key":"陈弘毅@华南理工大学","name":"陈弘毅"}],"predictedRank":80,"perf":1582.92,"preRating":1618.77,"muDelta":102.52,"predictedRankOfficial":80,"perfOfficial":1605.8,"preRatingOfficial":1620.3,"muDeltaOfficial":116.4,"rankOfficial":41},{"rank":46,"name":"NUM-NTN","org":"蒙古国立大学","solved":3,"penalty":404,"official":true,"members":[{"key":"naranbat munkherdene@蒙古国立大学","name":"Naranbat Munkherdene"},{"key":"tamir jamiyangarav@蒙古国立大学","name":"Tamir Jamiyangarav"},{"key":"aldarjaw naranbaatar@蒙古国立大学","name":"Aldarjaw Naranbaatar"}],"predictedRank":90,"perf":1567.63,"preRating":1590.85,"muDelta":109.09,"predictedRankOfficial":89,"perfOfficial":1589.47,"preRatingOfficial":1590.85,"muDeltaOfficial":123.23,"rankOfficial":42},{"rank":47,"name":"GreedyIsTruth","org":"武昌首义学院","solved":3,"penalty":405,"official":true,"members":[{"key":"汤龙飞@武昌首义学院","name":"汤龙飞"},{"key":"李明辉@武昌首义学院","name":"李明辉"},{"key":"高静云@武昌首义学院","name":"高静云"}],"predictedRank":84,"perf":1569.73,"preRating":1609.16,"muDelta":101.13,"predictedRankOfficial":82,"perfOfficial":1592.5,"preRatingOfficial":1614.01,"muDeltaOfficial":113.38,"rankOfficial":43},{"rank":48,"name":"Rosmontis_Fan","org":"浙江工商大学","solved":3,"penalty":446,"official":true,"members":[{"key":"沈士渊@浙江工商大学","name":"沈士渊"},{"key":"魏嘉豪@浙江工商大学","name":"魏嘉豪"},{"key":"徐晨阳@浙江工商大学","name":"徐晨阳"}],"predictedRank":29,"perf":1719.34,"preRating":1941.46,"muDelta":5.66,"predictedRankOfficial":29,"perfOfficial":1750.76,"preRatingOfficial":1968.44,"muDeltaOfficial":10.75,"rankOfficial":44},{"rank":49,"name":"May this voyage culminate in the Final","org":"西南财经大学","solved":3,"penalty":469,"official":true,"members":[{"key":"蒋思翔@西南财经大学","name":"蒋思翔"},{"key":"刘彻@西南财经大学","name":"刘彻"},{"key":"祝亚辉@西南财经大学","name":"祝亚辉"}],"predictedRank":48,"perf":1616.03,"preRating":1739.23,"muDelta":57.1,"predictedRankOfficial":47,"perfOfficial":1647.79,"preRatingOfficial":1768.21,"muDeltaOfficial":61.33,"rankOfficial":45},{"rank":50,"name":"DengDuck Masters Club","org":"Hou Kong Middle School","solved":3,"penalty":475,"official":false,"members":[{"key":"tang cheng hou@Hou Kong Middle School","name":"TANG Cheng Hou"},{"key":"huang kam lam@Hou Kong Middle School","name":"HUANG Kam Lam"},{"key":"ao keng chio@Hou Kong Middle School","name":"AO Keng Chio"}],"predictedRank":90,"perf":1548.99,"preRating":1590.85,"muDelta":99.4,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":51,"name":"Ordinary.exe","org":"厦门大学嘉庚学院","solved":3,"penalty":477,"official":true,"members":[{"key":"孙硕@厦门大学嘉庚学院","name":"孙硕"},{"key":"卓子翔@厦门大学嘉庚学院","name":"卓子翔"},{"key":"黄俊华@厦门大学嘉庚学院","name":"黄俊华"}],"predictedRank":107,"perf":1542.12,"preRating":1584.52,"muDelta":101.17,"predictedRankOfficial":87,"perfOfficial":1569.9,"preRatingOfficial":1595.76,"muDeltaOfficial":112.7,"rankOfficial":46},{"rank":52,"name":"we are iron","org":"四川农业大学","solved":3,"penalty":495,"official":true,"members":[{"key":"江雅奥@四川农业大学","name":"江雅奥"},{"key":"李鑫@四川农业大学","name":"李鑫"},{"key":"刁戈@四川农业大学","name":"刁戈"}],"predictedRank":81,"perf":1549.2,"preRating":1614.38,"muDelta":87.27,"predictedRankOfficial":78,"perfOfficial":1576.5,"preRatingOfficial":1626.35,"muDeltaOfficial":98.03,"rankOfficial":47},{"rank":53,"name":"Last Final","org":"浙江理工大学","solved":3,"penalty":512,"official":true,"members":[{"key":"陈宏毅@浙江理工大学","name":"陈宏毅"},{"key":"陶稼辉@浙江理工大学","name":"陶稼辉"},{"key":"王舜宇@浙江理工大学","name":"王舜宇"}],"predictedRank":26,"perf":1708.84,"preRating":1958.53,"muDelta":46.69,"predictedRankOfficial":23,"perfOfficial":1748.71,"preRatingOfficial":1999.43,"muDeltaOfficial":57.67,"rankOfficial":48},{"rank":54,"name":"The last dance of XiaoMo","org":"成都锦城学院","solved":3,"penalty":529,"official":true,"members":[{"key":"程义威@成都锦城学院","name":"程义威"},{"key":"邓力豪@成都锦城学院","name":"邓力豪"},{"key":"何轩逸@成都锦城学院","name":"何轩逸"}],"predictedRank":63,"perf":1569.69,"preRating":1682.97,"muDelta":64.61,"predictedRankOfficial":61,"perfOfficial":1598.19,"preRatingOfficial":1701.13,"muDeltaOfficial":73.46,"rankOfficial":49},{"rank":55,"name":"Back Seaing","org":"大连理工大学","solved":3,"penalty":531,"official":true,"members":[{"key":"冯子祥@大连理工大学","name":"冯子祥"},{"key":"吴习哲@大连理工大学","name":"吴习哲"},{"key":"卜方昱@大连理工大学","name":"卜方昱"}],"predictedRank":60,"perf":1571.05,"preRating":1694.99,"muDelta":63.63,"predictedRankOfficial":60,"perfOfficial":1596.79,"preRatingOfficial":1708.4,"muDeltaOfficial":71.96,"rankOfficial":50},{"rank":56,"name":"HKUST1","org":"香港科技大学","solved":3,"penalty":538,"official":true,"members":[{"key":"taimas korganbayev@香港科技大学","name":"Taimas Korganbayev"},{"key":"mukhammadarif sakhmoldin@香港科技大学","name":"Mukhammadarif Sakhmoldin"},{"key":"raiymbek baishuak@香港科技大学","name":"Raiymbek Baishuak"}],"predictedRank":21,"perf":1717.24,"preRating":1995.45,"muDelta":-23.51,"predictedRankOfficial":21,"perfOfficial":1760.64,"preRatingOfficial":2046.64,"muDeltaOfficial":-24.78,"rankOfficial":51},{"rank":57,"name":"nia~nia~nia~ciallo~","org":"成都大学","solved":3,"penalty":552,"official":true,"members":[{"key":"陈纪元@成都大学","name":"陈纪元"},{"key":"张凡盛@成都大学","name":"张凡盛"},{"key":"黄兵@成都大学","name":"黄兵"}],"predictedRank":89,"perf":1519.97,"preRating":1594.17,"muDelta":91.5,"predictedRankOfficial":84,"perfOfficial":1546.08,"preRatingOfficial":1610.78,"muDeltaOfficial":101.56,"rankOfficial":52},{"rank":58,"name":"Harukanaru Gensokyo","org":"广西大学","solved":3,"penalty":562,"official":true,"members":[{"key":"张健明@广西大学","name":"张健明"},{"key":"陶康@广西大学","name":"陶康"},{"key":"孙怿翔@广西大学","name":"孙怿翔"}],"predictedRank":40,"perf":1619.55,"preRating":1819.23,"muDelta":17.33,"predictedRankOfficial":39,"perfOfficial":1648.63,"preRatingOfficial":1843.85,"muDeltaOfficial":22.43,"rankOfficial":53},{"rank":59,"name":"ln 7/b","org":"河海大学","solved":3,"penalty":563,"official":true,"members":[{"key":"陈培印@河海大学","name":"陈培印"},{"key":"邵然@河海大学","name":"邵然"},{"key":"谭炜烨@河海大学","name":"谭炜烨"}],"predictedRank":65,"perf":1549.25,"preRating":1681.47,"muDelta":52.41,"predictedRankOfficial":64,"perfOfficial":1571.47,"preRatingOfficial":1692.06,"muDeltaOfficial":61.24,"rankOfficial":54},{"rank":60,"name":"Without Sky","org":"香港理工大学","solved":3,"penalty":588,"official":true,"members":[{"key":"孙涵松@香港理工大学","name":"孙涵松"},{"key":"孟祥宇@香港理工大学","name":"孟祥宇"},{"key":"ziqian lin@香港理工大学","name":"Ziqian Lin"}],"predictedRank":47,"perf":1583.85,"preRating":1762.09,"muDelta":62.05,"predictedRankOfficial":46,"perfOfficial":1609.57,"preRatingOfficial":1781.8,"muDeltaOfficial":71.34,"rankOfficial":55},{"rank":61,"name":"Wanting to learn Ai","org":"四川大学","solved":3,"penalty":602,"official":true,"members":[{"key":"冯朝航@四川大学","name":"冯朝航"},{"key":"蔡相渔@四川大学","name":"蔡相渔"},{"key":"陈燚@四川大学","name":"陈燚"}],"predictedRank":71,"perf":1529.69,"preRating":1655.05,"muDelta":55.97,"predictedRankOfficial":69,"perfOfficial":1549.26,"preRatingOfficial":1661.8,"muDeltaOfficial":65.43,"rankOfficial":56},{"rank":61,"name":"Courage","org":"重庆移通学院","solved":3,"penalty":602,"official":true,"members":[{"key":"李德立@重庆移通学院","name":"李德立"},{"key":"詹毅涵@重庆移通学院","name":"詹毅涵"},{"key":"qing'an lu@重庆移通学院","name":"Qing'an Lu"}],"predictedRank":53,"perf":1559.45,"preRating":1719.33,"muDelta":46.49,"predictedRankOfficial":50,"perfOfficial":1585.44,"preRatingOfficial":1740.5,"muDeltaOfficial":54.23,"rankOfficial":56},{"rank":63,"name":"go valorant esacpe delta dance","org":"哈尔滨工程大学","solved":3,"penalty":610,"official":true,"members":[{"key":"赵新凯@哈尔滨工程大学","name":"赵新凯"},{"key":"孙江吉@哈尔滨工程大学","name":"孙江吉"},{"key":"闫力仁@哈尔滨工程大学","name":"闫力仁"}],"predictedRank":43,"perf":1587.49,"preRating":1790.45,"muDelta":15.62,"predictedRankOfficial":41,"perfOfficial":1616.82,"preRatingOfficial":1820.42,"muDeltaOfficial":18.07,"rankOfficial":58},{"rank":64,"name":"^v^","org":"天津大学","solved":3,"penalty":657,"official":true,"members":[{"key":"张翔智@天津大学","name":"张翔智"},{"key":"万文彬@天津大学","name":"万文彬"},{"key":"王嘉晨@天津大学","name":"王嘉晨"}],"predictedRank":27,"perf":1669.22,"preRating":1953.81,"muDelta":-26.82,"predictedRankOfficial":25,"perfOfficial":1702.75,"preRatingOfficial":1993.41,"muDeltaOfficial":-27.2,"rankOfficial":59},{"rank":65,"name":"Little Switty","org":"西北工业大学","solved":3,"penalty":682,"official":true,"members":[{"key":"李可期@西北工业大学","name":"李可期"},{"key":"邹嘉豪@西北工业大学","name":"邹嘉豪"},{"key":"钟涛宇@西北工业大学","name":"钟涛宇"}],"predictedRank":28,"perf":1664.93,"preRating":1951.56,"muDelta":-27.71,"predictedRankOfficial":28,"perfOfficial":1691.53,"preRatingOfficial":1978.79,"muDeltaOfficial":-25.22,"rankOfficial":60},{"rank":66,"name":"T34-Gray","org":"华中师范大学","solved":3,"penalty":774,"official":true,"members":[{"key":"刘孟谦@华中师范大学","name":"刘孟谦"},{"key":"杨璟欣@华中师范大学","name":"杨璟欣"},{"key":"彭雅晨@华中师范大学","name":"彭雅晨"}],"predictedRank":77,"perf":1500.1,"preRating":1630.77,"muDelta":53.22,"predictedRankOfficial":75,"perfOfficial":1518.75,"preRatingOfficial":1640.94,"muDeltaOfficial":60.41,"rankOfficial":61},{"rank":67,"name":"Taboo Laevatein","org":"江南大学","solved":2,"penalty":69,"official":true,"members":[{"key":"董万里@江南大学","name":"董万里"},{"key":"赵泓博@江南大学","name":"赵泓博"},{"key":"吴继凯@江南大学","name":"吴继凯"}],"predictedRank":24,"perf":1664.63,"preRating":1962.46,"muDelta":-23.44,"predictedRankOfficial":22,"perfOfficial":1700.46,"preRatingOfficial":2008.89,"muDeltaOfficial":-23.97,"rankOfficial":62},{"rank":68,"name":"zufang","org":"昆山杜克大学","solved":2,"penalty":120,"official":true,"members":[{"key":"胡子@昆山杜克大学","name":"胡子"},{"key":"孙厚旻@昆山杜克大学","name":"孙厚旻"},{"key":"袁天骏@昆山杜克大学","name":"袁天骏"}],"predictedRank":38,"perf":1592.45,"preRating":1831.9,"muDelta":-2.9,"predictedRankOfficial":34,"perfOfficial":1624.84,"preRatingOfficial":1871.99,"muDeltaOfficial":-4.03,"rankOfficial":63},{"rank":68,"name":"HKUST5","org":"香港科技大学","solved":2,"penalty":120,"official":true,"members":[{"key":"chan ho yin@香港科技大学","name":"Chan Ho Yin"},{"key":"awadalla, bdelrahman hossameldin a. a.@香港科技大学","name":"AWADALLA, bdelrahman HossamEldin A. A."},{"key":"vu duy tung@香港科技大学","name":"Vu Duy Tung"}],"predictedRank":90,"perf":1475.31,"preRating":1590.85,"muDelta":61.08,"predictedRankOfficial":89,"perfOfficial":1488.9,"preRatingOfficial":1590.85,"muDeltaOfficial":70.93,"rankOfficial":63},{"rank":70,"name":"Chuunibyou But ACMers","org":"武汉理工大学","solved":2,"penalty":122,"official":true,"members":[{"key":"史佳尚@武汉理工大学","name":"史佳尚"},{"key":"余翔宇@武汉理工大学","name":"余翔宇"},{"key":"陆冠丞@武汉理工大学","name":"陆冠丞"}],"predictedRank":106,"perf":1467.04,"preRating":1588.96,"muDelta":57.76,"predictedRankOfficial":83,"perfOfficial":1489.96,"preRatingOfficial":1613.14,"muDeltaOfficial":59.89,"rankOfficial":65},{"rank":71,"name":"Pure 2025","org":"香港城市大学","solved":2,"penalty":127,"official":true,"members":[{"key":"燕雅超@香港城市大学","name":"燕雅超"},{"key":"高立由@香港城市大学","name":"高立由"},{"key":"邓子冲@香港城市大学","name":"邓子冲"}],"predictedRank":51,"perf":1529.62,"preRating":1729.0,"muDelta":18.99,"predictedRankOfficial":48,"perfOfficial":1552.73,"preRatingOfficial":1753.43,"muDeltaOfficial":21.2,"rankOfficial":66},{"rank":72,"name":"Don't Hack Me","org":"东北大学秦皇岛分校","solved":2,"penalty":151,"official":true,"members":[{"key":"朱逸飞@东北大学秦皇岛分校","name":"朱逸飞"},{"key":"陈小全@东北大学秦皇岛分校","name":"陈小全"},{"key":"赵星凯@东北大学秦皇岛分校","name":"赵星凯"}],"predictedRank":121,"perf":1444.82,"preRating":1553.74,"muDelta":64.52,"predictedRankOfficial":88,"perfOfficial":1473.42,"preRatingOfficial":1593.94,"muDeltaOfficial":61.28,"rankOfficial":67},{"rank":73,"name":"My Little Pony won't use Snickers before meeting Rainbow Dash","org":"成都东软学院","solved":2,"penalty":152,"official":true,"members":[{"key":"吴庭信@成都东软学院","name":"吴庭信"},{"key":"王俊喆@成都东软学院","name":"王俊喆"},{"key":"陈一夫@成都东软学院","name":"陈一夫"}],"predictedRank":134,"perf":1424.53,"preRating":1511.85,"muDelta":76.67,"predictedRankOfficial":123,"perfOfficial":1438.96,"preRatingOfficial":1518.7,"muDeltaOfficial":83.37,"rankOfficial":68},{"rank":74,"name":"icy_firefly","org":"澳门大学","solved":2,"penalty":157,"official":true,"members":[{"key":"高淼悦@澳门大学","name":"高淼悦"},{"key":"席跃@澳门大学","name":"席跃"},{"key":"张容嘉@澳门大学","name":"张容嘉"}],"predictedRank":37,"perf":1576.53,"preRating":1836.36,"muDelta":-13.8,"predictedRankOfficial":38,"perfOfficial":1595.31,"preRatingOfficial":1855.17,"muDeltaOfficial":-11.0,"rankOfficial":69},{"rank":75,"name":"Little Foodie Loves Penalty Time","org":"中国地质大学(北京)","solved":2,"penalty":171,"official":true,"members":[{"key":"牛鸿宇@中国地质大学(北京)","name":"牛鸿宇"},{"key":"叶宇翔@中国地质大学(北京)","name":"叶宇翔"},{"key":"滕俊宁@中国地质大学(北京)","name":"滕俊宁"}],"predictedRank":31,"perf":1589.73,"preRating":1866.27,"muDelta":-14.75,"predictedRankOfficial":31,"perfOfficial":1614.49,"preRatingOfficial":1897.08,"muDeltaOfficial":-15.5,"rankOfficial":70},{"rank":76,"name":"Feel the Russian Style","org":"香港城市大学","solved":2,"penalty":173,"official":true,"members":[{"key":"gizatullin timur@香港城市大学","name":"Gizatullin Timur"},{"key":"demidov ilia@香港城市大学","name":"Demidov Ilia"},{"key":"evstafev andrei@香港城市大学","name":"Evstafev Andrei"}],"predictedRank":61,"perf":1495.73,"preRating":1694.26,"muDelta":17.99,"predictedRankOfficial":58,"perfOfficial":1512.99,"preRatingOfficial":1711.0,"muDeltaOfficial":21.04,"rankOfficial":71},{"rank":77,"name":"WA Deeds Done Dirt Cheap","org":"上海科技大学","solved":2,"penalty":182,"official":true,"members":[{"key":"姜昕宇@上海科技大学","name":"姜昕宇"},{"key":"陈钊堃@上海科技大学","name":"陈钊堃"},{"key":"王俊篪@上海科技大学","name":"王俊篪"}],"predictedRank":44,"perf":1537.55,"preRating":1780.25,"muDelta":-5.04,"predictedRankOfficial":44,"perfOfficial":1556.45,"preRatingOfficial":1801.11,"muDeltaOfficial":-3.28,"rankOfficial":72},{"rank":78,"name":"Dreamer without love","org":"西安邮电大学","solved":2,"penalty":184,"official":true,"members":[{"key":"石宇@西安邮电大学","name":"石宇"},{"key":"武奕源@西安邮电大学","name":"武奕源"},{"key":"赵旭东@西安邮电大学","name":"赵旭东"}],"predictedRank":83,"perf":1449.31,"preRating":1613.18,"muDelta":39.3,"predictedRankOfficial":77,"perfOfficial":1464.29,"preRatingOfficial":1626.86,"muDeltaOfficial":43.29,"rankOfficial":73},{"rank":79,"name":"add uuz to your qq group meow thank you meow","org":"齐鲁工业大学(山东省科学院)","solved":2,"penalty":225,"official":true,"members":[{"key":"杨梓睿@齐鲁工业大学(山东省科学院)","name":"杨梓睿"},{"key":"国展源@齐鲁工业大学(山东省科学院)","name":"国展源"},{"key":"张宸维@齐鲁工业大学(山东省科学院)","name":"张宸维"}],"predictedRank":75,"perf":1456.26,"preRating":1634.79,"muDelta":28.33,"predictedRankOfficial":73,"perfOfficial":1468.05,"preRatingOfficial":1642.71,"muDeltaOfficial":33.12,"rankOfficial":74},{"rank":80,"name":"Respawn of entropy","org":"山东理工大学","solved":2,"penalty":243,"official":true,"members":[{"key":"刘超@山东理工大学","name":"刘超"},{"key":"张俊@山东理工大学","name":"张俊"},{"key":"袁烨@山东理工大学","name":"袁烨"}],"predictedRank":59,"perf":1485.53,"preRating":1699.2,"muDelta":10.05,"predictedRankOfficial":59,"perfOfficial":1498.48,"preRatingOfficial":1710.58,"muDeltaOfficial":13.65,"rankOfficial":75},{"rank":81,"name":"Fondness? Delusion!","org":"江西财经大学","solved":2,"penalty":265,"official":true,"members":[{"key":"衷铭川@江西财经大学","name":"衷铭川"},{"key":"万俊哲@江西财经大学","name":"万俊哲"},{"key":"张云菲@江西财经大学","name":"张云菲"}],"predictedRank":122,"perf":1411.42,"preRating":1553.36,"muDelta":47.82,"predictedRankOfficial":111,"perfOfficial":1423.7,"preRatingOfficial":1563.83,"muDeltaOfficial":51.57,"rankOfficial":76},{"rank":82,"name":"Aleatory Acceptism of Encounter","org":"大连海事大学","solved":2,"penalty":278,"official":true,"members":[{"key":"任品豪@大连海事大学","name":"任品豪"},{"key":"梅宇涵@大连海事大学","name":"梅宇涵"},{"key":"石俊锋@大连海事大学","name":"石俊锋"}],"predictedRank":112,"perf":1416.22,"preRating":1572.0,"muDelta":40.24,"predictedRankOfficial":110,"perfOfficial":1419.98,"preRatingOfficial":1564.54,"muDeltaOfficial":49.06,"rankOfficial":77},{"rank":83,"name":"Haibara Ai is Correct","org":"安徽师范大学","solved":2,"penalty":279,"official":true,"members":[{"key":"许居尚@安徽师范大学","name":"许居尚"},{"key":"高翔@安徽师范大学","name":"高翔"},{"key":"火天宝@安徽师范大学","name":"火天宝"}],"predictedRank":117,"perf":1407.7,"preRating":1561.12,"muDelta":41.38,"predictedRankOfficial":103,"perfOfficial":1419.78,"preRatingOfficial":1572.98,"muDeltaOfficial":44.28,"rankOfficial":78},{"rank":84,"name":"Accepted by HKUST","org":"北京师范大学-香港浸会大学联合国际学院","solved":2,"penalty":282,"official":true,"members":[{"key":"倪方博@北京师范大学-香港浸会大学联合国际学院","name":"倪方博"},{"key":"赵泽峰@北京师范大学-香港浸会大学联合国际学院","name":"赵泽峰"},{"key":"王孟涵@北京师范大学-香港浸会大学联合国际学院","name":"王孟涵"}],"predictedRank":86,"perf":1422.76,"preRating":1600.6,"muDelta":37.78,"predictedRankOfficial":81,"perfOfficial":1435.72,"preRatingOfficial":1615.0,"muDeltaOfficial":41.31,"rankOfficial":79},{"rank":85,"name":"HKOI 3","org":"Hong Kong Olympiad in Informatics","solved":2,"penalty":297,"official":false,"members":[{"key":"tan jian lang@Hong Kong Olympiad in Informatics","name":"Tan Jian Lang"},{"key":"yang chun kit@Hong Kong Olympiad in Informatics","name":"Yang Chun Kit"},{"key":"wong cheuk kiu@Hong Kong Olympiad in Informatics","name":"Wong Cheuk Kiu"}],"predictedRank":79,"perf":1431.6,"preRating":1625.26,"muDelta":21.24,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":86,"name":"GDUT_darkseek","org":"广东工业大学","solved":2,"penalty":303,"official":true,"members":[{"key":"谭一峰@广东工业大学","name":"谭一峰"},{"key":"蔡鋈@广东工业大学","name":"蔡鋈"},{"key":"赖国华@广东工业大学","name":"赖国华"}],"predictedRank":110,"perf":1405.45,"preRating":1578.91,"muDelta":30.96,"predictedRankOfficial":102,"perfOfficial":1415.74,"preRatingOfficial":1581.3,"muDeltaOfficial":37.86,"rankOfficial":80},{"rank":87,"name":"3 ap = 1band = 1 life?","org":"华南农业大学","solved":2,"penalty":306,"official":true,"members":[{"key":"谭伟杰@华南农业大学","name":"谭伟杰"},{"key":"颜乾彪@华南农业大学","name":"颜乾彪"},{"key":"陈钢@华南农业大学","name":"陈钢"}],"predictedRank":64,"perf":1454.91,"preRating":1682.22,"muDelta":2.96,"predictedRankOfficial":63,"perfOfficial":1468.2,"preRatingOfficial":1692.69,"muDeltaOfficial":7.21,"rankOfficial":81},{"rank":88,"name":"Naming is so HARD!","org":"合肥工业大学宣城校区","solved":2,"penalty":333,"official":true,"members":[{"key":"冯舶钊@合肥工业大学宣城校区","name":"冯舶钊"},{"key":"于鸥鹿@合肥工业大学宣城校区","name":"于鸥鹿"},{"key":"马久贺@合肥工业大学宣城校区","name":"马久贺"}],"predictedRank":69,"perf":1441.22,"preRating":1662.38,"muDelta":9.76,"predictedRankOfficial":67,"perfOfficial":1452.69,"preRatingOfficial":1669.97,"muDeltaOfficial":15.13,"rankOfficial":82},{"rank":89,"name":"Elite Conscripts","org":"黑龙江大学","solved":2,"penalty":339,"official":true,"members":[{"key":"何恩培@黑龙江大学","name":"何恩培"},{"key":"信自强@黑龙江大学","name":"信自强"},{"key":"魏全宏@黑龙江大学","name":"魏全宏"}],"predictedRank":58,"perf":1462.71,"preRating":1707.59,"muDelta":-5.69,"predictedRankOfficial":55,"perfOfficial":1476.38,"preRatingOfficial":1720.36,"muDeltaOfficial":-2.38,"rankOfficial":83},{"rank":90,"name":"GPNU-Awei","org":"广东技术师范大学","solved":2,"penalty":351,"official":true,"members":[{"key":"黄宇凡@广东技术师范大学","name":"黄宇凡"},{"key":"李苇森@广东技术师范大学","name":"李苇森"},{"key":"陈政柱@广东技术师范大学","name":"陈政柱"}],"predictedRank":62,"perf":1450.83,"preRating":1691.39,"muDelta":4.49,"predictedRankOfficial":57,"perfOfficial":1469.99,"preRatingOfficial":1714.76,"muDeltaOfficial":6.98,"rankOfficial":84},{"rank":91,"name":"SZTU_developer","org":"深圳技术大学","solved":2,"penalty":377,"official":true,"members":[{"key":"王正@深圳技术大学","name":"王正"},{"key":"张家乐@深圳技术大学","name":"张家乐"},{"key":"许榕鑫@深圳技术大学","name":"许榕鑫"}],"predictedRank":108,"perf":1389.98,"preRating":1582.33,"muDelta":21.92,"predictedRankOfficial":100,"perfOfficial":1399.44,"preRatingOfficial":1587.6,"muDeltaOfficial":26.1,"rankOfficial":85},{"rank":92,"name":"All the way south","org":"华南师范大学","solved":2,"penalty":379,"official":true,"members":[{"key":"于昊炜@华南师范大学","name":"于昊炜"},{"key":"朱宬华@华南师范大学","name":"朱宬华"},{"key":"曾祥康@华南师范大学","name":"曾祥康"}],"predictedRank":74,"perf":1418.32,"preRating":1642.95,"muDelta":4.36,"predictedRankOfficial":71,"perfOfficial":1429.8,"preRatingOfficial":1653.36,"muDeltaOfficial":7.69,"rankOfficial":86},{"rank":93,"name":"No-Panic Doubao Pro","org":"华北理工大学","solved":2,"penalty":380,"official":true,"members":[{"key":"陈沿迁@华北理工大学","name":"陈沿迁"},{"key":"陈宇宁@华北理工大学","name":"陈宇宁"},{"key":"丰文政@华北理工大学","name":"丰文政"}],"predictedRank":118,"perf":1372.06,"preRating":1560.24,"muDelta":39.48,"predictedRankOfficial":109,"perfOfficial":1380.38,"preRatingOfficial":1564.74,"muDeltaOfficial":44.66,"rankOfficial":87},{"rank":94,"name":"XiXi","org":"西华大学","solved":2,"penalty":388,"official":true,"members":[{"key":"石浩楠@西华大学","name":"石浩楠"},{"key":"吴岚轩@西华大学","name":"吴岚轩"},{"key":"刘馨阳@西华大学","name":"刘馨阳"}],"predictedRank":33,"perf":1532.24,"preRating":1853.44,"muDelta":-36.85,"predictedRankOfficial":32,"perfOfficial":1558.35,"preRatingOfficial":1891.96,"muDeltaOfficial":-39.06,"rankOfficial":88},{"rank":95,"name":"Aren't Slacking Off","org":"华中科技大学","solved":2,"penalty":410,"official":true,"members":[{"key":"郭际泽@华中科技大学","name":"郭际泽"},{"key":"李凌凯@华中科技大学","name":"李凌凯"},{"key":"赵佳义@华中科技大学","name":"赵佳义"}],"predictedRank":22,"perf":1599.09,"preRating":1974.23,"muDelta":-73.91,"predictedRankOfficial":27,"perfOfficial":1607.51,"preRatingOfficial":1983.0,"muDeltaOfficial":-71.31,"rankOfficial":89},{"rank":96,"name":"Greedy is all about guessing","org":"天津工业大学","solved":1,"penalty":9,"official":true,"members":[{"key":"韩奕霖@天津工业大学","name":"韩奕霖"},{"key":"吴一凡@天津工业大学","name":"吴一凡"},{"key":"姚盛源@天津工业大学","name":"姚盛源"}],"predictedRank":115,"perf":1362.78,"preRating":1562.54,"muDelta":21.92,"predictedRankOfficial":106,"perfOfficial":1369.58,"preRatingOfficial":1566.67,"muDeltaOfficial":24.7,"rankOfficial":90},{"rank":96,"name":"Untitled_Dream","org":"浙江师范大学","solved":1,"penalty":9,"official":true,"members":[{"key":"杨琳@浙江师范大学","name":"杨琳"},{"key":"沈睿@浙江师范大学","name":"沈睿"},{"key":"曹海@浙江师范大学","name":"曹海"}],"predictedRank":55,"perf":1445.04,"preRating":1712.07,"muDelta":-17.64,"predictedRankOfficial":54,"perfOfficial":1454.77,"preRatingOfficial":1722.38,"muDeltaOfficial":-15.16,"rankOfficial":90},{"rank":98,"name":"Dawn","org":"长江大学","solved":1,"penalty":10,"official":true,"members":[{"key":"纪方嘉@长江大学","name":"纪方嘉"},{"key":"童炎@长江大学","name":"童炎"},{"key":"任文@长江大学","name":"任文"}],"predictedRank":120,"perf":1352.94,"preRating":1556.97,"muDelta":21.92,"predictedRankOfficial":107,"perfOfficial":1361.75,"preRatingOfficial":1566.67,"muDeltaOfficial":24.7,"rankOfficial":92},{"rank":98,"name":"UU Accelerator","org":"香港浸会大学","solved":1,"penalty":10,"official":true,"members":[{"key":"张旭景@香港浸会大学","name":"张旭景"},{"key":"印无忧@香港浸会大学","name":"印无忧"},{"key":"姜蒙@香港浸会大学","name":"姜蒙"}],"predictedRank":132,"perf":1333.32,"preRating":1518.15,"muDelta":25.05,"predictedRankOfficial":119,"perfOfficial":1341.23,"preRatingOfficial":1526.09,"muDeltaOfficial":27.82,"rankOfficial":92},{"rank":100,"name":"Array of Cqupt Monkeys","org":"重庆邮电大学","solved":1,"penalty":11,"official":true,"members":[{"key":"冯禹杰@重庆邮电大学","name":"冯禹杰"},{"key":"林新雨@重庆邮电大学","name":"林新雨"},{"key":"汪炜杰@重庆邮电大学","name":"汪炜杰"}],"predictedRank":82,"perf":1377.07,"preRating":1613.93,"muDelta":-2.0,"predictedRankOfficial":79,"perfOfficial":1385.83,"preRatingOfficial":1624.93,"muDeltaOfficial":-0.38,"rankOfficial":94},{"rank":100,"name":"HKOI 4","org":"Hong Kong Olympiad in Informatics","solved":1,"penalty":11,"official":false,"members":[{"key":"cheung kin sun@Hong Kong Olympiad in Informatics","name":"Cheung Kin Sun"},{"key":"chan cary sirui@Hong Kong Olympiad in Informatics","name":"Chan Cary Sirui"},{"key":"lung ping him@Hong Kong Olympiad in Informatics","name":"Lung Ping Him"}],"predictedRank":85,"perf":1374.25,"preRating":1608.91,"muDelta":-0.02,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":100,"name":"Icecream!","org":"山东大学","solved":1,"penalty":11,"official":true,"members":[{"key":"毛洋洋@山东大学","name":"毛洋洋"},{"key":"刘少卿@山东大学","name":"刘少卿"},{"key":"侯佳昊@山东大学","name":"侯佳昊"}],"predictedRank":73,"perf":1393.74,"preRating":1643.32,"muDelta":-8.62,"predictedRankOfficial":72,"perfOfficial":1399.04,"preRatingOfficial":1648.24,"muDeltaOfficial":-5.63,"rankOfficial":94},{"rank":100,"name":"Just AC","org":"中北大学","solved":1,"penalty":11,"official":true,"members":[{"key":"刘灿阳@中北大学","name":"刘灿阳"},{"key":"谭炯豪@中北大学","name":"谭炯豪"},{"key":"陈文博@中北大学","name":"陈文博"}],"predictedRank":119,"perf":1346.46,"preRating":1557.95,"muDelta":21.92,"predictedRankOfficial":112,"perfOfficial":1352.26,"preRatingOfficial":1563.53,"muDeltaOfficial":24.7,"rankOfficial":94},{"rank":100,"name":"NYU Shanghai Team 2","org":"上海纽约大学","solved":1,"penalty":11,"official":true,"members":[{"key":"张书恺@上海纽约大学","name":"张书恺"},{"key":"许诗栋@上海纽约大学","name":"许诗栋"},{"key":"yuhang hou@上海纽约大学","name":"Yuhang Hou"}],"predictedRank":68,"perf":1404.79,"preRating":1662.49,"muDelta":-8.58,"predictedRankOfficial":66,"perfOfficial":1414.02,"preRatingOfficial":1674.29,"muDeltaOfficial":-6.16,"rankOfficial":94},{"rank":100,"name":"noircloud","org":"广东东软学院","solved":1,"penalty":11,"official":true,"members":[{"key":"朱梓瀚@广东东软学院","name":"朱梓瀚"},{"key":"黄琳峰@广东东软学院","name":"黄琳峰"},{"key":"黄炜填@广东东软学院","name":"黄炜填"}],"predictedRank":72,"perf":1398.75,"preRating":1652.03,"muDelta":-10.55,"predictedRankOfficial":68,"perfOfficial":1407.51,"preRatingOfficial":1663.01,"muDeltaOfficial":-8.91,"rankOfficial":94},{"rank":106,"name":"threenoobs","org":"中南林业科技大学","solved":1,"penalty":12,"official":true,"members":[{"key":"肖俊杰@中南林业科技大学","name":"肖俊杰"},{"key":"孙齐政@中南林业科技大学","name":"孙齐政"},{"key":"何文杰@中南林业科技大学","name":"何文杰"}],"predictedRank":129,"perf":1307.64,"preRating":1525.88,"muDelta":27.91,"predictedRankOfficial":120,"perfOfficial":1311.81,"preRatingOfficial":1525.87,"muDeltaOfficial":32.15,"rankOfficial":99},{"rank":107,"name":"Zutto Acceptednakade Iinoni.","org":"宁波工程学院","solved":1,"penalty":13,"official":true,"members":[{"key":"郑坚淳@宁波工程学院","name":"郑坚淳"},{"key":"叶德坚@宁波工程学院","name":"叶德坚"},{"key":"陈南丞@宁波工程学院","name":"陈南丞"}],"predictedRank":116,"perf":1323.95,"preRating":1561.46,"muDelta":21.92,"predictedRankOfficial":104,"perfOfficial":1331.27,"preRatingOfficial":1568.29,"muDeltaOfficial":24.7,"rankOfficial":100},{"rank":107,"name":"robust driver","org":"北京工业大学","solved":1,"penalty":13,"official":true,"members":[{"key":"陈镇岳@北京工业大学","name":"陈镇岳"},{"key":"齐相龙@北京工业大学","name":"齐相龙"},{"key":"张晋赫@北京工业大学","name":"张晋赫"}],"predictedRank":126,"perf":1309.37,"preRating":1535.69,"muDelta":21.92,"predictedRankOfficial":117,"perfOfficial":1315.43,"preRatingOfficial":1540.15,"muDeltaOfficial":24.7,"rankOfficial":100},{"rank":109,"name":"Mooncross in Mistweave","org":"福建师范大学","solved":1,"penalty":15,"official":true,"members":[{"key":"欧阳圣默@福建师范大学","name":"欧阳圣默"},{"key":"徐大淦@福建师范大学","name":"徐大淦"},{"key":"周傲宇@福建师范大学","name":"周傲宇"}],"predictedRank":128,"perf":1299.36,"preRating":1531.02,"muDelta":21.92,"predictedRankOfficial":118,"perfOfficial":1304.69,"preRatingOfficial":1535.85,"muDeltaOfficial":24.7,"rankOfficial":102},{"rank":110,"name":"Be AKed by ICPC","org":"哈尔滨工业大学(威海)","solved":1,"penalty":18,"official":true,"members":[{"key":"李博文@哈尔滨工业大学(威海)","name":"李博文"},{"key":"崔彦宇@哈尔滨工业大学(威海)","name":"崔彦宇"},{"key":"刘佳豪@哈尔滨工业大学(威海)","name":"刘佳豪"}],"predictedRank":130,"perf":1288.84,"preRating":1519.15,"muDelta":21.92,"predictedRankOfficial":122,"perfOfficial":1293.22,"preRatingOfficial":1523.15,"muDeltaOfficial":24.7,"rankOfficial":103},{"rank":111,"name":"ios::sync_with_think","org":"广东工业大学揭阳校区","solved":1,"penalty":19,"official":true,"members":[{"key":"陈智谦@广东工业大学揭阳校区","name":"陈智谦"},{"key":"陈锦涛@广东工业大学揭阳校区","name":"陈锦涛"},{"key":"宋阳@广东工业大学揭阳校区","name":"宋阳"}],"predictedRank":123,"perf":1303.19,"preRating":1550.19,"muDelta":21.92,"predictedRankOfficial":113,"perfOfficial":1307.17,"preRatingOfficial":1554.41,"muDeltaOfficial":24.7,"rankOfficial":104},{"rank":112,"name":"SleepToAC","org":"西南大学","solved":1,"penalty":20,"official":true,"members":[{"key":"刘子毅@西南大学","name":"刘子毅"},{"key":"周佰涛@西南大学","name":"周佰涛"},{"key":"杨竣胜@西南大学","name":"杨竣胜"}],"predictedRank":127,"perf":1288.88,"preRating":1532.24,"muDelta":21.92,"predictedRankOfficial":115,"perfOfficial":1297.77,"preRatingOfficial":1545.55,"muDeltaOfficial":24.7,"rankOfficial":105},{"rank":112,"name":"The Doctor's team and there ape-man captain","org":"五邑大学","solved":1,"penalty":20,"official":true,"members":[{"key":"冯凯翔@五邑大学","name":"冯凯翔"},{"key":"李晟熙@五邑大学","name":"李晟熙"},{"key":"黄达聪@五邑大学","name":"黄达聪"}],"predictedRank":111,"perf":1315.8,"preRating":1576.87,"muDelta":-14.59,"predictedRankOfficial":99,"perfOfficial":1323.39,"preRatingOfficial":1587.78,"muDeltaOfficial":-13.53,"rankOfficial":105},{"rank":114,"name":"Little sheep","org":"河南师范大学","solved":1,"penalty":21,"official":true,"members":[{"key":"闫浩文@河南师范大学","name":"闫浩文"},{"key":"谢添点@河南师范大学","name":"谢添点"},{"key":"阴珂珂@河南师范大学","name":"阴珂珂"}],"predictedRank":124,"perf":1290.51,"preRating":1547.23,"muDelta":21.92,"predictedRankOfficial":114,"perfOfficial":1293.02,"preRatingOfficial":1551.47,"muDeltaOfficial":24.7,"rankOfficial":107},{"rank":115,"name":"Universum","org":"Hou Kong Middle School","solved":1,"penalty":26,"official":false,"members":[{"key":"choi sai chi@Hou Kong Middle School","name":"CHOI Sai Chi"},{"key":"chen chio cheong@Hou Kong Middle School","name":"CHEN Chio Cheong"},{"key":"wong chi pang@Hou Kong Middle School","name":"WONG Chi Pang"}],"predictedRank":90,"perf":1314.38,"preRating":1590.85,"muDelta":-22.6,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":116,"name":"Truly miracle algorithms but no space to write","org":"太原科技大学","solved":1,"penalty":28,"official":true,"members":[{"key":"xingyu xu@太原科技大学","name":"Xingyu Xu"},{"key":"sijie xun@太原科技大学","name":"Sijie Xun"},{"key":"zhenchen wang@太原科技大学","name":"Zhenchen Wang"}],"predictedRank":90,"perf":1311.03,"preRating":1590.85,"muDelta":-24.35,"predictedRankOfficial":89,"perfOfficial":1313.77,"preRatingOfficial":1590.85,"muDeltaOfficial":-20.13,"rankOfficial":108},{"rank":117,"name":"SILVER MINER PRO","org":"澳门城市大学","solved":1,"penalty":30,"official":true,"members":[{"key":"muhan hao@澳门城市大学","name":"Muhan Hao"},{"key":"mingxu zhu@澳门城市大学","name":"Mingxu Zhu"},{"key":"fangyuan jian@澳门城市大学","name":"Fangyuan Jian"}],"predictedRank":90,"perf":1307.66,"preRating":1590.85,"muDelta":-26.1,"predictedRankOfficial":89,"perfOfficial":1309.92,"preRatingOfficial":1590.85,"muDeltaOfficial":-22.14,"rankOfficial":109},{"rank":118,"name":"Carrot","org":"上海海洋大学","solved":1,"penalty":31,"official":true,"members":[{"key":"周子恒@上海海洋大学","name":"周子恒"},{"key":"周郁涵@上海海洋大学","name":"周郁涵"},{"key":"吕天佑@上海海洋大学","name":"吕天佑"}],"predictedRank":135,"perf":1247.96,"preRating":1503.63,"muDelta":21.92,"predictedRankOfficial":125,"perfOfficial":1256.36,"preRatingOfficial":1513.6,"muDeltaOfficial":24.7,"rankOfficial":110},{"rank":118,"name":"SKD 45167","org":"山东科技大学","solved":1,"penalty":31,"official":true,"members":[{"key":"张特尔@山东科技大学","name":"张特尔"},{"key":"徐学辉@山东科技大学","name":"徐学辉"},{"key":"朱继涛@山东科技大学","name":"朱继涛"}],"predictedRank":114,"perf":1287.44,"preRating":1565.2,"muDelta":-22.86,"predictedRankOfficial":105,"perfOfficial":1291.1,"preRatingOfficial":1567.96,"muDeltaOfficial":-19.54,"rankOfficial":110},{"rank":120,"name":"nxVPCP 'or'1'='1","org":"澳门大学","solved":1,"penalty":32,"official":true,"members":[{"key":"lao un@澳门大学","name":"LAO UN"},{"key":"chan u hun@澳门大学","name":"Chan U Hun"},{"key":"zhou zi mo@澳门大学","name":"ZHOU ZI MO"}],"predictedRank":90,"perf":1297.52,"preRating":1590.85,"muDelta":-31.37,"predictedRankOfficial":89,"perfOfficial":1298.26,"preRatingOfficial":1590.85,"muDeltaOfficial":-28.2,"rankOfficial":112},{"rank":121,"name":"Good Luck!","org":"中国石油大学(北京)克拉玛依校区","solved":1,"penalty":33,"official":true,"members":[{"key":"董玉贤@中国石油大学(北京)克拉玛依校区","name":"董玉贤"},{"key":"梁博雅@中国石油大学(北京)克拉玛依校区","name":"梁博雅"},{"key":"刘东升@中国石油大学(北京)克拉玛依校区","name":"刘东升"}],"predictedRank":131,"perf":1245.64,"preRating":1519.01,"muDelta":21.92,"predictedRankOfficial":121,"perfOfficial":1249.18,"preRatingOfficial":1523.87,"muDeltaOfficial":24.7,"rankOfficial":113},{"rank":122,"name":"Java++3","org":"香港城市大学","solved":1,"penalty":34,"official":false,"members":[{"key":"chi yin cheung@香港城市大学","name":"Chi Yin Cheung"},{"key":"chunqiun tsang@香港城市大学","name":"Chunqiun Tsang"},{"key":"lap tsun chan@香港城市大学","name":"Lap Tsun Chan"}],"predictedRank":90,"perf":1290.71,"preRating":1590.85,"muDelta":-34.91,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":122,"name":"SegFault Maigo","org":"上海大学","solved":1,"penalty":34,"official":true,"members":[{"key":"刘夏宏@上海大学","name":"刘夏宏"},{"key":"张世逸@上海大学","name":"张世逸"},{"key":"闵彦超@上海大学","name":"闵彦超"}],"predictedRank":90,"perf":1290.71,"preRating":1590.85,"muDelta":-34.91,"predictedRankOfficial":89,"perfOfficial":1290.41,"preRatingOfficial":1590.85,"muDeltaOfficial":-32.28,"rankOfficial":114},{"rank":124,"name":"The Midas Touch","org":"香港理工大学","solved":1,"penalty":36,"official":true,"members":[{"key":"haochen shi@香港理工大学","name":"Haochen Shi"},{"key":"jingbo huang@香港理工大学","name":"Jingbo Huang"},{"key":"薛腾@香港理工大学","name":"薛腾"}],"predictedRank":109,"perf":1277.6,"preRating":1582.01,"muDelta":-36.88,"predictedRankOfficial":101,"perfOfficial":1281.36,"preRatingOfficial":1583.57,"muDeltaOfficial":-33.03,"rankOfficial":115},{"rank":125,"name":"I All Accepted","org":"昆明理工大学","solved":1,"penalty":37,"official":true,"members":[{"key":"刘浩天@昆明理工大学","name":"刘浩天"},{"key":"李康@昆明理工大学","name":"李康"},{"key":"卢宇翔@昆明理工大学","name":"卢宇翔"}],"predictedRank":76,"perf":1309.3,"preRating":1631.27,"muDelta":-42.7,"predictedRankOfficial":76,"perfOfficial":1315.3,"preRatingOfficial":1637.08,"muDeltaOfficial":-38.9,"rankOfficial":116},{"rank":126,"name":"998244353","org":"武汉理工大学","solved":1,"penalty":39,"official":true,"members":[{"key":"jiaxin li@武汉理工大学","name":"Jiaxin Li"},{"key":"yaqi wang@武汉理工大学","name":"Yaqi Wang"},{"key":"yangjing wang@武汉理工大学","name":"Yangjing Wang"}],"predictedRank":90,"perf":1276.93,"preRating":1590.85,"muDelta":-42.08,"predictedRankOfficial":89,"perfOfficial":1278.5,"preRatingOfficial":1590.85,"muDeltaOfficial":-38.48,"rankOfficial":117},{"rank":127,"name":"Mechanical Wings","org":"河北工业大学","solved":1,"penalty":40,"official":true,"members":[{"key":"王若豪@河北工业大学","name":"王若豪"},{"key":"赵子涵@河北工业大学","name":"赵子涵"},{"key":"wen huang@河北工业大学","name":"Wen Huang"}],"predictedRank":88,"perf":1279.3,"preRating":1598.82,"muDelta":-39.77,"predictedRankOfficial":86,"perfOfficial":1283.08,"preRatingOfficial":1602.63,"muDeltaOfficial":-36.51,"rankOfficial":118},{"rank":127,"name":"wawawawa...","org":"南阳理工学院","solved":1,"penalty":40,"official":true,"members":[{"key":"宋忱宪@南阳理工学院","name":"宋忱宪"},{"key":"任吉康@南阳理工学院","name":"任吉康"},{"key":"姚涵旭@南阳理工学院","name":"姚涵旭"}],"predictedRank":125,"perf":1238.08,"preRating":1542.65,"muDelta":-35.04,"predictedRankOfficial":116,"perfOfficial":1239.56,"preRatingOfficial":1543.01,"muDeltaOfficial":-31.71,"rankOfficial":118},{"rank":129,"name":"I-ACE","org":"New Mongol Institute of Technology","solved":1,"penalty":41,"official":true,"members":[{"key":"amarsaikhan badamragchaa@New Mongol Institute of Technology","name":"Amarsaikhan Badamragchaa"},{"key":"chingunjav ariuntur@New Mongol Institute of Technology","name":"Chingunjav Ariuntur"},{"key":"enkhbaatar bayarsaikhan@New Mongol Institute of Technology","name":"Enkhbaatar Bayarsaikhan"}],"predictedRank":90,"perf":1266.45,"preRating":1590.85,"muDelta":-47.53,"predictedRankOfficial":89,"perfOfficial":1266.39,"preRatingOfficial":1590.85,"muDeltaOfficial":-44.77,"rankOfficial":120},{"rank":129,"name":"sict3","org":"蒙古科技大学","solved":1,"penalty":41,"official":true,"members":[{"key":"munkhtur munkhbagana@蒙古科技大学","name":"Munkhtur MUNKHBAGANA"},{"key":"purevdorj tserenpuntsag@蒙古科技大学","name":"Purevdorj TSERENPUNTSAG"},{"key":"purev-ochir bilguuntuguldur@蒙古科技大学","name":"Purev-Ochir BILGUUNTUGULDUR"}],"predictedRank":90,"perf":1266.45,"preRating":1590.85,"muDelta":-47.53,"predictedRankOfficial":89,"perfOfficial":1266.39,"preRatingOfficial":1590.85,"muDeltaOfficial":-44.77,"rankOfficial":120},{"rank":131,"name":"SZU_OvO","org":"深圳大学","solved":1,"penalty":43,"official":true,"members":[{"key":"岑健锋@深圳大学","name":"岑健锋"},{"key":"熊鑫辉@深圳大学","name":"熊鑫辉"},{"key":"张楠@深圳大学","name":"张楠"}],"predictedRank":49,"perf":1367.36,"preRating":1735.05,"muDelta":-70.04,"predictedRankOfficial":51,"perfOfficial":1368.86,"preRatingOfficial":1738.44,"muDeltaOfficial":-68.23,"rankOfficial":122},{"rank":132,"name":"Can't solve it? Nap it away!","org":"江西农业大学","solved":1,"penalty":51,"official":true,"members":[{"key":"黄馨瑶@江西农业大学","name":"黄馨瑶"},{"key":"余政远@江西农业大学","name":"余政远"},{"key":"王海玉@江西农业大学","name":"王海玉"}],"predictedRank":133,"perf":1194.92,"preRating":1513.81,"muDelta":21.92,"predictedRankOfficial":124,"perfOfficial":1194.75,"preRatingOfficial":1516.27,"muDeltaOfficial":24.7,"rankOfficial":123},{"rank":133,"name":"Cute Cat Dad","org":"西安电子科技大学","solved":1,"penalty":55,"official":true,"members":[{"key":"高琦@西安电子科技大学","name":"高琦"},{"key":"薛思宇@西安电子科技大学","name":"薛思宇"},{"key":"顾梓骞@西安电子科技大学","name":"顾梓骞"}],"predictedRank":70,"perf":1303.44,"preRating":1656.5,"muDelta":-62.43,"predictedRankOfficial":70,"perfOfficial":1304.88,"preRatingOfficial":1661.0,"muDeltaOfficial":-61.23,"rankOfficial":124},{"rank":134,"name":"Long may the sun shine","org":"台州学院","solved":1,"penalty":59,"official":true,"members":[{"key":"王若琰@台州学院","name":"王若琰"},{"key":"章智超@台州学院","name":"章智超"},{"key":"俞熠聪@台州学院","name":"俞熠聪"}],"predictedRank":136,"perf":1157.04,"preRating":1479.29,"muDelta":21.92,"predictedRankOfficial":126,"perfOfficial":1156.11,"preRatingOfficial":1483.06,"muDeltaOfficial":24.7,"rankOfficial":125},{"rank":135,"name":"gagagugu","org":"Pui Ching Middle School","solved":1,"penalty":63,"official":false,"members":[{"key":"wong in son@Pui Ching Middle School","name":"WONG In Son"},{"key":"cheong sio fong@Pui Ching Middle School","name":"CHEONG Sio Fong"},{"key":"lin yu feng@Pui Ching Middle School","name":"LIN Yu Feng"}],"predictedRank":90,"perf":1245.0,"preRating":1590.85,"muDelta":-58.68,"predictedRankOfficial":null,"perfOfficial":null,"preRatingOfficial":null,"muDeltaOfficial":null,"rankOfficial":null},{"rank":136,"name":"HKBU_2","org":"香港浸会大学","solved":1,"penalty":76,"official":true,"members":[{"key":"timur ten@香港浸会大学","name":"Timur Ten"},{"key":"feiyi fang@香港浸会大学","name":"Feiyi Fang"},{"key":"jiafu guo@香港浸会大学","name":"Jiafu Guo"}],"predictedRank":113,"perf":1220.8,"preRating":1566.12,"muDelta":-55.98,"predictedRankOfficial":108,"perfOfficial":1220.96,"preRatingOfficial":1566.14,"muDeltaOfficial":-53.13,"rankOfficial":126}]}
+{
+  "id": "icpc/icpc2025/icpc2025hongkong",
+  "slug": "icpc__icpc2025__icpc2025hongkong",
+  "title": "The 50th ICPC Asia Hong Kong Regional Contest",
+  "startAt": "2025-11-30T09:00:00+08:00",
+  "category": "icpc",
+  "tier": "regional",
+  "onlinePreliminary": false,
+  "teamCount": 136,
+  "concordance": 0.77,
+  "unrated": false,
+  "unratedNote": null,
+  "problems": [
+    {
+      "alias": "A",
+      "title": "Bipartite Graph Matching Problem",
+      "canonicalId": "qoj:15432",
+      "problemUrl": "https://qoj.ac/problem/15432",
+      "typeKeys": [
+        "graph"
+      ],
+      "typeLabels": [
+        "图论与网络"
+      ],
+      "detailTags": [
+        "匹配"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 0,
+      "submitted": 4,
+      "eligibleTeams": 136,
+      "solveRate": 0.007246,
+      "problemRating": 3112.196158,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 219.974902,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.000295,
+      "ratingAcCount": 0,
+      "ratingWaCount": 126,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "B",
+      "title": "Travelling",
+      "canonicalId": "qoj:15433",
+      "problemUrl": "https://qoj.ac/problem/15433",
+      "typeKeys": [
+        "dp",
+        "graph"
+      ],
+      "typeLabels": [
+        "图论与网络",
+        "动态规划"
+      ],
+      "detailTags": [
+        "树形DP"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 26,
+      "submitted": 169,
+      "eligibleTeams": 136,
+      "solveRate": 0.195652,
+      "problemRating": 2051.038998,
+      "difficultyKey": "midHard",
+      "difficultyLabel": "中等-困难",
+      "posteriorSd": 48.00206,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.061084,
+      "ratingAcCount": 25,
+      "ratingWaCount": 101,
+      "ratingModel": "2PL",
+      "ratingDiscrimination": 1.352212,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": 0.158776,
+      "ratingSlopeSource": "estimated",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": []
+    },
+    {
+      "alias": "C",
+      "title": "Stonebag",
+      "canonicalId": "qoj:15434",
+      "problemUrl": "https://qoj.ac/problem/15434",
+      "typeKeys": [
+        "math"
+      ],
+      "typeLabels": [
+        "数学"
+      ],
+      "detailTags": [
+        "容斥",
+        "生成函数"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 5,
+      "submitted": 21,
+      "eligibleTeams": 136,
+      "solveRate": 0.043478,
+      "problemRating": 2592.685919,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 92.689501,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.005831,
+      "ratingAcCount": 5,
+      "ratingWaCount": 121,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "D",
+      "title": "Dumb Problem",
+      "canonicalId": "qoj:15435",
+      "problemUrl": "https://qoj.ac/problem/15435",
+      "typeKeys": [
+        "dp",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "动态规划",
+        "数据结构"
+      ],
+      "detailTags": [
+        "李超树",
+        "线性DP"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 1,
+      "submitted": 13,
+      "eligibleTeams": 136,
+      "solveRate": 0.014493,
+      "problemRating": 2913.598874,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 159.345468,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.000924,
+      "ratingAcCount": 1,
+      "ratingWaCount": 125,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "E",
+      "title": "Bipartite Graph Weighting Problem",
+      "canonicalId": "qoj:15436",
+      "problemUrl": "https://qoj.ac/problem/15436",
+      "typeKeys": [
+        "geometry",
+        "graph"
+      ],
+      "typeLabels": [
+        "图论与网络",
+        "几何"
+      ],
+      "detailTags": [
+        "凸包",
+        "网络流"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 0,
+      "submitted": 3,
+      "eligibleTeams": 136,
+      "solveRate": 0.007246,
+      "problemRating": 3112.196158,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 219.974902,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.000295,
+      "ratingAcCount": 0,
+      "ratingWaCount": 126,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "F",
+      "title": "Find the Circuit",
+      "canonicalId": "qoj:15437",
+      "problemUrl": "https://qoj.ac/problem/15437",
+      "typeKeys": [
+        "graph"
+      ],
+      "typeLabels": [
+        "图论与网络"
+      ],
+      "detailTags": [
+        "强连通分量",
+        "拓扑排序"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 7,
+      "submitted": 109,
+      "eligibleTeams": 136,
+      "solveRate": 0.057971,
+      "problemRating": 2505.834179,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 81.778264,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.009577,
+      "ratingAcCount": 7,
+      "ratingWaCount": 119,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "G",
+      "title": "Watering System",
+      "canonicalId": "qoj:15438",
+      "problemUrl": "https://qoj.ac/problem/15438",
+      "typeKeys": [
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "数据结构"
+      ],
+      "detailTags": [
+        "线段树"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 5,
+      "submitted": 49,
+      "eligibleTeams": 136,
+      "solveRate": 0.043478,
+      "problemRating": 2646.373785,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 100.826422,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.004287,
+      "ratingAcCount": 4,
+      "ratingWaCount": 122,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "H",
+      "title": "Longest Common Prefix",
+      "canonicalId": "qoj:15439",
+      "problemUrl": "https://qoj.ac/problem/15439",
+      "typeKeys": [
+        "string"
+      ],
+      "typeLabels": [
+        "字符串"
+      ],
+      "detailTags": [
+        "枚举"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 136,
+      "submitted": 180,
+      "eligibleTeams": 136,
+      "solveRate": 0.992754,
+      "problemRating": 699.902416,
+      "difficultyKey": "veryEasy",
+      "difficultyLabel": "极易",
+      "posteriorSd": 231.4051,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.996849,
+      "ratingAcCount": 126,
+      "ratingWaCount": 0,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "wa_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "I",
+      "title": "DFS Order - Extra Stage",
+      "canonicalId": "qoj:15440",
+      "problemUrl": "https://qoj.ac/problem/15440",
+      "typeKeys": [
+        "dp"
+      ],
+      "typeLabels": [
+        "动态规划"
+      ],
+      "detailTags": [
+        "区间DP",
+        "计数DP"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 23,
+      "submitted": 49,
+      "eligibleTeams": 136,
+      "solveRate": 0.173913,
+      "problemRating": 2093.996709,
+      "difficultyKey": "midHard",
+      "difficultyLabel": "中等-困难",
+      "posteriorSd": 47.73832,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.030026,
+      "ratingAcCount": 21,
+      "ratingWaCount": 105,
+      "ratingModel": "2PL",
+      "ratingDiscrimination": 1.53226,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": 0.168294,
+      "ratingSlopeSource": "estimated",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": []
+    },
+    {
+      "alias": "J",
+      "title": "Re: Becoming the Programming Champion",
+      "canonicalId": "qoj:15441",
+      "problemUrl": "https://qoj.ac/problem/15441",
+      "typeKeys": [
+        "basic",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "基础算法",
+        "数据结构"
+      ],
+      "detailTags": [
+        "堆",
+        "贪心"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 72,
+      "submitted": 496,
+      "eligibleTeams": 136,
+      "solveRate": 0.528986,
+      "problemRating": 1704.624473,
+      "difficultyKey": "easyMid",
+      "difficultyLabel": "简单-中等",
+      "posteriorSd": 30.001279,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.491737,
+      "ratingAcCount": 67,
+      "ratingWaCount": 59,
+      "ratingModel": "2PL",
+      "ratingDiscrimination": 1.241728,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": 0.174032,
+      "ratingSlopeSource": "estimated",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": []
+    },
+    {
+      "alias": "K",
+      "title": "Cyclic Shift",
+      "canonicalId": "qoj:15442",
+      "problemUrl": "https://qoj.ac/problem/15442",
+      "typeKeys": [
+        "dataStructure",
+        "string"
+      ],
+      "typeLabels": [
+        "字符串",
+        "数据结构"
+      ],
+      "detailTags": [
+        "倍增",
+        "字符串哈希"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 89,
+      "submitted": 436,
+      "eligibleTeams": 136,
+      "solveRate": 0.652174,
+      "problemRating": 1614.749577,
+      "difficultyKey": "easyMid",
+      "difficultyLabel": "简单-中等",
+      "posteriorSd": 23.015456,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.697115,
+      "ratingAcCount": 83,
+      "ratingWaCount": 43,
+      "ratingModel": "2PL",
+      "ratingDiscrimination": 1.698646,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": 0.19945,
+      "ratingSlopeSource": "estimated",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": []
+    },
+    {
+      "alias": "L",
+      "title": "Cyclic Shift II",
+      "canonicalId": "qoj:15443",
+      "problemUrl": "https://qoj.ac/problem/15443",
+      "typeKeys": [
+        "math",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "数学",
+        "数据结构"
+      ],
+      "detailTags": [
+        "并查集"
+      ],
+      "status": "classified",
+      "confidence": 0.92,
+      "accepted": 0,
+      "submitted": 2,
+      "eligibleTeams": 136,
+      "solveRate": 0.007246,
+      "problemRating": 3112.196158,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 219.974902,
+      "ratingSampleCount": 126,
+      "ratingEffectiveSampleCount": 126.0,
+      "expectedPassRateAtReference": 0.000295,
+      "ratingAcCount": 0,
+      "ratingWaCount": 126,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 1536.9570355225937,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "rank": 1,
+      "name": "Naive Birds",
+      "org": "北京大学",
+      "solved": 8,
+      "penalty": 894,
+      "official": true,
+      "members": [
+        {
+          "key": "王蔚澄@北京大学",
+          "name": "王蔚澄"
+        },
+        {
+          "key": "朱剑枫@北京大学",
+          "name": "朱剑枫"
+        },
+        {
+          "key": "李羿辰@北京大学",
+          "name": "李羿辰"
+        }
+      ],
+      "predictedRank": 1,
+      "perf": 2903.42,
+      "preRating": 3016.6,
+      "muDelta": 62.32,
+      "predictedRankOfficial": 1,
+      "perfOfficial": 2951.02,
+      "preRatingOfficial": 3067.18,
+      "muDeltaOfficial": 63.54,
+      "rankOfficial": 1,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 2,
+      "name": "DeepSleep",
+      "org": "复旦大学",
+      "solved": 8,
+      "penalty": 932,
+      "official": true,
+      "members": [
+        {
+          "key": "张圣皓@复旦大学",
+          "name": "张圣皓"
+        },
+        {
+          "key": "王瑞藻@复旦大学",
+          "name": "王瑞藻"
+        },
+        {
+          "key": "朱翔宇@复旦大学",
+          "name": "朱翔宇"
+        }
+      ],
+      "predictedRank": 6,
+      "perf": 2502.73,
+      "preRating": 2465.73,
+      "muDelta": 140.4,
+      "predictedRankOfficial": 7,
+      "perfOfficial": 2501.77,
+      "preRatingOfficial": 2417.39,
+      "muDeltaOfficial": 167.81,
+      "rankOfficial": 2,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 3,
+      "name": "Stella Primus",
+      "org": "上海交通大学",
+      "solved": 8,
+      "penalty": 1348,
+      "official": true,
+      "members": [
+        {
+          "key": "杨崇烨@上海交通大学",
+          "name": "杨崇烨"
+        },
+        {
+          "key": "李俊毅@上海交通大学",
+          "name": "李俊毅"
+        },
+        {
+          "key": "唐星珣@上海交通大学",
+          "name": "唐星珣"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 2486.32,
+      "preRating": 2556.33,
+      "muDelta": 84.87,
+      "predictedRankOfficial": 4,
+      "perfOfficial": 2519.19,
+      "preRatingOfficial": 2584.22,
+      "muDeltaOfficial": 90.25,
+      "rankOfficial": 3,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 4,
+      "name": "CQOI Flames",
+      "org": "哈尔滨工业大学",
+      "solved": 7,
+      "penalty": 1082,
+      "official": true,
+      "members": [
+        {
+          "key": "杜沛键@哈尔滨工业大学",
+          "name": "杜沛键"
+        },
+        {
+          "key": "方智鉴@哈尔滨工业大学",
+          "name": "方智鉴"
+        },
+        {
+          "key": "雷钧森@哈尔滨工业大学",
+          "name": "雷钧森"
+        }
+      ],
+      "predictedRank": 8,
+      "perf": 2374.06,
+      "preRating": 2411.8,
+      "muDelta": 101.59,
+      "predictedRankOfficial": 6,
+      "perfOfficial": 2424.96,
+      "preRatingOfficial": 2478.97,
+      "muDeltaOfficial": 95.9,
+      "rankOfficial": 4,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 5,
+      "name": "Mynoghra",
+      "org": "香港中文大学(深圳)",
+      "solved": 6,
+      "penalty": 679,
+      "official": true,
+      "members": [
+        {
+          "key": "周莫非@香港中文大学(深圳)",
+          "name": "周莫非"
+        },
+        {
+          "key": "陈嘉年@香港中文大学(深圳)",
+          "name": "陈嘉年"
+        },
+        {
+          "key": "王泽诚@香港中文大学(深圳)",
+          "name": "王泽诚"
+        }
+      ],
+      "predictedRank": 10,
+      "perf": 2281.04,
+      "preRating": 2284.33,
+      "muDelta": 119.55,
+      "predictedRankOfficial": 10,
+      "perfOfficial": 2330.27,
+      "preRatingOfficial": 2349.35,
+      "muDeltaOfficial": 114.13,
+      "rankOfficial": 5,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 6,
+      "name": "Nice Nature",
+      "org": "厦门理工学院",
+      "solved": 6,
+      "penalty": 764,
+      "official": true,
+      "members": [
+        {
+          "key": "洪世炜@厦门理工学院",
+          "name": "洪世炜"
+        },
+        {
+          "key": "张子漠@厦门理工学院",
+          "name": "张子漠"
+        }
+      ],
+      "predictedRank": 36,
+      "perf": 2122.03,
+      "preRating": 1839.67,
+      "muDelta": 231.59,
+      "predictedRankOfficial": 36,
+      "perfOfficial": 2156.72,
+      "preRatingOfficial": 1863.58,
+      "muDeltaOfficial": 239.94,
+      "rankOfficial": 6,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 7,
+      "name": "Hot Kpop Union",
+      "org": "香港大学",
+      "solved": 6,
+      "penalty": 785,
+      "official": true,
+      "members": [
+        {
+          "key": "李其轩@香港大学",
+          "name": "李其轩"
+        },
+        {
+          "key": "吴语晨@香港大学",
+          "name": "吴语晨"
+        },
+        {
+          "key": "夏铭飞@香港大学",
+          "name": "夏铭飞"
+        }
+      ],
+      "predictedRank": 15,
+      "perf": 2186.72,
+      "preRating": 2196.01,
+      "muDelta": 128.97,
+      "predictedRankOfficial": 15,
+      "perfOfficial": 2219.18,
+      "preRatingOfficial": 2225.58,
+      "muDeltaOfficial": 133.77,
+      "rankOfficial": 7,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 8,
+      "name": "The Defect",
+      "org": "吉林大学",
+      "solved": 6,
+      "penalty": 804,
+      "official": true,
+      "members": [
+        {
+          "key": "于之航@吉林大学",
+          "name": "于之航"
+        },
+        {
+          "key": "陈鹏旭@吉林大学",
+          "name": "陈鹏旭"
+        },
+        {
+          "key": "徐梓博@吉林大学",
+          "name": "徐梓博"
+        }
+      ],
+      "predictedRank": 4,
+      "perf": 2327.28,
+      "preRating": 2531.85,
+      "muDelta": 14.8,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 2374.67,
+      "preRatingOfficial": 2594.4,
+      "muDeltaOfficial": 9.69,
+      "rankOfficial": 8,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 9,
+      "name": "SUSTech-Lyaki",
+      "org": "南方科技大学",
+      "solved": 6,
+      "penalty": 829,
+      "official": true,
+      "members": [
+        {
+          "key": "易楚曦@南方科技大学",
+          "name": "易楚曦"
+        },
+        {
+          "key": "蒲韦坤@南方科技大学",
+          "name": "蒲韦坤"
+        },
+        {
+          "key": "陈恺桉@南方科技大学",
+          "name": "陈恺桉"
+        }
+      ],
+      "predictedRank": 16,
+      "perf": 2122.04,
+      "preRating": 2146.83,
+      "muDelta": 111.27,
+      "predictedRankOfficial": 18,
+      "perfOfficial": 2156.31,
+      "preRatingOfficial": 2182.24,
+      "muDeltaOfficial": 113.59,
+      "rankOfficial": 9,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 10,
+      "name": "Rinsed to Remote",
+      "org": "西安交通大学",
+      "solved": 6,
+      "penalty": 851,
+      "official": true,
+      "members": [
+        {
+          "key": "陈儒恒@西安交通大学",
+          "name": "陈儒恒"
+        },
+        {
+          "key": "殷嘉鹏@西安交通大学",
+          "name": "殷嘉鹏"
+        },
+        {
+          "key": "方亦晨@西安交通大学",
+          "name": "方亦晨"
+        }
+      ],
+      "predictedRank": 13,
+      "perf": 2146.31,
+      "preRating": 2235.1,
+      "muDelta": 75.02,
+      "predictedRankOfficial": 13,
+      "perfOfficial": 2177.31,
+      "preRatingOfficial": 2266.07,
+      "muDeltaOfficial": 77.81,
+      "rankOfficial": 10,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 11,
+      "name": "Wine-filled Fishball Pie",
+      "org": "香港中文大学",
+      "solved": 6,
+      "penalty": 932,
+      "official": false,
+      "members": [
+        {
+          "key": "hsieh chong ho@香港中文大学",
+          "name": "Hsieh Chong Ho"
+        },
+        {
+          "key": "wong chun@香港中文大学",
+          "name": "Wong Chun"
+        },
+        {
+          "key": "lu yi fung@香港中文大学",
+          "name": "Lu Yi Fung"
+        }
+      ],
+      "predictedRank": 39,
+      "perf": 1937.71,
+      "preRating": 1823.89,
+      "muDelta": 233.82,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 12,
+      "name": "Fear WA, all in implementation",
+      "org": "香港科技大学(广州)",
+      "solved": 5,
+      "penalty": 378,
+      "official": true,
+      "members": [
+        {
+          "key": "王向前@香港科技大学(广州)",
+          "name": "王向前"
+        },
+        {
+          "key": "罗浩@香港科技大学(广州)",
+          "name": "罗浩"
+        },
+        {
+          "key": "储文皓@香港科技大学(广州)",
+          "name": "储文皓"
+        }
+      ],
+      "predictedRank": 7,
+      "perf": 2203.08,
+      "preRating": 2411.8,
+      "muDelta": 12.63,
+      "predictedRankOfficial": 8,
+      "perfOfficial": 2231.89,
+      "preRatingOfficial": 2411.9,
+      "muDeltaOfficial": 30.33,
+      "rankOfficial": 11,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 13,
+      "name": "HDU-T05",
+      "org": "杭州电子科技大学",
+      "solved": 5,
+      "penalty": 475,
+      "official": true,
+      "members": [
+        {
+          "key": "杨钧昊@杭州电子科技大学",
+          "name": "杨钧昊"
+        },
+        {
+          "key": "徐中天@杭州电子科技大学",
+          "name": "徐中天"
+        },
+        {
+          "key": "蔡睿诚@杭州电子科技大学",
+          "name": "蔡睿诚"
+        }
+      ],
+      "predictedRank": 11,
+      "perf": 2112.95,
+      "preRating": 2257.11,
+      "muDelta": 46.2,
+      "predictedRankOfficial": 11,
+      "perfOfficial": 2161.38,
+      "preRatingOfficial": 2298.53,
+      "muDeltaOfficial": 52.63,
+      "rankOfficial": 12,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 14,
+      "name": "lemonade factory",
+      "org": "北京航空航天大学",
+      "solved": 5,
+      "penalty": 495,
+      "official": true,
+      "members": [
+        {
+          "key": "董和军@北京航空航天大学",
+          "name": "董和军"
+        },
+        {
+          "key": "王大禹@北京航空航天大学",
+          "name": "王大禹"
+        },
+        {
+          "key": "蒋槟阳@北京航空航天大学",
+          "name": "蒋槟阳"
+        }
+      ],
+      "predictedRank": 2,
+      "perf": 2281.18,
+      "preRating": 2610.31,
+      "muDelta": -49.98,
+      "predictedRankOfficial": 2,
+      "perfOfficial": 2325.98,
+      "preRatingOfficial": 2647.95,
+      "muDeltaOfficial": -43.48,
+      "rankOfficial": 13,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 15,
+      "name": "Twilight",
+      "org": "东南大学",
+      "solved": 5,
+      "penalty": 507,
+      "official": true,
+      "members": [
+        {
+          "key": "杜岩旭@东南大学",
+          "name": "杜岩旭"
+        },
+        {
+          "key": "颜熙@东南大学",
+          "name": "颜熙"
+        },
+        {
+          "key": "周天一@东南大学",
+          "name": "周天一"
+        }
+      ],
+      "predictedRank": 12,
+      "perf": 2087.8,
+      "preRating": 2255.44,
+      "muDelta": 33.99,
+      "predictedRankOfficial": 12,
+      "perfOfficial": 2131.38,
+      "preRatingOfficial": 2292.33,
+      "muDeltaOfficial": 40.24,
+      "rankOfficial": 14,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 16,
+      "name": "Anohana",
+      "org": "南京大学",
+      "solved": 5,
+      "penalty": 535,
+      "official": true,
+      "members": [
+        {
+          "key": "张瑞珉@南京大学",
+          "name": "张瑞珉"
+        },
+        {
+          "key": "朱羽宽@南京大学",
+          "name": "朱羽宽"
+        },
+        {
+          "key": "陈子达@南京大学",
+          "name": "陈子达"
+        }
+      ],
+      "predictedRank": 5,
+      "perf": 2196.05,
+      "preRating": 2488.84,
+      "muDelta": -31.09,
+      "predictedRankOfficial": 5,
+      "perfOfficial": 2263.42,
+      "preRatingOfficial": 2572.99,
+      "muDeltaOfficial": -37.04,
+      "rankOfficial": 15,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 17,
+      "name": "The Affiliated High School of Shanxi University",
+      "org": "南开大学",
+      "solved": 5,
+      "penalty": 724,
+      "official": true,
+      "members": [
+        {
+          "key": "车昱辉@南开大学",
+          "name": "车昱辉"
+        },
+        {
+          "key": "杨澍@南开大学",
+          "name": "杨澍"
+        },
+        {
+          "key": "王治中@南开大学",
+          "name": "王治中"
+        }
+      ],
+      "predictedRank": 19,
+      "perf": 1995.32,
+      "preRating": 2111.74,
+      "muDelta": 60.7,
+      "predictedRankOfficial": 19,
+      "perfOfficial": 2037.17,
+      "preRatingOfficial": 2148.71,
+      "muDeltaOfficial": 66.02,
+      "rankOfficial": 16,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 18,
+      "name": "HFOI2018",
+      "org": "清华大学",
+      "solved": 5,
+      "penalty": 838,
+      "official": true,
+      "members": [
+        {
+          "key": "区庆亮@清华大学",
+          "name": "区庆亮"
+        },
+        {
+          "key": "贺睿杰@清华大学",
+          "name": "贺睿杰"
+        },
+        {
+          "key": "罗以彬@清华大学",
+          "name": "罗以彬"
+        }
+      ],
+      "predictedRank": 30,
+      "perf": 1901.57,
+      "preRating": 1939.21,
+      "muDelta": 101.59,
+      "predictedRankOfficial": 30,
+      "perfOfficial": 1929.77,
+      "preRatingOfficial": 1948.38,
+      "muDeltaOfficial": 114.26,
+      "rankOfficial": 17,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 19,
+      "name": "SYSU_Fate of Waves",
+      "org": "中山大学",
+      "solved": 5,
+      "penalty": 894,
+      "official": true,
+      "members": [
+        {
+          "key": "何宇扬@中山大学",
+          "name": "何宇扬"
+        },
+        {
+          "key": "杨立伟@中山大学",
+          "name": "杨立伟"
+        },
+        {
+          "key": "覃锐麟@中山大学",
+          "name": "覃锐麟"
+        }
+      ],
+      "predictedRank": 18,
+      "perf": 1976.35,
+      "preRating": 2113.24,
+      "muDelta": 50.02,
+      "predictedRankOfficial": 20,
+      "perfOfficial": 2013.99,
+      "preRatingOfficial": 2145.99,
+      "muDeltaOfficial": 55.35,
+      "rankOfficial": 18,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 20,
+      "name": "1+1",
+      "org": "中国人民大学",
+      "solved": 4,
+      "penalty": 362,
+      "official": true,
+      "members": [
+        {
+          "key": "晏艺桓@中国人民大学",
+          "name": "晏艺桓"
+        },
+        {
+          "key": "房子珈@中国人民大学",
+          "name": "房子珈"
+        },
+        {
+          "key": "孙奕豪@中国人民大学",
+          "name": "孙奕豪"
+        }
+      ],
+      "predictedRank": 14,
+      "perf": 2015.48,
+      "preRating": 2210.33,
+      "muDelta": 20.09,
+      "predictedRankOfficial": 14,
+      "perfOfficial": 2057.49,
+      "preRatingOfficial": 2254.1,
+      "muDeltaOfficial": 22.0,
+      "rankOfficial": 19,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 21,
+      "name": "blossom of snow",
+      "org": "南京航空航天大学",
+      "solved": 4,
+      "penalty": 383,
+      "official": true,
+      "members": [
+        {
+          "key": "胡昊天@南京航空航天大学",
+          "name": "胡昊天"
+        },
+        {
+          "key": "赵乐坤@南京航空航天大学",
+          "name": "赵乐坤"
+        },
+        {
+          "key": "匡显然@南京航空航天大学",
+          "name": "匡显然"
+        }
+      ],
+      "predictedRank": 9,
+      "perf": 2057.84,
+      "preRating": 2310.76,
+      "muDelta": -10.33,
+      "predictedRankOfficial": 9,
+      "perfOfficial": 2101.02,
+      "preRatingOfficial": 2357.81,
+      "muDeltaOfficial": -9.57,
+      "rankOfficial": 20,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 22,
+      "name": "GNOSIA",
+      "org": "北京邮电大学",
+      "solved": 4,
+      "penalty": 499,
+      "official": true,
+      "members": [
+        {
+          "key": "谭怡萱@北京邮电大学",
+          "name": "谭怡萱"
+        },
+        {
+          "key": "许智彬@北京邮电大学",
+          "name": "许智彬"
+        },
+        {
+          "key": "邢瑞林@北京邮电大学",
+          "name": "邢瑞林"
+        }
+      ],
+      "predictedRank": 17,
+      "perf": 1962.39,
+      "preRating": 2137.77,
+      "muDelta": 145.2,
+      "predictedRankOfficial": 16,
+      "perfOfficial": 2006.67,
+      "preRatingOfficial": 2189.47,
+      "muDeltaOfficial": 156.78,
+      "rankOfficial": 21,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 23,
+      "name": "HKOI 1",
+      "org": "Hong Kong Olympiad in Informatics",
+      "solved": 4,
+      "penalty": 530,
+      "official": false,
+      "members": [
+        {
+          "key": "mak chun hin ivan@Hong Kong Olympiad in Informatics",
+          "name": "Mak Chun Hin Ivan"
+        },
+        {
+          "key": "choy tsz chai berton@Hong Kong Olympiad in Informatics",
+          "name": "Choy Tsz Chai Berton"
+        },
+        {
+          "key": "lai hong tung honrich@Hong Kong Olympiad in Informatics",
+          "name": "Lai Hong Tung Honrich"
+        }
+      ],
+      "predictedRank": 54,
+      "perf": 1755.11,
+      "preRating": 1713.17,
+      "muDelta": 144.12,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 24,
+      "name": "UESTC_lyc_fan_club",
+      "org": "电子科技大学",
+      "solved": 4,
+      "penalty": 536,
+      "official": true,
+      "members": [
+        {
+          "key": "周蛰粼@电子科技大学",
+          "name": "周蛰粼"
+        },
+        {
+          "key": "赵城尧@电子科技大学",
+          "name": "赵城尧"
+        },
+        {
+          "key": "徐明君@电子科技大学",
+          "name": "徐明君"
+        }
+      ],
+      "predictedRank": 46,
+      "perf": 1773.6,
+      "preRating": 1776.34,
+      "muDelta": 119.84,
+      "predictedRankOfficial": 45,
+      "perfOfficial": 1804.49,
+      "preRatingOfficial": 1784.49,
+      "muDeltaOfficial": 134.44,
+      "rankOfficial": 22,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 25,
+      "name": "example pass=AC",
+      "org": "同济大学",
+      "solved": 4,
+      "penalty": 541,
+      "official": true,
+      "members": [
+        {
+          "key": "郑梓健@同济大学",
+          "name": "郑梓健"
+        },
+        {
+          "key": "张丞玮@同济大学",
+          "name": "张丞玮"
+        },
+        {
+          "key": "邓双南@同济大学",
+          "name": "邓双南"
+        }
+      ],
+      "predictedRank": 34,
+      "perf": 1798.25,
+      "preRating": 1848.06,
+      "muDelta": 95.26,
+      "predictedRankOfficial": 37,
+      "perfOfficial": 1828.94,
+      "preRatingOfficial": 1858.86,
+      "muDeltaOfficial": 108.38,
+      "rankOfficial": 23,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 26,
+      "name": "Wenhua Road East",
+      "org": "山东大学(威海)",
+      "solved": 4,
+      "penalty": 557,
+      "official": true,
+      "members": [
+        {
+          "key": "张智航@山东大学(威海)",
+          "name": "张智航"
+        },
+        {
+          "key": "童延@山东大学(威海)",
+          "name": "童延"
+        },
+        {
+          "key": "陆柯旭@山东大学(威海)",
+          "name": "陆柯旭"
+        }
+      ],
+      "predictedRank": 32,
+      "perf": 1799.43,
+      "preRating": 1866.3,
+      "muDelta": 86.5,
+      "predictedRankOfficial": 33,
+      "perfOfficial": 1833.27,
+      "preRatingOfficial": 1886.33,
+      "muDeltaOfficial": 96.51,
+      "rankOfficial": 24,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 27,
+      "name": "Team name ddl today",
+      "org": "香港大学",
+      "solved": 4,
+      "penalty": 638,
+      "official": true,
+      "members": [
+        {
+          "key": "杨明天@香港大学",
+          "name": "杨明天"
+        },
+        {
+          "key": "罗简@香港大学",
+          "name": "罗简"
+        },
+        {
+          "key": "刘彦呈@香港大学",
+          "name": "刘彦呈"
+        }
+      ],
+      "predictedRank": 50,
+      "perf": 1731.25,
+      "preRating": 1729.71,
+      "muDelta": 126.67,
+      "predictedRankOfficial": 49,
+      "perfOfficial": 1764.68,
+      "preRatingOfficial": 1751.82,
+      "muDeltaOfficial": 135.93,
+      "rankOfficial": 25,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 28,
+      "name": "Hongkong Uncle",
+      "org": "湘潭大学",
+      "solved": 4,
+      "penalty": 652,
+      "official": true,
+      "members": [
+        {
+          "key": "卓越@湘潭大学",
+          "name": "卓越"
+        },
+        {
+          "key": "李子熙@湘潭大学",
+          "name": "李子熙"
+        },
+        {
+          "key": "曾庆鑫@湘潭大学",
+          "name": "曾庆鑫"
+        }
+      ],
+      "predictedRank": 20,
+      "perf": 1891.24,
+      "preRating": 2082.27,
+      "muDelta": 22.38,
+      "predictedRankOfficial": 17,
+      "perfOfficial": 1963.69,
+      "preRatingOfficial": 2184.05,
+      "muDeltaOfficial": 17.96,
+      "rankOfficial": 26,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 29,
+      "name": "manbo and hajimi",
+      "org": "南京邮电大学",
+      "solved": 4,
+      "penalty": 674,
+      "official": true,
+      "members": [
+        {
+          "key": "胡乐安@南京邮电大学",
+          "name": "胡乐安"
+        },
+        {
+          "key": "王普立@南京邮电大学",
+          "name": "王普立"
+        },
+        {
+          "key": "田晓亮@南京邮电大学",
+          "name": "田晓亮"
+        }
+      ],
+      "predictedRank": 23,
+      "perf": 1826.8,
+      "preRating": 1965.35,
+      "muDelta": 49.27,
+      "predictedRankOfficial": 24,
+      "perfOfficial": 1864.33,
+      "preRatingOfficial": 1999.18,
+      "muDeltaOfficial": 54.04,
+      "rankOfficial": 27,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 30,
+      "name": "no brain just nom nom nom",
+      "org": "香港中文大学",
+      "solved": 4,
+      "penalty": 677,
+      "official": true,
+      "members": [
+        {
+          "key": "wong tsz him@香港中文大学",
+          "name": "Wong Tsz Him"
+        },
+        {
+          "key": "wong man pai angus@香港中文大学",
+          "name": "Wong Man Pai Angus"
+        },
+        {
+          "key": "poonyapat sriroth@香港中文大学",
+          "name": "Poonyapat Sriroth"
+        }
+      ],
+      "predictedRank": 57,
+      "perf": 1702.2,
+      "preRating": 1708.92,
+      "muDelta": 137.93,
+      "predictedRankOfficial": 52,
+      "perfOfficial": 1730.56,
+      "preRatingOfficial": 1725.9,
+      "muDeltaOfficial": 151.12,
+      "rankOfficial": 28,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 31,
+      "name": "Byd Fan Club",
+      "org": "暨南大学",
+      "solved": 3,
+      "penalty": 223,
+      "official": true,
+      "members": [
+        {
+          "key": "曹哲睿@暨南大学",
+          "name": "曹哲睿"
+        },
+        {
+          "key": "谢正心@暨南大学",
+          "name": "谢正心"
+        },
+        {
+          "key": "潘城樟@暨南大学",
+          "name": "潘城樟"
+        }
+      ],
+      "predictedRank": 52,
+      "perf": 1701.8,
+      "preRating": 1723.37,
+      "muDelta": 110.06,
+      "predictedRankOfficial": 56,
+      "perfOfficial": 1719.68,
+      "preRatingOfficial": 1717.2,
+      "muDeltaOfficial": 125.23,
+      "rankOfficial": 29,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 32,
+      "name": "N^3",
+      "org": "蒙古国立大学",
+      "solved": 3,
+      "penalty": 230,
+      "official": true,
+      "members": [
+        {
+          "key": "dugarjantsan bilguun@蒙古国立大学",
+          "name": "Dugarjantsan Bilguun"
+        },
+        {
+          "key": "dalaitseren ganbold@蒙古国立大学",
+          "name": "Dalaitseren Ganbold"
+        },
+        {
+          "key": "bilguun erkhembayar@蒙古国立大学",
+          "name": "Bilguun Erkhembayar"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1644.91,
+      "preRating": 1590.85,
+      "muDelta": 149.27,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1665.27,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": 162.64,
+      "rankOfficial": 30,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 33,
+      "name": "gugugaga",
+      "org": "Pui Ching Middle School",
+      "solved": 3,
+      "penalty": 234,
+      "official": false,
+      "members": [
+        {
+          "key": "ng hang chi@Pui Ching Middle School",
+          "name": "NG Hang Chi"
+        },
+        {
+          "key": "wang ziyan@Pui Ching Middle School",
+          "name": "WANG Ziyan"
+        },
+        {
+          "key": "to chak seng@Pui Ching Middle School",
+          "name": "TO Chak Seng"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1638.62,
+      "preRating": 1590.85,
+      "muDelta": 146.01,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 34,
+      "name": "two-thirds",
+      "org": "西南科技大学",
+      "solved": 3,
+      "penalty": 237,
+      "official": true,
+      "members": [
+        {
+          "key": "刘诗璐@西南科技大学",
+          "name": "刘诗璐"
+        },
+        {
+          "key": "钟妍@西南科技大学",
+          "name": "钟妍"
+        },
+        {
+          "key": "柯涵@西南科技大学",
+          "name": "柯涵"
+        }
+      ],
+      "predictedRank": 66,
+      "perf": 1664.99,
+      "preRating": 1678.29,
+      "muDelta": 114.31,
+      "predictedRankOfficial": 62,
+      "perfOfficial": 1696.62,
+      "preRatingOfficial": 1694.92,
+      "muDeltaOfficial": 124.86,
+      "rankOfficial": 31,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 35,
+      "name": "Genesis in Hong Kong",
+      "org": "惠州学院",
+      "solved": 3,
+      "penalty": 256,
+      "official": true,
+      "members": [
+        {
+          "key": "冼健民@惠州学院",
+          "name": "冼健民"
+        },
+        {
+          "key": "孙昊@惠州学院",
+          "name": "孙昊"
+        },
+        {
+          "key": "钟志杰@惠州学院",
+          "name": "钟志杰"
+        }
+      ],
+      "predictedRank": 44,
+      "perf": 1704.14,
+      "preRating": 1782.77,
+      "muDelta": 96.77,
+      "predictedRankOfficial": 42,
+      "perfOfficial": 1741.53,
+      "preRatingOfficial": 1813.77,
+      "muDeltaOfficial": 105.76,
+      "rankOfficial": 32,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 35,
+      "name": "Phoenix",
+      "org": "井冈山大学",
+      "solved": 3,
+      "penalty": 256,
+      "official": true,
+      "members": [
+        {
+          "key": "王琼@井冈山大学",
+          "name": "王琼"
+        },
+        {
+          "key": "杨文源@井冈山大学",
+          "name": "杨文源"
+        },
+        {
+          "key": "陈柏伟@井冈山大学",
+          "name": "陈柏伟"
+        }
+      ],
+      "predictedRank": 78,
+      "perf": 1640.08,
+      "preRating": 1628.94,
+      "muDelta": 126.96,
+      "predictedRankOfficial": 75,
+      "perfOfficial": 1669.61,
+      "preRatingOfficial": 1642.72,
+      "muDeltaOfficial": 137.93,
+      "rankOfficial": 32,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 37,
+      "name": "from here",
+      "org": "哈尔滨工业大学(深圳)",
+      "solved": 3,
+      "penalty": 300,
+      "official": true,
+      "members": [
+        {
+          "key": "赵飞羽@哈尔滨工业大学(深圳)",
+          "name": "赵飞羽"
+        },
+        {
+          "key": "陈彦波@哈尔滨工业大学(深圳)",
+          "name": "陈彦波"
+        },
+        {
+          "key": "蔡易轩@哈尔滨工业大学(深圳)",
+          "name": "蔡易轩"
+        }
+      ],
+      "predictedRank": 35,
+      "perf": 1723.44,
+      "preRating": 1847.17,
+      "muDelta": 56.84,
+      "predictedRankOfficial": 35,
+      "perfOfficial": 1755.87,
+      "preRatingOfficial": 1870.79,
+      "muDeltaOfficial": 64.18,
+      "rankOfficial": 34,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 38,
+      "name": "Russian Roulette",
+      "org": "福州大学",
+      "solved": 3,
+      "penalty": 317,
+      "official": true,
+      "members": [
+        {
+          "key": "黄佳鹏@福州大学",
+          "name": "黄佳鹏"
+        },
+        {
+          "key": "肖羽石@福州大学",
+          "name": "肖羽石"
+        },
+        {
+          "key": "张仁杰@福州大学",
+          "name": "张仁杰"
+        }
+      ],
+      "predictedRank": 42,
+      "perf": 1692.83,
+      "preRating": 1793.23,
+      "muDelta": 78.36,
+      "predictedRankOfficial": 43,
+      "perfOfficial": 1721.01,
+      "preRatingOfficial": 1809.46,
+      "muDeltaOfficial": 87.92,
+      "rankOfficial": 35,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 39,
+      "name": "Explosion!",
+      "org": "西南交通大学",
+      "solved": 3,
+      "penalty": 323,
+      "official": true,
+      "members": [
+        {
+          "key": "刘俊豪@西南交通大学",
+          "name": "刘俊豪"
+        },
+        {
+          "key": "李欣珂@西南交通大学",
+          "name": "李欣珂"
+        },
+        {
+          "key": "陈义达@西南交通大学",
+          "name": "陈义达"
+        }
+      ],
+      "predictedRank": 56,
+      "perf": 1650.1,
+      "preRating": 1709.15,
+      "muDelta": 94.48,
+      "predictedRankOfficial": 53,
+      "perfOfficial": 1677.46,
+      "preRatingOfficial": 1725.29,
+      "muDeltaOfficial": 103.4,
+      "rankOfficial": 36,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 40,
+      "name": "HKOI 2",
+      "org": "Hong Kong Olympiad in Informatics",
+      "solved": 3,
+      "penalty": 324,
+      "official": false,
+      "members": [
+        {
+          "key": "xu adam@Hong Kong Olympiad in Informatics",
+          "name": "Xu Adam"
+        },
+        {
+          "key": "su yat long rayson@Hong Kong Olympiad in Informatics",
+          "name": "Su Yat Long Rayson"
+        },
+        {
+          "key": "ho shun ngai@Hong Kong Olympiad in Informatics",
+          "name": "Ho Shun Ngai"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1598.45,
+      "preRating": 1590.85,
+      "muDelta": 125.12,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 41,
+      "name": "Thank you Bing Zhang",
+      "org": "武汉大学",
+      "solved": 3,
+      "penalty": 337,
+      "official": true,
+      "members": [
+        {
+          "key": "刘尚源@武汉大学",
+          "name": "刘尚源"
+        },
+        {
+          "key": "袁振宇@武汉大学",
+          "name": "袁振宇"
+        },
+        {
+          "key": "洪阳@武汉大学",
+          "name": "洪阳"
+        }
+      ],
+      "predictedRank": 67,
+      "perf": 1626.58,
+      "preRating": 1677.61,
+      "muDelta": 94.65,
+      "predictedRankOfficial": 65,
+      "perfOfficial": 1653.89,
+      "preRatingOfficial": 1683.07,
+      "muDeltaOfficial": 108.78,
+      "rankOfficial": 37,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 42,
+      "name": "One pull one hit",
+      "org": "成都信息工程大学",
+      "solved": 3,
+      "penalty": 338,
+      "official": true,
+      "members": [
+        {
+          "key": "季璨@成都信息工程大学",
+          "name": "季璨"
+        },
+        {
+          "key": "李奕乐@成都信息工程大学",
+          "name": "李奕乐"
+        },
+        {
+          "key": "王宇欣@成都信息工程大学",
+          "name": "王宇欣"
+        }
+      ],
+      "predictedRank": 41,
+      "perf": 1683.87,
+      "preRating": 1816.16,
+      "muDelta": 80.72,
+      "predictedRankOfficial": 40,
+      "perfOfficial": 1720.15,
+      "preRatingOfficial": 1844.06,
+      "muDeltaOfficial": 97.81,
+      "rankOfficial": 38,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 43,
+      "name": "Team is Powerful",
+      "org": "东莞理工学院",
+      "solved": 3,
+      "penalty": 349,
+      "official": true,
+      "members": [
+        {
+          "key": "黄海@东莞理工学院",
+          "name": "黄海"
+        },
+        {
+          "key": "林恬烁@东莞理工学院",
+          "name": "林恬烁"
+        },
+        {
+          "key": "林志龙@东莞理工学院",
+          "name": "林志龙"
+        }
+      ],
+      "predictedRank": 25,
+      "perf": 1751.38,
+      "preRating": 1962.31,
+      "muDelta": 11.48,
+      "predictedRankOfficial": 26,
+      "perfOfficial": 1785.0,
+      "preRatingOfficial": 1986.71,
+      "muDeltaOfficial": 19.05,
+      "rankOfficial": 39,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 44,
+      "name": "Hajimi",
+      "org": "广州大学",
+      "solved": 3,
+      "penalty": 378,
+      "official": true,
+      "members": [
+        {
+          "key": "李轩@广州大学",
+          "name": "李轩"
+        },
+        {
+          "key": "周昊焌@广州大学",
+          "name": "周昊焌"
+        },
+        {
+          "key": "杨尚华@广州大学",
+          "name": "杨尚华"
+        }
+      ],
+      "predictedRank": 87,
+      "perf": 1581.18,
+      "preRating": 1599.86,
+      "muDelta": 111.45,
+      "predictedRankOfficial": 85,
+      "perfOfficial": 1607.83,
+      "preRatingOfficial": 1608.8,
+      "muDeltaOfficial": 123.44,
+      "rankOfficial": 40,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 45,
+      "name": "SCUT Chireden",
+      "org": "华南理工大学",
+      "solved": 3,
+      "penalty": 402,
+      "official": true,
+      "members": [
+        {
+          "key": "郑理耀@华南理工大学",
+          "name": "郑理耀"
+        },
+        {
+          "key": "袁昊朗@华南理工大学",
+          "name": "袁昊朗"
+        },
+        {
+          "key": "陈弘毅@华南理工大学",
+          "name": "陈弘毅"
+        }
+      ],
+      "predictedRank": 80,
+      "perf": 1583.59,
+      "preRating": 1619.25,
+      "muDelta": 102.62,
+      "predictedRankOfficial": 80,
+      "perfOfficial": 1606.64,
+      "preRatingOfficial": 1620.77,
+      "muDeltaOfficial": 116.59,
+      "rankOfficial": 41,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 46,
+      "name": "NUM-NTN",
+      "org": "蒙古国立大学",
+      "solved": 3,
+      "penalty": 404,
+      "official": true,
+      "members": [
+        {
+          "key": "naranbat munkherdene@蒙古国立大学",
+          "name": "Naranbat Munkherdene"
+        },
+        {
+          "key": "tamir jamiyangarav@蒙古国立大学",
+          "name": "Tamir Jamiyangarav"
+        },
+        {
+          "key": "aldarjaw naranbaatar@蒙古国立大学",
+          "name": "Aldarjaw Naranbaatar"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1568.14,
+      "preRating": 1590.85,
+      "muDelta": 109.35,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1590.17,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": 123.58,
+      "rankOfficial": 42,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 47,
+      "name": "GreedyIsTruth",
+      "org": "武昌首义学院",
+      "solved": 3,
+      "penalty": 405,
+      "official": true,
+      "members": [
+        {
+          "key": "汤龙飞@武昌首义学院",
+          "name": "汤龙飞"
+        },
+        {
+          "key": "李明辉@武昌首义学院",
+          "name": "李明辉"
+        },
+        {
+          "key": "高静云@武昌首义学院",
+          "name": "高静云"
+        }
+      ],
+      "predictedRank": 84,
+      "perf": 1570.39,
+      "preRating": 1609.58,
+      "muDelta": 101.27,
+      "predictedRankOfficial": 82,
+      "perfOfficial": 1593.34,
+      "preRatingOfficial": 1614.44,
+      "muDeltaOfficial": 113.6,
+      "rankOfficial": 43,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 48,
+      "name": "Rosmontis_Fan",
+      "org": "浙江工商大学",
+      "solved": 3,
+      "penalty": 446,
+      "official": true,
+      "members": [
+        {
+          "key": "沈士渊@浙江工商大学",
+          "name": "沈士渊"
+        },
+        {
+          "key": "魏嘉豪@浙江工商大学",
+          "name": "魏嘉豪"
+        },
+        {
+          "key": "徐晨阳@浙江工商大学",
+          "name": "徐晨阳"
+        }
+      ],
+      "predictedRank": 29,
+      "perf": 1720.11,
+      "preRating": 1942.22,
+      "muDelta": 5.67,
+      "predictedRankOfficial": 29,
+      "perfOfficial": 1751.65,
+      "preRatingOfficial": 1969.18,
+      "muDeltaOfficial": 10.82,
+      "rankOfficial": 44,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 49,
+      "name": "May this voyage culminate in the Final",
+      "org": "西南财经大学",
+      "solved": 3,
+      "penalty": 469,
+      "official": true,
+      "members": [
+        {
+          "key": "蒋思翔@西南财经大学",
+          "name": "蒋思翔"
+        },
+        {
+          "key": "刘彻@西南财经大学",
+          "name": "刘彻"
+        },
+        {
+          "key": "祝亚辉@西南财经大学",
+          "name": "祝亚辉"
+        }
+      ],
+      "predictedRank": 48,
+      "perf": 1616.71,
+      "preRating": 1739.79,
+      "muDelta": 57.16,
+      "predictedRankOfficial": 47,
+      "perfOfficial": 1648.68,
+      "preRatingOfficial": 1768.9,
+      "muDeltaOfficial": 61.42,
+      "rankOfficial": 45,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 50,
+      "name": "DengDuck Masters Club",
+      "org": "Hou Kong Middle School",
+      "solved": 3,
+      "penalty": 475,
+      "official": false,
+      "members": [
+        {
+          "key": "tang cheng hou@Hou Kong Middle School",
+          "name": "TANG Cheng Hou"
+        },
+        {
+          "key": "huang kam lam@Hou Kong Middle School",
+          "name": "HUANG Kam Lam"
+        },
+        {
+          "key": "ao keng chio@Hou Kong Middle School",
+          "name": "AO Keng Chio"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1549.49,
+      "preRating": 1590.85,
+      "muDelta": 99.65,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 51,
+      "name": "Ordinary.exe",
+      "org": "厦门大学嘉庚学院",
+      "solved": 3,
+      "penalty": 477,
+      "official": true,
+      "members": [
+        {
+          "key": "孙硕@厦门大学嘉庚学院",
+          "name": "孙硕"
+        },
+        {
+          "key": "卓子翔@厦门大学嘉庚学院",
+          "name": "卓子翔"
+        },
+        {
+          "key": "黄俊华@厦门大学嘉庚学院",
+          "name": "黄俊华"
+        }
+      ],
+      "predictedRank": 107,
+      "perf": 1542.89,
+      "preRating": 1585.25,
+      "muDelta": 101.2,
+      "predictedRankOfficial": 87,
+      "perfOfficial": 1570.8,
+      "preRatingOfficial": 1596.3,
+      "muDeltaOfficial": 112.88,
+      "rankOfficial": 46,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 52,
+      "name": "we are iron",
+      "org": "四川农业大学",
+      "solved": 3,
+      "penalty": 495,
+      "official": true,
+      "members": [
+        {
+          "key": "江雅奥@四川农业大学",
+          "name": "江雅奥"
+        },
+        {
+          "key": "李鑫@四川农业大学",
+          "name": "李鑫"
+        },
+        {
+          "key": "刁戈@四川农业大学",
+          "name": "刁戈"
+        }
+      ],
+      "predictedRank": 81,
+      "perf": 1550.0,
+      "preRating": 1615.2,
+      "muDelta": 87.26,
+      "predictedRankOfficial": 77,
+      "perfOfficial": 1577.54,
+      "preRatingOfficial": 1627.31,
+      "muDeltaOfficial": 98.06,
+      "rankOfficial": 47,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 53,
+      "name": "Last Final",
+      "org": "浙江理工大学",
+      "solved": 3,
+      "penalty": 512,
+      "official": true,
+      "members": [
+        {
+          "key": "陈宏毅@浙江理工大学",
+          "name": "陈宏毅"
+        },
+        {
+          "key": "陶稼辉@浙江理工大学",
+          "name": "陶稼辉"
+        },
+        {
+          "key": "王舜宇@浙江理工大学",
+          "name": "王舜宇"
+        }
+      ],
+      "predictedRank": 26,
+      "perf": 1709.45,
+      "preRating": 1958.96,
+      "muDelta": 46.76,
+      "predictedRankOfficial": 23,
+      "perfOfficial": 1749.4,
+      "preRatingOfficial": 1999.75,
+      "muDeltaOfficial": 57.81,
+      "rankOfficial": 48,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 54,
+      "name": "The last dance of XiaoMo",
+      "org": "成都锦城学院",
+      "solved": 3,
+      "penalty": 529,
+      "official": true,
+      "members": [
+        {
+          "key": "程义威@成都锦城学院",
+          "name": "程义威"
+        },
+        {
+          "key": "邓力豪@成都锦城学院",
+          "name": "邓力豪"
+        },
+        {
+          "key": "何轩逸@成都锦城学院",
+          "name": "何轩逸"
+        }
+      ],
+      "predictedRank": 63,
+      "perf": 1570.38,
+      "preRating": 1683.53,
+      "muDelta": 64.7,
+      "predictedRankOfficial": 61,
+      "perfOfficial": 1599.06,
+      "preRatingOfficial": 1701.72,
+      "muDeltaOfficial": 73.62,
+      "rankOfficial": 49,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 55,
+      "name": "Back Seaing",
+      "org": "大连理工大学",
+      "solved": 3,
+      "penalty": 531,
+      "official": true,
+      "members": [
+        {
+          "key": "冯子祥@大连理工大学",
+          "name": "冯子祥"
+        },
+        {
+          "key": "吴习哲@大连理工大学",
+          "name": "吴习哲"
+        },
+        {
+          "key": "卜方昱@大连理工大学",
+          "name": "卜方昱"
+        }
+      ],
+      "predictedRank": 60,
+      "perf": 1571.72,
+      "preRating": 1695.52,
+      "muDelta": 63.75,
+      "predictedRankOfficial": 60,
+      "perfOfficial": 1597.7,
+      "preRatingOfficial": 1709.07,
+      "muDeltaOfficial": 72.05,
+      "rankOfficial": 50,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 56,
+      "name": "HKUST1",
+      "org": "香港科技大学",
+      "solved": 3,
+      "penalty": 538,
+      "official": true,
+      "members": [
+        {
+          "key": "taimas korganbayev@香港科技大学",
+          "name": "Taimas Korganbayev"
+        },
+        {
+          "key": "mukhammadarif sakhmoldin@香港科技大学",
+          "name": "Mukhammadarif Sakhmoldin"
+        },
+        {
+          "key": "raiymbek baishuak@香港科技大学",
+          "name": "Raiymbek Baishuak"
+        }
+      ],
+      "predictedRank": 21,
+      "perf": 1717.89,
+      "preRating": 1995.97,
+      "muDelta": -23.44,
+      "predictedRankOfficial": 21,
+      "perfOfficial": 1761.49,
+      "preRatingOfficial": 2047.26,
+      "muDeltaOfficial": -24.66,
+      "rankOfficial": 51,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 57,
+      "name": "nia~nia~nia~ciallo~",
+      "org": "成都大学",
+      "solved": 3,
+      "penalty": 552,
+      "official": true,
+      "members": [
+        {
+          "key": "陈纪元@成都大学",
+          "name": "陈纪元"
+        },
+        {
+          "key": "张凡盛@成都大学",
+          "name": "张凡盛"
+        },
+        {
+          "key": "黄兵@成都大学",
+          "name": "黄兵"
+        }
+      ],
+      "predictedRank": 89,
+      "perf": 1520.53,
+      "preRating": 1594.36,
+      "muDelta": 91.67,
+      "predictedRankOfficial": 84,
+      "perfOfficial": 1546.85,
+      "preRatingOfficial": 1611.02,
+      "muDeltaOfficial": 101.79,
+      "rankOfficial": 52,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 58,
+      "name": "Harukanaru Gensokyo",
+      "org": "广西大学",
+      "solved": 3,
+      "penalty": 562,
+      "official": true,
+      "members": [
+        {
+          "key": "张健明@广西大学",
+          "name": "张健明"
+        },
+        {
+          "key": "陶康@广西大学",
+          "name": "陶康"
+        },
+        {
+          "key": "孙怿翔@广西大学",
+          "name": "孙怿翔"
+        }
+      ],
+      "predictedRank": 40,
+      "perf": 1621.71,
+      "preRating": 1822.75,
+      "muDelta": 16.62,
+      "predictedRankOfficial": 39,
+      "perfOfficial": 1651.22,
+      "preRatingOfficial": 1847.91,
+      "muDeltaOfficial": 21.65,
+      "rankOfficial": 53,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 59,
+      "name": "ln 7/b",
+      "org": "河海大学",
+      "solved": 3,
+      "penalty": 563,
+      "official": true,
+      "members": [
+        {
+          "key": "陈培印@河海大学",
+          "name": "陈培印"
+        },
+        {
+          "key": "邵然@河海大学",
+          "name": "邵然"
+        },
+        {
+          "key": "谭炜烨@河海大学",
+          "name": "谭炜烨"
+        }
+      ],
+      "predictedRank": 65,
+      "perf": 1549.97,
+      "preRating": 1682.11,
+      "muDelta": 52.45,
+      "predictedRankOfficial": 64,
+      "perfOfficial": 1572.34,
+      "preRatingOfficial": 1692.63,
+      "muDeltaOfficial": 61.39,
+      "rankOfficial": 54,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 60,
+      "name": "Without Sky",
+      "org": "香港理工大学",
+      "solved": 3,
+      "penalty": 588,
+      "official": true,
+      "members": [
+        {
+          "key": "孙涵松@香港理工大学",
+          "name": "孙涵松"
+        },
+        {
+          "key": "孟祥宇@香港理工大学",
+          "name": "孟祥宇"
+        },
+        {
+          "key": "ziqian lin@香港理工大学",
+          "name": "Ziqian Lin"
+        }
+      ],
+      "predictedRank": 47,
+      "perf": 1584.55,
+      "preRating": 1762.71,
+      "muDelta": 62.19,
+      "predictedRankOfficial": 46,
+      "perfOfficial": 1610.54,
+      "preRatingOfficial": 1782.6,
+      "muDeltaOfficial": 71.56,
+      "rankOfficial": 55,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 61,
+      "name": "Wanting to learn Ai",
+      "org": "四川大学",
+      "solved": 3,
+      "penalty": 602,
+      "official": true,
+      "members": [
+        {
+          "key": "冯朝航@四川大学",
+          "name": "冯朝航"
+        },
+        {
+          "key": "蔡相渔@四川大学",
+          "name": "蔡相渔"
+        },
+        {
+          "key": "陈燚@四川大学",
+          "name": "陈燚"
+        }
+      ],
+      "predictedRank": 71,
+      "perf": 1530.32,
+      "preRating": 1655.49,
+      "muDelta": 56.08,
+      "predictedRankOfficial": 69,
+      "perfOfficial": 1550.11,
+      "preRatingOfficial": 1662.29,
+      "muDeltaOfficial": 65.61,
+      "rankOfficial": 56,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 61,
+      "name": "Courage",
+      "org": "重庆移通学院",
+      "solved": 3,
+      "penalty": 602,
+      "official": true,
+      "members": [
+        {
+          "key": "李德立@重庆移通学院",
+          "name": "李德立"
+        },
+        {
+          "key": "詹毅涵@重庆移通学院",
+          "name": "詹毅涵"
+        },
+        {
+          "key": "qing'an lu@重庆移通学院",
+          "name": "Qing'an Lu"
+        }
+      ],
+      "predictedRank": 53,
+      "perf": 1560.09,
+      "preRating": 1719.81,
+      "muDelta": 46.63,
+      "predictedRankOfficial": 50,
+      "perfOfficial": 1586.29,
+      "preRatingOfficial": 1741.06,
+      "muDeltaOfficial": 54.44,
+      "rankOfficial": 56,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 63,
+      "name": "go valorant esacpe delta dance",
+      "org": "哈尔滨工程大学",
+      "solved": 3,
+      "penalty": 610,
+      "official": true,
+      "members": [
+        {
+          "key": "赵新凯@哈尔滨工程大学",
+          "name": "赵新凯"
+        },
+        {
+          "key": "孙江吉@哈尔滨工程大学",
+          "name": "孙江吉"
+        },
+        {
+          "key": "闫力仁@哈尔滨工程大学",
+          "name": "闫力仁"
+        }
+      ],
+      "predictedRank": 43,
+      "perf": 1588.32,
+      "preRating": 1791.33,
+      "muDelta": 15.6,
+      "predictedRankOfficial": 41,
+      "perfOfficial": 1617.84,
+      "preRatingOfficial": 1821.34,
+      "muDeltaOfficial": 18.12,
+      "rankOfficial": 58,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 64,
+      "name": "^v^",
+      "org": "天津大学",
+      "solved": 3,
+      "penalty": 657,
+      "official": true,
+      "members": [
+        {
+          "key": "张翔智@天津大学",
+          "name": "张翔智"
+        },
+        {
+          "key": "万文彬@天津大学",
+          "name": "万文彬"
+        },
+        {
+          "key": "王嘉晨@天津大学",
+          "name": "王嘉晨"
+        }
+      ],
+      "predictedRank": 27,
+      "perf": 1670.15,
+      "preRating": 1954.87,
+      "muDelta": -26.89,
+      "predictedRankOfficial": 25,
+      "perfOfficial": 1703.88,
+      "preRatingOfficial": 1994.52,
+      "muDeltaOfficial": -27.2,
+      "rankOfficial": 59,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 65,
+      "name": "Little Switty",
+      "org": "西北工业大学",
+      "solved": 3,
+      "penalty": 682,
+      "official": true,
+      "members": [
+        {
+          "key": "李可期@西北工业大学",
+          "name": "李可期"
+        },
+        {
+          "key": "邹嘉豪@西北工业大学",
+          "name": "邹嘉豪"
+        },
+        {
+          "key": "钟涛宇@西北工业大学",
+          "name": "钟涛宇"
+        }
+      ],
+      "predictedRank": 28,
+      "perf": 1665.45,
+      "preRating": 1951.85,
+      "muDelta": -27.59,
+      "predictedRankOfficial": 28,
+      "perfOfficial": 1692.19,
+      "preRatingOfficial": 1979.01,
+      "muDeltaOfficial": -25.0,
+      "rankOfficial": 60,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 66,
+      "name": "T34-Gray",
+      "org": "华中师范大学",
+      "solved": 3,
+      "penalty": 774,
+      "official": true,
+      "members": [
+        {
+          "key": "刘孟谦@华中师范大学",
+          "name": "刘孟谦"
+        },
+        {
+          "key": "杨璟欣@华中师范大学",
+          "name": "杨璟欣"
+        },
+        {
+          "key": "彭雅晨@华中师范大学",
+          "name": "彭雅晨"
+        }
+      ],
+      "predictedRank": 76,
+      "perf": 1502.4,
+      "preRating": 1634.96,
+      "muDelta": 52.24,
+      "predictedRankOfficial": 73,
+      "perfOfficial": 1521.49,
+      "preRatingOfficial": 1645.7,
+      "muDeltaOfficial": 59.36,
+      "rankOfficial": 61,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 67,
+      "name": "Taboo Laevatein",
+      "org": "江南大学",
+      "solved": 2,
+      "penalty": 69,
+      "official": true,
+      "members": [
+        {
+          "key": "董万里@江南大学",
+          "name": "董万里"
+        },
+        {
+          "key": "赵泓博@江南大学",
+          "name": "赵泓博"
+        },
+        {
+          "key": "吴继凯@江南大学",
+          "name": "吴继凯"
+        }
+      ],
+      "predictedRank": 24,
+      "perf": 1665.43,
+      "preRating": 1963.26,
+      "muDelta": -23.41,
+      "predictedRankOfficial": 22,
+      "perfOfficial": 1701.42,
+      "preRatingOfficial": 2009.67,
+      "muDeltaOfficial": -23.85,
+      "rankOfficial": 62,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 68,
+      "name": "zufang",
+      "org": "昆山杜克大学",
+      "solved": 2,
+      "penalty": 120,
+      "official": true,
+      "members": [
+        {
+          "key": "胡子@昆山杜克大学",
+          "name": "胡子"
+        },
+        {
+          "key": "孙厚旻@昆山杜克大学",
+          "name": "孙厚旻"
+        },
+        {
+          "key": "袁天骏@昆山杜克大学",
+          "name": "袁天骏"
+        }
+      ],
+      "predictedRank": 38,
+      "perf": 1593.06,
+      "preRating": 1832.34,
+      "muDelta": -2.81,
+      "predictedRankOfficial": 34,
+      "perfOfficial": 1625.71,
+      "preRatingOfficial": 1872.6,
+      "muDeltaOfficial": -3.9,
+      "rankOfficial": 63,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 68,
+      "name": "HKUST5",
+      "org": "香港科技大学",
+      "solved": 2,
+      "penalty": 120,
+      "official": true,
+      "members": [
+        {
+          "key": "chan ho yin@香港科技大学",
+          "name": "Chan Ho Yin"
+        },
+        {
+          "key": "awadalla, bdelrahman hossameldin a. a.@香港科技大学",
+          "name": "AWADALLA, bdelrahman HossamEldin A. A."
+        },
+        {
+          "key": "vu duy tung@香港科技大学",
+          "name": "Vu Duy Tung"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1475.76,
+      "preRating": 1590.85,
+      "muDelta": 61.32,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1489.58,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": 71.28,
+      "rankOfficial": 63,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 70,
+      "name": "Chuunibyou But ACMers",
+      "org": "武汉理工大学",
+      "solved": 2,
+      "penalty": 122,
+      "official": true,
+      "members": [
+        {
+          "key": "史佳尚@武汉理工大学",
+          "name": "史佳尚"
+        },
+        {
+          "key": "余翔宇@武汉理工大学",
+          "name": "余翔宇"
+        },
+        {
+          "key": "陆冠丞@武汉理工大学",
+          "name": "陆冠丞"
+        }
+      ],
+      "predictedRank": 106,
+      "perf": 1467.68,
+      "preRating": 1589.41,
+      "muDelta": 57.86,
+      "predictedRankOfficial": 83,
+      "perfOfficial": 1490.82,
+      "preRatingOfficial": 1613.59,
+      "muDeltaOfficial": 60.1,
+      "rankOfficial": 65,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 71,
+      "name": "Pure 2025",
+      "org": "香港城市大学",
+      "solved": 2,
+      "penalty": 127,
+      "official": true,
+      "members": [
+        {
+          "key": "燕雅超@香港城市大学",
+          "name": "燕雅超"
+        },
+        {
+          "key": "高立由@香港城市大学",
+          "name": "高立由"
+        },
+        {
+          "key": "邓子冲@香港城市大学",
+          "name": "邓子冲"
+        }
+      ],
+      "predictedRank": 51,
+      "perf": 1530.23,
+      "preRating": 1729.46,
+      "muDelta": 19.08,
+      "predictedRankOfficial": 48,
+      "perfOfficial": 1553.57,
+      "preRatingOfficial": 1753.95,
+      "muDeltaOfficial": 21.36,
+      "rankOfficial": 66,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 72,
+      "name": "Don't Hack Me",
+      "org": "东北大学秦皇岛分校",
+      "solved": 2,
+      "penalty": 151,
+      "official": true,
+      "members": [
+        {
+          "key": "朱逸飞@东北大学秦皇岛分校",
+          "name": "朱逸飞"
+        },
+        {
+          "key": "陈小全@东北大学秦皇岛分校",
+          "name": "陈小全"
+        },
+        {
+          "key": "赵星凯@东北大学秦皇岛分校",
+          "name": "赵星凯"
+        }
+      ],
+      "predictedRank": 121,
+      "perf": 1445.56,
+      "preRating": 1554.42,
+      "muDelta": 64.56,
+      "predictedRankOfficial": 88,
+      "perfOfficial": 1474.29,
+      "preRatingOfficial": 1594.39,
+      "muDeltaOfficial": 61.49,
+      "rankOfficial": 67,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 73,
+      "name": "My Little Pony won't use Snickers before meeting Rainbow Dash",
+      "org": "成都东软学院",
+      "solved": 2,
+      "penalty": 152,
+      "official": true,
+      "members": [
+        {
+          "key": "吴庭信@成都东软学院",
+          "name": "吴庭信"
+        },
+        {
+          "key": "王俊喆@成都东软学院",
+          "name": "王俊喆"
+        },
+        {
+          "key": "陈一夫@成都东软学院",
+          "name": "陈一夫"
+        }
+      ],
+      "predictedRank": 134,
+      "perf": 1425.16,
+      "preRating": 1512.21,
+      "muDelta": 76.81,
+      "predictedRankOfficial": 123,
+      "perfOfficial": 1439.85,
+      "preRatingOfficial": 1519.08,
+      "muDeltaOfficial": 83.63,
+      "rankOfficial": 68,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 74,
+      "name": "icy_firefly",
+      "org": "澳门大学",
+      "solved": 2,
+      "penalty": 157,
+      "official": true,
+      "members": [
+        {
+          "key": "高淼悦@澳门大学",
+          "name": "高淼悦"
+        },
+        {
+          "key": "席跃@澳门大学",
+          "name": "席跃"
+        },
+        {
+          "key": "张容嘉@澳门大学",
+          "name": "张容嘉"
+        }
+      ],
+      "predictedRank": 37,
+      "perf": 1577.31,
+      "preRating": 1837.15,
+      "muDelta": -13.8,
+      "predictedRankOfficial": 38,
+      "perfOfficial": 1596.38,
+      "preRatingOfficial": 1856.13,
+      "muDeltaOfficial": -10.96,
+      "rankOfficial": 69,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 75,
+      "name": "Little Foodie Loves Penalty Time",
+      "org": "中国地质大学(北京)",
+      "solved": 2,
+      "penalty": 171,
+      "official": true,
+      "members": [
+        {
+          "key": "牛鸿宇@中国地质大学(北京)",
+          "name": "牛鸿宇"
+        },
+        {
+          "key": "叶宇翔@中国地质大学(北京)",
+          "name": "叶宇翔"
+        },
+        {
+          "key": "滕俊宁@中国地质大学(北京)",
+          "name": "滕俊宁"
+        }
+      ],
+      "predictedRank": 31,
+      "perf": 1590.3,
+      "preRating": 1866.65,
+      "muDelta": -14.68,
+      "predictedRankOfficial": 31,
+      "perfOfficial": 1615.34,
+      "preRatingOfficial": 1897.63,
+      "muDeltaOfficial": -15.38,
+      "rankOfficial": 70,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 76,
+      "name": "Feel the Russian Style",
+      "org": "香港城市大学",
+      "solved": 2,
+      "penalty": 173,
+      "official": true,
+      "members": [
+        {
+          "key": "gizatullin timur@香港城市大学",
+          "name": "Gizatullin Timur"
+        },
+        {
+          "key": "demidov ilia@香港城市大学",
+          "name": "Demidov Ilia"
+        },
+        {
+          "key": "evstafev andrei@香港城市大学",
+          "name": "Evstafev Andrei"
+        }
+      ],
+      "predictedRank": 61,
+      "perf": 1496.33,
+      "preRating": 1694.67,
+      "muDelta": 18.09,
+      "predictedRankOfficial": 58,
+      "perfOfficial": 1513.83,
+      "preRatingOfficial": 1711.5,
+      "muDeltaOfficial": 21.21,
+      "rankOfficial": 71,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 77,
+      "name": "WA Deeds Done Dirt Cheap",
+      "org": "上海科技大学",
+      "solved": 2,
+      "penalty": 182,
+      "official": true,
+      "members": [
+        {
+          "key": "姜昕宇@上海科技大学",
+          "name": "姜昕宇"
+        },
+        {
+          "key": "陈钊堃@上海科技大学",
+          "name": "陈钊堃"
+        },
+        {
+          "key": "王俊篪@上海科技大学",
+          "name": "王俊篪"
+        }
+      ],
+      "predictedRank": 45,
+      "perf": 1538.33,
+      "preRating": 1781.04,
+      "muDelta": -5.04,
+      "predictedRankOfficial": 44,
+      "perfOfficial": 1557.44,
+      "preRatingOfficial": 1801.93,
+      "muDeltaOfficial": -3.19,
+      "rankOfficial": 72,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 78,
+      "name": "Dreamer without love",
+      "org": "西安邮电大学",
+      "solved": 2,
+      "penalty": 184,
+      "official": true,
+      "members": [
+        {
+          "key": "石宇@西安邮电大学",
+          "name": "石宇"
+        },
+        {
+          "key": "武奕源@西安邮电大学",
+          "name": "武奕源"
+        },
+        {
+          "key": "赵旭东@西安邮电大学",
+          "name": "赵旭东"
+        }
+      ],
+      "predictedRank": 83,
+      "perf": 1449.78,
+      "preRating": 1613.31,
+      "muDelta": 39.42,
+      "predictedRankOfficial": 78,
+      "perfOfficial": 1465.02,
+      "preRatingOfficial": 1627.05,
+      "muDeltaOfficial": 43.45,
+      "rankOfficial": 73,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 79,
+      "name": "add uuz to your qq group meow thank you meow",
+      "org": "齐鲁工业大学(山东省科学院)",
+      "solved": 2,
+      "penalty": 225,
+      "official": true,
+      "members": [
+        {
+          "key": "杨梓睿@齐鲁工业大学(山东省科学院)",
+          "name": "杨梓睿"
+        },
+        {
+          "key": "国展源@齐鲁工业大学(山东省科学院)",
+          "name": "国展源"
+        },
+        {
+          "key": "张宸维@齐鲁工业大学(山东省科学院)",
+          "name": "张宸维"
+        }
+      ],
+      "predictedRank": 75,
+      "perf": 1456.89,
+      "preRating": 1635.27,
+      "muDelta": 28.41,
+      "predictedRankOfficial": 74,
+      "perfOfficial": 1468.9,
+      "preRatingOfficial": 1643.19,
+      "muDeltaOfficial": 33.31,
+      "rankOfficial": 74,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 80,
+      "name": "Respawn of entropy",
+      "org": "山东理工大学",
+      "solved": 2,
+      "penalty": 243,
+      "official": true,
+      "members": [
+        {
+          "key": "刘超@山东理工大学",
+          "name": "刘超"
+        },
+        {
+          "key": "张俊@山东理工大学",
+          "name": "张俊"
+        },
+        {
+          "key": "袁烨@山东理工大学",
+          "name": "袁烨"
+        }
+      ],
+      "predictedRank": 59,
+      "perf": 1486.16,
+      "preRating": 1699.69,
+      "muDelta": 10.13,
+      "predictedRankOfficial": 59,
+      "perfOfficial": 1499.36,
+      "preRatingOfficial": 1711.16,
+      "muDeltaOfficial": 13.8,
+      "rankOfficial": 75,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 81,
+      "name": "Fondness? Delusion!",
+      "org": "江西财经大学",
+      "solved": 2,
+      "penalty": 265,
+      "official": true,
+      "members": [
+        {
+          "key": "衷铭川@江西财经大学",
+          "name": "衷铭川"
+        },
+        {
+          "key": "万俊哲@江西财经大学",
+          "name": "万俊哲"
+        },
+        {
+          "key": "张云菲@江西财经大学",
+          "name": "张云菲"
+        }
+      ],
+      "predictedRank": 122,
+      "perf": 1412.08,
+      "preRating": 1553.85,
+      "muDelta": 47.9,
+      "predictedRankOfficial": 111,
+      "perfOfficial": 1424.56,
+      "preRatingOfficial": 1564.23,
+      "muDeltaOfficial": 51.8,
+      "rankOfficial": 76,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 82,
+      "name": "Aleatory Acceptism of Encounter",
+      "org": "大连海事大学",
+      "solved": 2,
+      "penalty": 278,
+      "official": true,
+      "members": [
+        {
+          "key": "任品豪@大连海事大学",
+          "name": "任品豪"
+        },
+        {
+          "key": "梅宇涵@大连海事大学",
+          "name": "梅宇涵"
+        },
+        {
+          "key": "石俊锋@大连海事大学",
+          "name": "石俊锋"
+        }
+      ],
+      "predictedRank": 113,
+      "perf": 1416.87,
+      "preRating": 1572.51,
+      "muDelta": 40.32,
+      "predictedRankOfficial": 102,
+      "perfOfficial": 1430.21,
+      "preRatingOfficial": 1585.69,
+      "muDeltaOfficial": 43.18,
+      "rankOfficial": 77,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 83,
+      "name": "Haibara Ai is Correct",
+      "org": "安徽师范大学",
+      "solved": 2,
+      "penalty": 279,
+      "official": true,
+      "members": [
+        {
+          "key": "许居尚@安徽师范大学",
+          "name": "许居尚"
+        },
+        {
+          "key": "高翔@安徽师范大学",
+          "name": "高翔"
+        },
+        {
+          "key": "火天宝@安徽师范大学",
+          "name": "火天宝"
+        }
+      ],
+      "predictedRank": 112,
+      "perf": 1415.22,
+      "preRating": 1576.57,
+      "muDelta": 37.26,
+      "predictedRankOfficial": 100,
+      "perfOfficial": 1427.43,
+      "preRatingOfficial": 1588.16,
+      "muDeltaOfficial": 40.35,
+      "rankOfficial": 78,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 84,
+      "name": "Accepted by HKUST",
+      "org": "北京师范大学-香港浸会大学联合国际学院",
+      "solved": 2,
+      "penalty": 282,
+      "official": true,
+      "members": [
+        {
+          "key": "倪方博@北京师范大学-香港浸会大学联合国际学院",
+          "name": "倪方博"
+        },
+        {
+          "key": "赵泽峰@北京师范大学-香港浸会大学联合国际学院",
+          "name": "赵泽峰"
+        },
+        {
+          "key": "王孟涵@北京师范大学-香港浸会大学联合国际学院",
+          "name": "王孟涵"
+        }
+      ],
+      "predictedRank": 86,
+      "perf": 1423.54,
+      "preRating": 1601.37,
+      "muDelta": 37.77,
+      "predictedRankOfficial": 81,
+      "perfOfficial": 1436.83,
+      "preRatingOfficial": 1616.0,
+      "muDeltaOfficial": 41.3,
+      "rankOfficial": 79,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 85,
+      "name": "HKOI 3",
+      "org": "Hong Kong Olympiad in Informatics",
+      "solved": 2,
+      "penalty": 297,
+      "official": false,
+      "members": [
+        {
+          "key": "tan jian lang@Hong Kong Olympiad in Informatics",
+          "name": "Tan Jian Lang"
+        },
+        {
+          "key": "yang chun kit@Hong Kong Olympiad in Informatics",
+          "name": "Yang Chun Kit"
+        },
+        {
+          "key": "wong cheuk kiu@Hong Kong Olympiad in Informatics",
+          "name": "Wong Cheuk Kiu"
+        }
+      ],
+      "predictedRank": 79,
+      "perf": 1431.99,
+      "preRating": 1625.26,
+      "muDelta": 21.44,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 86,
+      "name": "GDUT_darkseek",
+      "org": "广东工业大学",
+      "solved": 2,
+      "penalty": 303,
+      "official": true,
+      "members": [
+        {
+          "key": "谭一峰@广东工业大学",
+          "name": "谭一峰"
+        },
+        {
+          "key": "蔡鋈@广东工业大学",
+          "name": "蔡鋈"
+        },
+        {
+          "key": "赖国华@广东工业大学",
+          "name": "赖国华"
+        }
+      ],
+      "predictedRank": 108,
+      "perf": 1408.56,
+      "preRating": 1584.54,
+      "muDelta": 29.65,
+      "predictedRankOfficial": 104,
+      "perfOfficial": 1416.6,
+      "preRatingOfficial": 1581.74,
+      "muDeltaOfficial": 38.06,
+      "rankOfficial": 80,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 87,
+      "name": "3 ap = 1band = 1 life?",
+      "org": "华南农业大学",
+      "solved": 2,
+      "penalty": 306,
+      "official": true,
+      "members": [
+        {
+          "key": "谭伟杰@华南农业大学",
+          "name": "谭伟杰"
+        },
+        {
+          "key": "颜乾彪@华南农业大学",
+          "name": "颜乾彪"
+        },
+        {
+          "key": "陈钢@华南农业大学",
+          "name": "陈钢"
+        }
+      ],
+      "predictedRank": 64,
+      "perf": 1455.8,
+      "preRating": 1683.2,
+      "muDelta": 2.91,
+      "predictedRankOfficial": 63,
+      "perfOfficial": 1469.19,
+      "preRatingOfficial": 1693.46,
+      "muDeltaOfficial": 7.32,
+      "rankOfficial": 81,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 88,
+      "name": "Naming is so HARD!",
+      "org": "合肥工业大学宣城校区",
+      "solved": 2,
+      "penalty": 333,
+      "official": true,
+      "members": [
+        {
+          "key": "冯舶钊@合肥工业大学宣城校区",
+          "name": "冯舶钊"
+        },
+        {
+          "key": "于鸥鹿@合肥工业大学宣城校区",
+          "name": "于鸥鹿"
+        },
+        {
+          "key": "马久贺@合肥工业大学宣城校区",
+          "name": "马久贺"
+        }
+      ],
+      "predictedRank": 68,
+      "perf": 1447.61,
+      "preRating": 1673.66,
+      "muDelta": 8.83,
+      "predictedRankOfficial": 66,
+      "perfOfficial": 1459.33,
+      "preRatingOfficial": 1681.42,
+      "muDeltaOfficial": 14.31,
+      "rankOfficial": 82,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 89,
+      "name": "Elite Conscripts",
+      "org": "黑龙江大学",
+      "solved": 2,
+      "penalty": 339,
+      "official": true,
+      "members": [
+        {
+          "key": "何恩培@黑龙江大学",
+          "name": "何恩培"
+        },
+        {
+          "key": "信自强@黑龙江大学",
+          "name": "信自强"
+        },
+        {
+          "key": "魏全宏@黑龙江大学",
+          "name": "魏全宏"
+        }
+      ],
+      "predictedRank": 58,
+      "perf": 1463.52,
+      "preRating": 1708.43,
+      "muDelta": -5.7,
+      "predictedRankOfficial": 55,
+      "perfOfficial": 1477.29,
+      "preRatingOfficial": 1720.99,
+      "muDeltaOfficial": -2.24,
+      "rankOfficial": 83,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 90,
+      "name": "GPNU-Awei",
+      "org": "广东技术师范大学",
+      "solved": 2,
+      "penalty": 351,
+      "official": true,
+      "members": [
+        {
+          "key": "黄宇凡@广东技术师范大学",
+          "name": "黄宇凡"
+        },
+        {
+          "key": "李苇森@广东技术师范大学",
+          "name": "李苇森"
+        },
+        {
+          "key": "陈政柱@广东技术师范大学",
+          "name": "陈政柱"
+        }
+      ],
+      "predictedRank": 62,
+      "perf": 1451.8,
+      "preRating": 1692.53,
+      "muDelta": 4.47,
+      "predictedRankOfficial": 57,
+      "perfOfficial": 1471.39,
+      "preRatingOfficial": 1716.28,
+      "muDeltaOfficial": 7.04,
+      "rankOfficial": 84,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 91,
+      "name": "SZTU_developer",
+      "org": "深圳技术大学",
+      "solved": 2,
+      "penalty": 377,
+      "official": true,
+      "members": [
+        {
+          "key": "王正@深圳技术大学",
+          "name": "王正"
+        },
+        {
+          "key": "张家乐@深圳技术大学",
+          "name": "张家乐"
+        },
+        {
+          "key": "许榕鑫@深圳技术大学",
+          "name": "许榕鑫"
+        }
+      ],
+      "predictedRank": 109,
+      "perf": 1390.59,
+      "preRating": 1582.79,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 101,
+      "perfOfficial": 1400.32,
+      "preRatingOfficial": 1588.12,
+      "muDeltaOfficial": 26.28,
+      "rankOfficial": 85,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 92,
+      "name": "All the way south",
+      "org": "华南师范大学",
+      "solved": 2,
+      "penalty": 379,
+      "official": true,
+      "members": [
+        {
+          "key": "于昊炜@华南师范大学",
+          "name": "于昊炜"
+        },
+        {
+          "key": "朱宬华@华南师范大学",
+          "name": "朱宬华"
+        },
+        {
+          "key": "曾祥康@华南师范大学",
+          "name": "曾祥康"
+        }
+      ],
+      "predictedRank": 73,
+      "perf": 1419.32,
+      "preRating": 1644.14,
+      "muDelta": 4.26,
+      "predictedRankOfficial": 71,
+      "perfOfficial": 1431.07,
+      "preRatingOfficial": 1654.65,
+      "muDeltaOfficial": 7.67,
+      "rankOfficial": 86,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 93,
+      "name": "No-Panic Doubao Pro",
+      "org": "华北理工大学",
+      "solved": 2,
+      "penalty": 380,
+      "official": true,
+      "members": [
+        {
+          "key": "陈沿迁@华北理工大学",
+          "name": "陈沿迁"
+        },
+        {
+          "key": "陈宇宁@华北理工大学",
+          "name": "陈宇宁"
+        },
+        {
+          "key": "丰文政@华北理工大学",
+          "name": "丰文政"
+        }
+      ],
+      "predictedRank": 118,
+      "perf": 1372.48,
+      "preRating": 1560.3,
+      "muDelta": 39.62,
+      "predictedRankOfficial": 110,
+      "perfOfficial": 1381.09,
+      "preRatingOfficial": 1564.88,
+      "muDeltaOfficial": 44.87,
+      "rankOfficial": 87,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 94,
+      "name": "XiXi",
+      "org": "西华大学",
+      "solved": 2,
+      "penalty": 388,
+      "official": true,
+      "members": [
+        {
+          "key": "石浩楠@西华大学",
+          "name": "石浩楠"
+        },
+        {
+          "key": "吴岚轩@西华大学",
+          "name": "吴岚轩"
+        },
+        {
+          "key": "刘馨阳@西华大学",
+          "name": "刘馨阳"
+        }
+      ],
+      "predictedRank": 33,
+      "perf": 1533.1,
+      "preRating": 1854.36,
+      "muDelta": -36.85,
+      "predictedRankOfficial": 32,
+      "perfOfficial": 1559.45,
+      "preRatingOfficial": 1892.92,
+      "muDeltaOfficial": -38.98,
+      "rankOfficial": 88,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 95,
+      "name": "Aren't Slacking Off",
+      "org": "华中科技大学",
+      "solved": 2,
+      "penalty": 410,
+      "official": true,
+      "members": [
+        {
+          "key": "郭际泽@华中科技大学",
+          "name": "郭际泽"
+        },
+        {
+          "key": "李凌凯@华中科技大学",
+          "name": "李凌凯"
+        },
+        {
+          "key": "赵佳义@华中科技大学",
+          "name": "赵佳义"
+        }
+      ],
+      "predictedRank": 22,
+      "perf": 1599.65,
+      "preRating": 1974.6,
+      "muDelta": -73.82,
+      "predictedRankOfficial": 27,
+      "perfOfficial": 1608.38,
+      "preRatingOfficial": 1983.55,
+      "muDeltaOfficial": -71.15,
+      "rankOfficial": 89,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 96,
+      "name": "Greedy is all about guessing",
+      "org": "天津工业大学",
+      "solved": 1,
+      "penalty": 9,
+      "official": true,
+      "members": [
+        {
+          "key": "韩奕霖@天津工业大学",
+          "name": "韩奕霖"
+        },
+        {
+          "key": "吴一凡@天津工业大学",
+          "name": "吴一凡"
+        },
+        {
+          "key": "姚盛源@天津工业大学",
+          "name": "姚盛源"
+        }
+      ],
+      "predictedRank": 116,
+      "perf": 1363.37,
+      "preRating": 1562.98,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 108,
+      "perfOfficial": 1370.45,
+      "preRatingOfficial": 1567.16,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 90,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 96,
+      "name": "Untitled_Dream",
+      "org": "浙江师范大学",
+      "solved": 1,
+      "penalty": 9,
+      "official": true,
+      "members": [
+        {
+          "key": "杨琳@浙江师范大学",
+          "name": "杨琳"
+        },
+        {
+          "key": "沈睿@浙江师范大学",
+          "name": "沈睿"
+        },
+        {
+          "key": "曹海@浙江师范大学",
+          "name": "曹海"
+        }
+      ],
+      "predictedRank": 55,
+      "perf": 1445.62,
+      "preRating": 1712.51,
+      "muDelta": -17.57,
+      "predictedRankOfficial": 54,
+      "perfOfficial": 1455.63,
+      "preRatingOfficial": 1722.93,
+      "muDeltaOfficial": -15.01,
+      "rankOfficial": 90,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 98,
+      "name": "Dawn",
+      "org": "长江大学",
+      "solved": 1,
+      "penalty": 10,
+      "official": true,
+      "members": [
+        {
+          "key": "纪方嘉@长江大学",
+          "name": "纪方嘉"
+        },
+        {
+          "key": "童炎@长江大学",
+          "name": "童炎"
+        },
+        {
+          "key": "任文@长江大学",
+          "name": "任文"
+        }
+      ],
+      "predictedRank": 120,
+      "perf": 1353.74,
+      "preRating": 1557.81,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 107,
+      "perfOfficial": 1362.85,
+      "preRatingOfficial": 1567.6,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 92,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 98,
+      "name": "UU Accelerator",
+      "org": "香港浸会大学",
+      "solved": 1,
+      "penalty": 10,
+      "official": true,
+      "members": [
+        {
+          "key": "张旭景@香港浸会大学",
+          "name": "张旭景"
+        },
+        {
+          "key": "印无忧@香港浸会大学",
+          "name": "印无忧"
+        },
+        {
+          "key": "姜蒙@香港浸会大学",
+          "name": "姜蒙"
+        }
+      ],
+      "predictedRank": 132,
+      "perf": 1333.77,
+      "preRating": 1518.28,
+      "muDelta": 25.22,
+      "predictedRankOfficial": 120,
+      "perfOfficial": 1341.98,
+      "preRatingOfficial": 1526.32,
+      "muDeltaOfficial": 28.08,
+      "rankOfficial": 92,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 100,
+      "name": "Array of Cqupt Monkeys",
+      "org": "重庆邮电大学",
+      "solved": 1,
+      "penalty": 11,
+      "official": true,
+      "members": [
+        {
+          "key": "冯禹杰@重庆邮电大学",
+          "name": "冯禹杰"
+        },
+        {
+          "key": "林新雨@重庆邮电大学",
+          "name": "林新雨"
+        },
+        {
+          "key": "汪炜杰@重庆邮电大学",
+          "name": "汪炜杰"
+        }
+      ],
+      "predictedRank": 82,
+      "perf": 1377.79,
+      "preRating": 1614.62,
+      "muDelta": -1.99,
+      "predictedRankOfficial": 79,
+      "perfOfficial": 1386.68,
+      "preRatingOfficial": 1625.43,
+      "muDeltaOfficial": -0.21,
+      "rankOfficial": 94,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 100,
+      "name": "HKOI 4",
+      "org": "Hong Kong Olympiad in Informatics",
+      "solved": 1,
+      "penalty": 11,
+      "official": false,
+      "members": [
+        {
+          "key": "cheung kin sun@Hong Kong Olympiad in Informatics",
+          "name": "Cheung Kin Sun"
+        },
+        {
+          "key": "chan cary sirui@Hong Kong Olympiad in Informatics",
+          "name": "Chan Cary Sirui"
+        },
+        {
+          "key": "lung ping him@Hong Kong Olympiad in Informatics",
+          "name": "Lung Ping Him"
+        }
+      ],
+      "predictedRank": 85,
+      "perf": 1374.59,
+      "preRating": 1608.91,
+      "muDelta": 0.15,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 100,
+      "name": "Icecream!",
+      "org": "山东大学",
+      "solved": 1,
+      "penalty": 11,
+      "official": true,
+      "members": [
+        {
+          "key": "毛洋洋@山东大学",
+          "name": "毛洋洋"
+        },
+        {
+          "key": "刘少卿@山东大学",
+          "name": "刘少卿"
+        },
+        {
+          "key": "侯佳昊@山东大学",
+          "name": "侯佳昊"
+        }
+      ],
+      "predictedRank": 74,
+      "perf": 1394.32,
+      "preRating": 1643.76,
+      "muDelta": -8.54,
+      "predictedRankOfficial": 72,
+      "perfOfficial": 1399.87,
+      "preRatingOfficial": 1648.72,
+      "muDeltaOfficial": -5.46,
+      "rankOfficial": 94,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 100,
+      "name": "Just AC",
+      "org": "中北大学",
+      "solved": 1,
+      "penalty": 11,
+      "official": true,
+      "members": [
+        {
+          "key": "刘灿阳@中北大学",
+          "name": "刘灿阳"
+        },
+        {
+          "key": "谭炯豪@中北大学",
+          "name": "谭炯豪"
+        },
+        {
+          "key": "陈文博@中北大学",
+          "name": "陈文博"
+        }
+      ],
+      "predictedRank": 119,
+      "perf": 1347.05,
+      "preRating": 1558.38,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 112,
+      "perfOfficial": 1353.03,
+      "preRatingOfficial": 1563.85,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 94,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 100,
+      "name": "NYU Shanghai Team 2",
+      "org": "上海纽约大学",
+      "solved": 1,
+      "penalty": 11,
+      "official": true,
+      "members": [
+        {
+          "key": "张书恺@上海纽约大学",
+          "name": "张书恺"
+        },
+        {
+          "key": "许诗栋@上海纽约大学",
+          "name": "许诗栋"
+        },
+        {
+          "key": "yuhang hou@上海纽约大学",
+          "name": "Yuhang Hou"
+        }
+      ],
+      "predictedRank": 69,
+      "perf": 1405.34,
+      "preRating": 1662.88,
+      "muDelta": -8.46,
+      "predictedRankOfficial": 67,
+      "perfOfficial": 1414.75,
+      "preRatingOfficial": 1674.61,
+      "muDeltaOfficial": -5.93,
+      "rankOfficial": 94,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 100,
+      "name": "noircloud",
+      "org": "广东东软学院",
+      "solved": 1,
+      "penalty": 11,
+      "official": true,
+      "members": [
+        {
+          "key": "朱梓瀚@广东东软学院",
+          "name": "朱梓瀚"
+        },
+        {
+          "key": "黄琳峰@广东东软学院",
+          "name": "黄琳峰"
+        },
+        {
+          "key": "黄炜填@广东东软学院",
+          "name": "黄炜填"
+        }
+      ],
+      "predictedRank": 72,
+      "perf": 1399.5,
+      "preRating": 1652.77,
+      "muDelta": -10.54,
+      "predictedRankOfficial": 68,
+      "perfOfficial": 1408.51,
+      "preRatingOfficial": 1663.8,
+      "muDeltaOfficial": -8.81,
+      "rankOfficial": 94,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 106,
+      "name": "threenoobs",
+      "org": "中南林业科技大学",
+      "solved": 1,
+      "penalty": 12,
+      "official": true,
+      "members": [
+        {
+          "key": "肖俊杰@中南林业科技大学",
+          "name": "肖俊杰"
+        },
+        {
+          "key": "孙齐政@中南林业科技大学",
+          "name": "孙齐政"
+        },
+        {
+          "key": "何文杰@中南林业科技大学",
+          "name": "何文杰"
+        }
+      ],
+      "predictedRank": 129,
+      "perf": 1307.99,
+      "preRating": 1525.88,
+      "muDelta": 28.03,
+      "predictedRankOfficial": 121,
+      "perfOfficial": 1312.44,
+      "preRatingOfficial": 1525.92,
+      "muDeltaOfficial": 32.32,
+      "rankOfficial": 99,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 107,
+      "name": "Zutto Acceptednakade Iinoni.",
+      "org": "宁波工程学院",
+      "solved": 1,
+      "penalty": 13,
+      "official": true,
+      "members": [
+        {
+          "key": "郑坚淳@宁波工程学院",
+          "name": "郑坚淳"
+        },
+        {
+          "key": "叶德坚@宁波工程学院",
+          "name": "叶德坚"
+        },
+        {
+          "key": "陈南丞@宁波工程学院",
+          "name": "陈南丞"
+        }
+      ],
+      "predictedRank": 117,
+      "perf": 1324.48,
+      "preRating": 1561.8,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 105,
+      "perfOfficial": 1332.08,
+      "preRatingOfficial": 1568.72,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 100,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 107,
+      "name": "robust driver",
+      "org": "北京工业大学",
+      "solved": 1,
+      "penalty": 13,
+      "official": true,
+      "members": [
+        {
+          "key": "陈镇岳@北京工业大学",
+          "name": "陈镇岳"
+        },
+        {
+          "key": "齐相龙@北京工业大学",
+          "name": "齐相龙"
+        },
+        {
+          "key": "张晋赫@北京工业大学",
+          "name": "张晋赫"
+        }
+      ],
+      "predictedRank": 126,
+      "perf": 1309.8,
+      "preRating": 1535.86,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 118,
+      "perfOfficial": 1316.16,
+      "preRatingOfficial": 1540.43,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 100,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 109,
+      "name": "Mooncross in Mistweave",
+      "org": "福建师范大学",
+      "solved": 1,
+      "penalty": 15,
+      "official": true,
+      "members": [
+        {
+          "key": "欧阳圣默@福建师范大学",
+          "name": "欧阳圣默"
+        },
+        {
+          "key": "徐大淦@福建师范大学",
+          "name": "徐大淦"
+        },
+        {
+          "key": "周傲宇@福建师范大学",
+          "name": "周傲宇"
+        }
+      ],
+      "predictedRank": 128,
+      "perf": 1300.1,
+      "preRating": 1531.76,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 119,
+      "perfOfficial": 1305.56,
+      "preRatingOfficial": 1536.41,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 102,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 110,
+      "name": "Be AKed by ICPC",
+      "org": "哈尔滨工业大学(威海)",
+      "solved": 1,
+      "penalty": 18,
+      "official": true,
+      "members": [
+        {
+          "key": "李博文@哈尔滨工业大学(威海)",
+          "name": "李博文"
+        },
+        {
+          "key": "崔彦宇@哈尔滨工业大学(威海)",
+          "name": "崔彦宇"
+        },
+        {
+          "key": "刘佳豪@哈尔滨工业大学(威海)",
+          "name": "刘佳豪"
+        }
+      ],
+      "predictedRank": 131,
+      "perf": 1289.27,
+      "preRating": 1519.34,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 117,
+      "perfOfficial": 1304.46,
+      "preRatingOfficial": 1541.8,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 103,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 111,
+      "name": "ios::sync_with_think",
+      "org": "广东工业大学揭阳校区",
+      "solved": 1,
+      "penalty": 19,
+      "official": true,
+      "members": [
+        {
+          "key": "陈智谦@广东工业大学揭阳校区",
+          "name": "陈智谦"
+        },
+        {
+          "key": "陈锦涛@广东工业大学揭阳校区",
+          "name": "陈锦涛"
+        },
+        {
+          "key": "宋阳@广东工业大学揭阳校区",
+          "name": "宋阳"
+        }
+      ],
+      "predictedRank": 123,
+      "perf": 1303.71,
+      "preRating": 1550.55,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 113,
+      "perfOfficial": 1307.98,
+      "preRatingOfficial": 1554.87,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 104,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 112,
+      "name": "SleepToAC",
+      "org": "西南大学",
+      "solved": 1,
+      "penalty": 20,
+      "official": true,
+      "members": [
+        {
+          "key": "刘子毅@西南大学",
+          "name": "刘子毅"
+        },
+        {
+          "key": "周佰涛@西南大学",
+          "name": "周佰涛"
+        },
+        {
+          "key": "杨竣胜@西南大学",
+          "name": "杨竣胜"
+        }
+      ],
+      "predictedRank": 127,
+      "perf": 1289.39,
+      "preRating": 1532.58,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 115,
+      "perfOfficial": 1298.52,
+      "preRatingOfficial": 1545.92,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 105,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 112,
+      "name": "The Doctor's team and there ape-man captain",
+      "org": "五邑大学",
+      "solved": 1,
+      "penalty": 20,
+      "official": true,
+      "members": [
+        {
+          "key": "冯凯翔@五邑大学",
+          "name": "冯凯翔"
+        },
+        {
+          "key": "李晟熙@五邑大学",
+          "name": "李晟熙"
+        },
+        {
+          "key": "黄达聪@五邑大学",
+          "name": "黄达聪"
+        }
+      ],
+      "predictedRank": 111,
+      "perf": 1316.36,
+      "preRating": 1577.31,
+      "muDelta": -14.53,
+      "predictedRankOfficial": 99,
+      "perfOfficial": 1324.25,
+      "preRatingOfficial": 1588.35,
+      "muDeltaOfficial": -13.39,
+      "rankOfficial": 105,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 114,
+      "name": "Little sheep",
+      "org": "河南师范大学",
+      "solved": 1,
+      "penalty": 21,
+      "official": true,
+      "members": [
+        {
+          "key": "闫浩文@河南师范大学",
+          "name": "闫浩文"
+        },
+        {
+          "key": "谢添点@河南师范大学",
+          "name": "谢添点"
+        },
+        {
+          "key": "阴珂珂@河南师范大学",
+          "name": "阴珂珂"
+        }
+      ],
+      "predictedRank": 124,
+      "perf": 1290.88,
+      "preRating": 1547.36,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 114,
+      "perfOfficial": 1293.72,
+      "preRatingOfficial": 1551.78,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 107,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 115,
+      "name": "Universum",
+      "org": "Hou Kong Middle School",
+      "solved": 1,
+      "penalty": 26,
+      "official": false,
+      "members": [
+        {
+          "key": "choi sai chi@Hou Kong Middle School",
+          "name": "CHOI Sai Chi"
+        },
+        {
+          "key": "chen chio cheong@Hou Kong Middle School",
+          "name": "CHEN Chio Cheong"
+        },
+        {
+          "key": "wong chi pang@Hou Kong Middle School",
+          "name": "WONG Chi Pang"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1314.65,
+      "preRating": 1590.85,
+      "muDelta": -22.46,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 116,
+      "name": "Truly miracle algorithms but no space to write",
+      "org": "太原科技大学",
+      "solved": 1,
+      "penalty": 28,
+      "official": true,
+      "members": [
+        {
+          "key": "xingyu xu@太原科技大学",
+          "name": "Xingyu Xu"
+        },
+        {
+          "key": "sijie xun@太原科技大学",
+          "name": "Sijie Xun"
+        },
+        {
+          "key": "zhenchen wang@太原科技大学",
+          "name": "Zhenchen Wang"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1311.29,
+      "preRating": 1590.85,
+      "muDelta": -24.21,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1314.26,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -19.89,
+      "rankOfficial": 108,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 117,
+      "name": "SILVER MINER PRO",
+      "org": "澳门城市大学",
+      "solved": 1,
+      "penalty": 30,
+      "official": true,
+      "members": [
+        {
+          "key": "muhan hao@澳门城市大学",
+          "name": "Muhan Hao"
+        },
+        {
+          "key": "mingxu zhu@澳门城市大学",
+          "name": "Mingxu Zhu"
+        },
+        {
+          "key": "fangyuan jian@澳门城市大学",
+          "name": "Fangyuan Jian"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1307.92,
+      "preRating": 1590.85,
+      "muDelta": -25.96,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1310.39,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -21.9,
+      "rankOfficial": 109,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 118,
+      "name": "Carrot",
+      "org": "上海海洋大学",
+      "solved": 1,
+      "penalty": 31,
+      "official": true,
+      "members": [
+        {
+          "key": "周子恒@上海海洋大学",
+          "name": "周子恒"
+        },
+        {
+          "key": "周郁涵@上海海洋大学",
+          "name": "周郁涵"
+        },
+        {
+          "key": "吕天佑@上海海洋大学",
+          "name": "吕天佑"
+        }
+      ],
+      "predictedRank": 135,
+      "perf": 1248.58,
+      "preRating": 1504.18,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 125,
+      "perfOfficial": 1257.26,
+      "preRatingOfficial": 1514.23,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 110,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 118,
+      "name": "SKD 45167",
+      "org": "山东科技大学",
+      "solved": 1,
+      "penalty": 31,
+      "official": true,
+      "members": [
+        {
+          "key": "张特尔@山东科技大学",
+          "name": "张特尔"
+        },
+        {
+          "key": "徐学辉@山东科技大学",
+          "name": "徐学辉"
+        },
+        {
+          "key": "朱继涛@山东科技大学",
+          "name": "朱继涛"
+        }
+      ],
+      "predictedRank": 115,
+      "perf": 1287.85,
+      "preRating": 1565.44,
+      "muDelta": -22.77,
+      "predictedRankOfficial": 106,
+      "perfOfficial": 1291.81,
+      "preRatingOfficial": 1568.32,
+      "muDeltaOfficial": -19.35,
+      "rankOfficial": 110,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 120,
+      "name": "nxVPCP 'or'1'='1",
+      "org": "澳门大学",
+      "solved": 1,
+      "penalty": 32,
+      "official": true,
+      "members": [
+        {
+          "key": "lao un@澳门大学",
+          "name": "LAO UN"
+        },
+        {
+          "key": "chan u hun@澳门大学",
+          "name": "Chan U Hun"
+        },
+        {
+          "key": "zhou zi mo@澳门大学",
+          "name": "ZHOU ZI MO"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1297.76,
+      "preRating": 1590.85,
+      "muDelta": -31.24,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1298.71,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -27.98,
+      "rankOfficial": 112,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 121,
+      "name": "Good Luck!",
+      "org": "中国石油大学(北京)克拉玛依校区",
+      "solved": 1,
+      "penalty": 33,
+      "official": true,
+      "members": [
+        {
+          "key": "董玉贤@中国石油大学(北京)克拉玛依校区",
+          "name": "董玉贤"
+        },
+        {
+          "key": "梁博雅@中国石油大学(北京)克拉玛依校区",
+          "name": "梁博雅"
+        },
+        {
+          "key": "刘东升@中国石油大学(北京)克拉玛依校区",
+          "name": "刘东升"
+        }
+      ],
+      "predictedRank": 130,
+      "perf": 1246.17,
+      "preRating": 1519.45,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 122,
+      "perfOfficial": 1249.81,
+      "preRatingOfficial": 1524.13,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 113,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 122,
+      "name": "Java++3",
+      "org": "香港城市大学",
+      "solved": 1,
+      "penalty": 34,
+      "official": false,
+      "members": [
+        {
+          "key": "chi yin cheung@香港城市大学",
+          "name": "Chi Yin Cheung"
+        },
+        {
+          "key": "chunqiun tsang@香港城市大学",
+          "name": "Chunqiun Tsang"
+        },
+        {
+          "key": "lap tsun chan@香港城市大学",
+          "name": "Lap Tsun Chan"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1290.93,
+      "preRating": 1590.85,
+      "muDelta": -34.79,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 122,
+      "name": "SegFault Maigo",
+      "org": "上海大学",
+      "solved": 1,
+      "penalty": 34,
+      "official": true,
+      "members": [
+        {
+          "key": "刘夏宏@上海大学",
+          "name": "刘夏宏"
+        },
+        {
+          "key": "张世逸@上海大学",
+          "name": "张世逸"
+        },
+        {
+          "key": "闵彦超@上海大学",
+          "name": "闵彦超"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1290.93,
+      "preRating": 1590.85,
+      "muDelta": -34.79,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1290.84,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -32.07,
+      "rankOfficial": 114,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 124,
+      "name": "The Midas Touch",
+      "org": "香港理工大学",
+      "solved": 1,
+      "penalty": 36,
+      "official": true,
+      "members": [
+        {
+          "key": "haochen shi@香港理工大学",
+          "name": "Haochen Shi"
+        },
+        {
+          "key": "jingbo huang@香港理工大学",
+          "name": "Jingbo Huang"
+        },
+        {
+          "key": "薛腾@香港理工大学",
+          "name": "薛腾"
+        }
+      ],
+      "predictedRank": 110,
+      "perf": 1277.92,
+      "preRating": 1582.16,
+      "muDelta": -36.8,
+      "predictedRankOfficial": 103,
+      "perfOfficial": 1281.91,
+      "preRatingOfficial": 1583.75,
+      "muDeltaOfficial": -32.86,
+      "rankOfficial": 115,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 125,
+      "name": "I All Accepted",
+      "org": "昆明理工大学",
+      "solved": 1,
+      "penalty": 37,
+      "official": true,
+      "members": [
+        {
+          "key": "刘浩天@昆明理工大学",
+          "name": "刘浩天"
+        },
+        {
+          "key": "李康@昆明理工大学",
+          "name": "李康"
+        },
+        {
+          "key": "卢宇翔@昆明理工大学",
+          "name": "卢宇翔"
+        }
+      ],
+      "predictedRank": 77,
+      "perf": 1309.69,
+      "preRating": 1631.51,
+      "muDelta": -42.59,
+      "predictedRankOfficial": 76,
+      "perfOfficial": 1315.82,
+      "preRatingOfficial": 1637.23,
+      "muDeltaOfficial": -38.69,
+      "rankOfficial": 116,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 126,
+      "name": "998244353",
+      "org": "武汉理工大学",
+      "solved": 1,
+      "penalty": 39,
+      "official": true,
+      "members": [
+        {
+          "key": "jiaxin li@武汉理工大学",
+          "name": "Jiaxin Li"
+        },
+        {
+          "key": "yaqi wang@武汉理工大学",
+          "name": "Yaqi Wang"
+        },
+        {
+          "key": "yangjing wang@武汉理工大学",
+          "name": "Yangjing Wang"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1277.13,
+      "preRating": 1590.85,
+      "muDelta": -41.97,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1278.9,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -38.28,
+      "rankOfficial": 117,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 127,
+      "name": "Mechanical Wings",
+      "org": "河北工业大学",
+      "solved": 1,
+      "penalty": 40,
+      "official": true,
+      "members": [
+        {
+          "key": "王若豪@河北工业大学",
+          "name": "王若豪"
+        },
+        {
+          "key": "赵子涵@河北工业大学",
+          "name": "赵子涵"
+        },
+        {
+          "key": "wen huang@河北工业大学",
+          "name": "Wen Huang"
+        }
+      ],
+      "predictedRank": 88,
+      "perf": 1279.61,
+      "preRating": 1598.98,
+      "muDelta": -39.68,
+      "predictedRankOfficial": 86,
+      "perfOfficial": 1283.6,
+      "preRatingOfficial": 1602.8,
+      "muDeltaOfficial": -36.33,
+      "rankOfficial": 118,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 127,
+      "name": "wawawawa...",
+      "org": "南阳理工学院",
+      "solved": 1,
+      "penalty": 40,
+      "official": true,
+      "members": [
+        {
+          "key": "宋忱宪@南阳理工学院",
+          "name": "宋忱宪"
+        },
+        {
+          "key": "任吉康@南阳理工学院",
+          "name": "任吉康"
+        },
+        {
+          "key": "姚涵旭@南阳理工学院",
+          "name": "姚涵旭"
+        }
+      ],
+      "predictedRank": 125,
+      "perf": 1238.31,
+      "preRating": 1542.69,
+      "muDelta": -34.95,
+      "predictedRankOfficial": 116,
+      "perfOfficial": 1240.01,
+      "preRatingOfficial": 1543.1,
+      "muDeltaOfficial": -31.55,
+      "rankOfficial": 118,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 129,
+      "name": "I-ACE",
+      "org": "New Mongol Institute of Technology",
+      "solved": 1,
+      "penalty": 41,
+      "official": true,
+      "members": [
+        {
+          "key": "amarsaikhan badamragchaa@New Mongol Institute of Technology",
+          "name": "Amarsaikhan Badamragchaa"
+        },
+        {
+          "key": "chingunjav ariuntur@New Mongol Institute of Technology",
+          "name": "Chingunjav Ariuntur"
+        },
+        {
+          "key": "enkhbaatar bayarsaikhan@New Mongol Institute of Technology",
+          "name": "Enkhbaatar Bayarsaikhan"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1266.63,
+      "preRating": 1590.85,
+      "muDelta": -47.43,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1266.76,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -44.59,
+      "rankOfficial": 120,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 129,
+      "name": "sict3",
+      "org": "蒙古科技大学",
+      "solved": 1,
+      "penalty": 41,
+      "official": true,
+      "members": [
+        {
+          "key": "munkhtur munkhbagana@蒙古科技大学",
+          "name": "Munkhtur MUNKHBAGANA"
+        },
+        {
+          "key": "purevdorj tserenpuntsag@蒙古科技大学",
+          "name": "Purevdorj TSERENPUNTSAG"
+        },
+        {
+          "key": "purev-ochir bilguuntuguldur@蒙古科技大学",
+          "name": "Purev-Ochir BILGUUNTUGULDUR"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1266.63,
+      "preRating": 1590.85,
+      "muDelta": -47.43,
+      "predictedRankOfficial": 89,
+      "perfOfficial": 1266.76,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -44.59,
+      "rankOfficial": 120,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 131,
+      "name": "SZU_OvO",
+      "org": "深圳大学",
+      "solved": 1,
+      "penalty": 43,
+      "official": true,
+      "members": [
+        {
+          "key": "岑健锋@深圳大学",
+          "name": "岑健锋"
+        },
+        {
+          "key": "熊鑫辉@深圳大学",
+          "name": "熊鑫辉"
+        },
+        {
+          "key": "张楠@深圳大学",
+          "name": "张楠"
+        }
+      ],
+      "predictedRank": 49,
+      "perf": 1368.04,
+      "preRating": 1735.71,
+      "muDelta": -70.02,
+      "predictedRankOfficial": 51,
+      "perfOfficial": 1369.7,
+      "preRatingOfficial": 1739.02,
+      "muDeltaOfficial": -68.1,
+      "rankOfficial": 122,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 132,
+      "name": "Can't solve it? Nap it away!",
+      "org": "江西农业大学",
+      "solved": 1,
+      "penalty": 51,
+      "official": true,
+      "members": [
+        {
+          "key": "黄馨瑶@江西农业大学",
+          "name": "黄馨瑶"
+        },
+        {
+          "key": "余政远@江西农业大学",
+          "name": "余政远"
+        },
+        {
+          "key": "王海玉@江西农业大学",
+          "name": "王海玉"
+        }
+      ],
+      "predictedRank": 133,
+      "perf": 1195.34,
+      "preRating": 1514.16,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 124,
+      "perfOfficial": 1195.27,
+      "preRatingOfficial": 1516.56,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 123,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 133,
+      "name": "Cute Cat Dad",
+      "org": "西安电子科技大学",
+      "solved": 1,
+      "penalty": 55,
+      "official": true,
+      "members": [
+        {
+          "key": "高琦@西安电子科技大学",
+          "name": "高琦"
+        },
+        {
+          "key": "薛思宇@西安电子科技大学",
+          "name": "薛思宇"
+        },
+        {
+          "key": "顾梓骞@西安电子科技大学",
+          "name": "顾梓骞"
+        }
+      ],
+      "predictedRank": 70,
+      "perf": 1303.94,
+      "preRating": 1656.93,
+      "muDelta": -62.39,
+      "predictedRankOfficial": 70,
+      "perfOfficial": 1305.61,
+      "preRatingOfficial": 1661.48,
+      "muDeltaOfficial": -61.12,
+      "rankOfficial": 124,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 134,
+      "name": "Long may the sun shine",
+      "org": "台州学院",
+      "solved": 1,
+      "penalty": 59,
+      "official": true,
+      "members": [
+        {
+          "key": "王若琰@台州学院",
+          "name": "王若琰"
+        },
+        {
+          "key": "章智超@台州学院",
+          "name": "章智超"
+        },
+        {
+          "key": "俞熠聪@台州学院",
+          "name": "俞熠聪"
+        }
+      ],
+      "predictedRank": 136,
+      "perf": 1157.45,
+      "preRating": 1479.64,
+      "muDelta": 21.92,
+      "predictedRankOfficial": 126,
+      "perfOfficial": 1156.6,
+      "preRatingOfficial": 1483.36,
+      "muDeltaOfficial": 24.7,
+      "rankOfficial": 125,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 135,
+      "name": "gagagugu",
+      "org": "Pui Ching Middle School",
+      "solved": 1,
+      "penalty": 63,
+      "official": false,
+      "members": [
+        {
+          "key": "wong in son@Pui Ching Middle School",
+          "name": "WONG In Son"
+        },
+        {
+          "key": "cheong sio fong@Pui Ching Middle School",
+          "name": "CHEONG Sio Fong"
+        },
+        {
+          "key": "lin yu feng@Pui Ching Middle School",
+          "name": "LIN Yu Feng"
+        }
+      ],
+      "predictedRank": 90,
+      "perf": 1245.13,
+      "preRating": 1590.85,
+      "muDelta": -58.61,
+      "predictedRankOfficial": null,
+      "perfOfficial": null,
+      "preRatingOfficial": null,
+      "muDeltaOfficial": null,
+      "rankOfficial": null,
+      "knownMembersOfficial": null
+    },
+    {
+      "rank": 136,
+      "name": "HKBU_2",
+      "org": "香港浸会大学",
+      "solved": 1,
+      "penalty": 76,
+      "official": true,
+      "members": [
+        {
+          "key": "timur ten@香港浸会大学",
+          "name": "Timur Ten"
+        },
+        {
+          "key": "feiyi fang@香港浸会大学",
+          "name": "Feiyi Fang"
+        },
+        {
+          "key": "jiafu guo@香港浸会大学",
+          "name": "Jiafu Guo"
+        }
+      ],
+      "predictedRank": 114,
+      "perf": 1220.92,
+      "preRating": 1566.13,
+      "muDelta": -55.93,
+      "predictedRankOfficial": 109,
+      "perfOfficial": 1221.24,
+      "preRatingOfficial": 1566.17,
+      "muDeltaOfficial": -53.01,
+      "rankOfficial": 126,
+      "knownMembersOfficial": 1
+    }
+  ],
+  "contestMetrics": {
+    "version": "contest-metrics-v7",
+    "awardsMedals": true,
+    "effectiveTeamCount": 126,
+    "zeroHistoryTeamCount": 10,
+    "partialHistoryTeamCount": 14,
+    "weirdnessTeamCount": 102,
+    "historyCoverage": 0.8095238095238095,
+    "medalCutoffs": {
+      "gold": 13,
+      "silver": 26,
+      "bronze": 39
+    },
+    "strength": {
+      "bronze": 1964.95,
+      "silver": 2124.71,
+      "gold": 2377.21,
+      "top3": 2836.89,
+      "top10": 2464.87,
+      "overall": 1799.4
+    },
+    "weirdness": 4.32
+  }
+}

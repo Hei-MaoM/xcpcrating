@@ -12,6 +12,13 @@ Two per-contest metrics are computed:
   team (ties in prediction count as 0.5).
 * spearman -- Spearman rank correlation between negated predicted scores and
   actual ranks (so that "stronger prediction" aligns with "smaller rank").
+
+The review metric follows the XCPC Sight post-contest review convention: the
+correlation is evaluated only on effective rows (participated, rostered teams
+with a current score), then ranks are recomputed inside that set.  The latter
+is equivalent to passing the filtered values to scipy's average-tie
+Spearman implementation, but keeping the filtering here makes the sample
+definition explicit and shared by all backtest metrics.
 """
 
 from collections import defaultdict
@@ -71,6 +78,51 @@ def spearman(predicted_scores, actual_ranks):
     return _spearman_numpy(neg_scores, actual_ranks)
 
 
+def metric_pairs(predicted_scores, teams):
+    """Return effective ``(score, actual_rank)`` pairs for review metrics.
+
+    A standings row is effective only when it represents a participated team
+    with at least one roster member and a finite current prediction.  Rows
+    without activity or without a roster are display rows, not observations;
+    including them would assign artificial predictions and depress the review
+    correlation.  The helper intentionally does not filter by ``official``:
+    the review metric describes the observed active field, matching XCPC
+    Sight's active-team rule.
+    """
+    pairs = []
+    for score, team in zip(predicted_scores, teams):
+        if not getattr(team, "participated", True):
+            continue
+        if not getattr(team, "members", ()):
+            continue
+        rank = getattr(team, "rank", None)
+        if rank is None:
+            continue
+        try:
+            score = float(score)
+        except (TypeError, ValueError):
+            continue
+        if not np.isfinite(score):
+            continue
+        pairs.append((score, rank))
+    return pairs
+
+
+def spearman_for_teams(predicted_scores, teams):
+    """XCPC Sight-compatible Spearman review metric for a contest.
+
+    Returns ``None`` when the effective sample has fewer than two rows or has
+    no rank variation.  Ties are handled as average ranks by ``spearman``.
+    """
+    pairs = metric_pairs(predicted_scores, teams)
+    if len(pairs) < 2:
+        return None
+    scores, ranks = zip(*pairs)
+    if len(set(scores)) < 2 or len(set(ranks)) < 2:
+        return None
+    return spearman(scores, ranks)
+
+
 def pairwise_concordance(predicted_scores, actual_ranks):
     """Fraction of correctly-ordered team pairs (ties in prediction = 0.5)."""
     n = len(predicted_scores)
@@ -92,6 +144,15 @@ def pairwise_concordance(predicted_scores, actual_ranks):
     return agree / total
 
 
+def pairwise_concordance_for_teams(predicted_scores, teams):
+    """Pairwise concordance on the same effective review sample as Spearman."""
+    pairs = metric_pairs(predicted_scores, teams)
+    if not pairs:
+        return None
+    scores, ranks = zip(*pairs)
+    return pairwise_concordance(scores, ranks)
+
+
 def _contest_year(contest):
     return contest.start_at.year
 
@@ -107,11 +168,11 @@ def replay(contests, engine):
     per_contest = []
 
     for contest in contests:
-        ranks = [team.rank for team in contest.teams]
         scores = engine.predict_scores(contest)
 
-        conc = pairwise_concordance(scores, ranks)
-        spear = spearman(scores, ranks)
+        effective = metric_pairs(scores, contest.teams)
+        conc = pairwise_concordance_for_teams(scores, contest.teams)
+        spear = spearman_for_teams(scores, contest.teams)
 
         engine.process_contest(contest)
 
@@ -120,7 +181,10 @@ def replay(contests, engine):
                 "id": contest.id,
                 "category": contest.category,
                 "year": _contest_year(contest),
-                "teams": len(contest.teams),
+                # ``teams`` is the effective review sample, matching XCPC
+                # Sight. Keep the raw board size for diagnostics only.
+                "teams": len(effective),
+                "teams_total": len(contest.teams),
                 "concordance": conc,
                 "spearman": spear,
             }

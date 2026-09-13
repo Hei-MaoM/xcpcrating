@@ -1,25 +1,57 @@
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import { SKILL_AXIS_ORDER } from '../../lib/data'
 import { PeriodBoard } from './PeriodBoard'
 import { RatingsBoard } from './RatingsBoard'
+import { SkillBoard } from './SkillBoard'
+import { warmSkillBoard } from './skillBoardWorker'
 
-/** Default caliber 正式参赛; ?board=all / ?board=period select the other views. */
-type BoardKind = 'all' | 'official' | 'period'
+/** Default caliber 正式参赛; ?board=all / ?board=period / ?board=skill pick the other views. */
+type BoardKind = 'all' | 'official' | 'period' | 'skill'
 
 function readBoard(raw: string | null): BoardKind {
   if (raw === 'all') return 'all'
   if (raw === 'period') return 'period'
+  if (raw === 'skill') return 'skill'
   return 'official'
+}
+
+/**
+ * Warm the biggest asset the site has (one ~6 MB axis board) once the browser
+ * is idle, so opening the 维度榜单 tab renders immediately. Skipped when the
+ * visitor asked to save data or the connection is slow.
+ */
+function useSkillBoardPrefetch(): void {
+  useEffect(() => {
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string }
+    }).connection
+    if (connection?.saveData) return
+    if (connection?.effectiveType && /(^|-)2g$/.test(connection.effectiveType)) return
+    const warm = () => warmSkillBoard('official', 'overall', SKILL_AXIS_ORDER[0])
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void, options?: { timeout: number }) => number }).requestIdleCallback
+    if (idle) {
+      const handle = idle(warm, { timeout: 4000 })
+      return () => {
+        (window as Window & { cancelIdleCallback?: (handle: number) => void }).cancelIdleCallback?.(handle)
+      }
+    }
+    const timer = window.setTimeout(warm, 2500)
+    return () => window.clearTimeout(timer)
+  }, [])
 }
 
 const BOARD_HINT: Record<BoardKind, string> = {
   official: '仅计入正式参赛，打星（非正式）场次不计。',
   all: '全部成绩计入积分，含打星（非正式）场次。',
   period: '截至选定日期、有过正式参赛的选手，分数为当时的历史评分。',
+  skill: '按核心解法把题目归入七个维度，比较选手在不同维度上的长期能力。',
 }
 
 export default function LeaderboardPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const board = readBoard(searchParams.get('board'))
+  useSkillBoardPrefetch()
 
   // Switch board: persist in the URL and reset paging / period window so each
   // view opens clean (a stale page/from/to from another tab would mislead).
@@ -32,6 +64,13 @@ export default function LeaderboardPage() {
         merged.delete('page')
         merged.delete('from') // legacy param from the earlier range-based view
         if (next !== 'period') merged.delete('to')
+        // The seven-dimension board owns these; drop them when it is closed so
+        // the other boards never inherit a stale axis or search term.
+        if (next !== 'skill') {
+          merged.delete('axis')
+          merged.delete('caliber')
+          merged.delete('q')
+        }
         return merged
       },
       { replace: false },
@@ -75,12 +114,23 @@ export default function LeaderboardPage() {
             >
               时间段
             </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={board === 'skill'}
+              className={`board-tab ${board === 'skill' ? 'is-active' : ''}`}
+              onClick={() => selectBoard('skill')}
+            >
+              维度榜单
+            </button>
           </div>
-          <span className="board-tabs__hint">{BOARD_HINT[board]}</span>
+          {board !== 'skill' && <span className="board-tabs__hint">{BOARD_HINT[board]}</span>}
         </div>
 
         {board === 'period' ? (
           <PeriodBoard />
+        ) : board === 'skill' ? (
+          <SkillBoard />
         ) : (
           <RatingsBoard official={board === 'official'} />
         )}

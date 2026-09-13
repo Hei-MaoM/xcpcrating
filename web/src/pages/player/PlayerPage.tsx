@@ -10,7 +10,9 @@ import {
 import { formatDate, formatScore } from '../../lib/format'
 import { Caret, CountUp, Reveal, RuleDraw } from '../../components/ui'
 import { RatingChart } from '../../components/charts/RatingChart'
+import { PlayerSkillPanel } from './PlayerSkillPanel'
 import { bestRank, careerSpan, sortedByTime } from './stats'
+import { contestHref } from './playerPresentation'
 
 type LoadState =
   | { status: 'loading' }
@@ -221,6 +223,8 @@ function Dossier({ player }: { player: PlayerDetail }) {
         <MedalWall player={player} />
       </section>
 
+      <PlayerSkillPanel player={player} official={isOfficial} />
+
       {/* trajectory chart */}
       <section className="band--2">
         <div className="wrap" style={{ paddingTop: 56, paddingBottom: 56 }}>
@@ -286,17 +290,13 @@ function Dossier({ player }: { player: PlayerDetail }) {
                 const rankVal = isOfficial ? h.rankOfficial : h.rank
                 const teamCountVal = isOfficial ? h.teamCountOfficial : h.teamCount
                 return (
-                  <tr
-                    key={`${h.contestId}-${i}`}
-                    className="row-link"
-                    tabIndex={0}
-                    onClick={() => window.location.assign(`#/contest/${h.contestId}`)}
-                    onKeyDown={(e) =>
-                      e.key === 'Enter' && window.location.assign(`#/contest/${h.contestId}`)
-                    }
-                  >
+                  <tr key={`${h.contestId}-${i}`}>
                     <td className="dim tnum">{formatDate(h.startAt)}</td>
-                    <td style={{ fontWeight: 500 }}>{h.title}</td>
+                    <td style={{ fontWeight: 500 }}>
+                      <Link className="link-contest" to={contestHref(h.contestId)}>
+                        {h.title}
+                      </Link>
+                    </td>
                     <td className="muted">
                       <span className="team-name" style={{ fontSize: 15 }}>
                         {h.teamName}
@@ -346,12 +346,6 @@ export default function PlayerPage() {
   const { key } = useParams<{ key: string }>()
   const [state, setState] = useState<LoadState>({ status: 'loading' })
 
-  const [loadedKey, setLoadedKey] = useState<string | undefined>(undefined)
-  if (key !== loadedKey) {
-    setLoadedKey(key)
-    setState(key ? { status: 'loading' } : { status: 'notFound' })
-  }
-
   useEffect(() => {
     if (!key) return
     let cancelled = false
@@ -372,6 +366,35 @@ export default function PlayerPage() {
       cancelled = true
     }
   }, [key])
+
+  // Effects run after paint; avoid showing the previous player's dossier for
+  // one frame while a route transition starts loading the new shard.
+  if (state.status === 'ready' && state.player.key !== key) {
+    return (
+      <div className="page-enter">
+        <div className="state" role="status" aria-live="polite">
+          <p className="state__title">加载中…</p>
+          <p>正在读取选手档案。</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (!key) {
+    return (
+      <div className="page-enter">
+        <div className="state" role="status">
+          <p className="state__title">未找到该选手</p>
+          <p>缺少选手键值，无法读取档案。</p>
+          <p style={{ marginTop: 16 }}>
+            <Link className="btn" to="/">
+              去榜单查找
+            </Link>
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   if (state.status === 'loading') {
     return (

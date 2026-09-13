@@ -6,7 +6,7 @@ import { formatScoreInt } from '../../lib/format'
 import { tiedRanks } from '../../lib/rank'
 import { useDebounce } from '../../lib/useDebounce'
 
-const PAGE_SIZE = 100
+const PAGE_SIZE = 30
 
 /** A school row carrying its full-board rank (1224 ties on the rounded score). */
 interface RankedSchool extends SchoolRow {

@@ -14,6 +14,7 @@ interface SchoolFilterProps {
 }
 
 const ALL_LABEL = '全部学校'
+const INITIAL_MENU_LIMIT = 80
 
 /**
  * Light Luxury searchable school dropdown. Schools can number in the thousands,
@@ -47,6 +48,7 @@ export function SchoolFilter({ value, options, onChange, disabled }: SchoolFilte
   )
   const term = query.trim()
   const showAll = term === '' || ALL_LABEL.includes(term)
+  const visibleOptions = term ? filtered : filtered.slice(0, INITIAL_MENU_LIMIT)
 
   function pick(org: string | null) {
     onChange(org)
@@ -99,7 +101,7 @@ export function SchoolFilter({ value, options, onChange, disabled }: SchoolFilte
                 {value === null ? <span className="menu__tick">✓</span> : null}
               </button>
             ) : null}
-            {filtered.map((opt) => (
+            {visibleOptions.map((opt) => (
               <button
                 key={opt.org}
                 role="option"
@@ -117,6 +119,9 @@ export function SchoolFilter({ value, options, onChange, disabled }: SchoolFilte
             ))}
             {!showAll && filtered.length === 0 ? (
               <div className="menu__empty">无匹配学校</div>
+            ) : null}
+            {showAll && filtered.length > INITIAL_MENU_LIMIT ? (
+              <div className="menu__hint">输入学校名称以查看更多结果</div>
             ) : null}
           </div>
         </div>

@@ -250,8 +250,11 @@ def _assign_ranks(rows: list):
 
 
 def parse_contest(path: str, root: str, category: str,
-                  min_coverage: float, result: LoadResult):
-    """Parse one srk.json file. Returns a Contest or None (skipped)."""
+                  min_coverage: float, result: LoadResult, *, require_roster: bool = True):
+    """Parse a board; archive exporters may retain rows without player rosters.
+
+    Rating callers keep the default ``require_roster=True`` admission rule.
+    """
     rel = os.path.relpath(path, root)
     contest_id = rel[: -len(SRK_SUFFIX)] if rel.endswith(SRK_SUFFIX) else rel
     contest_id = contest_id.replace(os.sep, "/")
@@ -292,7 +295,7 @@ def parse_contest(path: str, root: str, category: str,
     # no rostered row at all is dropped as "no-roster"; the explicitly-supplied
     # ``min_coverage`` (default 0.0) can additionally reject a partially-rostered
     # board, recorded as "low-coverage" to keep the two causes distinguishable.
-    if rows_with_members < 1:
+    if require_roster and rows_with_members < 1:
         result.skipped.append(
             SkippedContest(contest_id, coverage,
                            SkippedContest.REASON_NO_ROSTER)

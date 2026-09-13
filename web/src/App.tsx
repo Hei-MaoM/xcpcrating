@@ -17,6 +17,7 @@ const ContestTrendsPage = lazy(
 )
 const PredictionsPage = lazy(() => import('./pages/predictions/PredictionsPage'))
 const PredictionPage = lazy(() => import('./pages/predictions/PredictionPage'))
+const ProblemsPage = lazy(() => import('./pages/problems/ProblemsPage'))
 // PlayerPage owns ECharts, so route splitting keeps the chart runtime entirely
 // out of the leaderboard's critical JavaScript chunk.
 const PlayerPage = lazy(() => import('./pages/player/PlayerPage'))
@@ -59,6 +60,7 @@ export default function App() {
               <Route path="/contest/:slug" element={<ContestDetailPage />} />
               <Route path="/predictions" element={<PredictionsPage />} />
               <Route path="/prediction/:slug" element={<PredictionPage />} />
+              <Route path="/problems" element={<ProblemsPage />} />
               <Route path="/player/:key" element={<PlayerPage />} />
               <Route path="/rules" element={<RulesPage />} />
               <Route path="*" element={<Navigate to="/" replace />} />

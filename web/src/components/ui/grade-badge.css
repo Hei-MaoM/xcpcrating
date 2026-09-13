@@ -1,0 +1,156 @@
+.grade-badge {
+  position: relative;
+  display: inline-flex;
+  min-width: 52px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0 11px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-sm);
+  background: var(--paper-sunk);
+  color: var(--ink-2);
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  box-shadow: inset 0 1px 0 oklch(100% 0 0 / 0.55);
+}
+
+.grade-badge--compact {
+  min-width: 28px;
+  height: 20px;
+  padding: 0 7px;
+  font-family: var(--sans);
+  font-size: 10px;
+  border-radius: var(--r-xs);
+}
+
+.grade-badge--sss {
+  border-color: transparent;
+  background: linear-gradient(
+    110deg,
+    #be123c,
+    #c2410c,
+    #15803d,
+    #0e7490,
+    #4338ca,
+    #a21caf,
+    #be123c
+  );
+  background-size: 260% 100%;
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(36 22 66 / 0.46);
+  box-shadow:
+    0 5px 15px -7px rgb(99 102 241 / 0.72),
+    inset 0 1px 0 rgb(255 255 255 / 0.34);
+  animation: grade-badge-rainbow 4.8s linear infinite;
+}
+
+.grade-badge--sss::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 28%,
+    rgb(255 255 255 / 0.7) 48%,
+    transparent 68%
+  );
+  transform: translateX(-140%);
+  animation: grade-badge-sheen 2.7s ease-in-out infinite;
+}
+
+.grade-badge--ss {
+  border-color: oklch(76% 0.025 250);
+  background: linear-gradient(
+    125deg,
+    oklch(96% 0.009 250),
+    oklch(78% 0.024 250),
+    oklch(98% 0.006 250),
+    oklch(72% 0.027 250)
+  );
+  color: oklch(35% 0.035 255);
+  text-shadow: 0 1px 0 oklch(100% 0 0 / 0.72);
+}
+
+.grade-badge--s {
+  border-color: oklch(78% 0.11 82);
+  background: oklch(94% 0.05 84);
+  color: var(--gold-deep);
+}
+
+.grade-badge--a {
+  border-color: var(--oxford-line);
+  background: var(--oxford-tint);
+  color: var(--oxford-deep);
+}
+
+.grade-badge--b {
+  border-color: oklch(82% 0.055 173);
+  background: oklch(95% 0.03 173);
+  color: oklch(43% 0.09 173);
+}
+
+.grade-badge--c {
+  border-color: oklch(84% 0.025 235);
+  background: oklch(96% 0.015 235);
+  color: oklch(45% 0.055 235);
+}
+
+.grade-badge--d {
+  border-color: var(--line-2);
+  background: var(--paper-sunk);
+  color: var(--ink-2);
+}
+
+.grade-badge--e {
+  border-color: oklch(85% 0.045 56);
+  background: oklch(95% 0.025 56);
+  color: var(--bronze-deep);
+}
+
+.grade-badge--f {
+  border-color: oklch(84% 0.06 35);
+  background: oklch(95% 0.035 35);
+  color: oklch(48% 0.13 35);
+}
+
+.grade-badge--empty {
+  color: var(--ink-4);
+  background: transparent;
+  box-shadow: none;
+}
+
+@keyframes grade-badge-rainbow {
+  from {
+    background-position: 0 50%;
+  }
+  to {
+    background-position: 260% 50%;
+  }
+}
+
+@keyframes grade-badge-sheen {
+  0%,
+  42% {
+    transform: translateX(-140%);
+  }
+  78%,
+  100% {
+    transform: translateX(140%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grade-badge--sss,
+  .grade-badge--sss::after {
+    animation: none !important;
+  }
+
+  .grade-badge--sss::after {
+    display: none;
+  }
+}

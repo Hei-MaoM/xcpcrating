@@ -7,6 +7,7 @@ import { SchoolFilter } from './SchoolFilter'
 import { EndDatePicker } from './EndDatePicker'
 import { useLeaderboardParams } from './useLeaderboardParams'
 import { dateToInt } from './period'
+import { PageJump } from './PageJump'
 import type { PeriodPageResult } from './periodWorkerCore'
 import type {
   PeriodBounds,
@@ -14,7 +15,7 @@ import type {
   PeriodWorkerResponse,
 } from './periodWorkerProtocol'
 
-const PAGE_SIZE = 100
+const PAGE_SIZE = 30
 
 /** `YYYYMMDD` int → `YYYY-MM-DD` string. */
 function intToDate(value: number): string {
@@ -242,14 +243,18 @@ export function PeriodBoard() {
               <div className="pager__ctrl">
                 <button
                   className="pager__btn"
+                  title="上一页"
                   disabled={loading || clampedPage <= 1}
                   aria-label="上一页"
                   onClick={() => setPage(clampedPage - 1)}
                 >
                   <Caret dir="left" />
                 </button>
+                <span className="pager__page tnum">第 {clampedPage} / {totalPages} 页</span>
+                <PageJump page={clampedPage} totalPages={totalPages} disabled={loading} onChange={setPage} />
                 <button
                   className="pager__btn"
+                  title="下一页"
                   disabled={loading || clampedPage >= totalPages}
                   aria-label="下一页"
                   onClick={() => setPage(clampedPage + 1)}

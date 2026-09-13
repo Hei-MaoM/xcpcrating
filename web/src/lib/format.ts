@@ -99,6 +99,28 @@ export function formatPercent(value: number | null | undefined): string {
   return `${Math.round(value * 100)}%`
 }
 
+/** Expected solve rate with one decimal place; input is a 0..1 fraction. */
+export function formatSolveRate(value: number | null | undefined): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) return '—'
+  const clamped = Math.min(Math.max(value, 0), 1)
+  return `${(clamped * 100).toFixed(1)}%`
+}
+
+/** Stable CSS token for the contest problem difficulty badge. */
+export function difficultyClass(key: string | null | undefined): string {
+  switch (key) {
+    case 'veryHard': return 'very-hard'
+    case 'hard': return 'hard'
+    case 'midHard': return 'mid-hard'
+    case 'mid': return 'mid'
+    case 'easyMid': return 'easy-mid'
+    case 'medium': return 'medium'
+    case 'easy': return 'easy'
+    case 'veryEasy': return 'very-easy'
+    default: return 'unknown'
+  }
+}
+
 /** Prediction deviation direction relative to actual rank. */
 export type DeviationDirection = 'up' | 'down' | 'flat'
 

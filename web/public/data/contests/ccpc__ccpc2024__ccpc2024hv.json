@@ -1,1 +1,2925 @@
-{"id":"ccpc/ccpc2024/ccpc2024hv","slug":"ccpc__ccpc2024__ccpc2024hv","title":"第十届中国大学生程序设计竞赛（高职专场）","startAt":"2024-11-03T09:00:00+08:00","category":"ccpc","teamCount":75,"concordance":0.47,"unrated":false,"unratedNote":null,"teams":[{"rank":1,"name":"金职大1队","org":"金华职业技术大学","solved":9,"penalty":591,"official":true,"members":[{"key":"罗家乐@金华职业技术大学","name":"罗家乐"},{"key":"边栋成@金华职业技术大学","name":"边栋成"},{"key":"陈俊宇@金华职业技术大学","name":"陈俊宇"}],"predictedRank":3,"perf":1808.56,"preRating":1590.85,"muDelta":104.97,"predictedRankOfficial":3,"perfOfficial":1810.14,"preRatingOfficial":1590.85,"muDeltaOfficial":105.39,"rankOfficial":1},{"rank":2,"name":"猎人带守卫,输赢无所谓","org":"宁波职业技术学院","solved":9,"penalty":813,"official":true,"members":[{"key":"吕扬盛@宁波职业技术学院","name":"吕扬盛"},{"key":"闫文杰@宁波职业技术学院","name":"闫文杰"},{"key":"王泽宇@宁波职业技术学院","name":"王泽宇"}],"predictedRank":1,"perf":1788.47,"preRating":1727.86,"muDelta":67.46,"predictedRankOfficial":1,"perfOfficial":1795.78,"preRatingOfficial":1741.93,"muDeltaOfficial":66.2,"rankOfficial":2},{"rank":3,"name":"能和我打一辈子ACM吗","org":"浙江机电职业技术大学","solved":7,"penalty":501,"official":true,"members":[{"key":"陈科睿@浙江机电职业技术大学","name":"陈科睿"},{"key":"王湘豫@浙江机电职业技术大学","name":"王湘豫"},{"key":"谭振鹏@浙江机电职业技术大学","name":"谭振鹏"}],"predictedRank":27,"perf":1687.74,"preRating":1569.79,"muDelta":77.03,"predictedRankOfficial":27,"perfOfficial":1689.8,"preRatingOfficial":1571.41,"muDeltaOfficial":77.14,"rankOfficial":3},{"rank":4,"name":"恐惧震慑","org":"宁波职业技术学院","solved":7,"penalty":621,"official":true,"members":[{"key":"徐振宇@宁波职业技术学院","name":"徐振宇"},{"key":"叶玉龙@宁波职业技术学院","name":"叶玉龙"},{"key":"朱津宏@宁波职业技术学院","name":"朱津宏"}],"predictedRank":57,"perf":1637.62,"preRating":1504.87,"muDelta":81.18,"predictedRankOfficial":57,"perfOfficial":1641.27,"preRatingOfficial":1512.26,"muDeltaOfficial":80.12,"rankOfficial":4},{"rank":5,"name":"终旅","org":"浙江警官职业学院","solved":7,"penalty":696,"official":true,"members":[{"key":"戚伊梅@浙江警官职业学院","name":"戚伊梅"},{"key":"王雨阳@浙江警官职业学院","name":"王雨阳"},{"key":"陈仁宁@浙江警官职业学院","name":"陈仁宁"}],"predictedRank":36,"perf":1628.61,"preRating":1557.48,"muDelta":64.09,"predictedRankOfficial":40,"perfOfficial":1628.2,"preRatingOfficial":1551.36,"muDeltaOfficial":65.53,"rankOfficial":5},{"rank":6,"name":"育英七队","org":"浙江育英职业技术学院","solved":7,"penalty":860,"official":true,"members":[{"key":"邵奇@浙江育英职业技术学院","name":"邵奇"},{"key":"陈华鹏@浙江育英职业技术学院","name":"陈华鹏"},{"key":"张杨晨昱@浙江育英职业技术学院","name":"张杨晨昱"}],"predictedRank":2,"perf":1629.52,"preRating":1618.5,"muDelta":47.92,"predictedRankOfficial":2,"perfOfficial":1634.52,"preRatingOfficial":1628.12,"muDeltaOfficial":46.63,"rankOfficial":6},{"rank":7,"name":"教练让我们考研,我们感觉压力很大。","org":"中山职业技术学院","solved":7,"penalty":963,"official":true,"members":[{"key":"颜伟燃@中山职业技术学院","name":"颜伟燃"},{"key":"郑富幸@中山职业技术学院","name":"郑富幸"},{"key":"梁展鹏@中山职业技术学院","name":"梁展鹏"}],"predictedRank":34,"perf":1591.35,"preRating":1559.22,"muDelta":53.0,"predictedRankOfficial":33,"perfOfficial":1593.77,"preRatingOfficial":1562.05,"muDeltaOfficial":52.87,"rankOfficial":7},{"rank":8,"name":"浙江工业职业技术学院8队","org":"浙江工业职业技术学院","solved":7,"penalty":976,"official":true,"members":[{"key":"张江@浙江工业职业技术学院","name":"张江"},{"key":"苏楠@浙江工业职业技术学院","name":"苏楠"},{"key":"周益锋@浙江工业职业技术学院","name":"周益锋"}],"predictedRank":24,"perf":1581.71,"preRating":1576.0,"muDelta":46.04,"predictedRankOfficial":26,"perfOfficial":1582.51,"preRatingOfficial":1574.18,"muDeltaOfficial":47.16,"rankOfficial":8},{"rank":9,"name":"育英十二队","org":"浙江育英职业技术学院","solved":6,"penalty":503,"official":true,"members":[{"key":"金朝翔@浙江育英职业技术学院","name":"金朝翔"},{"key":"陈浩然@浙江育英职业技术学院","name":"陈浩然"},{"key":"陈子轩@浙江育英职业技术学院","name":"陈子轩"}],"predictedRank":44,"perf":1557.18,"preRating":1544.72,"muDelta":47.87,"predictedRankOfficial":41,"perfOfficial":1560.43,"preRatingOfficial":1550.05,"muDeltaOfficial":47.4,"rankOfficial":9},{"rank":10,"name":"育英六队","org":"浙江育英职业技术学院","solved":6,"penalty":509,"official":true,"members":[{"key":"徐诚翰@浙江育英职业技术学院","name":"徐诚翰"},{"key":"林渊涵@浙江育英职业技术学院","name":"林渊涵"},{"key":"薛骏诚@浙江育英职业技术学院","name":"薛骏诚"}],"predictedRank":26,"perf":1554.67,"preRating":1573.77,"muDelta":38.88,"predictedRankOfficial":23,"perfOfficial":1558.56,"preRatingOfficial":1580.62,"muDeltaOfficial":38.13,"rankOfficial":10},{"rank":11,"name":"育英十三队","org":"浙江育英职业技术学院","solved":6,"penalty":537,"official":true,"members":[{"key":"杨煜航@浙江育英职业技术学院","name":"杨煜航"},{"key":"金丐峰@浙江育英职业技术学院","name":"金丐峰"},{"key":"郑宇圣@浙江育英职业技术学院","name":"郑宇圣"}],"predictedRank":61,"perf":1516.43,"preRating":1493.98,"muDelta":51.1,"predictedRankOfficial":63,"perfOfficial":1518.56,"preRatingOfficial":1495.98,"muDeltaOfficial":51.18,"rankOfficial":11},{"rank":12,"name":"麦秋","org":"浙江机电职业技术大学","solved":6,"penalty":582,"official":true,"members":[{"key":"陈泽澎@浙江机电职业技术大学","name":"陈泽澎"},{"key":"田振民@浙江机电职业技术大学","name":"田振民"},{"key":"沈芸@浙江机电职业技术大学","name":"沈芸"}],"predictedRank":65,"perf":1500.5,"preRating":1477.94,"muDelta":50.32,"predictedRankOfficial":66,"perfOfficial":1502.3,"preRatingOfficial":1478.81,"muDeltaOfficial":50.56,"rankOfficial":12},{"rank":13,"name":"下次一定对","org":"宁波职业技术学院","solved":6,"penalty":584,"official":true,"members":[{"key":"黄方杰@宁波职业技术学院","name":"黄方杰"},{"key":"张峻榕@宁波职业技术学院","name":"张峻榕"},{"key":"吴郑雨@宁波职业技术学院","name":"吴郑雨"}],"predictedRank":53,"perf":1502.91,"preRating":1518.5,"muDelta":39.64,"predictedRankOfficial":51,"perfOfficial":1505.36,"preRatingOfficial":1521.45,"muDeltaOfficial":39.48,"rankOfficial":13},{"rank":14,"name":"育英十一队","org":"浙江育英职业技术学院","solved":6,"penalty":596,"official":true,"members":[{"key":"王煦怡@浙江育英职业技术学院","name":"王煦怡"},{"key":"陈倚@浙江育英职业技术学院","name":"陈倚"},{"key":"赵应琦@浙江育英职业技术学院","name":"赵应琦"}],"predictedRank":58,"perf":1488.05,"preRating":1502.85,"muDelta":39.87,"predictedRankOfficial":59,"perfOfficial":1489.7,"preRatingOfficial":1503.37,"muDeltaOfficial":40.16,"rankOfficial":14},{"rank":15,"name":"育英十队","org":"浙江育英职业技术学院","solved":6,"penalty":629,"official":true,"members":[{"key":"潘永胜@浙江育英职业技术学院","name":"潘永胜"},{"key":"骆方彦@浙江育英职业技术学院","name":"骆方彦"},{"key":"袁逢聪@浙江育英职业技术学院","name":"袁逢聪"}],"predictedRank":69,"perf":1467.42,"preRating":1466.82,"muDelta":44.18,"predictedRankOfficial":58,"perfOfficial":1481.7,"preRatingOfficial":1507.06,"muDeltaOfficial":36.89,"rankOfficial":15},{"rank":16,"name":"浙江工业职业技术学院7队","org":"浙江工业职业技术学院","solved":6,"penalty":648,"official":true,"members":[{"key":"朱昊@浙江工业职业技术学院","name":"朱昊"},{"key":"温作航@浙江工业职业技术学院","name":"温作航"},{"key":"施世泽@浙江工业职业技术学院","name":"施世泽"}],"predictedRank":35,"perf":1489.98,"preRating":1558.09,"muDelta":25.22,"predictedRankOfficial":36,"perfOfficial":1492.13,"preRatingOfficial":1560.16,"muDeltaOfficial":25.18,"rankOfficial":16},{"rank":17,"name":"摆烂人","org":"浙江金融职业学院","solved":6,"penalty":669,"official":true,"members":[{"key":"洪振@浙江金融职业学院","name":"洪振"},{"key":"姚俊宇@浙江金融职业学院","name":"姚俊宇"},{"key":"岳高远@浙江金融职业学院","name":"岳高远"}],"predictedRank":39,"perf":1479.36,"preRating":1551.44,"muDelta":23.82,"predictedRankOfficial":39,"perfOfficial":1481.22,"preRatingOfficial":1552.76,"muDeltaOfficial":23.96,"rankOfficial":17},{"rank":18,"name":"育英八队","org":"浙江育英职业技术学院","solved":6,"penalty":706,"official":true,"members":[{"key":"卢颖@浙江育英职业技术学院","name":"卢颖"},{"key":"郑滢@浙江育英职业技术学院","name":"郑滢"},{"key":"倪彦杰@浙江育英职业技术学院","name":"倪彦杰"}],"predictedRank":47,"perf":1468.15,"preRating":1542.39,"muDelta":24.58,"predictedRankOfficial":42,"perfOfficial":1472.17,"preRatingOfficial":1549.38,"muDeltaOfficial":24.07,"rankOfficial":18},{"rank":19,"name":"育英二队","org":"浙江育英职业技术学院","solved":6,"penalty":710,"official":true,"members":[{"key":"刘金维@浙江育英职业技术学院","name":"刘金维"},{"key":"潘彬泽@浙江育英职业技术学院","name":"潘彬泽"},{"key":"孙明轩@浙江育英职业技术学院","name":"孙明轩"}],"predictedRank":19,"perf":1476.15,"preRating":1581.01,"muDelta":14.65,"predictedRankOfficial":18,"perfOfficial":1478.36,"preRatingOfficial":1583.23,"muDeltaOfficial":14.62,"rankOfficial":19},{"rank":20,"name":"醒一醒别睡了","org":"浙江金融职业学院","solved":6,"penalty":723,"official":true,"members":[{"key":"陈暄@浙江金融职业学院","name":"陈暄"},{"key":"莫冬娜@浙江金融职业学院","name":"莫冬娜"},{"key":"陈濛濛@浙江金融职业学院","name":"陈濛濛"}],"predictedRank":48,"perf":1453.31,"preRating":1541.96,"muDelta":19.28,"predictedRankOfficial":43,"perfOfficial":1457.38,"preRatingOfficial":1548.94,"muDeltaOfficial":18.44,"rankOfficial":20},{"rank":21,"name":"育英三队","org":"浙江育英职业技术学院","solved":6,"penalty":737,"official":true,"members":[{"key":"卢哲涵@浙江育英职业技术学院","name":"卢哲涵"},{"key":"骆晓亮@浙江育英职业技术学院","name":"骆晓亮"},{"key":"包鑫远@浙江育英职业技术学院","name":"包鑫远"}],"predictedRank":54,"perf":1436.63,"preRating":1516.79,"muDelta":21.56,"predictedRankOfficial":55,"perfOfficial":1438.48,"preRatingOfficial":1518.09,"muDeltaOfficial":21.7,"rankOfficial":21},{"rank":22,"name":"朗朗晴天","org":"南昌理工学院","solved":6,"penalty":769,"official":true,"members":[{"key":"杨欢欢@南昌理工学院","name":"杨欢欢"},{"key":"吴添豪@南昌理工学院","name":"吴添豪"},{"key":"曾熊辉@南昌理工学院","name":"曾熊辉"}],"predictedRank":71,"perf":1404.83,"preRating":1445.95,"muDelta":32.5,"predictedRankOfficial":71,"perfOfficial":1406.9,"preRatingOfficial":1447.75,"muDeltaOfficial":32.55,"rankOfficial":22},{"rank":23,"name":"第五人格星铁崩坏队","org":"绍兴职业技术学院","solved":6,"penalty":863,"official":true,"members":[{"key":"陈珂瑜@绍兴职业技术学院","name":"陈珂瑜"},{"key":"卢超@绍兴职业技术学院","name":"卢超"},{"key":"高鑫@绍兴职业技术学院","name":"高鑫"}],"predictedRank":49,"perf":1429.79,"preRating":1533.66,"muDelta":16.06,"predictedRankOfficial":49,"perfOfficial":1431.65,"preRatingOfficial":1535.03,"muDeltaOfficial":16.13,"rankOfficial":23},{"rank":24,"name":"唐玩就是宋","org":"宁波职业技术学院","solved":6,"penalty":867,"official":true,"members":[{"key":"黄俊杰@宁波职业技术学院","name":"黄俊杰"},{"key":"王烨繁@宁波职业技术学院","name":"王烨繁"},{"key":"柯铭炜@宁波职业技术学院","name":"柯铭炜"}],"predictedRank":50,"perf":1422.14,"preRating":1530.5,"muDelta":15.1,"predictedRankOfficial":50,"perfOfficial":1424.4,"preRatingOfficial":1532.84,"muDeltaOfficial":15.12,"rankOfficial":24},{"rank":25,"name":"育英五队","org":"浙江育英职业技术学院","solved":6,"penalty":908,"official":true,"members":[{"key":"李崇伟@浙江育英职业技术学院","name":"李崇伟"},{"key":"王浩宇@浙江育英职业技术学院","name":"王浩宇"},{"key":"邱景宇@浙江育英职业技术学院","name":"邱景宇"}],"predictedRank":22,"perf":1436.59,"preRating":1578.66,"muDelta":4.23,"predictedRankOfficial":22,"perfOfficial":1439.0,"preRatingOfficial":1581.33,"muDeltaOfficial":4.14,"rankOfficial":25},{"rank":26,"name":"AC超能鹿","org":"深圳职业技术大学","solved":6,"penalty":957,"official":true,"members":[{"key":"陈泽锦@深圳职业技术大学","name":"陈泽锦"},{"key":"胡峰贤@深圳职业技术大学","name":"胡峰贤"},{"key":"黄勇文@深圳职业技术大学","name":"黄勇文"}],"predictedRank":20,"perf":1431.85,"preRating":1580.93,"muDelta":2.44,"predictedRankOfficial":20,"perfOfficial":1433.43,"preRatingOfficial":1581.77,"muDeltaOfficial":2.6,"rankOfficial":26},{"rank":27,"name":"育英九队","org":"浙江育英职业技术学院","solved":6,"penalty":1065,"official":true,"members":[{"key":"张任晨@浙江育英职业技术学院","name":"张任晨"},{"key":"郑旗@浙江育英职业技术学院","name":"郑旗"},{"key":"金能益@浙江育英职业技术学院","name":"金能益"}],"predictedRank":55,"perf":1397.68,"preRating":1515.32,"muDelta":11.25,"predictedRankOfficial":54,"perfOfficial":1400.63,"preRatingOfficial":1519.35,"muDeltaOfficial":10.92,"rankOfficial":27},{"rank":28,"name":"求求你别再WA了","org":"四川现代职业学院","solved":5,"penalty":284,"official":true,"members":[{"key":"樊曾胜@四川现代职业学院","name":"樊曾胜"},{"key":"何彦儒@四川现代职业学院","name":"何彦儒"},{"key":"王广仁@四川现代职业学院","name":"王广仁"}],"predictedRank":73,"perf":1363.14,"preRating":1440.56,"muDelta":22.33,"predictedRankOfficial":73,"perfOfficial":1364.74,"preRatingOfficial":1441.03,"muDeltaOfficial":22.63,"rankOfficial":28},{"rank":29,"name":"写给AYAKA的十四行诗","org":"浙江经贸职业技术学院","solved":5,"penalty":319,"official":true,"members":[{"key":"严冯翼@浙江经贸职业技术学院","name":"严冯翼"},{"key":"黄宇霄@浙江经贸职业技术学院","name":"黄宇霄"},{"key":"徐冬海@浙江经贸职业技术学院","name":"徐冬海"}],"predictedRank":62,"perf":1376.48,"preRating":1491.99,"muDelta":11.67,"predictedRankOfficial":64,"perfOfficial":1378.63,"preRatingOfficial":1494.07,"muDeltaOfficial":11.67,"rankOfficial":29},{"rank":30,"name":"码仔队","org":"浙江金融职业学院","solved":5,"penalty":327,"official":true,"members":[{"key":"汪嘉铭@浙江金融职业学院","name":"汪嘉铭"},{"key":"陈灵吉@浙江金融职业学院","name":"陈灵吉"},{"key":"彭杨博@浙江金融职业学院","name":"彭杨博"}],"predictedRank":18,"perf":1410.62,"preRating":1581.83,"muDelta":-3.79,"predictedRankOfficial":19,"perfOfficial":1412.07,"preRatingOfficial":1582.46,"muDeltaOfficial":-3.6,"rankOfficial":30},{"rank":31,"name":"银从必过队","org":"浙江金融职业学院","solved":5,"penalty":349,"official":true,"members":[{"key":"张哲楷@浙江金融职业学院","name":"张哲楷"},{"key":"吕艾尔@浙江金融职业学院","name":"吕艾尔"},{"key":"朱佳辉@浙江金融职业学院","name":"朱佳辉"}],"predictedRank":63,"perf":1364.3,"preRating":1490.14,"muDelta":8.78,"predictedRankOfficial":62,"perfOfficial":1368.11,"preRatingOfficial":1496.22,"muDeltaOfficial":8.12,"rankOfficial":31},{"rank":32,"name":"育英四队","org":"浙江育英职业技术学院","solved":5,"penalty":518,"official":true,"members":[{"key":"宋新雨@浙江育英职业技术学院","name":"宋新雨"},{"key":"戚周炜@浙江育英职业技术学院","name":"戚周炜"},{"key":"梁廷炳@浙江育英职业技术学院","name":"梁廷炳"}],"predictedRank":56,"perf":1368.57,"preRating":1513.08,"muDelta":9.98,"predictedRankOfficial":56,"perfOfficial":1370.17,"preRatingOfficial":1513.91,"muDeltaOfficial":9.93,"rankOfficial":32},{"rank":33,"name":"总不可能一道题都不出吧","org":"浙江机电职业技术大学","solved":5,"penalty":520,"official":true,"members":[{"key":"孙宇帆@浙江机电职业技术大学","name":"孙宇帆"},{"key":"游晨昕@浙江机电职业技术大学","name":"游晨昕"},{"key":"蔡杍晨@浙江机电职业技术大学","name":"蔡杍晨"}],"predictedRank":52,"perf":1366.29,"preRating":1519.91,"muDelta":0.99,"predictedRankOfficial":52,"perfOfficial":1368.04,"preRatingOfficial":1521.1,"muDeltaOfficial":1.13,"rankOfficial":33},{"rank":34,"name":"提交都队","org":"深圳职业技术大学","solved":5,"penalty":522,"official":true,"members":[{"key":"邱嘉悦@深圳职业技术大学","name":"邱嘉悦"},{"key":"樊麒裕@深圳职业技术大学","name":"樊麒裕"},{"key":"朱仟涛@深圳职业技术大学","name":"朱仟涛"}],"predictedRank":3,"perf":1395.29,"preRating":1590.85,"muDelta":-10.75,"predictedRankOfficial":3,"perfOfficial":1396.39,"preRatingOfficial":1590.85,"muDeltaOfficial":-10.46,"rankOfficial":34},{"rank":35,"name":"大佬和他的两个摆件","org":"武汉职业技术学院","solved":5,"penalty":525,"official":true,"members":[{"key":"罗振荣@武汉职业技术学院","name":"罗振荣"},{"key":"杨浩@武汉职业技术学院","name":"杨浩"},{"key":"王子玄@武汉职业技术学院","name":"王子玄"}],"predictedRank":67,"perf":1335.14,"preRating":1473.0,"muDelta":5.74,"predictedRankOfficial":69,"perfOfficial":1337.2,"preRatingOfficial":1474.85,"muDeltaOfficial":5.79,"rankOfficial":35},{"rank":36,"name":"队堆对","org":"浙江金融职业学院","solved":5,"penalty":551,"official":true,"members":[{"key":"章炤宁@浙江金融职业学院","name":"章炤宁"},{"key":"徐新@浙江金融职业学院","name":"徐新"},{"key":"颜靖@浙江金融职业学院","name":"颜靖"}],"predictedRank":33,"perf":1370.8,"preRating":1560.97,"muDelta":-9.23,"predictedRankOfficial":32,"perfOfficial":1372.87,"preRatingOfficial":1562.89,"muDeltaOfficial":-9.2,"rankOfficial":36},{"rank":37,"name":"这次一定不超限","org":"浙江金融职业学院","solved":5,"penalty":572,"official":true,"members":[{"key":"符轩跃@浙江金融职业学院","name":"符轩跃"},{"key":"吴明政@浙江金融职业学院","name":"吴明政"},{"key":"陈如慧@浙江金融职业学院","name":"陈如慧"}],"predictedRank":40,"perf":1360.55,"preRating":1549.93,"muDelta":-7.44,"predictedRankOfficial":38,"perfOfficial":1363.75,"preRatingOfficial":1554.12,"muDeltaOfficial":-7.72,"rankOfficial":37},{"rank":38,"name":"金职大4队","org":"金华职业技术大学","solved":5,"penalty":581,"official":true,"members":[{"key":"杨灵洁@金华职业技术大学","name":"杨灵洁"},{"key":"王传舜@金华职业技术大学","name":"王传舜"},{"key":"毕琬莹@金华职业技术大学","name":"毕琬莹"}],"predictedRank":3,"perf":1377.0,"preRating":1590.85,"muDelta":-15.87,"predictedRankOfficial":3,"perfOfficial":1378.05,"preRatingOfficial":1590.85,"muDeltaOfficial":-15.6,"rankOfficial":38},{"rank":39,"name":"重生之我在宁职敲代码","org":"宁波职业技术学院","solved":5,"penalty":582,"official":true,"members":[{"key":"吴姜慧@宁波职业技术学院","name":"吴姜慧"},{"key":"陈颖@宁波职业技术学院","name":"陈颖"},{"key":"王玺乐@宁波职业技术学院","name":"王玺乐"}],"predictedRank":70,"perf":1308.07,"preRating":1459.59,"muDelta":1.58,"predictedRankOfficial":70,"perfOfficial":1310.21,"preRatingOfficial":1461.62,"muDeltaOfficial":1.59,"rankOfficial":39},{"rank":40,"name":"我永远喜欢灵梦","org":"四川信息职业技术学院","solved":5,"penalty":585,"official":true,"members":[{"key":"曾华艺@四川信息职业技术学院","name":"曾华艺"},{"key":"张艺滟@四川信息职业技术学院","name":"张艺滟"},{"key":"蒋蕾@四川信息职业技术学院","name":"蒋蕾"}],"predictedRank":68,"perf":1307.39,"preRating":1469.68,"muDelta":-1.32,"predictedRankOfficial":67,"perfOfficial":1311.78,"preRatingOfficial":1476.64,"muDeltaOfficial":-2.13,"rankOfficial":40},{"rank":41,"name":"机电X队","org":"浙江机电职业技术大学","solved":5,"penalty":684,"official":true,"members":[{"key":"林雍谕@浙江机电职业技术大学","name":"林雍谕"},{"key":"陆丹阳@浙江机电职业技术大学","name":"陆丹阳"},{"key":"吕俊毅@浙江机电职业技术大学","name":"吕俊毅"}],"predictedRank":3,"perf":1363.99,"preRating":1590.85,"muDelta":-19.51,"predictedRankOfficial":3,"perfOfficial":1364.99,"preRatingOfficial":1590.85,"muDeltaOfficial":-19.25,"rankOfficial":41},{"rank":42,"name":"不对也要队","org":"宁波职业技术学院","solved":5,"penalty":789,"official":true,"members":[{"key":"陈瑞嗣@宁波职业技术学院","name":"陈瑞嗣"},{"key":"邱佳熠@宁波职业技术学院","name":"邱佳熠"},{"key":"吴松@宁波职业技术学院","name":"吴松"}],"predictedRank":3,"perf":1359.76,"preRating":1590.85,"muDelta":-20.7,"predictedRankOfficial":3,"perfOfficial":1360.76,"preRatingOfficial":1590.85,"muDeltaOfficial":-20.44,"rankOfficial":42},{"rank":43,"name":"绝区原神幻想队","org":"绍兴职业技术学院","solved":4,"penalty":230,"official":true,"members":[{"key":"谷卿诚@绍兴职业技术学院","name":"谷卿诚"},{"key":"赖敏韬@绍兴职业技术学院","name":"赖敏韬"},{"key":"陈锦仁@绍兴职业技术学院","name":"陈锦仁"}],"predictedRank":42,"perf":1331.21,"preRating":1546.44,"muDelta":-16.11,"predictedRankOfficial":44,"perfOfficial":1333.48,"preRatingOfficial":1548.73,"muDeltaOfficial":-9.45,"rankOfficial":43},{"rank":44,"name":"坤你太美","org":"四川信息职业技术学院","solved":4,"penalty":271,"official":true,"members":[{"key":"孙海宇@四川信息职业技术学院","name":"孙海宇"},{"key":"王文俊@四川信息职业技术学院","name":"王文俊"},{"key":"黄斯绪@四川信息职业技术学院","name":"黄斯绪"}],"predictedRank":37,"perf":1331.59,"preRating":1555.24,"muDelta":-18.61,"predictedRankOfficial":35,"perfOfficial":1335.46,"preRatingOfficial":1560.44,"muDeltaOfficial":-19.01,"rankOfficial":44},{"rank":45,"name":"再打铁就去踩缝纫机","org":"浙江纺织服装职业技术学院","solved":4,"penalty":299,"official":true,"members":[{"key":"钟顺波@浙江纺织服装职业技术学院","name":"钟顺波"},{"key":"余昆滨@浙江纺织服装职业技术学院","name":"余昆滨"},{"key":"倪文佳@浙江纺织服装职业技术学院","name":"倪文佳"}],"predictedRank":31,"perf":1330.66,"preRating":1561.32,"muDelta":-20.58,"predictedRankOfficial":31,"perfOfficial":1332.65,"preRatingOfficial":1563.1,"muDeltaOfficial":-20.54,"rankOfficial":45},{"rank":46,"name":"金职大3队","org":"金华职业技术大学","solved":4,"penalty":348,"official":true,"members":[{"key":"刘晨@金华职业技术大学","name":"刘晨"},{"key":"应其宏@金华职业技术大学","name":"应其宏"},{"key":"丁鼎立@金华职业技术大学","name":"丁鼎立"}],"predictedRank":3,"perf":1343.36,"preRating":1590.85,"muDelta":-25.29,"predictedRankOfficial":3,"perfOfficial":1344.3,"preRatingOfficial":1590.85,"muDeltaOfficial":-25.05,"rankOfficial":46},{"rank":47,"name":"可是我18岁","org":"浙江机电职业技术大学","solved":4,"penalty":358,"official":true,"members":[{"key":"池长乐@浙江机电职业技术大学","name":"池长乐"},{"key":"张光瑶@浙江机电职业技术大学","name":"张光瑶"},{"key":"张兴日@浙江机电职业技术大学","name":"张兴日"}],"predictedRank":72,"perf":1259.88,"preRating":1444.8,"muDelta":-7.77,"predictedRankOfficial":72,"perfOfficial":1261.29,"preRatingOfficial":1445.32,"muDeltaOfficial":-7.54,"rankOfficial":47},{"rank":48,"name":"重生之我在ccpc组队","org":"浙江金融职业学院","solved":4,"penalty":376,"official":true,"members":[{"key":"郑欣如@浙江金融职业学院","name":"郑欣如"},{"key":"王杰@浙江金融职业学院","name":"王杰"},{"key":"胡艺轩@浙江金融职业学院","name":"胡艺轩"}],"predictedRank":28,"perf":1321.89,"preRating":1567.88,"muDelta":-24.64,"predictedRankOfficial":28,"perfOfficial":1323.4,"preRatingOfficial":1568.86,"muDeltaOfficial":-24.53,"rankOfficial":48},{"rank":49,"name":"金职大2队","org":"金华职业技术大学","solved":4,"penalty":415,"official":true,"members":[{"key":"盛煜航@金华职业技术大学","name":"盛煜航"},{"key":"邵俊杰@金华职业技术大学","name":"邵俊杰"},{"key":"陈朱凯@金华职业技术大学","name":"陈朱凯"}],"predictedRank":3,"perf":1331.5,"preRating":1590.85,"muDelta":-28.61,"predictedRankOfficial":3,"perfOfficial":1332.4,"preRatingOfficial":1590.85,"muDeltaOfficial":-28.38,"rankOfficial":49},{"rank":50,"name":"我要吃汉堡王","org":"浙江纺织服装职业技术学院","solved":4,"penalty":496,"official":true,"members":[{"key":"罗华康@浙江纺织服装职业技术学院","name":"罗华康"},{"key":"童羽璐@浙江纺织服装职业技术学院","name":"童羽璐"},{"key":"朱佳慧@浙江纺织服装职业技术学院","name":"朱佳慧"}],"predictedRank":30,"perf":1310.57,"preRating":1562.53,"muDelta":-26.18,"predictedRankOfficial":30,"perfOfficial":1311.84,"preRatingOfficial":1563.12,"muDeltaOfficial":-26.02,"rankOfficial":50},{"rank":51,"name":"平安喜乐","org":"电子科技大学成都学院","solved":4,"penalty":554,"official":true,"members":[{"key":"吕文凯@电子科技大学成都学院","name":"吕文凯"},{"key":"周屿涵@电子科技大学成都学院","name":"周屿涵"},{"key":"熊悦童@电子科技大学成都学院","name":"熊悦童"}],"predictedRank":38,"perf":1300.34,"preRating":1552.25,"muDelta":-25.74,"predictedRankOfficial":37,"perfOfficial":1304.04,"preRatingOfficial":1556.92,"muDeltaOfficial":-26.06,"rankOfficial":51},{"rank":52,"name":"你说的都队","org":"宁波城市职业技术学院","solved":4,"penalty":557,"official":true,"members":[{"key":"余严俊@宁波城市职业技术学院","name":"余严俊"},{"key":"陆喆逊@宁波城市职业技术学院","name":"陆喆逊"},{"key":"唐怡凯@宁波城市职业技术学院","name":"唐怡凯"}],"predictedRank":45,"perf":1291.65,"preRating":1544.68,"muDelta":-26.84,"predictedRankOfficial":46,"perfOfficial":1293.07,"preRatingOfficial":1545.53,"muDeltaOfficial":-26.7,"rankOfficial":52},{"rank":53,"name":"有福同享有难退队","org":"武汉软件工程职业学院","solved":4,"penalty":575,"official":true,"members":[{"key":"郭臣希@武汉软件工程职业学院","name":"郭臣希"},{"key":"樊洪涛@武汉软件工程职业学院","name":"樊洪涛"},{"key":"邹涛@武汉软件工程职业学院","name":"邹涛"}],"predictedRank":3,"perf":1316.17,"preRating":1590.85,"muDelta":-32.9,"predictedRankOfficial":3,"perfOfficial":1317.01,"preRatingOfficial":1590.85,"muDeltaOfficial":-32.69,"rankOfficial":53},{"rank":54,"name":"玛卡巴卡","org":"嘉兴职业技术学院","solved":4,"penalty":694,"official":true,"members":[{"key":"邹捷@嘉兴职业技术学院","name":"邹捷"},{"key":"应晴@嘉兴职业技术学院","name":"应晴"},{"key":"曹海宁@嘉兴职业技术学院","name":"曹海宁"}],"predictedRank":41,"perf":1284.74,"preRating":1546.87,"muDelta":-29.39,"predictedRankOfficial":45,"perfOfficial":1286.23,"preRatingOfficial":1547.87,"muDeltaOfficial":-29.27,"rankOfficial":54},{"rank":55,"name":"唔西迪西","org":"嘉兴职业技术学院","solved":4,"penalty":741,"official":true,"members":[{"key":"常哲兴@嘉兴职业技术学院","name":"常哲兴"},{"key":"阮荣靖@嘉兴职业技术学院","name":"阮荣靖"},{"key":"崔露莹@嘉兴职业技术学院","name":"崔露莹"}],"predictedRank":25,"perf":1299.02,"preRating":1575.8,"muDelta":-33.06,"predictedRankOfficial":25,"perfOfficial":1300.01,"preRatingOfficial":1576.07,"muDeltaOfficial":-32.9,"rankOfficial":55},{"rank":56,"name":"中午不AC","org":"浙江金融职业学院","solved":4,"penalty":836,"official":true,"members":[{"key":"翁彬宸@浙江金融职业学院","name":"翁彬宸"},{"key":"庞烨@浙江金融职业学院","name":"庞烨"},{"key":"任董@浙江金融职业学院","name":"任董"}],"predictedRank":3,"perf":1304.97,"preRating":1590.85,"muDelta":-36.04,"predictedRankOfficial":3,"perfOfficial":1305.76,"preRatingOfficial":1590.85,"muDeltaOfficial":-35.84,"rankOfficial":56},{"rank":57,"name":"我去,初音未来!","org":"深圳职业技术大学","solved":4,"penalty":848,"official":true,"members":[{"key":"刘志锋@深圳职业技术大学","name":"刘志锋"},{"key":"曾鸿亮@深圳职业技术大学","name":"曾鸿亮"},{"key":"黄峻峰@深圳职业技术大学","name":"黄峻峰"}],"predictedRank":20,"perf":1294.76,"preRating":1580.93,"muDelta":-35.95,"predictedRankOfficial":20,"perfOfficial":1296.09,"preRatingOfficial":1581.77,"muDeltaOfficial":-35.86,"rankOfficial":57},{"rank":58,"name":"温商2队","org":"温州商学院","solved":3,"penalty":111,"official":true,"members":[{"key":"丁玄龙@温州商学院","name":"丁玄龙"},{"key":"唐鑫杰@温州商学院","name":"唐鑫杰"},{"key":"张耀文@温州商学院","name":"张耀文"}],"predictedRank":75,"perf":1190.81,"preRating":1422.62,"muDelta":-9.43,"predictedRankOfficial":75,"perfOfficial":1191.91,"preRatingOfficial":1422.86,"muDeltaOfficial":-9.45,"rankOfficial":58},{"rank":59,"name":"随缘","org":"浙江警官职业学院","solved":3,"penalty":143,"official":true,"members":[{"key":"潘伊梦@浙江警官职业学院","name":"潘伊梦"},{"key":"王翔@浙江警官职业学院","name":"王翔"},{"key":"成鑫兴@浙江警官职业学院","name":"成鑫兴"}],"predictedRank":23,"perf":1285.75,"preRating":1578.65,"muDelta":-37.89,"predictedRankOfficial":24,"perfOfficial":1287.02,"preRatingOfficial":1579.41,"muDeltaOfficial":-37.79,"rankOfficial":59},{"rank":60,"name":"再多看一眼就会AC","org":"桂林理工大学南宁分校","solved":3,"penalty":164,"official":true,"members":[{"key":"陈仕磊@桂林理工大学南宁分校","name":"陈仕磊"},{"key":"杨勇智@桂林理工大学南宁分校","name":"杨勇智"},{"key":"巫方贤@桂林理工大学南宁分校","name":"巫方贤"}],"predictedRank":29,"perf":1273.69,"preRating":1566.39,"muDelta":-37.68,"predictedRankOfficial":29,"perfOfficial":1274.96,"preRatingOfficial":1567.16,"muDeltaOfficial":-37.58,"rankOfficial":60},{"rank":61,"name":"那我懂你意思了","org":"宁波城市职业技术学院","solved":3,"penalty":259,"official":true,"members":[{"key":"洪嘉耀@宁波城市职业技术学院","name":"洪嘉耀"},{"key":"陈豪鹏@宁波城市职业技术学院","name":"陈豪鹏"}],"predictedRank":59,"perf":1295.02,"preRating":1499.71,"muDelta":-32.64,"predictedRankOfficial":60,"perfOfficial":1296.08,"preRatingOfficial":1500.14,"muDeltaOfficial":-32.5,"rankOfficial":61},{"rank":62,"name":"育英十四队","org":"浙江育英职业技术学院","solved":3,"penalty":283,"official":true,"members":[{"key":"林浩@浙江育英职业技术学院","name":"林浩"},{"key":"应孔晨@浙江育英职业技术学院","name":"应孔晨"}],"predictedRank":51,"perf":1304.68,"preRating":1520.41,"muDelta":-36.12,"predictedRankOfficial":53,"perfOfficial":1305.41,"preRatingOfficial":1520.41,"muDeltaOfficial":-35.94,"rankOfficial":62},{"rank":63,"name":"元梦启动队","org":"桂林航天工业学院","solved":3,"penalty":287,"official":true,"members":[{"key":"韦鑫昌@桂林航天工业学院","name":"韦鑫昌"},{"key":"梁焕才@桂林航天工业学院","name":"梁焕才"},{"key":"李勇强@桂林航天工业学院","name":"李勇强"}],"predictedRank":32,"perf":1258.56,"preRating":1561.13,"muDelta":-40.71,"predictedRankOfficial":34,"perfOfficial":1259.84,"preRatingOfficial":1561.97,"muDeltaOfficial":-40.61,"rankOfficial":63},{"rank":64,"name":"超级无敌暴龙战队","org":"共青科技职业学院","solved":3,"penalty":293,"official":true,"members":[{"key":"汪诗恒@共青科技职业学院","name":"汪诗恒"},{"key":"钟丽平@共青科技职业学院","name":"钟丽平"},{"key":"胡辰卉@共青科技职业学院","name":"胡辰卉"}],"predictedRank":64,"perf":1199.71,"preRating":1483.43,"muDelta":-9.43,"predictedRankOfficial":65,"perfOfficial":1200.6,"preRatingOfficial":1483.69,"muDeltaOfficial":-9.45,"rankOfficial":64},{"rank":65,"name":"你管我做的对不队","org":"共青科技职业学院","solved":3,"penalty":310,"official":true,"members":[{"key":"邱建军@共青科技职业学院","name":"邱建军"},{"key":"徐刚@共青科技职业学院","name":"徐刚"},{"key":"刘豪风@共青科技职业学院","name":"刘豪风"}],"predictedRank":60,"perf":1206.31,"preRating":1499.28,"muDelta":-38.02,"predictedRankOfficial":61,"perfOfficial":1207.08,"preRatingOfficial":1499.42,"muDeltaOfficial":-37.86,"rankOfficial":65},{"rank":66,"name":"广演1队","org":"广东亚视演艺职业学院","solved":3,"penalty":317,"official":true,"members":[{"key":"徐庆庭@广东亚视演艺职业学院","name":"徐庆庭"},{"key":"潘文辉@广东亚视演艺职业学院","name":"潘文辉"},{"key":"许逸民@广东亚视演艺职业学院","name":"许逸民"}],"predictedRank":3,"perf":1268.91,"preRating":1590.85,"muDelta":-46.13,"predictedRankOfficial":3,"perfOfficial":1269.54,"preRatingOfficial":1590.85,"muDeltaOfficial":-45.98,"rankOfficial":66},{"rank":66,"name":"这是个","org":"南昌理工学院","solved":3,"penalty":317,"official":true,"members":[{"key":"赵立业@南昌理工学院","name":"赵立业"},{"key":"赵云鹏@南昌理工学院","name":"赵云鹏"},{"key":"韩潇鹏@南昌理工学院","name":"韩潇鹏"}],"predictedRank":43,"perf":1236.14,"preRating":1546.22,"muDelta":-41.82,"predictedRankOfficial":48,"perfOfficial":1234.22,"preRatingOfficial":1542.74,"muDeltaOfficial":-41.23,"rankOfficial":66},{"rank":68,"name":"天生赢家组","org":"深圳职业技术大学","solved":3,"penalty":335,"official":true,"members":[{"key":"艾洋@深圳职业技术大学","name":"艾洋"},{"key":"揭英淼@深圳职业技术大学","name":"揭英淼"},{"key":"赵雄畅@深圳职业技术大学","name":"赵雄畅"}],"predictedRank":3,"perf":1261.87,"preRating":1590.85,"muDelta":-48.11,"predictedRankOfficial":3,"perfOfficial":1262.46,"preRatingOfficial":1590.85,"muDeltaOfficial":-47.96,"rankOfficial":68},{"rank":69,"name":"大梦想家","org":"丽水职业技术学院","solved":3,"penalty":467,"official":true,"members":[{"key":"周纪宇@丽水职业技术学院","name":"周纪宇"},{"key":"周峰@丽水职业技术学院","name":"周峰"},{"key":"吕海星@丽水职业技术学院","name":"吕海星"}],"predictedRank":45,"perf":1223.06,"preRating":1544.68,"muDelta":-46.05,"predictedRankOfficial":46,"perfOfficial":1224.27,"preRatingOfficial":1545.53,"muDeltaOfficial":-45.97,"rankOfficial":69},{"rank":70,"name":"MAGA再冲国会山","org":"宁波城市职业技术学院","solved":3,"penalty":477,"official":true,"members":[{"key":"陈俊杰@宁波城市职业技术学院","name":"陈俊杰"},{"key":"蔡昇鸿@宁波城市职业技术学院","name":"蔡昇鸿"}],"predictedRank":66,"perf":1235.21,"preRating":1475.23,"muDelta":-42.92,"predictedRankOfficial":68,"perfOfficial":1236.46,"preRatingOfficial":1476.15,"muDeltaOfficial":-42.85,"rankOfficial":70},{"rank":71,"name":"黑,真**的黑啊!","org":"南昌理工学院","solved":3,"penalty":510,"official":true,"members":[{"key":"陈智@南昌理工学院","name":"陈智"},{"key":"水清华@南昌理工学院","name":"水清华"}],"predictedRank":74,"perf":1195.87,"preRating":1432.16,"muDelta":-9.43,"predictedRankOfficial":74,"perfOfficial":1196.56,"preRatingOfficial":1432.41,"muDeltaOfficial":-9.45,"rankOfficial":71},{"rank":72,"name":"广演2队","org":"广东亚视演艺职业学院","solved":2,"penalty":208,"official":true,"members":[{"key":"曹康康@广东亚视演艺职业学院","name":"曹康康"},{"key":"卢培森@广东亚视演艺职业学院","name":"卢培森"},{"key":"阮汉宙@广东亚视演艺职业学院","name":"阮汉宙"}],"predictedRank":3,"perf":1247.87,"preRating":1590.85,"muDelta":-52.03,"predictedRankOfficial":3,"perfOfficial":1248.38,"preRatingOfficial":1590.85,"muDeltaOfficial":-51.9,"rankOfficial":72},{"rank":73,"name":"广演3队","org":"广东亚视演艺职业学院","solved":1,"penalty":81,"official":true,"members":[{"key":"甘敬阳@广东亚视演艺职业学院","name":"甘敬阳"},{"key":"安德祥@广东亚视演艺职业学院","name":"安德祥"},{"key":"张启宇@广东亚视演艺职业学院","name":"张启宇"}],"predictedRank":3,"perf":1244.39,"preRating":1590.85,"muDelta":-53.0,"predictedRankOfficial":3,"perfOfficial":1244.87,"preRatingOfficial":1590.85,"muDeltaOfficial":-52.89,"rankOfficial":73},{"rank":74,"name":"广演4队","org":"广东亚视演艺职业学院","solved":0,"penalty":0,"official":true,"members":[{"key":"毛志森@广东亚视演艺职业学院","name":"毛志森"},{"key":"林永漳@广东亚视演艺职业学院","name":"林永漳"},{"key":"钟浩智@广东亚视演艺职业学院","name":"钟浩智"}],"predictedRank":3,"perf":1240.91,"preRating":1590.85,"muDelta":-53.98,"predictedRankOfficial":3,"perfOfficial":1241.37,"preRatingOfficial":1590.85,"muDeltaOfficial":-53.87,"rankOfficial":74},{"rank":74,"name":"广演5队","org":"广东亚视演艺职业学院","solved":0,"penalty":0,"official":true,"members":[{"key":"何为@广东亚视演艺职业学院","name":"何为"},{"key":"黄学旋@广东亚视演艺职业学院","name":"黄学旋"},{"key":"刘冰杰@广东亚视演艺职业学院","name":"刘冰杰"}],"predictedRank":3,"perf":1240.91,"preRating":1590.85,"muDelta":-53.98,"predictedRankOfficial":3,"perfOfficial":1241.37,"preRatingOfficial":1590.85,"muDeltaOfficial":-53.87,"rankOfficial":74}]}
+{
+  "id": "ccpc/ccpc2024/ccpc2024hv",
+  "slug": "ccpc__ccpc2024__ccpc2024hv",
+  "title": "第十届中国大学生程序设计竞赛（高职专场）",
+  "startAt": "2024-11-03T09:00:00+08:00",
+  "category": "ccpc",
+  "tier": "provincial",
+  "onlinePreliminary": false,
+  "teamCount": 75,
+  "concordance": 0.47,
+  "unrated": false,
+  "unratedNote": null,
+  "problems": [
+    {
+      "alias": "A",
+      "title": "盒子",
+      "canonicalId": "qoj:9739",
+      "problemUrl": "https://qoj.ac/problem/9739",
+      "typeKeys": [
+        "geometry"
+      ],
+      "typeLabels": [
+        "几何"
+      ],
+      "detailTags": [
+        "构造"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 72,
+      "submitted": 133,
+      "eligibleTeams": 75,
+      "solveRate": 0.948052,
+      "problemRating": 1003.499766,
+      "difficultyKey": "veryEasy",
+      "difficultyLabel": "极易",
+      "posteriorSd": 96.233129,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.982179,
+      "ratingAcCount": 72,
+      "ratingWaCount": 3,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "wa_threshold"
+      ]
+    },
+    {
+      "alias": "B",
+      "title": "递增序列",
+      "canonicalId": "qoj:9745",
+      "problemUrl": "https://qoj.ac/problem/9745",
+      "typeKeys": [
+        "math",
+        "basic"
+      ],
+      "typeLabels": [
+        "数学",
+        "基础算法"
+      ],
+      "detailTags": [
+        "数论",
+        "模拟"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 4,
+      "submitted": 42,
+      "eligibleTeams": 75,
+      "solveRate": 0.064935,
+      "problemRating": 2042.421244,
+      "difficultyKey": "midHard",
+      "difficultyLabel": "中等-困难",
+      "posteriorSd": 86.878001,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.122267,
+      "ratingAcCount": 4,
+      "ratingWaCount": 71,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "C",
+      "title": "CCPC",
+      "canonicalId": "qoj:9741",
+      "problemUrl": "https://qoj.ac/problem/9741",
+      "typeKeys": [
+        "string"
+      ],
+      "typeLabels": [
+        "字符串"
+      ],
+      "detailTags": [
+        "字符串哈希"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 73,
+      "submitted": 172,
+      "eligibleTeams": 75,
+      "solveRate": 0.961039,
+      "problemRating": 862.28864,
+      "difficultyKey": "veryEasy",
+      "difficultyLabel": "极易",
+      "posteriorSd": 82.891133,
+      "ratingSampleCount": 242,
+      "ratingEffectiveSampleCount": 242.0,
+      "expectedPassRateAtReference": 0.992016,
+      "ratingAcCount": 238,
+      "ratingWaCount": 4,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 907.4444013172365,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "wa_threshold"
+      ]
+    },
+    {
+      "alias": "D",
+      "title": "重心树",
+      "canonicalId": "qoj:9743",
+      "problemUrl": "https://qoj.ac/problem/9743",
+      "typeKeys": [
+        "graph",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "图论与网络",
+        "数据结构"
+      ],
+      "detailTags": [
+        "最短路",
+        "线段树"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 4,
+      "submitted": 17,
+      "eligibleTeams": 75,
+      "solveRate": 0.064935,
+      "problemRating": 2042.421244,
+      "difficultyKey": "midHard",
+      "difficultyLabel": "中等-困难",
+      "posteriorSd": 86.878001,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.122267,
+      "ratingAcCount": 4,
+      "ratingWaCount": 71,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "E",
+      "title": "覆盖一棵树",
+      "canonicalId": "qoj:9751",
+      "problemUrl": "https://qoj.ac/problem/9751",
+      "typeKeys": [
+        "graph"
+      ],
+      "typeLabels": [
+        "图论与网络"
+      ],
+      "detailTags": [
+        "最短路"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 38,
+      "submitted": 135,
+      "eligibleTeams": 75,
+      "solveRate": 0.506494,
+      "problemRating": 1539.422498,
+      "difficultyKey": "easyMid",
+      "difficultyLabel": "简单-中等",
+      "posteriorSd": 40.4564,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.715929,
+      "ratingAcCount": 38,
+      "ratingWaCount": 37,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold"
+      ]
+    },
+    {
+      "alias": "F",
+      "title": "拼图",
+      "canonicalId": "qoj:9750",
+      "problemUrl": "https://qoj.ac/problem/9750",
+      "typeKeys": [
+        "basic"
+      ],
+      "typeLabels": [
+        "基础算法"
+      ],
+      "detailTags": [
+        "模拟"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 31,
+      "submitted": 285,
+      "eligibleTeams": 75,
+      "solveRate": 0.415584,
+      "problemRating": 1605.986287,
+      "difficultyKey": "easyMid",
+      "difficultyLabel": "简单-中等",
+      "posteriorSd": 41.066282,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.632088,
+      "ratingAcCount": 31,
+      "ratingWaCount": 44,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold"
+      ]
+    },
+    {
+      "alias": "G",
+      "title": "覆盖一个环",
+      "canonicalId": "qoj:9752",
+      "problemUrl": "https://qoj.ac/problem/9752",
+      "typeKeys": [
+        "math"
+      ],
+      "typeLabels": [
+        "数学"
+      ],
+      "detailTags": [
+        "概率与期望"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 0,
+      "submitted": 16,
+      "eligibleTeams": 75,
+      "solveRate": 0.012987,
+      "problemRating": 2471.777054,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 257.758265,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.011627,
+      "ratingAcCount": 0,
+      "ratingWaCount": 75,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "H",
+      "title": "平方根",
+      "canonicalId": "qoj:9746",
+      "problemUrl": "https://qoj.ac/problem/9746",
+      "typeKeys": [
+        "math",
+        "dp"
+      ],
+      "typeLabels": [
+        "数学",
+        "动态规划"
+      ],
+      "detailTags": [
+        "数论",
+        "计数DP"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 71,
+      "submitted": 142,
+      "eligibleTeams": 75,
+      "solveRate": 0.935065,
+      "problemRating": 1050.728928,
+      "difficultyKey": "veryEasy",
+      "difficultyLabel": "极易",
+      "posteriorSd": 85.498986,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.97674,
+      "ratingAcCount": 71,
+      "ratingWaCount": 4,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "wa_threshold"
+      ]
+    },
+    {
+      "alias": "I",
+      "title": "字符串复制",
+      "canonicalId": "qoj:9747",
+      "problemUrl": "https://qoj.ac/problem/9747",
+      "typeKeys": [
+        "string",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "字符串",
+        "数据结构"
+      ],
+      "detailTags": [
+        "字符串哈希",
+        "线段树"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 0,
+      "submitted": 2,
+      "eligibleTeams": 75,
+      "solveRate": 0.012987,
+      "problemRating": 2471.777054,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 257.758265,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.011627,
+      "ratingAcCount": 0,
+      "ratingWaCount": 75,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "J",
+      "title": "最大公因数的平方和",
+      "canonicalId": "qoj:9748",
+      "problemUrl": "https://qoj.ac/problem/9748",
+      "typeKeys": [
+        "math",
+        "dataStructure"
+      ],
+      "typeLabels": [
+        "数学",
+        "数据结构"
+      ],
+      "detailTags": [
+        "数论",
+        "线段树"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 0,
+      "submitted": 2,
+      "eligibleTeams": 75,
+      "solveRate": 0.012987,
+      "problemRating": 2471.777054,
+      "difficultyKey": "veryHard",
+      "difficultyLabel": "极难",
+      "posteriorSd": 257.758265,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.011627,
+      "ratingAcCount": 0,
+      "ratingWaCount": 75,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": true,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold",
+        "outcome_boundary"
+      ]
+    },
+    {
+      "alias": "K",
+      "title": "小凯的省奖之梦",
+      "canonicalId": "qoj:9749",
+      "problemUrl": "https://qoj.ac/problem/9749",
+      "typeKeys": [
+        "math",
+        "basic"
+      ],
+      "typeLabels": [
+        "数学",
+        "基础算法"
+      ],
+      "detailTags": [
+        "数论",
+        "模拟"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 5,
+      "submitted": 41,
+      "eligibleTeams": 75,
+      "solveRate": 0.077922,
+      "problemRating": 2003.043872,
+      "difficultyKey": "midHard",
+      "difficultyLabel": "中等-困难",
+      "posteriorSd": 78.894945,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.148747,
+      "ratingAcCount": 5,
+      "ratingWaCount": 70,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "ac_threshold"
+      ]
+    },
+    {
+      "alias": "L",
+      "title": "修正减法",
+      "canonicalId": "qoj:9753",
+      "problemUrl": "https://qoj.ac/problem/9753",
+      "typeKeys": [
+        "math",
+        "basic"
+      ],
+      "typeLabels": [
+        "数学",
+        "基础算法"
+      ],
+      "detailTags": [
+        "数论",
+        "模拟"
+      ],
+      "status": "classified",
+      "confidence": 0.97,
+      "accepted": 56,
+      "submitted": 255,
+      "eligibleTeams": 75,
+      "solveRate": 0.74026,
+      "problemRating": 1353.975514,
+      "difficultyKey": "easy",
+      "difficultyLabel": "简单",
+      "posteriorSd": 46.241372,
+      "ratingSampleCount": 75,
+      "ratingEffectiveSampleCount": 75.0,
+      "expectedPassRateAtReference": 0.879942,
+      "ratingAcCount": 56,
+      "ratingWaCount": 19,
+      "ratingModel": "1PL",
+      "ratingDiscrimination": 1.0,
+      "ratingSpread": 305.59703849664425,
+      "ratingSlopePosteriorSd": null,
+      "ratingSlopeSource": "fixed_prior",
+      "ratingBoundaryOutcome": false,
+      "ratingGateReasons": [
+        "sample_threshold",
+        "wa_threshold"
+      ]
+    }
+  ],
+  "teams": [
+    {
+      "rank": 1,
+      "name": "金职大1队",
+      "org": "金华职业技术大学",
+      "solved": 9,
+      "penalty": 591,
+      "official": true,
+      "members": [
+        {
+          "key": "罗家乐@金华职业技术大学",
+          "name": "罗家乐"
+        },
+        {
+          "key": "边栋成@金华职业技术大学",
+          "name": "边栋成"
+        },
+        {
+          "key": "陈俊宇@金华职业技术大学",
+          "name": "陈俊宇"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1808.59,
+      "preRating": 1590.85,
+      "muDelta": 104.97,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1810.01,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": 105.33,
+      "rankOfficial": 1,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 2,
+      "name": "猎人带守卫,输赢无所谓",
+      "org": "宁波职业技术学院",
+      "solved": 9,
+      "penalty": 813,
+      "official": true,
+      "members": [
+        {
+          "key": "吕扬盛@宁波职业技术学院",
+          "name": "吕扬盛"
+        },
+        {
+          "key": "闫文杰@宁波职业技术学院",
+          "name": "闫文杰"
+        },
+        {
+          "key": "王泽宇@宁波职业技术学院",
+          "name": "王泽宇"
+        }
+      ],
+      "predictedRank": 1,
+      "perf": 1788.64,
+      "preRating": 1728.21,
+      "muDelta": 67.42,
+      "predictedRankOfficial": 1,
+      "perfOfficial": 1795.76,
+      "preRatingOfficial": 1742.17,
+      "muDeltaOfficial": 66.11,
+      "rankOfficial": 2,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 3,
+      "name": "能和我打一辈子ACM吗",
+      "org": "浙江机电职业技术大学",
+      "solved": 7,
+      "penalty": 501,
+      "official": true,
+      "members": [
+        {
+          "key": "陈科睿@浙江机电职业技术大学",
+          "name": "陈科睿"
+        },
+        {
+          "key": "王湘豫@浙江机电职业技术大学",
+          "name": "王湘豫"
+        },
+        {
+          "key": "谭振鹏@浙江机电职业技术大学",
+          "name": "谭振鹏"
+        }
+      ],
+      "predictedRank": 27,
+      "perf": 1687.78,
+      "preRating": 1569.82,
+      "muDelta": 77.03,
+      "predictedRankOfficial": 27,
+      "perfOfficial": 1689.67,
+      "preRatingOfficial": 1571.48,
+      "muDeltaOfficial": 77.06,
+      "rankOfficial": 3,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 4,
+      "name": "恐惧震慑",
+      "org": "宁波职业技术学院",
+      "solved": 7,
+      "penalty": 621,
+      "official": true,
+      "members": [
+        {
+          "key": "徐振宇@宁波职业技术学院",
+          "name": "徐振宇"
+        },
+        {
+          "key": "叶玉龙@宁波职业技术学院",
+          "name": "叶玉龙"
+        },
+        {
+          "key": "朱津宏@宁波职业技术学院",
+          "name": "朱津宏"
+        }
+      ],
+      "predictedRank": 57,
+      "perf": 1637.65,
+      "preRating": 1504.87,
+      "muDelta": 81.19,
+      "predictedRankOfficial": 57,
+      "perfOfficial": 1641.14,
+      "preRatingOfficial": 1512.37,
+      "muDeltaOfficial": 80.03,
+      "rankOfficial": 4,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 5,
+      "name": "终旅",
+      "org": "浙江警官职业学院",
+      "solved": 7,
+      "penalty": 696,
+      "official": true,
+      "members": [
+        {
+          "key": "戚伊梅@浙江警官职业学院",
+          "name": "戚伊梅"
+        },
+        {
+          "key": "王雨阳@浙江警官职业学院",
+          "name": "王雨阳"
+        },
+        {
+          "key": "陈仁宁@浙江警官职业学院",
+          "name": "陈仁宁"
+        }
+      ],
+      "predictedRank": 36,
+      "perf": 1628.69,
+      "preRating": 1557.65,
+      "muDelta": 64.07,
+      "predictedRankOfficial": 40,
+      "perfOfficial": 1628.09,
+      "preRatingOfficial": 1551.51,
+      "muDeltaOfficial": 65.43,
+      "rankOfficial": 5,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 6,
+      "name": "育英七队",
+      "org": "浙江育英职业技术学院",
+      "solved": 7,
+      "penalty": 860,
+      "official": true,
+      "members": [
+        {
+          "key": "邵奇@浙江育英职业技术学院",
+          "name": "邵奇"
+        },
+        {
+          "key": "陈华鹏@浙江育英职业技术学院",
+          "name": "陈华鹏"
+        },
+        {
+          "key": "张杨晨昱@浙江育英职业技术学院",
+          "name": "张杨晨昱"
+        }
+      ],
+      "predictedRank": 2,
+      "perf": 1629.62,
+      "preRating": 1618.68,
+      "muDelta": 47.89,
+      "predictedRankOfficial": 2,
+      "perfOfficial": 1634.45,
+      "preRatingOfficial": 1628.33,
+      "muDeltaOfficial": 46.53,
+      "rankOfficial": 6,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 7,
+      "name": "教练让我们考研,我们感觉压力很大。",
+      "org": "中山职业技术学院",
+      "solved": 7,
+      "penalty": 963,
+      "official": true,
+      "members": [
+        {
+          "key": "颜伟燃@中山职业技术学院",
+          "name": "颜伟燃"
+        },
+        {
+          "key": "郑富幸@中山职业技术学院",
+          "name": "郑富幸"
+        },
+        {
+          "key": "梁展鹏@中山职业技术学院",
+          "name": "梁展鹏"
+        }
+      ],
+      "predictedRank": 34,
+      "perf": 1591.37,
+      "preRating": 1559.22,
+      "muDelta": 53.01,
+      "predictedRankOfficial": 33,
+      "perfOfficial": 1593.61,
+      "preRatingOfficial": 1562.05,
+      "muDeltaOfficial": 52.8,
+      "rankOfficial": 7,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 8,
+      "name": "浙江工业职业技术学院8队",
+      "org": "浙江工业职业技术学院",
+      "solved": 7,
+      "penalty": 976,
+      "official": true,
+      "members": [
+        {
+          "key": "张江@浙江工业职业技术学院",
+          "name": "张江"
+        },
+        {
+          "key": "苏楠@浙江工业职业技术学院",
+          "name": "苏楠"
+        },
+        {
+          "key": "周益锋@浙江工业职业技术学院",
+          "name": "周益锋"
+        }
+      ],
+      "predictedRank": 24,
+      "perf": 1581.85,
+      "preRating": 1576.32,
+      "muDelta": 45.99,
+      "predictedRankOfficial": 26,
+      "perfOfficial": 1582.42,
+      "preRatingOfficial": 1574.38,
+      "muDeltaOfficial": 47.06,
+      "rankOfficial": 8,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 9,
+      "name": "育英十二队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 503,
+      "official": true,
+      "members": [
+        {
+          "key": "金朝翔@浙江育英职业技术学院",
+          "name": "金朝翔"
+        },
+        {
+          "key": "陈浩然@浙江育英职业技术学院",
+          "name": "陈浩然"
+        },
+        {
+          "key": "陈子轩@浙江育英职业技术学院",
+          "name": "陈子轩"
+        }
+      ],
+      "predictedRank": 44,
+      "perf": 1557.24,
+      "preRating": 1544.85,
+      "muDelta": 47.85,
+      "predictedRankOfficial": 41,
+      "perfOfficial": 1560.3,
+      "preRatingOfficial": 1550.18,
+      "muDeltaOfficial": 47.3,
+      "rankOfficial": 9,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 10,
+      "name": "育英六队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 509,
+      "official": true,
+      "members": [
+        {
+          "key": "徐诚翰@浙江育英职业技术学院",
+          "name": "徐诚翰"
+        },
+        {
+          "key": "林渊涵@浙江育英职业技术学院",
+          "name": "林渊涵"
+        },
+        {
+          "key": "薛骏诚@浙江育英职业技术学院",
+          "name": "薛骏诚"
+        }
+      ],
+      "predictedRank": 26,
+      "perf": 1554.75,
+      "preRating": 1573.93,
+      "muDelta": 38.86,
+      "predictedRankOfficial": 23,
+      "perfOfficial": 1558.47,
+      "preRatingOfficial": 1580.84,
+      "muDeltaOfficial": 38.02,
+      "rankOfficial": 10,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 11,
+      "name": "育英十三队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 537,
+      "official": true,
+      "members": [
+        {
+          "key": "杨煜航@浙江育英职业技术学院",
+          "name": "杨煜航"
+        },
+        {
+          "key": "金丐峰@浙江育英职业技术学院",
+          "name": "金丐峰"
+        },
+        {
+          "key": "郑宇圣@浙江育英职业技术学院",
+          "name": "郑宇圣"
+        }
+      ],
+      "predictedRank": 61,
+      "perf": 1516.47,
+      "preRating": 1494.04,
+      "muDelta": 51.1,
+      "predictedRankOfficial": 63,
+      "perfOfficial": 1518.39,
+      "preRatingOfficial": 1496.04,
+      "muDeltaOfficial": 51.09,
+      "rankOfficial": 11,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 12,
+      "name": "麦秋",
+      "org": "浙江机电职业技术大学",
+      "solved": 6,
+      "penalty": 582,
+      "official": true,
+      "members": [
+        {
+          "key": "陈泽澎@浙江机电职业技术大学",
+          "name": "陈泽澎"
+        },
+        {
+          "key": "田振民@浙江机电职业技术大学",
+          "name": "田振民"
+        },
+        {
+          "key": "沈芸@浙江机电职业技术大学",
+          "name": "沈芸"
+        }
+      ],
+      "predictedRank": 65,
+      "perf": 1500.53,
+      "preRating": 1477.96,
+      "muDelta": 50.33,
+      "predictedRankOfficial": 66,
+      "perfOfficial": 1502.11,
+      "preRatingOfficial": 1478.86,
+      "muDeltaOfficial": 50.48,
+      "rankOfficial": 12,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 13,
+      "name": "下次一定对",
+      "org": "宁波职业技术学院",
+      "solved": 6,
+      "penalty": 584,
+      "official": true,
+      "members": [
+        {
+          "key": "黄方杰@宁波职业技术学院",
+          "name": "黄方杰"
+        },
+        {
+          "key": "张峻榕@宁波职业技术学院",
+          "name": "张峻榕"
+        },
+        {
+          "key": "吴郑雨@宁波职业技术学院",
+          "name": "吴郑雨"
+        }
+      ],
+      "predictedRank": 53,
+      "perf": 1502.94,
+      "preRating": 1518.52,
+      "muDelta": 39.64,
+      "predictedRankOfficial": 51,
+      "perfOfficial": 1505.2,
+      "preRatingOfficial": 1521.56,
+      "muDeltaOfficial": 39.39,
+      "rankOfficial": 13,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 14,
+      "name": "育英十一队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 596,
+      "official": true,
+      "members": [
+        {
+          "key": "王煦怡@浙江育英职业技术学院",
+          "name": "王煦怡"
+        },
+        {
+          "key": "陈倚@浙江育英职业技术学院",
+          "name": "陈倚"
+        },
+        {
+          "key": "赵应琦@浙江育英职业技术学院",
+          "name": "赵应琦"
+        }
+      ],
+      "predictedRank": 58,
+      "perf": 1488.08,
+      "preRating": 1502.87,
+      "muDelta": 39.87,
+      "predictedRankOfficial": 59,
+      "perfOfficial": 1489.52,
+      "preRatingOfficial": 1503.42,
+      "muDeltaOfficial": 40.08,
+      "rankOfficial": 14,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 15,
+      "name": "育英十队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 629,
+      "official": true,
+      "members": [
+        {
+          "key": "潘永胜@浙江育英职业技术学院",
+          "name": "潘永胜"
+        },
+        {
+          "key": "骆方彦@浙江育英职业技术学院",
+          "name": "骆方彦"
+        },
+        {
+          "key": "袁逢聪@浙江育英职业技术学院",
+          "name": "袁逢聪"
+        }
+      ],
+      "predictedRank": 69,
+      "perf": 1467.45,
+      "preRating": 1466.83,
+      "muDelta": 44.18,
+      "predictedRankOfficial": 58,
+      "perfOfficial": 1481.52,
+      "preRatingOfficial": 1507.11,
+      "muDeltaOfficial": 36.8,
+      "rankOfficial": 15,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 16,
+      "name": "浙江工业职业技术学院7队",
+      "org": "浙江工业职业技术学院",
+      "solved": 6,
+      "penalty": 648,
+      "official": true,
+      "members": [
+        {
+          "key": "朱昊@浙江工业职业技术学院",
+          "name": "朱昊"
+        },
+        {
+          "key": "温作航@浙江工业职业技术学院",
+          "name": "温作航"
+        },
+        {
+          "key": "施世泽@浙江工业职业技术学院",
+          "name": "施世泽"
+        }
+      ],
+      "predictedRank": 35,
+      "perf": 1490.06,
+      "preRating": 1558.26,
+      "muDelta": 25.21,
+      "predictedRankOfficial": 36,
+      "perfOfficial": 1491.98,
+      "preRatingOfficial": 1560.28,
+      "muDeltaOfficial": 25.09,
+      "rankOfficial": 16,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 17,
+      "name": "摆烂人",
+      "org": "浙江金融职业学院",
+      "solved": 6,
+      "penalty": 669,
+      "official": true,
+      "members": [
+        {
+          "key": "洪振@浙江金融职业学院",
+          "name": "洪振"
+        },
+        {
+          "key": "姚俊宇@浙江金融职业学院",
+          "name": "姚俊宇"
+        },
+        {
+          "key": "岳高远@浙江金融职业学院",
+          "name": "岳高远"
+        }
+      ],
+      "predictedRank": 39,
+      "perf": 1479.38,
+      "preRating": 1551.44,
+      "muDelta": 23.83,
+      "predictedRankOfficial": 39,
+      "perfOfficial": 1481.03,
+      "preRatingOfficial": 1552.75,
+      "muDeltaOfficial": 23.88,
+      "rankOfficial": 17,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 18,
+      "name": "育英八队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 706,
+      "official": true,
+      "members": [
+        {
+          "key": "卢颖@浙江育英职业技术学院",
+          "name": "卢颖"
+        },
+        {
+          "key": "郑滢@浙江育英职业技术学院",
+          "name": "郑滢"
+        },
+        {
+          "key": "倪彦杰@浙江育英职业技术学院",
+          "name": "倪彦杰"
+        }
+      ],
+      "predictedRank": 47,
+      "perf": 1468.2,
+      "preRating": 1542.49,
+      "muDelta": 24.58,
+      "predictedRankOfficial": 42,
+      "perfOfficial": 1472.03,
+      "preRatingOfficial": 1549.5,
+      "muDeltaOfficial": 23.98,
+      "rankOfficial": 18,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 19,
+      "name": "育英二队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 710,
+      "official": true,
+      "members": [
+        {
+          "key": "刘金维@浙江育英职业技术学院",
+          "name": "刘金维"
+        },
+        {
+          "key": "潘彬泽@浙江育英职业技术学院",
+          "name": "潘彬泽"
+        },
+        {
+          "key": "孙明轩@浙江育英职业技术学院",
+          "name": "孙明轩"
+        }
+      ],
+      "predictedRank": 19,
+      "perf": 1476.2,
+      "preRating": 1581.07,
+      "muDelta": 14.64,
+      "predictedRankOfficial": 18,
+      "perfOfficial": 1478.24,
+      "preRatingOfficial": 1583.38,
+      "muDeltaOfficial": 14.53,
+      "rankOfficial": 19,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 20,
+      "name": "醒一醒别睡了",
+      "org": "浙江金融职业学院",
+      "solved": 6,
+      "penalty": 723,
+      "official": true,
+      "members": [
+        {
+          "key": "陈暄@浙江金融职业学院",
+          "name": "陈暄"
+        },
+        {
+          "key": "莫冬娜@浙江金融职业学院",
+          "name": "莫冬娜"
+        },
+        {
+          "key": "陈濛濛@浙江金融职业学院",
+          "name": "陈濛濛"
+        }
+      ],
+      "predictedRank": 48,
+      "perf": 1453.37,
+      "preRating": 1542.06,
+      "muDelta": 19.27,
+      "predictedRankOfficial": 43,
+      "perfOfficial": 1457.21,
+      "preRatingOfficial": 1548.99,
+      "muDeltaOfficial": 18.35,
+      "rankOfficial": 20,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 21,
+      "name": "育英三队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 737,
+      "official": true,
+      "members": [
+        {
+          "key": "卢哲涵@浙江育英职业技术学院",
+          "name": "卢哲涵"
+        },
+        {
+          "key": "骆晓亮@浙江育英职业技术学院",
+          "name": "骆晓亮"
+        },
+        {
+          "key": "包鑫远@浙江育英职业技术学院",
+          "name": "包鑫远"
+        }
+      ],
+      "predictedRank": 54,
+      "perf": 1436.66,
+      "preRating": 1516.81,
+      "muDelta": 21.57,
+      "predictedRankOfficial": 55,
+      "perfOfficial": 1438.3,
+      "preRatingOfficial": 1518.16,
+      "muDeltaOfficial": 21.61,
+      "rankOfficial": 21,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 22,
+      "name": "朗朗晴天",
+      "org": "南昌理工学院",
+      "solved": 6,
+      "penalty": 769,
+      "official": true,
+      "members": [
+        {
+          "key": "杨欢欢@南昌理工学院",
+          "name": "杨欢欢"
+        },
+        {
+          "key": "吴添豪@南昌理工学院",
+          "name": "吴添豪"
+        },
+        {
+          "key": "曾熊辉@南昌理工学院",
+          "name": "曾熊辉"
+        }
+      ],
+      "predictedRank": 71,
+      "perf": 1404.88,
+      "preRating": 1446.01,
+      "muDelta": 32.49,
+      "predictedRankOfficial": 70,
+      "perfOfficial": 1406.7,
+      "preRatingOfficial": 1447.85,
+      "muDeltaOfficial": 32.45,
+      "rankOfficial": 22,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 23,
+      "name": "第五人格星铁崩坏队",
+      "org": "绍兴职业技术学院",
+      "solved": 6,
+      "penalty": 863,
+      "official": true,
+      "members": [
+        {
+          "key": "陈珂瑜@绍兴职业技术学院",
+          "name": "陈珂瑜"
+        },
+        {
+          "key": "卢超@绍兴职业技术学院",
+          "name": "卢超"
+        },
+        {
+          "key": "高鑫@绍兴职业技术学院",
+          "name": "高鑫"
+        }
+      ],
+      "predictedRank": 49,
+      "perf": 1429.81,
+      "preRating": 1533.66,
+      "muDelta": 16.07,
+      "predictedRankOfficial": 49,
+      "perfOfficial": 1431.46,
+      "preRatingOfficial": 1535.06,
+      "muDeltaOfficial": 16.04,
+      "rankOfficial": 23,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 24,
+      "name": "唐玩就是宋",
+      "org": "宁波职业技术学院",
+      "solved": 6,
+      "penalty": 867,
+      "official": true,
+      "members": [
+        {
+          "key": "黄俊杰@宁波职业技术学院",
+          "name": "黄俊杰"
+        },
+        {
+          "key": "王烨繁@宁波职业技术学院",
+          "name": "王烨繁"
+        },
+        {
+          "key": "柯铭炜@宁波职业技术学院",
+          "name": "柯铭炜"
+        }
+      ],
+      "predictedRank": 50,
+      "perf": 1422.17,
+      "preRating": 1530.51,
+      "muDelta": 15.1,
+      "predictedRankOfficial": 50,
+      "perfOfficial": 1424.2,
+      "preRatingOfficial": 1532.87,
+      "muDeltaOfficial": 15.03,
+      "rankOfficial": 24,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 25,
+      "name": "育英五队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 908,
+      "official": true,
+      "members": [
+        {
+          "key": "李崇伟@浙江育英职业技术学院",
+          "name": "李崇伟"
+        },
+        {
+          "key": "王浩宇@浙江育英职业技术学院",
+          "name": "王浩宇"
+        },
+        {
+          "key": "邱景宇@浙江育英职业技术学院",
+          "name": "邱景宇"
+        }
+      ],
+      "predictedRank": 22,
+      "perf": 1436.61,
+      "preRating": 1578.66,
+      "muDelta": 4.23,
+      "predictedRankOfficial": 22,
+      "perfOfficial": 1438.81,
+      "preRatingOfficial": 1581.33,
+      "muDeltaOfficial": 4.06,
+      "rankOfficial": 25,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 26,
+      "name": "AC超能鹿",
+      "org": "深圳职业技术大学",
+      "solved": 6,
+      "penalty": 957,
+      "official": true,
+      "members": [
+        {
+          "key": "陈泽锦@深圳职业技术大学",
+          "name": "陈泽锦"
+        },
+        {
+          "key": "胡峰贤@深圳职业技术大学",
+          "name": "胡峰贤"
+        },
+        {
+          "key": "黄勇文@深圳职业技术大学",
+          "name": "黄勇文"
+        }
+      ],
+      "predictedRank": 20,
+      "perf": 1431.87,
+      "preRating": 1580.93,
+      "muDelta": 2.45,
+      "predictedRankOfficial": 20,
+      "perfOfficial": 1433.24,
+      "preRatingOfficial": 1581.77,
+      "muDeltaOfficial": 2.52,
+      "rankOfficial": 26,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 27,
+      "name": "育英九队",
+      "org": "浙江育英职业技术学院",
+      "solved": 6,
+      "penalty": 1065,
+      "official": true,
+      "members": [
+        {
+          "key": "张任晨@浙江育英职业技术学院",
+          "name": "张任晨"
+        },
+        {
+          "key": "郑旗@浙江育英职业技术学院",
+          "name": "郑旗"
+        },
+        {
+          "key": "金能益@浙江育英职业技术学院",
+          "name": "金能益"
+        }
+      ],
+      "predictedRank": 55,
+      "perf": 1397.74,
+      "preRating": 1515.43,
+      "muDelta": 11.24,
+      "predictedRankOfficial": 54,
+      "perfOfficial": 1400.45,
+      "preRatingOfficial": 1519.43,
+      "muDeltaOfficial": 10.83,
+      "rankOfficial": 27,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 28,
+      "name": "求求你别再WA了",
+      "org": "四川现代职业学院",
+      "solved": 5,
+      "penalty": 284,
+      "official": true,
+      "members": [
+        {
+          "key": "樊曾胜@四川现代职业学院",
+          "name": "樊曾胜"
+        },
+        {
+          "key": "何彦儒@四川现代职业学院",
+          "name": "何彦儒"
+        },
+        {
+          "key": "王广仁@四川现代职业学院",
+          "name": "王广仁"
+        }
+      ],
+      "predictedRank": 73,
+      "perf": 1363.17,
+      "preRating": 1440.57,
+      "muDelta": 22.34,
+      "predictedRankOfficial": 72,
+      "perfOfficial": 1364.51,
+      "preRatingOfficial": 1441.08,
+      "muDeltaOfficial": 22.53,
+      "rankOfficial": 28,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 29,
+      "name": "写给AYAKA的十四行诗",
+      "org": "浙江经贸职业技术学院",
+      "solved": 5,
+      "penalty": 319,
+      "official": true,
+      "members": [
+        {
+          "key": "严冯翼@浙江经贸职业技术学院",
+          "name": "严冯翼"
+        },
+        {
+          "key": "黄宇霄@浙江经贸职业技术学院",
+          "name": "黄宇霄"
+        },
+        {
+          "key": "徐冬海@浙江经贸职业技术学院",
+          "name": "徐冬海"
+        }
+      ],
+      "predictedRank": 62,
+      "perf": 1376.51,
+      "preRating": 1492.02,
+      "muDelta": 11.67,
+      "predictedRankOfficial": 64,
+      "perfOfficial": 1378.45,
+      "preRatingOfficial": 1494.17,
+      "muDeltaOfficial": 11.57,
+      "rankOfficial": 29,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 30,
+      "name": "码仔队",
+      "org": "浙江金融职业学院",
+      "solved": 5,
+      "penalty": 327,
+      "official": true,
+      "members": [
+        {
+          "key": "汪嘉铭@浙江金融职业学院",
+          "name": "汪嘉铭"
+        },
+        {
+          "key": "陈灵吉@浙江金融职业学院",
+          "name": "陈灵吉"
+        },
+        {
+          "key": "彭杨博@浙江金融职业学院",
+          "name": "彭杨博"
+        }
+      ],
+      "predictedRank": 18,
+      "perf": 1410.64,
+      "preRating": 1581.83,
+      "muDelta": -3.78,
+      "predictedRankOfficial": 19,
+      "perfOfficial": 1411.87,
+      "preRatingOfficial": 1582.46,
+      "muDeltaOfficial": -3.67,
+      "rankOfficial": 30,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 31,
+      "name": "银从必过队",
+      "org": "浙江金融职业学院",
+      "solved": 5,
+      "penalty": 349,
+      "official": true,
+      "members": [
+        {
+          "key": "张哲楷@浙江金融职业学院",
+          "name": "张哲楷"
+        },
+        {
+          "key": "吕艾尔@浙江金融职业学院",
+          "name": "吕艾尔"
+        },
+        {
+          "key": "朱佳辉@浙江金融职业学院",
+          "name": "朱佳辉"
+        }
+      ],
+      "predictedRank": 63,
+      "perf": 1364.37,
+      "preRating": 1490.27,
+      "muDelta": 8.76,
+      "predictedRankOfficial": 62,
+      "perfOfficial": 1367.92,
+      "preRatingOfficial": 1496.31,
+      "muDeltaOfficial": 8.02,
+      "rankOfficial": 31,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 32,
+      "name": "育英四队",
+      "org": "浙江育英职业技术学院",
+      "solved": 5,
+      "penalty": 518,
+      "official": true,
+      "members": [
+        {
+          "key": "宋新雨@浙江育英职业技术学院",
+          "name": "宋新雨"
+        },
+        {
+          "key": "戚周炜@浙江育英职业技术学院",
+          "name": "戚周炜"
+        },
+        {
+          "key": "梁廷炳@浙江育英职业技术学院",
+          "name": "梁廷炳"
+        }
+      ],
+      "predictedRank": 56,
+      "perf": 1368.59,
+      "preRating": 1513.09,
+      "muDelta": 9.98,
+      "predictedRankOfficial": 56,
+      "perfOfficial": 1369.96,
+      "preRatingOfficial": 1513.94,
+      "muDeltaOfficial": 9.86,
+      "rankOfficial": 32,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 33,
+      "name": "总不可能一道题都不出吧",
+      "org": "浙江机电职业技术大学",
+      "solved": 5,
+      "penalty": 520,
+      "official": true,
+      "members": [
+        {
+          "key": "孙宇帆@浙江机电职业技术大学",
+          "name": "孙宇帆"
+        },
+        {
+          "key": "游晨昕@浙江机电职业技术大学",
+          "name": "游晨昕"
+        },
+        {
+          "key": "蔡杍晨@浙江机电职业技术大学",
+          "name": "蔡杍晨"
+        }
+      ],
+      "predictedRank": 52,
+      "perf": 1366.31,
+      "preRating": 1519.93,
+      "muDelta": 1.0,
+      "predictedRankOfficial": 52,
+      "perfOfficial": 1367.85,
+      "preRatingOfficial": 1521.17,
+      "muDeltaOfficial": 1.04,
+      "rankOfficial": 33,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 34,
+      "name": "提交都队",
+      "org": "深圳职业技术大学",
+      "solved": 5,
+      "penalty": 522,
+      "official": true,
+      "members": [
+        {
+          "key": "邱嘉悦@深圳职业技术大学",
+          "name": "邱嘉悦"
+        },
+        {
+          "key": "樊麒裕@深圳职业技术大学",
+          "name": "樊麒裕"
+        },
+        {
+          "key": "朱仟涛@深圳职业技术大学",
+          "name": "朱仟涛"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1395.31,
+      "preRating": 1590.85,
+      "muDelta": -10.74,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1396.19,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -10.54,
+      "rankOfficial": 34,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 35,
+      "name": "大佬和他的两个摆件",
+      "org": "武汉职业技术学院",
+      "solved": 5,
+      "penalty": 525,
+      "official": true,
+      "members": [
+        {
+          "key": "罗振荣@武汉职业技术学院",
+          "name": "罗振荣"
+        },
+        {
+          "key": "杨浩@武汉职业技术学院",
+          "name": "杨浩"
+        },
+        {
+          "key": "王子玄@武汉职业技术学院",
+          "name": "王子玄"
+        }
+      ],
+      "predictedRank": 67,
+      "perf": 1335.16,
+      "preRating": 1473.01,
+      "muDelta": 5.75,
+      "predictedRankOfficial": 73,
+      "perfOfficial": 1322.15,
+      "preRatingOfficial": 1438.48,
+      "muDeltaOfficial": 11.58,
+      "rankOfficial": 35,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 36,
+      "name": "队堆对",
+      "org": "浙江金融职业学院",
+      "solved": 5,
+      "penalty": 551,
+      "official": true,
+      "members": [
+        {
+          "key": "章炤宁@浙江金融职业学院",
+          "name": "章炤宁"
+        },
+        {
+          "key": "徐新@浙江金融职业学院",
+          "name": "徐新"
+        },
+        {
+          "key": "颜靖@浙江金融职业学院",
+          "name": "颜靖"
+        }
+      ],
+      "predictedRank": 33,
+      "perf": 1370.82,
+      "preRating": 1560.97,
+      "muDelta": -9.22,
+      "predictedRankOfficial": 32,
+      "perfOfficial": 1372.67,
+      "preRatingOfficial": 1562.89,
+      "muDeltaOfficial": -9.28,
+      "rankOfficial": 36,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 37,
+      "name": "这次一定不超限",
+      "org": "浙江金融职业学院",
+      "solved": 5,
+      "penalty": 572,
+      "official": true,
+      "members": [
+        {
+          "key": "符轩跃@浙江金融职业学院",
+          "name": "符轩跃"
+        },
+        {
+          "key": "吴明政@浙江金融职业学院",
+          "name": "吴明政"
+        },
+        {
+          "key": "陈如慧@浙江金融职业学院",
+          "name": "陈如慧"
+        }
+      ],
+      "predictedRank": 40,
+      "perf": 1360.62,
+      "preRating": 1550.04,
+      "muDelta": -7.45,
+      "predictedRankOfficial": 38,
+      "perfOfficial": 1363.58,
+      "preRatingOfficial": 1554.2,
+      "muDeltaOfficial": -7.77,
+      "rankOfficial": 37,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 38,
+      "name": "金职大4队",
+      "org": "金华职业技术大学",
+      "solved": 5,
+      "penalty": 581,
+      "official": true,
+      "members": [
+        {
+          "key": "杨灵洁@金华职业技术大学",
+          "name": "杨灵洁"
+        },
+        {
+          "key": "王传舜@金华职业技术大学",
+          "name": "王传舜"
+        },
+        {
+          "key": "毕琬莹@金华职业技术大学",
+          "name": "毕琬莹"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1377.02,
+      "preRating": 1590.85,
+      "muDelta": -15.87,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1377.84,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -15.67,
+      "rankOfficial": 38,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 39,
+      "name": "重生之我在宁职敲代码",
+      "org": "宁波职业技术学院",
+      "solved": 5,
+      "penalty": 582,
+      "official": true,
+      "members": [
+        {
+          "key": "吴姜慧@宁波职业技术学院",
+          "name": "吴姜慧"
+        },
+        {
+          "key": "陈颖@宁波职业技术学院",
+          "name": "陈颖"
+        },
+        {
+          "key": "王玺乐@宁波职业技术学院",
+          "name": "王玺乐"
+        }
+      ],
+      "predictedRank": 70,
+      "perf": 1308.1,
+      "preRating": 1459.61,
+      "muDelta": 1.58,
+      "predictedRankOfficial": 69,
+      "perfOfficial": 1309.99,
+      "preRatingOfficial": 1461.68,
+      "muDeltaOfficial": 1.49,
+      "rankOfficial": 39,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 40,
+      "name": "我永远喜欢灵梦",
+      "org": "四川信息职业技术学院",
+      "solved": 5,
+      "penalty": 585,
+      "official": true,
+      "members": [
+        {
+          "key": "曾华艺@四川信息职业技术学院",
+          "name": "曾华艺"
+        },
+        {
+          "key": "张艺滟@四川信息职业技术学院",
+          "name": "张艺滟"
+        },
+        {
+          "key": "蒋蕾@四川信息职业技术学院",
+          "name": "蒋蕾"
+        }
+      ],
+      "predictedRank": 68,
+      "perf": 1307.42,
+      "preRating": 1469.7,
+      "muDelta": -1.32,
+      "predictedRankOfficial": 67,
+      "perfOfficial": 1311.53,
+      "preRatingOfficial": 1476.6,
+      "muDeltaOfficial": -2.21,
+      "rankOfficial": 40,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 41,
+      "name": "机电X队",
+      "org": "浙江机电职业技术大学",
+      "solved": 5,
+      "penalty": 684,
+      "official": true,
+      "members": [
+        {
+          "key": "林雍谕@浙江机电职业技术大学",
+          "name": "林雍谕"
+        },
+        {
+          "key": "陆丹阳@浙江机电职业技术大学",
+          "name": "陆丹阳"
+        },
+        {
+          "key": "吕俊毅@浙江机电职业技术大学",
+          "name": "吕俊毅"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1364.0,
+      "preRating": 1590.85,
+      "muDelta": -19.51,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1364.79,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -19.33,
+      "rankOfficial": 41,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 42,
+      "name": "不对也要队",
+      "org": "宁波职业技术学院",
+      "solved": 5,
+      "penalty": 789,
+      "official": true,
+      "members": [
+        {
+          "key": "陈瑞嗣@宁波职业技术学院",
+          "name": "陈瑞嗣"
+        },
+        {
+          "key": "邱佳熠@宁波职业技术学院",
+          "name": "邱佳熠"
+        },
+        {
+          "key": "吴松@宁波职业技术学院",
+          "name": "吴松"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1359.78,
+      "preRating": 1590.85,
+      "muDelta": -20.69,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1360.56,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -20.52,
+      "rankOfficial": 42,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 43,
+      "name": "绝区原神幻想队",
+      "org": "绍兴职业技术学院",
+      "solved": 4,
+      "penalty": 230,
+      "official": true,
+      "members": [
+        {
+          "key": "谷卿诚@绍兴职业技术学院",
+          "name": "谷卿诚"
+        },
+        {
+          "key": "赖敏韬@绍兴职业技术学院",
+          "name": "赖敏韬"
+        },
+        {
+          "key": "陈锦仁@绍兴职业技术学院",
+          "name": "陈锦仁"
+        }
+      ],
+      "predictedRank": 42,
+      "perf": 1331.24,
+      "preRating": 1546.46,
+      "muDelta": -16.11,
+      "predictedRankOfficial": 44,
+      "perfOfficial": 1333.27,
+      "preRatingOfficial": 1548.74,
+      "muDeltaOfficial": -9.47,
+      "rankOfficial": 43,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 44,
+      "name": "坤你太美",
+      "org": "四川信息职业技术学院",
+      "solved": 4,
+      "penalty": 271,
+      "official": true,
+      "members": [
+        {
+          "key": "孙海宇@四川信息职业技术学院",
+          "name": "孙海宇"
+        },
+        {
+          "key": "王文俊@四川信息职业技术学院",
+          "name": "王文俊"
+        },
+        {
+          "key": "黄斯绪@四川信息职业技术学院",
+          "name": "黄斯绪"
+        }
+      ],
+      "predictedRank": 37,
+      "perf": 1331.6,
+      "preRating": 1555.23,
+      "muDelta": -18.61,
+      "predictedRankOfficial": 35,
+      "perfOfficial": 1335.23,
+      "preRatingOfficial": 1560.4,
+      "muDeltaOfficial": -19.08,
+      "rankOfficial": 44,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 45,
+      "name": "再打铁就去踩缝纫机",
+      "org": "浙江纺织服装职业技术学院",
+      "solved": 4,
+      "penalty": 299,
+      "official": true,
+      "members": [
+        {
+          "key": "钟顺波@浙江纺织服装职业技术学院",
+          "name": "钟顺波"
+        },
+        {
+          "key": "余昆滨@浙江纺织服装职业技术学院",
+          "name": "余昆滨"
+        },
+        {
+          "key": "倪文佳@浙江纺织服装职业技术学院",
+          "name": "倪文佳"
+        }
+      ],
+      "predictedRank": 31,
+      "perf": 1330.68,
+      "preRating": 1561.32,
+      "muDelta": -20.57,
+      "predictedRankOfficial": 31,
+      "perfOfficial": 1332.44,
+      "preRatingOfficial": 1563.1,
+      "muDeltaOfficial": -20.62,
+      "rankOfficial": 45,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 46,
+      "name": "金职大3队",
+      "org": "金华职业技术大学",
+      "solved": 4,
+      "penalty": 348,
+      "official": true,
+      "members": [
+        {
+          "key": "刘晨@金华职业技术大学",
+          "name": "刘晨"
+        },
+        {
+          "key": "应其宏@金华职业技术大学",
+          "name": "应其宏"
+        },
+        {
+          "key": "丁鼎立@金华职业技术大学",
+          "name": "丁鼎立"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1343.38,
+      "preRating": 1590.85,
+      "muDelta": -25.28,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1344.1,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -25.12,
+      "rankOfficial": 46,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 47,
+      "name": "可是我18岁",
+      "org": "浙江机电职业技术大学",
+      "solved": 4,
+      "penalty": 358,
+      "official": true,
+      "members": [
+        {
+          "key": "池长乐@浙江机电职业技术大学",
+          "name": "池长乐"
+        },
+        {
+          "key": "张光瑶@浙江机电职业技术大学",
+          "name": "张光瑶"
+        },
+        {
+          "key": "张兴日@浙江机电职业技术大学",
+          "name": "张兴日"
+        }
+      ],
+      "predictedRank": 72,
+      "perf": 1259.91,
+      "preRating": 1444.81,
+      "muDelta": -7.77,
+      "predictedRankOfficial": 71,
+      "perfOfficial": 1261.06,
+      "preRatingOfficial": 1445.37,
+      "muDeltaOfficial": -7.64,
+      "rankOfficial": 47,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 48,
+      "name": "重生之我在ccpc组队",
+      "org": "浙江金融职业学院",
+      "solved": 4,
+      "penalty": 376,
+      "official": true,
+      "members": [
+        {
+          "key": "郑欣如@浙江金融职业学院",
+          "name": "郑欣如"
+        },
+        {
+          "key": "王杰@浙江金融职业学院",
+          "name": "王杰"
+        },
+        {
+          "key": "胡艺轩@浙江金融职业学院",
+          "name": "胡艺轩"
+        }
+      ],
+      "predictedRank": 28,
+      "perf": 1321.91,
+      "preRating": 1567.88,
+      "muDelta": -24.63,
+      "predictedRankOfficial": 28,
+      "perfOfficial": 1323.19,
+      "preRatingOfficial": 1568.86,
+      "muDeltaOfficial": -24.61,
+      "rankOfficial": 48,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 49,
+      "name": "金职大2队",
+      "org": "金华职业技术大学",
+      "solved": 4,
+      "penalty": 415,
+      "official": true,
+      "members": [
+        {
+          "key": "盛煜航@金华职业技术大学",
+          "name": "盛煜航"
+        },
+        {
+          "key": "邵俊杰@金华职业技术大学",
+          "name": "邵俊杰"
+        },
+        {
+          "key": "陈朱凯@金华职业技术大学",
+          "name": "陈朱凯"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1331.52,
+      "preRating": 1590.85,
+      "muDelta": -28.61,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1332.2,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -28.46,
+      "rankOfficial": 49,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 50,
+      "name": "我要吃汉堡王",
+      "org": "浙江纺织服装职业技术学院",
+      "solved": 4,
+      "penalty": 496,
+      "official": true,
+      "members": [
+        {
+          "key": "罗华康@浙江纺织服装职业技术学院",
+          "name": "罗华康"
+        },
+        {
+          "key": "童羽璐@浙江纺织服装职业技术学院",
+          "name": "童羽璐"
+        },
+        {
+          "key": "朱佳慧@浙江纺织服装职业技术学院",
+          "name": "朱佳慧"
+        }
+      ],
+      "predictedRank": 30,
+      "perf": 1310.59,
+      "preRating": 1562.53,
+      "muDelta": -26.17,
+      "predictedRankOfficial": 30,
+      "perfOfficial": 1311.63,
+      "preRatingOfficial": 1563.12,
+      "muDeltaOfficial": -26.1,
+      "rankOfficial": 50,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 51,
+      "name": "平安喜乐",
+      "org": "电子科技大学成都学院",
+      "solved": 4,
+      "penalty": 554,
+      "official": true,
+      "members": [
+        {
+          "key": "吕文凯@电子科技大学成都学院",
+          "name": "吕文凯"
+        },
+        {
+          "key": "周屿涵@电子科技大学成都学院",
+          "name": "周屿涵"
+        },
+        {
+          "key": "熊悦童@电子科技大学成都学院",
+          "name": "熊悦童"
+        }
+      ],
+      "predictedRank": 38,
+      "perf": 1300.35,
+      "preRating": 1552.25,
+      "muDelta": -25.74,
+      "predictedRankOfficial": 37,
+      "perfOfficial": 1303.84,
+      "preRatingOfficial": 1556.93,
+      "muDeltaOfficial": -26.14,
+      "rankOfficial": 51,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 52,
+      "name": "你说的都队",
+      "org": "宁波城市职业技术学院",
+      "solved": 4,
+      "penalty": 557,
+      "official": true,
+      "members": [
+        {
+          "key": "余严俊@宁波城市职业技术学院",
+          "name": "余严俊"
+        },
+        {
+          "key": "陆喆逊@宁波城市职业技术学院",
+          "name": "陆喆逊"
+        },
+        {
+          "key": "唐怡凯@宁波城市职业技术学院",
+          "name": "唐怡凯"
+        }
+      ],
+      "predictedRank": 45,
+      "perf": 1291.66,
+      "preRating": 1544.68,
+      "muDelta": -26.84,
+      "predictedRankOfficial": 46,
+      "perfOfficial": 1292.85,
+      "preRatingOfficial": 1545.53,
+      "muDeltaOfficial": -26.78,
+      "rankOfficial": 52,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 53,
+      "name": "有福同享有难退队",
+      "org": "武汉软件工程职业学院",
+      "solved": 4,
+      "penalty": 575,
+      "official": true,
+      "members": [
+        {
+          "key": "郭臣希@武汉软件工程职业学院",
+          "name": "郭臣希"
+        },
+        {
+          "key": "樊洪涛@武汉软件工程职业学院",
+          "name": "樊洪涛"
+        },
+        {
+          "key": "邹涛@武汉软件工程职业学院",
+          "name": "邹涛"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1316.18,
+      "preRating": 1590.85,
+      "muDelta": -32.9,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1316.81,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -32.76,
+      "rankOfficial": 53,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 54,
+      "name": "玛卡巴卡",
+      "org": "嘉兴职业技术学院",
+      "solved": 4,
+      "penalty": 694,
+      "official": true,
+      "members": [
+        {
+          "key": "邹捷@嘉兴职业技术学院",
+          "name": "邹捷"
+        },
+        {
+          "key": "应晴@嘉兴职业技术学院",
+          "name": "应晴"
+        },
+        {
+          "key": "曹海宁@嘉兴职业技术学院",
+          "name": "曹海宁"
+        }
+      ],
+      "predictedRank": 41,
+      "perf": 1284.75,
+      "preRating": 1546.87,
+      "muDelta": -29.38,
+      "predictedRankOfficial": 45,
+      "perfOfficial": 1286.02,
+      "preRatingOfficial": 1547.87,
+      "muDeltaOfficial": -29.35,
+      "rankOfficial": 54,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 55,
+      "name": "唔西迪西",
+      "org": "嘉兴职业技术学院",
+      "solved": 4,
+      "penalty": 741,
+      "official": true,
+      "members": [
+        {
+          "key": "常哲兴@嘉兴职业技术学院",
+          "name": "常哲兴"
+        },
+        {
+          "key": "阮荣靖@嘉兴职业技术学院",
+          "name": "阮荣靖"
+        },
+        {
+          "key": "崔露莹@嘉兴职业技术学院",
+          "name": "崔露莹"
+        }
+      ],
+      "predictedRank": 25,
+      "perf": 1299.03,
+      "preRating": 1575.8,
+      "muDelta": -33.06,
+      "predictedRankOfficial": 25,
+      "perfOfficial": 1299.81,
+      "preRatingOfficial": 1576.07,
+      "muDeltaOfficial": -32.98,
+      "rankOfficial": 55,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 56,
+      "name": "中午不AC",
+      "org": "浙江金融职业学院",
+      "solved": 4,
+      "penalty": 836,
+      "official": true,
+      "members": [
+        {
+          "key": "翁彬宸@浙江金融职业学院",
+          "name": "翁彬宸"
+        },
+        {
+          "key": "庞烨@浙江金融职业学院",
+          "name": "庞烨"
+        },
+        {
+          "key": "任董@浙江金融职业学院",
+          "name": "任董"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1304.98,
+      "preRating": 1590.85,
+      "muDelta": -36.04,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1305.56,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -35.91,
+      "rankOfficial": 56,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 57,
+      "name": "我去,初音未来!",
+      "org": "深圳职业技术大学",
+      "solved": 4,
+      "penalty": 848,
+      "official": true,
+      "members": [
+        {
+          "key": "刘志锋@深圳职业技术大学",
+          "name": "刘志锋"
+        },
+        {
+          "key": "曾鸿亮@深圳职业技术大学",
+          "name": "曾鸿亮"
+        },
+        {
+          "key": "黄峻峰@深圳职业技术大学",
+          "name": "黄峻峰"
+        }
+      ],
+      "predictedRank": 20,
+      "perf": 1294.77,
+      "preRating": 1580.93,
+      "muDelta": -35.94,
+      "predictedRankOfficial": 20,
+      "perfOfficial": 1295.89,
+      "preRatingOfficial": 1581.77,
+      "muDeltaOfficial": -35.93,
+      "rankOfficial": 57,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 58,
+      "name": "温商2队",
+      "org": "温州商学院",
+      "solved": 3,
+      "penalty": 111,
+      "official": true,
+      "members": [
+        {
+          "key": "丁玄龙@温州商学院",
+          "name": "丁玄龙"
+        },
+        {
+          "key": "唐鑫杰@温州商学院",
+          "name": "唐鑫杰"
+        },
+        {
+          "key": "张耀文@温州商学院",
+          "name": "张耀文"
+        }
+      ],
+      "predictedRank": 75,
+      "perf": 1190.82,
+      "preRating": 1422.61,
+      "muDelta": -9.43,
+      "predictedRankOfficial": 75,
+      "perfOfficial": 1191.71,
+      "preRatingOfficial": 1422.93,
+      "muDeltaOfficial": -9.47,
+      "rankOfficial": 58,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 59,
+      "name": "随缘",
+      "org": "浙江警官职业学院",
+      "solved": 3,
+      "penalty": 143,
+      "official": true,
+      "members": [
+        {
+          "key": "潘伊梦@浙江警官职业学院",
+          "name": "潘伊梦"
+        },
+        {
+          "key": "王翔@浙江警官职业学院",
+          "name": "王翔"
+        },
+        {
+          "key": "成鑫兴@浙江警官职业学院",
+          "name": "成鑫兴"
+        }
+      ],
+      "predictedRank": 23,
+      "perf": 1285.76,
+      "preRating": 1578.65,
+      "muDelta": -37.89,
+      "predictedRankOfficial": 24,
+      "perfOfficial": 1286.81,
+      "preRatingOfficial": 1579.41,
+      "muDeltaOfficial": -37.86,
+      "rankOfficial": 59,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 60,
+      "name": "再多看一眼就会AC",
+      "org": "桂林理工大学南宁分校",
+      "solved": 3,
+      "penalty": 164,
+      "official": true,
+      "members": [
+        {
+          "key": "陈仕磊@桂林理工大学南宁分校",
+          "name": "陈仕磊"
+        },
+        {
+          "key": "杨勇智@桂林理工大学南宁分校",
+          "name": "杨勇智"
+        },
+        {
+          "key": "巫方贤@桂林理工大学南宁分校",
+          "name": "巫方贤"
+        }
+      ],
+      "predictedRank": 29,
+      "perf": 1273.7,
+      "preRating": 1566.39,
+      "muDelta": -37.68,
+      "predictedRankOfficial": 29,
+      "perfOfficial": 1274.76,
+      "preRatingOfficial": 1567.16,
+      "muDeltaOfficial": -37.66,
+      "rankOfficial": 60,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 61,
+      "name": "那我懂你意思了",
+      "org": "宁波城市职业技术学院",
+      "solved": 3,
+      "penalty": 259,
+      "official": true,
+      "members": [
+        {
+          "key": "洪嘉耀@宁波城市职业技术学院",
+          "name": "洪嘉耀"
+        },
+        {
+          "key": "陈豪鹏@宁波城市职业技术学院",
+          "name": "陈豪鹏"
+        }
+      ],
+      "predictedRank": 59,
+      "perf": 1295.03,
+      "preRating": 1499.71,
+      "muDelta": -32.63,
+      "predictedRankOfficial": 60,
+      "perfOfficial": 1295.86,
+      "preRatingOfficial": 1500.14,
+      "muDeltaOfficial": -32.58,
+      "rankOfficial": 61,
+      "knownMembersOfficial": 1
+    },
+    {
+      "rank": 62,
+      "name": "育英十四队",
+      "org": "浙江育英职业技术学院",
+      "solved": 3,
+      "penalty": 283,
+      "official": true,
+      "members": [
+        {
+          "key": "林浩@浙江育英职业技术学院",
+          "name": "林浩"
+        },
+        {
+          "key": "应孔晨@浙江育英职业技术学院",
+          "name": "应孔晨"
+        }
+      ],
+      "predictedRank": 51,
+      "perf": 1304.69,
+      "preRating": 1520.41,
+      "muDelta": -36.12,
+      "predictedRankOfficial": 53,
+      "perfOfficial": 1305.2,
+      "preRatingOfficial": 1520.41,
+      "muDeltaOfficial": -36.02,
+      "rankOfficial": 62,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 63,
+      "name": "元梦启动队",
+      "org": "桂林航天工业学院",
+      "solved": 3,
+      "penalty": 287,
+      "official": true,
+      "members": [
+        {
+          "key": "韦鑫昌@桂林航天工业学院",
+          "name": "韦鑫昌"
+        },
+        {
+          "key": "梁焕才@桂林航天工业学院",
+          "name": "梁焕才"
+        },
+        {
+          "key": "李勇强@桂林航天工业学院",
+          "name": "李勇强"
+        }
+      ],
+      "predictedRank": 32,
+      "perf": 1258.58,
+      "preRating": 1561.13,
+      "muDelta": -40.71,
+      "predictedRankOfficial": 34,
+      "perfOfficial": 1259.64,
+      "preRatingOfficial": 1561.97,
+      "muDeltaOfficial": -40.68,
+      "rankOfficial": 63,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 64,
+      "name": "超级无敌暴龙战队",
+      "org": "共青科技职业学院",
+      "solved": 3,
+      "penalty": 293,
+      "official": true,
+      "members": [
+        {
+          "key": "汪诗恒@共青科技职业学院",
+          "name": "汪诗恒"
+        },
+        {
+          "key": "钟丽平@共青科技职业学院",
+          "name": "钟丽平"
+        },
+        {
+          "key": "胡辰卉@共青科技职业学院",
+          "name": "胡辰卉"
+        }
+      ],
+      "predictedRank": 64,
+      "perf": 1199.72,
+      "preRating": 1483.44,
+      "muDelta": -9.43,
+      "predictedRankOfficial": 65,
+      "perfOfficial": 1200.4,
+      "preRatingOfficial": 1483.71,
+      "muDeltaOfficial": -9.47,
+      "rankOfficial": 64,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 65,
+      "name": "你管我做的对不队",
+      "org": "共青科技职业学院",
+      "solved": 3,
+      "penalty": 310,
+      "official": true,
+      "members": [
+        {
+          "key": "邱建军@共青科技职业学院",
+          "name": "邱建军"
+        },
+        {
+          "key": "徐刚@共青科技职业学院",
+          "name": "徐刚"
+        },
+        {
+          "key": "刘豪风@共青科技职业学院",
+          "name": "刘豪风"
+        }
+      ],
+      "predictedRank": 60,
+      "perf": 1206.31,
+      "preRating": 1499.28,
+      "muDelta": -38.01,
+      "predictedRankOfficial": 61,
+      "perfOfficial": 1206.89,
+      "preRatingOfficial": 1499.45,
+      "muDeltaOfficial": -37.94,
+      "rankOfficial": 65,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 66,
+      "name": "广演1队",
+      "org": "广东亚视演艺职业学院",
+      "solved": 3,
+      "penalty": 317,
+      "official": true,
+      "members": [
+        {
+          "key": "徐庆庭@广东亚视演艺职业学院",
+          "name": "徐庆庭"
+        },
+        {
+          "key": "潘文辉@广东亚视演艺职业学院",
+          "name": "潘文辉"
+        },
+        {
+          "key": "许逸民@广东亚视演艺职业学院",
+          "name": "许逸民"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1268.92,
+      "preRating": 1590.85,
+      "muDelta": -46.13,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1269.34,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -46.05,
+      "rankOfficial": 66,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 66,
+      "name": "这是个",
+      "org": "南昌理工学院",
+      "solved": 3,
+      "penalty": 317,
+      "official": true,
+      "members": [
+        {
+          "key": "赵立业@南昌理工学院",
+          "name": "赵立业"
+        },
+        {
+          "key": "赵云鹏@南昌理工学院",
+          "name": "赵云鹏"
+        },
+        {
+          "key": "韩潇鹏@南昌理工学院",
+          "name": "韩潇鹏"
+        }
+      ],
+      "predictedRank": 43,
+      "perf": 1236.17,
+      "preRating": 1546.25,
+      "muDelta": -41.82,
+      "predictedRankOfficial": 48,
+      "perfOfficial": 1234.03,
+      "preRatingOfficial": 1542.76,
+      "muDeltaOfficial": -41.31,
+      "rankOfficial": 66,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 68,
+      "name": "天生赢家组",
+      "org": "深圳职业技术大学",
+      "solved": 3,
+      "penalty": 335,
+      "official": true,
+      "members": [
+        {
+          "key": "艾洋@深圳职业技术大学",
+          "name": "艾洋"
+        },
+        {
+          "key": "揭英淼@深圳职业技术大学",
+          "name": "揭英淼"
+        },
+        {
+          "key": "赵雄畅@深圳职业技术大学",
+          "name": "赵雄畅"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1261.87,
+      "preRating": 1590.85,
+      "muDelta": -48.1,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1262.26,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -48.04,
+      "rankOfficial": 68,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 69,
+      "name": "大梦想家",
+      "org": "丽水职业技术学院",
+      "solved": 3,
+      "penalty": 467,
+      "official": true,
+      "members": [
+        {
+          "key": "周纪宇@丽水职业技术学院",
+          "name": "周纪宇"
+        },
+        {
+          "key": "周峰@丽水职业技术学院",
+          "name": "周峰"
+        },
+        {
+          "key": "吕海星@丽水职业技术学院",
+          "name": "吕海星"
+        }
+      ],
+      "predictedRank": 45,
+      "perf": 1223.06,
+      "preRating": 1544.68,
+      "muDelta": -46.04,
+      "predictedRankOfficial": 46,
+      "perfOfficial": 1224.08,
+      "preRatingOfficial": 1545.53,
+      "muDeltaOfficial": -46.04,
+      "rankOfficial": 69,
+      "knownMembersOfficial": 3
+    },
+    {
+      "rank": 70,
+      "name": "MAGA再冲国会山",
+      "org": "宁波城市职业技术学院",
+      "solved": 3,
+      "penalty": 477,
+      "official": true,
+      "members": [
+        {
+          "key": "陈俊杰@宁波城市职业技术学院",
+          "name": "陈俊杰"
+        },
+        {
+          "key": "蔡昇鸿@宁波城市职业技术学院",
+          "name": "蔡昇鸿"
+        }
+      ],
+      "predictedRank": 66,
+      "perf": 1235.22,
+      "preRating": 1475.23,
+      "muDelta": -42.92,
+      "predictedRankOfficial": 68,
+      "perfOfficial": 1236.27,
+      "preRatingOfficial": 1476.15,
+      "muDeltaOfficial": -42.92,
+      "rankOfficial": 70,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 71,
+      "name": "黑,真**的黑啊!",
+      "org": "南昌理工学院",
+      "solved": 3,
+      "penalty": 510,
+      "official": true,
+      "members": [
+        {
+          "key": "陈智@南昌理工学院",
+          "name": "陈智"
+        },
+        {
+          "key": "水清华@南昌理工学院",
+          "name": "水清华"
+        }
+      ],
+      "predictedRank": 74,
+      "perf": 1195.88,
+      "preRating": 1432.17,
+      "muDelta": -9.43,
+      "predictedRankOfficial": 74,
+      "perfOfficial": 1196.38,
+      "preRatingOfficial": 1432.41,
+      "muDeltaOfficial": -9.47,
+      "rankOfficial": 71,
+      "knownMembersOfficial": 2
+    },
+    {
+      "rank": 72,
+      "name": "广演2队",
+      "org": "广东亚视演艺职业学院",
+      "solved": 2,
+      "penalty": 208,
+      "official": true,
+      "members": [
+        {
+          "key": "曹康康@广东亚视演艺职业学院",
+          "name": "曹康康"
+        },
+        {
+          "key": "卢培森@广东亚视演艺职业学院",
+          "name": "卢培森"
+        },
+        {
+          "key": "阮汉宙@广东亚视演艺职业学院",
+          "name": "阮汉宙"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1247.88,
+      "preRating": 1590.85,
+      "muDelta": -52.02,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1248.19,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -51.98,
+      "rankOfficial": 72,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 73,
+      "name": "广演3队",
+      "org": "广东亚视演艺职业学院",
+      "solved": 1,
+      "penalty": 81,
+      "official": true,
+      "members": [
+        {
+          "key": "甘敬阳@广东亚视演艺职业学院",
+          "name": "甘敬阳"
+        },
+        {
+          "key": "安德祥@广东亚视演艺职业学院",
+          "name": "安德祥"
+        },
+        {
+          "key": "张启宇@广东亚视演艺职业学院",
+          "name": "张启宇"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1244.39,
+      "preRating": 1590.85,
+      "muDelta": -53.0,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1244.69,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -52.96,
+      "rankOfficial": 73,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 74,
+      "name": "广演4队",
+      "org": "广东亚视演艺职业学院",
+      "solved": 0,
+      "penalty": 0,
+      "official": true,
+      "members": [
+        {
+          "key": "毛志森@广东亚视演艺职业学院",
+          "name": "毛志森"
+        },
+        {
+          "key": "林永漳@广东亚视演艺职业学院",
+          "name": "林永漳"
+        },
+        {
+          "key": "钟浩智@广东亚视演艺职业学院",
+          "name": "钟浩智"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1240.91,
+      "preRating": 1590.85,
+      "muDelta": -53.97,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1241.19,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -53.94,
+      "rankOfficial": 74,
+      "knownMembersOfficial": 0
+    },
+    {
+      "rank": 74,
+      "name": "广演5队",
+      "org": "广东亚视演艺职业学院",
+      "solved": 0,
+      "penalty": 0,
+      "official": true,
+      "members": [
+        {
+          "key": "何为@广东亚视演艺职业学院",
+          "name": "何为"
+        },
+        {
+          "key": "黄学旋@广东亚视演艺职业学院",
+          "name": "黄学旋"
+        },
+        {
+          "key": "刘冰杰@广东亚视演艺职业学院",
+          "name": "刘冰杰"
+        }
+      ],
+      "predictedRank": 3,
+      "perf": 1240.91,
+      "preRating": 1590.85,
+      "muDelta": -53.97,
+      "predictedRankOfficial": 3,
+      "perfOfficial": 1241.19,
+      "preRatingOfficial": 1590.85,
+      "muDeltaOfficial": -53.94,
+      "rankOfficial": 74,
+      "knownMembersOfficial": 0
+    }
+  ],
+  "contestMetrics": {
+    "version": "contest-metrics-v7",
+    "awardsMedals": true,
+    "effectiveTeamCount": 75,
+    "zeroHistoryTeamCount": 16,
+    "partialHistoryTeamCount": 13,
+    "weirdnessTeamCount": 46,
+    "historyCoverage": 0.6133333333333333,
+    "medalCutoffs": {
+      "gold": 8,
+      "silver": 16,
+      "bronze": 24
+    },
+    "strength": {
+      "bronze": 1684.31,
+      "silver": 1783.35,
+      "gold": 1933.12,
+      "top3": 2137.55,
+      "top10": 1886.38,
+      "overall": 1545.16
+    },
+    "weirdness": 6.54
+  }
+}

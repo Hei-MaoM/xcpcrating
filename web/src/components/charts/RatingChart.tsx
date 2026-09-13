@@ -1,26 +1,34 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 // On-demand ECharts: register ONLY the pieces this chart uses, never the full
 // bundle. Light Luxury direction — hairline grid, thin strokes, oxford ladder
 // line + gold performance scatter, token-matched Simplified-Chinese tooltip.
-import * as echarts from 'echarts/core'
-import { LineChart, ScatterChart } from 'echarts/charts'
-import {
-  GridComponent,
-  TooltipComponent,
-  LegendComponent,
-} from 'echarts/components'
-import { CanvasRenderer } from 'echarts/renderers'
+import type * as echarts from 'echarts/core'
 import type { PlayerHistoryEntry } from '../../lib/data'
 import { sortedByTime } from '../../pages/player/stats'
 
-echarts.use([
-  LineChart,
-  ScatterChart,
-  GridComponent,
-  TooltipComponent,
-  LegendComponent,
-  CanvasRenderer,
-])
+type EChartsRuntime = typeof import('echarts/core')
+let echartsRuntimePromise: Promise<EChartsRuntime> | null = null
+
+function loadECharts(): Promise<EChartsRuntime> {
+  if (echartsRuntimePromise) return echartsRuntimePromise
+  echartsRuntimePromise = Promise.all([
+    import('echarts/core'),
+    import('echarts/charts'),
+    import('echarts/components'),
+    import('echarts/renderers'),
+  ]).then(([core, charts, components, renderers]) => {
+    core.use([
+      charts.LineChart,
+      charts.ScatterChart,
+      components.GridComponent,
+      components.TooltipComponent,
+      components.LegendComponent,
+      renderers.CanvasRenderer,
+    ])
+    return core
+  })
+  return echartsRuntimePromise
+}
 
 /* ------------------------------------------------------------------ *
  * Palette — resolved from the Light Luxury tokens so the chart matches
@@ -78,9 +86,9 @@ function buildOption(
   const hasLadderLine = ladderLine.length > 0
 
   return {
-    animation: !prefersReducedMotion(),
+    animation: !prefersReducedMotion() && rows.length <= 48,
     animationDuration: 700,
-    animationDelay: (idx: number) => idx * 55,
+    animationDelay: (idx: number) => Math.min(idx * 12, 240),
     textStyle: { fontFamily: SANS, color: COLOR.ink },
     grid: { top: 48, right: 16, bottom: 32, left: 52 },
     legend: {
@@ -191,22 +199,50 @@ function formatTip(iso: string): string {
  */
 export function RatingChart({ history, rating }: RatingChartProps) {
   const ref = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(
+    () => typeof window === 'undefined' || !('IntersectionObserver' in window),
+  )
   const rows = useMemo(() => sortedByTime(history), [history])
 
   useEffect(() => {
     const el = ref.current
     if (!el || rows.length < MIN_POINTS) return
 
-    const chart = echarts.init(el)
-    chart.setOption(buildOption(rows, rating))
-
-    const onResize = () => chart.resize()
-    window.addEventListener('resize', onResize)
-    return () => {
-      window.removeEventListener('resize', onResize)
-      chart.dispose()
+    if (!('IntersectionObserver' in window)) {
+      return
     }
-  }, [rows, rating])
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '240px 0px' },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [rows.length])
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !isVisible || rows.length < MIN_POINTS) return
+
+    let cancelled = false
+    let chart: echarts.ECharts | null = null
+    const onResize = () => chart?.resize()
+    loadECharts().then((runtime) => {
+      if (cancelled || !ref.current) return
+      chart = runtime.init(ref.current)
+      chart.setOption(buildOption(rows, rating))
+      window.addEventListener('resize', onResize)
+    })
+    return () => {
+      cancelled = true
+      window.removeEventListener('resize', onResize)
+      chart?.dispose()
+    }
+  }, [isVisible, rows, rating])
 
   if (rows.length < MIN_POINTS) {
     return (

@@ -12,8 +12,9 @@ import { formatScoreInt } from '../../lib/format'
 import { SchoolFilter } from './SchoolFilter'
 import type { SchoolOption } from './schools'
 import { useLeaderboardParams } from './useLeaderboardParams'
+import { PageJump } from './PageJump'
 
-const PAGE_SIZE = 100
+const PAGE_SIZE = 30
 
 interface RatingsBoardProps {
   /** Official-only caliber (打星/非正式 excluded) vs the all-participation board. */
@@ -79,12 +80,15 @@ export function RatingsBoard({ official }: RatingsBoardProps) {
     ? (meta?.schools.find(([school]) => school === org)?.[1] ?? 0)
     : null
   const total = org ? schoolCount ?? 0 : (meta?.total ?? 0)
-  const pageSize = meta?.pageSize ?? PAGE_SIZE
+  const sourcePageSize = meta?.pageSize ?? 100
+  const pageSize = PAGE_SIZE
   const totalPages = Math.max(1, Math.ceil(total / pageSize))
   const clampedPage = Math.min(Math.max(1, page), totalPages)
   const start = (clampedPage - 1) * pageSize
+  const sourcePage = Math.floor(start / sourcePageSize) + 1
+  const sourceOffset = start % sourcePageSize
   const invalidSchool = Boolean(org && meta && schoolCount === 0)
-  const loadKey = JSON.stringify([official, org, clampedPage, pageSize])
+  const loadKey = JSON.stringify([official, org, clampedPage, pageSize, sourcePage])
   const rows = invalidSchool
     ? []
     : rowsLoad?.key === loadKey
@@ -101,7 +105,13 @@ export function RatingsBoard({ official }: RatingsBoardProps) {
       ? getLeaderboardSchool(official, org).then((schoolRows) =>
           schoolRows.slice(start, start + pageSize),
         )
-      : getLeaderboardPage(official, clampedPage)
+      : (sourceOffset + pageSize <= sourcePageSize || sourcePage * sourcePageSize >= total
+          ? getLeaderboardPage(official, sourcePage)
+          : Promise.all([
+              getLeaderboardPage(official, sourcePage),
+              getLeaderboardPage(official, sourcePage + 1),
+            ]).then(([current, next]) => [...current, ...next])
+        ).then((sourceRows) => sourceRows.slice(sourceOffset, sourceOffset + pageSize))
     load
       .then((data) => {
         if (active) setRowsLoad({ key: loadKey, data })
@@ -116,7 +126,7 @@ export function RatingsBoard({ official }: RatingsBoardProps) {
     return () => {
       active = false
     }
-  }, [meta, official, org, invalidSchool, start, pageSize, clampedPage, loadKey])
+  }, [meta, official, org, invalidSchool, start, pageSize, sourcePage, sourceOffset, sourcePageSize, total, clampedPage, loadKey])
 
   return (
     <>
@@ -229,14 +239,18 @@ export function RatingsBoard({ official }: RatingsBoardProps) {
               <div className="pager__ctrl">
                 <button
                   className="pager__btn"
+                  title="上一页"
                   disabled={clampedPage <= 1}
                   aria-label="上一页"
                   onClick={() => setPage(clampedPage - 1)}
                 >
                   <Caret dir="left" />
                 </button>
+                <span className="pager__page tnum">第 {clampedPage} / {totalPages} 页</span>
+                <PageJump page={clampedPage} totalPages={totalPages} onChange={setPage} />
                 <button
                   className="pager__btn"
+                  title="下一页"
                   disabled={clampedPage >= totalPages}
                   aria-label="下一页"
                   onClick={() => setPage(clampedPage + 1)}

@@ -1,4 +1,5 @@
 import { shardForKey } from './md5'
+import { looksLikePinyinQuery, pinyinInitials } from './pinyin'
 
 /** Compact row emitted by search/players/<prefix-hash>.json. */
 export type PlayerSearchRow = [
@@ -34,9 +35,11 @@ export function decodePlayerSearchRows(
     name,
     org,
     contests,
-    hay: `${name}\u0001${org}`.toLowerCase(),
+    hay: `${name}\u0001${org}\u0001${pinyinInitials(name)}\u0001${pinyinInitials(org)}`.toLowerCase(),
   }))
 }
+
+export { looksLikePinyinQuery }
 
 /** Filter one prefix shard while stopping as soon as the UI result cap is met. */
 export function filterPlayerSearchEntries(

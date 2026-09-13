@@ -25,6 +25,9 @@ export function TopBar() {
           <NavLink to="/predictions" className={({ isActive }) => (isActive ? 'is-active' : '')}>
             预测
           </NavLink>
+          <NavLink to="/problems" className={({ isActive }) => (isActive ? 'is-active' : '')}>
+            题库
+          </NavLink>
           <NavLink to="/rules" className={({ isActive }) => (isActive ? 'is-active' : '')}>
             规则
           </NavLink>

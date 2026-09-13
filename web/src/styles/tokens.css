@@ -54,8 +54,8 @@
   --shadow-lg: 0 28px 60px -28px oklch(32% 0.03 60 / 0.30), 0 4px 12px -4px oklch(35% 0.03 60 / 0.08);
 
   /* ---- Type ---- */
-  --serif: ui-serif, "Songti SC", STSong, SimSun, serif;
-  --sans:  -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+  --serif: "SimSun", "Songti SC", STSong, "Noto Serif CJK SC", ui-serif, serif;
+  --sans:  "Microsoft YaHei", "Noto Sans CJK SC", "PingFang SC", "Hiragino Sans GB", system-ui, sans-serif;
 
   /* ---- Editorial measure ---- */
   --measure: 1240px;

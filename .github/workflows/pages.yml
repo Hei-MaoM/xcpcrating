@@ -4,10 +4,37 @@ name: Deploy data site to Pages
 # The exporter replays the incremental-ladder backtest (the single scoring rule)
 # over the official srk-collection and emits the JSON contract the Vite/React
 # frontend consumes (both the all-participation and official-only boards).
+#
+# The same exporter computes the problem difficulty ratings (1PL IRT fitted on
+# the srk per-team statistics) and the seven-dimension player skill panels
+# (skill-leaderboards/<mode>/overall/<axis>.json), so every run recomputes both
+# from the newest upstream boards plus the audited problem manifest and catalog
+# committed under data/.
+#
+# Triggers:
+#   * push to main           - ship code/data changes
+#   * schedule (every 12 h)  - pick up new srk-collection contests automatically
+#   * workflow_dispatch      - manual refresh
+# The runtime is dominated by the replay (~20 min), so the job reuses a previous
+# export whenever the upstream revision and the code/inputs are unchanged, and a
+# scheduled run with nothing new skips the rebuild entirely.
 
 on:
   push:
     branches: [main]
+    # A docs-only edit cannot change any exported byte: skip the full replay
+    # instead of publishing an identical bundle.  Scheduled runs ignore this.
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'work/**'
+      - 'tmp/**'
+      - '.gitignore'
+  # Twice a day at 00:23 / 12:23 UTC (08:23 / 20:23 Beijing).  GitHub runs cron
+  # in UTC, delays runs under load, and only fires schedules for the default
+  # branch; a repository idle for 60 days has its schedule disabled.
+  schedule:
+    - cron: '23 */12 * * *'
   workflow_dispatch:
 
 # Allow only one concurrent deployment; let an in-progress run finish.
@@ -23,22 +50,41 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # The default is 6 hours; a stuck upstream fetch or replay must fail fast.
+    timeout-minutes: 60
+    outputs:
+      deploy: ${{ steps.decision.outputs.deploy }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Verify upstream-only data source
-        run: python scripts/verify_upstream_only.py
+        with:
+          # The srk data comes from a bare mirror below, never from the
+          # submodule, so a shallow checkout is enough.
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Verify upstream-only data source
+        run: python scripts/verify_upstream_only.py
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Verify the audited problem manifest is present
+        # export_web --problem-types defaults to this file and aborts without
+        # it; fail with a readable message instead of a bare traceback.
+        run: |
+          test -f data/problem-types/2023-present-all-qoj-v2.json \
+            || { echo "::error::data/problem-types/2023-present-all-qoj-v2.json is missing; the problem ratings and seven-dimension panels cannot be built."; exit 1; }
+          test -f data/problem-catalog.json \
+            || echo "::warning::data/problem-catalog.json is missing; audited titles/links degrade to raw srk fallbacks."
 
       - name: Resolve the official srk-collection revision
         id: srk-revision
@@ -95,40 +141,100 @@ jobs:
           path: ${{ runner.temp }}/srk-collection.git
           key: srk-collection-git-${{ runner.os }}-${{ steps.srk-revision.outputs.sha }}
 
+      # The exporter owns this directory completely (it resets several
+      # subdirectories and rewrites the rest), so start from a clean slate:
+      # a partially stale bundle from the checkout or from an older cache key
+      # must never reach Pages.
+      - name: Clear the checked-out data directory
+        run: rm -rf web/public/data
+
+      # The replay is the expensive step.  Its result is a pure function of the
+      # upstream revision, the exporter code and the audited inputs, so it is
+      # cached on exactly those.
+      - name: Restore the exported bundle
+        id: bundle
+        uses: actions/cache/restore@v4
+        with:
+          path: web/public/data
+          key: exported-${{ runner.os }}-${{ steps.srk-revision.outputs.sha }}-${{ hashFiles('src/**/*.py', 'data/**', 'predictions/**', 'requirements.txt') }}
+
       - name: Export the static data bundle
+        if: steps.bundle.outputs.cache-hit != 'true'
         run: |
           PYTHONPATH=src python -m xcpc_rating.export_web \
             --data "${RUNNER_TEMP}/srk-collection/official" \
             --out  web/public/data
 
+      - name: Save the exported bundle
+        if: steps.bundle.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: web/public/data
+          key: exported-${{ runner.os }}-${{ steps.srk-revision.outputs.sha }}-${{ hashFiles('src/**/*.py', 'data/**', 'predictions/**', 'requirements.txt') }}
+
+      - name: Drop the unused skill summary index
+        # 88 MB of duplicate rows: the site reads one axis board per view and
+        # never requests this aggregate, so it only slows the artifact upload
+        # and the Pages deploy.
+        run: |
+          index=web/public/data/skill-leaderboards/index.json
+          if [[ -f "$index" ]]; then
+            du -h "$index"
+            rm "$index"
+          fi
+
+      # A scheduled run whose export came from the cache has nothing new to
+      # publish, so it stops here instead of rebuilding an identical site.
+      - name: Decide whether this run must redeploy
+        id: decision
+        run: |
+          if [[ "${{ github.event_name }}" == "schedule" && "${{ steps.bundle.outputs.cache-hit }}" == "true" ]]; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "Upstream data and site code are unchanged; skipping the rebuild."
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Node
+        if: steps.decision.outputs.deploy == 'true'
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Vite 8 requires ^20.19.0 || >=22.12.0.
+          node-version: '22'
           cache: npm
           cache-dependency-path: web/package-lock.json
 
       - name: Install frontend dependencies
+        if: steps.decision.outputs.deploy == 'true'
         working-directory: web
         run: npm ci
 
+      - name: Lint the frontend
+        if: steps.decision.outputs.deploy == 'true'
+        working-directory: web
+        run: npm run lint
+
       - name: Build the frontend
+        if: steps.decision.outputs.deploy == 'true'
         working-directory: web
         run: npm run build
 
       - name: Configure Pages
+        if: steps.decision.outputs.deploy == 'true'
         uses: actions/configure-pages@v5
         with:
           # Auto-enable Pages (Actions build type) on first run if not yet enabled.
           enablement: true
 
       - name: Upload Pages artifact
+        if: steps.decision.outputs.deploy == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
