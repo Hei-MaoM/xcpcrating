@@ -13,7 +13,6 @@ import {
   formatPenalty,
   formatScore,
   formatScoreInt,
-  formatSolveRate,
 } from '../../lib/format'
 import { Caret, Delta, Deviation } from '../../components/ui'
 import { categoryLabel } from './categories'
@@ -115,7 +114,7 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
         <span className="contest-problems-count">共 {problems.length} 题</span>
       </div>
       <p className="contest-problems__hint">
-        题目分与队伍赛前分使用同一尺度；两者相等时模型预计通过概率为 50%。题型来自 2023 年后的题解分类。
+        题目分与队伍赛前分使用同一尺度。题型来自 2023 年后的题解分类。
       </p>
       <div className="table-scroll contest-problems-table-wrap">
         <table className="tbl contest-problems-table">
@@ -125,7 +124,6 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
             <col style={{ width: '250px' }} />
             <col style={{ width: '120px' }} />
             <col style={{ width: '150px' }} />
-            <col style={{ width: '150px' }} />
           </colgroup>
           <thead>
             <tr>
@@ -133,7 +131,6 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
               <th>题目</th>
               <th>题型</th>
               <th>题目分</th>
-              <th className="right">预计通过率</th>
               <th className="right">通过队伍</th>
             </tr>
           </thead>
@@ -183,7 +180,6 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
                   <td className="tnum">
                     {formatScoreInt(problem.problemRating)}
                   </td>
-                  <td className="right tnum">{formatSolveRate(problem.solveRate)}</td>
                   <td
                     className="right tnum"
                     title={problem.submitted === null ? undefined : `全场提交 ${problem.submitted} 次`}
