@@ -33,7 +33,9 @@
 .problem-external { display: inline-block; margin-left: 7px; color: var(--oxford-2); font-size: 13px; font-weight: 500; transform: translateY(-1px); }
 .problem-id { display: block; margin-top: 4px; color: var(--ink-4); font-size: 10px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 .problem-score { color: var(--ink-2); font-weight: 600; }
-.problem-contest { display: block; max-width: 260px; overflow: hidden; color: var(--ink-2); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+/* The full contest name is shown: it wraps instead of truncating, so a long
+   provincial title stays readable without a tooltip. */
+.problem-contest { display: block; color: var(--ink-2); font-size: 12px; line-height: 1.5; word-break: break-word; }
 .problem-contest:hover { color: var(--oxford); }
 .problem-category { display: inline-block; margin-top: 5px; color: var(--ink-4); font-size: 10px; }
 .problem-category--icpc { color: var(--oxford-2); }
