@@ -117,9 +117,8 @@ export default function ProblemsPage() {
 
   return <div className="page-enter problems-page">
     <section className="wrap phead problems-head">
-      <span className="eyebrow eyebrow--oxford">题库索引 · 可检索</span>
+      <span className="eyebrow eyebrow--oxford">题库索引</span>
       <h1 className="display">题目浏览</h1>
-      <p className="subtle problems-lead">按比赛、年份、题型和难度筛选题目，题号与题目名称一目了然。</p>
     </section>
 
     <section className="wrap problems-content">

@@ -1097,15 +1097,33 @@ export function isIndividualProblemUrl(value: string | null | undefined): boolea
   return /problem|question|task/.test(parent)
 }
 
+/**
+ * Whether a title really names the problem.
+ *
+ * Placeholder titles ("未命名题目", the bare alias) and decoding failures stay
+ * out of the problem bank: a row without a name, a type or a rating is an
+ * unresolved audit row, not a browsable problem (its contest page still lists
+ * it).
+ */
+export function validProblemTitle(
+  value: string | null | undefined,
+  alias?: string | null,
+): boolean {
+  const text = value?.trim() ?? ''
+  if (!text || text === alias || text === '未命名题目') return false
+  return !text.includes('\uFFFD')
+}
+
 /** Load the flat problem index used by the problem browser filters.
  *
  * The problem bank only lists problems whose link actually opens that one
- * statement. A row with no URL, or with a contest/rank/tutorial URL standing in
- * for a statement, is not offered here (the contest pages still show it).
+ * statement and whose title really names it. Rows with no URL, a
+ * contest/rank/tutorial URL, or an unresolved title are not offered here (the
+ * contest pages still show them).
  */
 export function getProblemsIndex(): Promise<ProblemIndexRow[]> {
   return fetchJson<ProblemIndexRow[]>('problems-index.json').then((rows) =>
-    rows.filter((row) => isIndividualProblemUrl(row.problemUrl)),
+    rows.filter((row) => isIndividualProblemUrl(row.problemUrl) && validProblemTitle(row.title, row.alias)),
   )
 }
 
