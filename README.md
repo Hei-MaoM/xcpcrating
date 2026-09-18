@@ -1,5 +1,7 @@
 # xcpc · rating
 
+**在线站点：<https://heimaom.cn/>**
+
 面向 XCPC（ICPC / CCPC / 省赛）**个人选手**的积分与赛事数据站。从
 [algoux/srk-collection](https://github.com/algoux/srk-collection) 的官方榜单出发，
 按时间顺序逐场回放，给每位选手算出一个可横向比较的积分，并生成一个纯静态网页
