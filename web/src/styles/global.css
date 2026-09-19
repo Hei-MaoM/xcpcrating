@@ -506,6 +506,8 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-2); font-size: 14px; font-weight: 500;
 }
 .detail-meta > span { white-space: nowrap; }
+.contest-setter-link { color: inherit; white-space: nowrap; }
+.contest-setter-link:hover { color: var(--oxford-2); }
 .nowrap { white-space: nowrap; }
 .dotsep { color: var(--ink-4); }
 .team-name { font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--ink); }
@@ -915,6 +917,12 @@ a { color: inherit; text-decoration: none; }
 .foot__links { display: flex; gap: 18px; }
 .foot__links a { color: var(--ink-2); font-size: 13px; border-bottom: 1px solid transparent; transition: all .18s; cursor: pointer; }
 .foot__links a:hover { color: var(--oxford-2); border-color: var(--oxford-line); }
+/* 访问计数：每天由源站从 nginx 日志汇总一次，所以低调地摆在仓库链接下面 */
+.foot__stats {
+  margin-top: 10px; color: var(--ink-3); font-size: 12.5px; letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.foot__stats b { color: var(--ink-2); font-weight: 600; }
 
 /* ============================================================
    Reveal on scroll

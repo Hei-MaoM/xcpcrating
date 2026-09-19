@@ -1,0 +1,57 @@
+/* Setter archive: reuse contest-row chrome; only the detail head needs a tighter title block. */
+.setter-head {
+  padding-top: 20px;
+}
+
+.setter-cloud {
+  margin-top: 28px;
+  padding: 18px 20px 20px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+}
+
+.setter-cloud__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.setter-cloud__kicker {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--oxford-2);
+}
+
+.setter-cloud__meta,
+.setter-cloud__status {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 12.5px;
+}
+
+.setter-cloud__words {
+  text-align: center;
+  line-height: 1.35;
+}
+
+.setter-cloud__word {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.04em 0.4em;
+  line-height: 1.2;
+  font-family: var(--serif);
+  white-space: nowrap;
+}
+
+.setter-cloud__word--hot { color: var(--oxford-deep); }
+.setter-cloud__word--mid { color: var(--oxford); }
+.setter-cloud__word--cool { color: var(--ink-2); }
+
+@media (max-width: 600px) {
+  .setter-cloud { margin-top: 20px; padding: 14px 12px 16px; }
+  .setter-cloud__word { padding: 0.02em 0.28em; }
+}

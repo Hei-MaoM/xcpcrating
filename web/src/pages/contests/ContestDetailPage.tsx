@@ -16,6 +16,7 @@ import {
 } from '../../lib/format'
 import { Caret, Delta, Deviation } from '../../components/ui'
 import { categoryLabel } from './categories'
+import { SETTER_GROUPS, findSetterByContestId } from '../setters/settersPresentation'
 
 type ContestTab = 'results' | 'prediction'
 
@@ -354,6 +355,7 @@ export default function ContestDetailPage() {
     }
   }, [slug])
 
+  const setter = contest ? findSetterByContestId(SETTER_GROUPS, contest.id) : null
   const allTeams = useMemo(() => contest?.teams ?? [], [contest])
   // In 仅正式 mode, drop 打星 teams and swap each row's rank / prediction / perf /
   // preRating / muDelta to the official-only fields so the tables render unchanged.
@@ -436,6 +438,14 @@ export default function ContestDetailPage() {
             <span>
               {isOfficial ? `${teams.length} 支正式队伍` : `${contest.teamCount} 支队伍`}
             </span>
+            {setter ? (
+              <>
+                <span className="dotsep">·</span>
+                <Link to={`/setter/${setter.id}`} className="contest-setter-link">
+                  {setter.name}
+                </Link>
+              </>
+            ) : null}
           </div>
         </div>
       </section>

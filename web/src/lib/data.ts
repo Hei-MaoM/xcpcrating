@@ -1114,6 +1114,11 @@ export function validProblemTitle(
   return !text.includes('\uFFFD')
 }
 
+/** Full problem index, including rows the explorer hides. */
+export function getAllProblemsIndex(): Promise<ProblemIndexRow[]> {
+  return fetchJson<ProblemIndexRow[]>('problems-index.json')
+}
+
 /** Load the flat problem index used by the problem browser filters.
  *
  * The problem bank only lists problems whose link actually opens that one
@@ -1122,7 +1127,7 @@ export function validProblemTitle(
  * contest pages still show them).
  */
 export function getProblemsIndex(): Promise<ProblemIndexRow[]> {
-  return fetchJson<ProblemIndexRow[]>('problems-index.json').then((rows) =>
+  return getAllProblemsIndex().then((rows) =>
     rows.filter((row) => isIndividualProblemUrl(row.problemUrl) && validProblemTitle(row.title, row.alias)),
   )
 }
@@ -1170,38 +1175,78 @@ export async function getLeaderboardSchool(
   return (bucket[org] ?? []).map(decodeLeaderboardRow)
 }
 
+/**
+ * 解码后的分片缓存。**这层缓存是搜索速度的关键。**
+ *
+ * `decodePlayerSearchRows` 内部要对每一行算 `pinyinInitials(name)` 和
+ * `pinyinInitials(org)`，也就是每行几百次 `Intl.Collator.compare`。
+ * 13.7 万行全部解码一次大约几千万次比较，全在主线程上。
+ *
+ * `fetchJson` 已经缓存了网络层，但**解码结果没有被缓存**，于是原来每次按键
+ * （去抖 180ms）都把 256 个分片重新解码一遍 —— 那是"搜索特别慢"的主因。
+ * 这里缓存 Promise，连并发去重也一并解决了。
+ */
+const playerShardCache = new Map<string, Promise<PlayerSearchEntry[]>>()
+
+function loadPlayerShard(shard: string): Promise<PlayerSearchEntry[]> {
+  const cached = playerShardCache.get(shard)
+  if (cached) return cached
+  const pending = fetchJson<PlayerSearchRow[]>(`search/players/${shard}.json`)
+    .then(decodePlayerSearchRows)
+    .catch((error: unknown) => {
+      // 失败不要缓存，否则一个 404 会永久钉住这个分片
+      playerShardCache.delete(shard)
+      throw error
+    })
+  playerShardCache.set(shard, pending)
+  return pending
+}
+
+//: 拼音兜底要扫的分片顺序与批大小。
+//: 分批而不是一次发 256 个请求：常见的拼音查询在前几批就能凑够结果，
+//: 这样首屏拉的数据从 9.2 MB 降到几百 KB，而且每批之间都能检查是否已经够了。
+const ALL_SHARDS = Array.from({ length: 256 }, (_, index) =>
+  index.toString(16).padStart(2, '0'),
+)
+const FALLBACK_BATCH = 16
+const FALLBACK_LIMIT = 6
+
 /** Load the candidate shard selected by the query, with a pinyin fallback. */
 export async function getPlayerSearchPrefix(
   query: string,
 ): Promise<PlayerSearchEntry[]> {
   const shard = playerSearchShard(query)
   if (!shard) return []
+  const needle = query.trim().toLowerCase()
   try {
-    const rows = await fetchJson<PlayerSearchRow[]>(
-      `search/players/${shard}.json`,
-    )
-    const direct = decodePlayerSearchRows(rows)
-    if (!looksLikePinyinQuery(query) || query.trim().length > 6 || filterPlayerSearchEntries(direct, query).length > 0) {
-      return direct
-    }
+    const direct = await loadPlayerShard(shard)
+    if (!looksLikePinyinQuery(query) || needle.length > 6) return direct
 
-    // Pinyin initials do not share the original Chinese first-character shard.
-    // Only pay the broader lookup cost after a short, letter-only query misses.
-    const shards = Array.from({ length: 256 }, (_, index) => index.toString(16).padStart(2, '0'))
-    const results = await Promise.allSettled(
-      shards.map((candidate) => fetchJson<PlayerSearchRow[]>(`search/players/${candidate}.json`)),
-    )
+    const directHits = filterPlayerSearchEntries(direct, needle, FALLBACK_LIMIT)
+    if (directHits.length > 0) return direct
+
+    // 拼音首字母和"姓名第一个字"不是同一个分片键，所以命中不了。
+    // 只在短字母查询落空时才付这个代价，并且按批扫描、够了就停。
+    const hits: PlayerSearchEntry[] = []
     const seen = new Set<string>()
-    const merged: PlayerSearchEntry[] = []
-    for (const result of results) {
-      if (result.status !== 'fulfilled') continue
-      for (const entry of decodePlayerSearchRows(result.value)) {
-        if (seen.has(entry.key)) continue
-        seen.add(entry.key)
-        merged.push(entry)
+    for (let start = 0; start < ALL_SHARDS.length && hits.length < FALLBACK_LIMIT; start += FALLBACK_BATCH) {
+      const batch = ALL_SHARDS.slice(start, start + FALLBACK_BATCH)
+      const loaded = await Promise.all(
+        batch.map((candidate) =>
+          loadPlayerShard(candidate).catch(() => [] as PlayerSearchEntry[]),
+        ),
+      )
+      for (const entries of loaded) {
+        for (const entry of entries) {
+          if (seen.has(entry.key) || !entry.hay.includes(needle)) continue
+          seen.add(entry.key)
+          hits.push(entry)
+          if (hits.length >= FALLBACK_LIMIT) break
+        }
+        if (hits.length >= FALLBACK_LIMIT) break
       }
     }
-    return merged
+    return hits
   } catch (error: unknown) {
     if (error instanceof DataError && error.status === 404) return []
     throw error
