@@ -468,32 +468,88 @@ export interface PlayerPanelRaw {
 }
 
 export type SkillAxisKey =
+  | 'adhoc'
+  | 'technique'
+  | 'search'
+  | 'offline'
+  | 'random'
   | 'dataStructure'
   | 'graph'
+  | 'flow'
   | 'dp'
-  | 'math'
   | 'string'
+  | 'math'
+  | 'probability'
   | 'geometry'
-  | 'basic'
 
 export const SKILL_AXIS_ORDER: readonly SkillAxisKey[] = [
+  'adhoc',
+  'technique',
+  'search',
+  'offline',
+  'random',
+  'dataStructure',
+  'graph',
+  'flow',
+  'dp',
+  'string',
+  'math',
+  'probability',
+  'geometry',
+]
+
+export const SKILL_AXIS_LABELS: Record<SkillAxisKey, string> = {
+  adhoc: '思维与模拟',
+  technique: '基础技巧',
+  search: '搜索',
+  offline: '分治与离线',
+  random: '随机与近似',
+  dataStructure: '数据结构',
+  graph: '图论',
+  flow: '网络流与匹配',
+  dp: '动态规划',
+  string: '字符串',
+  math: '数学',
+  probability: '概率与博弈',
+  geometry: '计算几何',
+}
+
+/** Positional order of 7-axis skill-panel exports. Old `basic` is dropped, not remapped. */
+const LEGACY_SKILL_AXIS_ORDER = [
   'dataStructure',
   'graph',
   'dp',
   'math',
   'string',
   'geometry',
-  'basic',
-]
+] as const satisfies readonly SkillAxisKey[]
 
-export const SKILL_AXIS_LABELS: Record<SkillAxisKey, string> = {
-  dataStructure: '数据结构',
-  graph: '图论与网络',
-  dp: '动态规划',
-  math: '数学',
-  string: '字符串',
-  geometry: '几何',
-  basic: '基础算法',
+function emptySkillAxis(): PlayerSkillAxis {
+  return {
+    score: null,
+    mastery: null,
+    topPercent: null,
+    grade: null,
+    coverage: 0,
+    uniqueProblems: 0,
+    successWeight: 0,
+    exposureWeight: 0,
+    validContests: 0,
+    rawMastery: null,
+    rankScore: null,
+    effectiveProblems: 0,
+    confidence: 0,
+    evidenceLevel: 'missing',
+    rankEligible: false,
+    expectedMastery: null,
+    ability: null,
+    posteriorSd: null,
+    rank: null,
+  }
+}
+
+export function emptySkillAxes(): Record<SkillAxisKey, PlayerSkillAxis> {
+  return Object.fromEntries(SKILL_AXIS_ORDER.map((key) => [key, emptySkillAxis()])) as Record<SkillAxisKey, PlayerSkillAxis>
 }
 
 export interface PlayerSkillAxis {
@@ -653,11 +709,12 @@ function decodePanelTier(raw: PlayerPanelTierRaw): PlayerPanelTier {
 }
 
 function decodeSkillTier(raw: PlayerSkillTierRaw): PlayerSkillTier {
-  const metrics = {} as Record<SkillAxisKey, PlayerSkillAxis>
-  SKILL_AXIS_ORDER.forEach((key, index) => {
+  const metrics = emptySkillAxes()
+  const order: readonly SkillAxisKey[] = raw.axes?.length === 7 ? LEGACY_SKILL_AXIS_ORDER : SKILL_AXIS_ORDER
+  order.forEach((key, index) => {
     const metric = raw.axes?.[index]
-    metrics[key] = metric
-      ? {
+    if (!metric) return
+    metrics[key] = {
           score: nullableNumber(metric[0]),
           mastery: nullableNumber(metric[1]),
           topPercent: nullableNumber(metric[2]),
@@ -677,27 +734,6 @@ function decodeSkillTier(raw: PlayerSkillTierRaw): PlayerSkillTier {
           ability: nullableNumber(metric[16]),
           posteriorSd: nullableNumber(metric[17]),
           rank: typeof metric[18] === 'number' ? metric[18] : null,
-        }
-      : {
-          score: null,
-          mastery: null,
-          topPercent: null,
-          grade: null,
-          coverage: 0,
-          uniqueProblems: 0,
-          successWeight: 0,
-          exposureWeight: 0,
-          validContests: 0,
-          rawMastery: null,
-          rankScore: null,
-          effectiveProblems: 0,
-          confidence: 0,
-          evidenceLevel: 'missing',
-          rankEligible: false,
-          expectedMastery: null,
-          ability: null,
-          posteriorSd: null,
-          rank: null,
         }
   })
   return {

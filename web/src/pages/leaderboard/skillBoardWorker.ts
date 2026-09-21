@@ -111,7 +111,7 @@ export function warmSkillBoard(
   instance.postMessage(request)
 }
 
-/** Resolve one page of the seven-dimension board. */
+/** Resolve one page of the thirteen-dimension board. */
 export function querySkillBoard(request: SkillBoardQuery): Promise<SkillBoardPage> {
   const instance = createWorker()
   if (!instance) return queryOnMainThread(request)

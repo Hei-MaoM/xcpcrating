@@ -26,7 +26,7 @@
 .problems-sort-button.is-active { color: var(--ink); }
 .problems-sort-icon { color: var(--ink-4); font-size: 12px; line-height: 1; }
 .problems-sort-button.is-active .problems-sort-icon { color: var(--oxford-2); }
-.problems-table tbody td { height: 68px; vertical-align: middle; }
+.problems-table tbody td { min-height: 68px; height: auto; padding-top: 12px; padding-bottom: 12px; vertical-align: middle; }
 .problem-title { display: block; color: var(--ink); font-family: var(--sans); font-weight: 600; }
 .problem-title--link { width: fit-content; max-width: 100%; transition: color .16s ease; }
 .problem-title--link:hover { color: var(--oxford); }

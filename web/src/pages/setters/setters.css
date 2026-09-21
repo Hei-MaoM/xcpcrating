@@ -33,25 +33,33 @@
   font-size: 12.5px;
 }
 
-.setter-cloud__words {
-  text-align: center;
-  line-height: 1.35;
+/*
+ * 词云用绝对定位：坐标由 settersWordCloudLayout 算好，CSS 只负责画。
+ * 高度由 JS 按排版结果的包围盒写进 style，所以这里不设高度。
+ */
+.setter-cloud__canvas {
+  position: relative;
+  width: 100%;
 }
 
 .setter-cloud__word {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0.04em 0.4em;
+  position: absolute;
+  left: 50%;
+  top: 0;
   line-height: 1.2;
-  font-family: var(--serif);
   white-space: nowrap;
+  font-family: var(--serif);
+  font-feature-settings: "kern" 1;
+  cursor: default;
+  transition: color 0.18s ease;
 }
 
 .setter-cloud__word--hot { color: var(--oxford-deep); }
 .setter-cloud__word--mid { color: var(--oxford); }
 .setter-cloud__word--cool { color: var(--ink-2); }
 
+.setter-cloud__word:hover { color: var(--oxford-2); }
+
 @media (max-width: 600px) {
   .setter-cloud { margin-top: 20px; padding: 14px 12px 16px; }
-  .setter-cloud__word { padding: 0.02em 0.28em; }
 }

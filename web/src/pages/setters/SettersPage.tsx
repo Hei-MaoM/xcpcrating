@@ -1,20 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  getAllProblemsIndex,
-  getContestsIndex,
-  type ContestIndexEntry,
-  type ProblemIndexRow,
-} from '../../lib/data'
+import { getContestsIndex, type ContestIndexEntry } from '../../lib/data'
 import { Caret, Reveal } from '../../components/ui'
-import { SETTER_GROUPS, buildSetterIndex, contestSlugsForSetterGroups } from './settersPresentation'
-import { SetterWordCloud } from './SetterWordCloud'
+import { SETTER_GROUPS, buildSetterIndex } from './settersPresentation'
 import './setters.css'
 
+/**
+ * 出题组总览。
+ *
+ * **这里刻意不放算法词云。** 总览页的词云要把全部出题组、所有场次的标签混在一起统计，
+ * 那个"全部加起来"的词云既说明不了哪一组擅长什么，又得为此加载整个题库索引
+ * （`getAllProblemsIndex`）。词云留在单个出题组的详情页 —— 那里的标签才是这一组的特征。
+ */
 export default function SettersPage() {
   const navigate = useNavigate()
   const [contests, setContests] = useState<ContestIndexEntry[] | null>(null)
-  const [problems, setProblems] = useState<ProblemIndexRow[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -25,13 +25,6 @@ export default function SettersPage() {
       })
       .catch((err: unknown) => {
         if (active) setError(err instanceof Error ? err.message : '加载失败')
-      })
-    getAllProblemsIndex()
-      .then((data) => {
-        if (active) setProblems(data)
-      })
-      .catch(() => {
-        if (active) setProblems([])
       })
     return () => {
       active = false
@@ -46,10 +39,6 @@ export default function SettersPage() {
     () => rows.reduce((sum, row) => sum + row.contestCount, 0),
     [rows],
   )
-  const slugs = useMemo(
-    () => (contests ? contestSlugsForSetterGroups(SETTER_GROUPS, contests) : null),
-    [contests],
-  )
 
   return (
     <div className="page-enter">
@@ -60,7 +49,6 @@ export default function SettersPage() {
           目前收录 {rows.length || '—'} 个出题组、{contestCount || '—'} 场已确认比赛。
           点进一组查看它出过的场次。
         </p>
-        {error ? null : <SetterWordCloud problems={problems} slugs={slugs} />}
       </section>
 
       {error ? (

@@ -7,7 +7,7 @@ import {
 } from './skillBoardPresentation'
 
 /**
- * Pure part of the seven-dimension board, shared by the Web Worker and the
+ * Pure part of the thirteen-dimension board, shared by the Web Worker and the
  * main-thread fallback so both compute identical ranks, filtering and paging.
  */
 

@@ -172,8 +172,6 @@ def normalized_labels(value: Any) -> dict[str, float]:
         labels = normalize_label_weights(value)
     except (TypeError, ValueError):
         return {}
-    if len(labels) > 2:
-        return {}
     if not labels:
         return {}
     total = sum(float(v) for v in labels.values())

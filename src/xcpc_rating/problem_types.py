@@ -18,23 +18,35 @@ from .problem_tags import normalize_detail_tags
 
 
 PROBLEM_TYPE_AXES = (
+    "adhoc",
+    "technique",
+    "search",
+    "offline",
+    "random",
     "dataStructure",
     "graph",
+    "flow",
     "dp",
-    "math",
     "string",
+    "math",
+    "probability",
     "geometry",
-    "basic",
 )
 
 PROBLEM_TYPE_LABELS = {
+    "adhoc": "思维与模拟",
+    "technique": "基础技巧",
+    "search": "搜索",
+    "offline": "分治与离线",
+    "random": "随机与近似",
     "dataStructure": "数据结构",
-    "graph": "图论与网络",
+    "graph": "图论",
+    "flow": "网络流与匹配",
     "dp": "动态规划",
-    "math": "数学",
     "string": "字符串",
-    "geometry": "几何",
-    "basic": "基础算法",
+    "math": "数学",
+    "probability": "概率与博弈",
+    "geometry": "计算几何",
 }
 
 DIFFICULTY_LEVELS = (
@@ -1371,7 +1383,7 @@ def deduplicate_problem_evidence(
 def aggregate_skill_mastery(
     evidence: Iterable[Mapping[str, Any]],
 ) -> dict[str, Any]:
-    """Aggregate unique problem evidence into seven calibrated skill axes.
+    """Aggregate unique problem evidence into thirteen calibrated skill axes.
 
     ``rawMastery`` and the success/exposure weights remain the transparent
     observed solve-rate diagnostics.  ``mastery`` is now the posterior ability

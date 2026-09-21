@@ -48,18 +48,23 @@ export interface WordCloudLayout {
   bounds: WordCloudBounds
 }
 
-/** 超过这个字数就横排——竖排长标签难读，而且会浪费画布。 */
-const ROTATE_MAX_LENGTH = 4
-
 /**
- * 这个词应该竖排吗。只对短标签开放竖排，而且用标签自身的哈希决定，
- * 保证同一个标签每次渲染结果一致（不能用随机数，否则词会跳）。
+ * 这个词应该竖排吗。
+ *
+ * 只有**短的纯拉丁/数字标签**才竖排（DP / KMP / NTT 这类）。两个理由：
+ *   * 多向排版会明显伤害词云的可读性（Displays 2024 有专门研究）；
+ *   * 中文方块字转 90° 之后比拉丁字母难认得多——拉丁字母有上升部/下降部，
+ *     转过去还能靠轮廓辨识，汉字转过去就是一列方块。
+ *
+ * 用标签自身的哈希决定而不是随机数：必须保证同一个标签每次渲染结果一致，
+ * 否则每次重排词都会跳。
  */
+const ROTATABLE = /^[A-Za-z0-9+]{2,4}$/
+
 export function wordCloudRotate(text: string): number {
-  const chars = Array.from(text)
-  if (chars.length > ROTATE_MAX_LENGTH) return 0
+  if (!ROTATABLE.test(text)) return 0
   let hash = 0
-  for (const char of chars) {
+  for (const char of Array.from(text)) {
     hash = (hash * 31 + (char.codePointAt(0) ?? 0)) >>> 0
   }
   return hash % 2 === 0 ? 0 : 90
@@ -80,11 +85,21 @@ function intersects(
   )
 }
 
+/** 词云占画布的比例：留一点边距，别让词贴着边缘。 */
+const FILL = 0.92
+/** 相邻两圈之间的径向步长（像素，按画布最长半轴折算）。 */
+const RADIAL_STEP = 2
+/** 同一圈上相邻采样点之间的弧长（像素）。 */
+const ARC_STEP = 4
+
 /**
  * 从中心往外螺旋找一个放得下的位置。
  *
- * 用同心圆环而不是阿基米德螺线：环上的采样点按弧长均匀分布，半径越大采样越密，
- * 这样大画布上也不会出现"某些角度永远试不到"的缝。
+ * **按椭圆采样，不是圆。** 纯圆螺线在宽画布上会先撞到上下边界，于是左右大片留白
+ * ——实测 1022px 宽的画布上词云只占了 651px。把归一化的半径映射到画布的两个半轴上，
+ * 词云就会贴合容器比例铺开。
+ *
+ * 环上的采样点按弧长均匀分布（半径越大采样越密），这样不会出现"某些角度永远试不到"的缝。
  */
 function findSlot(
   width: number,
@@ -92,21 +107,23 @@ function findSlot(
   placed: readonly PlacedWord[],
   spec: WordCloudSpec,
 ): { x: number; y: number } | null {
-  const halfWidth = spec.width / 2
-  const halfHeight = spec.height / 2
-  const radialStep = 2
-  const arcStep = 4
-  const maxRadius = Math.hypot(halfWidth, halfHeight) + Math.max(width, height)
+  // 留一点边距，别让词贴着画布边缘
+  const halfWidth = (spec.width / 2) * FILL
+  const halfHeight = (spec.height / 2) * FILL
+  const longest = Math.max(halfWidth, halfHeight)
+  const tStep = Math.max(RADIAL_STEP / longest, 0.004)
 
-  for (let radius = radialStep; radius <= maxRadius; radius += radialStep) {
-    const samples = Math.max(8, Math.ceil((2 * Math.PI * radius) / arcStep))
+  for (let t = tStep; t <= 1.0001; t += tStep) {
+    const ringX = t * halfWidth
+    const ringY = t * halfHeight
+    const samples = Math.max(8, Math.ceil((2 * Math.PI * Math.max(ringX, ringY)) / ARC_STEP))
     for (let index = 0; index < samples; index += 1) {
       const angle = (index / samples) * 2 * Math.PI
       // 先取整再判定：坐标必须是整数，否则"确定性"会因为浮点尾数而不成立
-      const x = Math.round(Math.cos(angle) * radius)
-      const y = Math.round(Math.sin(angle) * radius)
-      if (Math.abs(x) + width / 2 > halfWidth) continue
-      if (Math.abs(y) + height / 2 > halfHeight) continue
+      const x = Math.round(Math.cos(angle) * ringX)
+      const y = Math.round(Math.sin(angle) * ringY)
+      if (Math.abs(x) + width / 2 > spec.width / 2) continue
+      if (Math.abs(y) + height / 2 > spec.height / 2) continue
       if (placed.some((other) => intersects(x, y, width, height, other, spec.padding))) continue
       return { x, y }
     }
@@ -130,10 +147,80 @@ function boundsOf(words: readonly PlacedWord[]): WordCloudBounds {
 }
 
 /**
+ * 字号自适应：让词云把画布铺满，而不是缩成中间一小团。
+ *
+ * 词云是从中心紧密堆出来的，画布边界只是**上限**不是目标 —— 43 个标签排完后实测只占了
+ * 1022px 画布里的 548px，两侧空得明显。所以排完一遍之后量一下包围盒，按比例缩放字号
+ * 再排，迭代几次贴到目标宽度。
+ *
+ * 包围盒的宽度近似与字号线性相关（字号乘 k，总面积乘 k²，半径乘 k），所以缩放比直接
+ * 用目标宽/当前宽即可，不需要二分。
+ */
+export interface FitOptions {
+  /** 目标：词云至少占到画布宽度的这个比例。 */
+  minWidthRatio?: number
+  /** 上限：超过就会被裁掉。 */
+  maxWidthRatio?: number
+  maxHeightRatio?: number
+  /** 字号最多放大到几倍。 */
+  maxScale?: number
+  iterations?: number
+}
+
+function withScale(
+  items: readonly ScaledAlgorithmTag[],
+  scale: number,
+): ScaledAlgorithmTag[] {
+  return items.map((item) => ({
+    ...item,
+    fontSize: Math.max(1, Math.round(item.fontSize * scale)),
+  }))
+}
+
+export function fitWordCloud(
+  items: readonly ScaledAlgorithmTag[],
+  spec: WordCloudSpec,
+  options: FitOptions = {},
+): WordCloudLayout {
+  const minWidthRatio = options.minWidthRatio ?? 0.86
+  const maxWidthRatio = options.maxWidthRatio ?? 0.97
+  const maxHeightRatio = options.maxHeightRatio ?? 0.97
+  const maxScale = options.maxScale ?? 2.4
+  const iterations = options.iterations ?? 4
+
+  const maxWidth = spec.width * maxWidthRatio
+  const maxHeight = spec.height * maxHeightRatio
+  const minWidth = spec.width * minWidthRatio
+
+  let scale = 1
+  let layout = layoutWordCloud(items, spec)
+
+  for (let attempt = 0; attempt < iterations; attempt += 1) {
+    const drawnWidth = layout.bounds.maxX - layout.bounds.minX
+    const drawnHeight = layout.bounds.maxY - layout.bounds.minY
+    const overflows = drawnWidth > maxWidth || drawnHeight > maxHeight
+    const tooSmall = drawnWidth < minWidth && scale < maxScale
+
+    if (!overflows && !tooSmall) break
+
+    // 包围盒近似与字号成正比，所以直接按比例调；overflow 时留 4% 余量避免来回震荡
+    const room = Math.min(maxWidth / Math.max(drawnWidth, 1), maxHeight / Math.max(drawnHeight, 1))
+    const next = overflows ? scale * room * 0.96 : Math.min(scale * room, maxScale)
+    if (Math.abs(next - scale) < 0.02) break
+    scale = next
+    layout = layoutWordCloud(withScale(items, scale), spec)
+  }
+
+  return layout
+}
+
+/**
  * 把带权重的标签排成一张互不重叠的词云。
  *
  * 放不下的词会被丢掉而不是硬塞——所以调用方要接受 `words.length < items.length`，
  * 并按 `bounds` 裁剪画布，不要假定所有标签都排上了。
+ *
+ * 想要"铺满画布"的效果请用 `fitWordCloud`，它在外面套了一层字号自适应。
  */
 export function layoutWordCloud(
   items: readonly ScaledAlgorithmTag[],

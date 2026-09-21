@@ -39,7 +39,7 @@ function readPage(value: string | null): number {
 }
 
 /**
- * The seven-dimension board shown as a tab on the home page. One of the seven
+ * The thirteen-dimension board shown as a tab on the home page. One of the
  * dimensions is selected at a time; the board always uses the official
  * participation caliber, so no extra caliber row is rendered.
  */
@@ -96,7 +96,7 @@ export function SkillBoard() {
 
   return (
     <div className="skill-board">
-      <div className="skill-axis-nav" role="tablist" aria-label="七个题型维度">
+      <div className="skill-axis-nav" role="tablist" aria-label="十三个题型维度">
         {SKILL_AXIS_ORDER.map((item, index) => (
           <button
             key={item}

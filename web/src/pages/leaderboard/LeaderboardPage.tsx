@@ -85,7 +85,7 @@ const BOARD_HINT: Record<BoardKind, string> = {
   official: '仅计入正式参赛，打星（非正式）场次不计。',
   all: '全部成绩计入积分，含打星（非正式）场次。',
   period: '截至选定日期、有过正式参赛的选手，分数为当时的历史评分。',
-  skill: '按核心解法把题目归入七个维度，比较选手在不同维度上的长期能力。',
+  skill: '按核心解法把题目归入十三个维度，比较选手在不同维度上的长期能力。',
 }
 
 export default function LeaderboardPage() {
@@ -104,7 +104,7 @@ export default function LeaderboardPage() {
         merged.delete('page')
         merged.delete('from') // legacy param from the earlier range-based view
         if (next !== 'period') merged.delete('to')
-        // The seven-dimension board owns these; drop them when it is closed so
+        // The thirteen-dimension board owns these; drop them when it is closed so
         // the other boards never inherit a stale axis or search term.
         if (next !== 'skill') {
           merged.delete('axis')

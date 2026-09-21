@@ -570,8 +570,8 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--line); border-radius: var(--r-md);
   background: var(--card); box-shadow: var(--shadow-sm);
 }
-.contest-problems-table { min-width: 860px; }
-.contest-problems-table tbody td { height: 54px; }
+.contest-problems-table { min-width: 920px; }
+.contest-problems-table tbody td { min-height: 54px; height: auto; padding-top: 12px; padding-bottom: 12px; vertical-align: middle; }
 .contest-problem-alias {
   display: inline-flex; min-width: 28px; justify-content: center;
   color: var(--oxford); font-family: var(--serif); font-size: 18px; font-weight: 700;
@@ -586,7 +586,14 @@ a { color: inherit; text-decoration: none; }
   display: inline-block; margin-left: 6px; color: var(--oxford-2);
   font-size: 12px; transform: translateY(-1px);
 }
+.contest-problem-tags { display: grid; gap: 6px; }
 .contest-problem-types { display: flex; flex-wrap: wrap; gap: 6px; }
+.contest-problem-details { display: flex; flex-wrap: wrap; gap: 5px; }
+.contest-problem-details span {
+  display: inline-flex; align-items: center; min-height: 22px; padding: 0 7px;
+  border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--ink-2); font-size: 11px; white-space: nowrap;
+}
 .contest-problem-type {
   display: inline-flex; align-items: center; min-height: 23px; padding: 0 8px;
   border: 1px solid oklch(82% 0.045 248); border-radius: 999px;

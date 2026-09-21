@@ -569,7 +569,7 @@ def _team_pre_rating(engine: IncrementalEngine, team) -> float | None:
 
 
 def _team_rating_sd(engine: IncrementalEngine, team) -> float | None:
-    """Conservative uncertainty proxy used only by the seven-axis model."""
+    """Conservative uncertainty proxy used only by the thirteen-axis model."""
 
     if not team.members:
         return None
@@ -720,7 +720,7 @@ def replay_and_collect(
             else []
         )
         # Capture the team baseline before processing this contest.  The
-        # seven-axis model uses this same pre-event scale and estimates only a
+        # thirteen-axis model uses this same pre-event scale and estimates only a
         # personal axis residual.
         pre_team_rating = [
             _team_pre_rating(engine, team) for team in contest.teams
@@ -1735,7 +1735,7 @@ def _skill_metric_values(tier_payload):
 
 
 def build_skill_leaderboard_index(records: Mapping[str, Mapping[str, object]]) -> dict:
-    """Build the standalone seven-axis skill leaderboard index.
+    """Build the standalone thirteen-axis skill leaderboard index.
 
     Rows use a fixed tuple order in ``rowFields`` to keep the public JSON much
     smaller than repeating nine property names for every player.  Legacy

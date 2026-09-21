@@ -115,14 +115,14 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
         <span className="contest-problems-count">共 {problems.length} 题</span>
       </div>
       <p className="contest-problems__hint">
-        题目分与队伍赛前分使用同一尺度。题型来自 2023 年后的题解分类。
+        题目分与队伍赛前分使用同一尺度。实心标签是粗题型，下方描边标签是这题用到的具体算法。
       </p>
       <div className="table-scroll contest-problems-table-wrap">
         <table className="tbl contest-problems-table">
           <colgroup>
             <col style={{ width: '72px' }} />
             <col />
-            <col style={{ width: '250px' }} />
+            <col style={{ width: '320px' }} />
             <col style={{ width: '120px' }} />
             <col style={{ width: '150px' }} />
           </colgroup>
@@ -167,15 +167,24 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
                     )}
                   </td>
                   <td>
-                    <div className="contest-problem-types">
-                      {typeLabels.map((label) => (
-                        <span
-                          className={`contest-problem-type${label === '未分类' ? ' is-unknown' : ''}`}
-                          key={label}
-                        >
-                          {label}
-                        </span>
-                      ))}
+                    <div className="contest-problem-tags">
+                      <div className="contest-problem-types" aria-label="粗略题型">
+                        {typeLabels.map((label) => (
+                          <span
+                            className={`contest-problem-type${label === '未分类' ? ' is-unknown' : ''}`}
+                            key={label}
+                          >
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                      {problem.detailTags?.length ? (
+                        <div className="contest-problem-details" aria-label="具体算法">
+                          {problem.detailTags.map((tag) => (
+                            <span key={tag}>{tag}</span>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                   </td>
                   <td className="tnum">

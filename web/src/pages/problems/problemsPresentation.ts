@@ -50,15 +50,7 @@ export const PROBLEM_RATING_THRESHOLDS = {
   hardMax: 2350,
 } as const
 
-export const AXIS_LABELS: Record<SkillAxisKey, string> = {
-  dataStructure: '数据结构',
-  graph: '图论与网络',
-  dp: '动态规划',
-  math: '数学',
-  string: '字符串',
-  geometry: '计算几何',
-  basic: '基础算法',
-}
+export { SKILL_AXIS_LABELS as AXIS_LABELS } from '../../lib/data'
 
 /** Map a calibrated problem rating to the seven-level explorer difficulty. */
 export function difficultyFromProblemRating(rating: number | null | undefined): DifficultyOption {

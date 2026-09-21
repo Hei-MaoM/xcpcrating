@@ -35,7 +35,7 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
-from xcpc_rating.problem_tags import DETAIL_TAG_LABELS, normalize_detail_tags  # noqa: E402
+from xcpc_rating.problem_tags import DETAIL_TAG_LABELS, axes_for_detail_tags, labels_from_detail_tags, normalize_detail_tags  # noqa: E402
 from xcpc_rating.problem_types import PROBLEM_TYPE_AXES, PROBLEM_TYPE_LABELS, normalize_label_weights  # noqa: E402
 
 
@@ -938,45 +938,37 @@ def derive_url(
 
 
 def infer_labels(title: str | None, evidence: str | None, detail_tags: list[str]) -> dict[str, float]:
+    from_tags = labels_from_detail_tags(detail_tags)
+    if from_tags:
+        return from_tags
     text = " ".join(x for x in (title, evidence) if x).lower()
     hits: list[str] = []
     keyword_axes = (
         ("geometry", ("geometry", "几何", "polygon", "triangle", "rectangle", "circle", "点积", "叉积", "凸包")),
         ("string", ("string", "字符串", "prefix", "suffix", "kmp", "trie", "hash", "回文", "字典")),
-        ("graph", ("graph", "图论", "tree", "树", "path", "最短路", "flow", "matching", "mst", "连通")),
+        ("flow", ("flow", "matching", "网络流", "匹配")),
+        ("graph", ("graph", "图论", "tree", "树", "path", "最短路", "mst", "连通")),
         ("dp", ("dynamic programming", "动态规划", " dp", "dp ", "knapsack", "背包", "状态转移", "记忆化")),
-        ("math", ("math", "数学", "number theory", "数论", "probability", "概率", "组合", "mod", "xor", "gcd")),
+        ("probability", ("probability", "概率", "期望", "博弈", "game theory")),
+        ("math", ("math", "数学", "number theory", "数论", "组合", "mod", "xor", "gcd")),
         ("dataStructure", ("data structure", "数据结构", "segment tree", "线段树", "fenwick", "树状数组", "heap", "堆", "dsu", "并查集")),
-        ("basic", ("simulation", "模拟", "construct", "构造", "签到", "implementation", "实现")),
+        ("search", ("dfs", "bfs", "搜索", "ida*", "dlx")),
+        ("offline", ("莫队", "cdq", "分治", "离线")),
+        ("random", ("随机", "randomiz", "模拟退火")),
+        ("technique", ("binary search", "二分", "前缀和", "双指针")),
+        ("adhoc", ("simulation", "模拟", "construct", "构造", "签到", "implementation", "实现", "greedy", "贪心")),
     )
     for axis, words in keyword_axes:
         if any(word in text for word in words):
             hits.append(axis)
-    for tag in detail_tags:
-        if tag in {"几何", "凸包", "旋转卡壳", "半平面交", "叉积与方向"}:
-            hits.append("geometry")
-        elif tag in {"字符串哈希", "KMP", "AC自动机", "后缀数组", "后缀自动机", "回文算法", "字典树"}:
-            hits.append("string")
-        elif tag in {"DFS/BFS", "最短路", "最小生成树", "拓扑排序", "强连通分量", "网络流", "匹配", "树链剖分", "最近公共祖先"}:
-            hits.append("graph")
-        elif tag in {"树形DP", "换根DP", "背包DP", "区间DP", "状压DP", "数位DP", "概率DP", "计数DP", "记忆化搜索", "插头DP"}:
-            hits.append("dp")
-        elif tag in {"线段树", "树状数组", "堆", "单调栈", "单调队列", "并查集", "莫队", "分块", "李超树"}:
-            hits.append("dataStructure")
-        elif tag in {"数论", "素数筛", "最大公约数", "组合数学", "容斥", "生成函数", "矩阵快速幂", "线性代数", "概率与期望", "博弈论", "计数", "模运算", "莫比乌斯反演", "质因数分解"}:
-            hits.append("math")
-        elif tag in {"模拟", "构造", "贪心", "排序", "二分查找", "双指针", "前缀和", "差分", "枚举", "分治", "递归", "交互", "位运算"}:
-            hits.append("basic")
     ordered: list[str] = []
     for axis in hits:
         if axis not in ordered:
             ordered.append(axis)
     if not ordered:
         return {}
-    ordered = ordered[:2]
-    if len(ordered) == 1:
-        return {ordered[0]: 1.0}
-    return {ordered[0]: 0.6, ordered[1]: 0.4}
+    weight = 1.0 / len(ordered)
+    return {axis: weight for axis in ordered}
 
 
 def infer_detail_tags(title: str | None, evidence: str | None, labels: Mapping[str, float]) -> list[str]:

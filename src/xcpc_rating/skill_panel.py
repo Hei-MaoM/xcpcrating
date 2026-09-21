@@ -1,4 +1,4 @@
-"""Seven-axis problem-type skill panels.
+"""Thirteen-axis problem-type skill panels.
 
 The type manifest is deliberately kept separate from player shards.  This
 module only turns transient, team-level problem evidence into a compact
@@ -27,6 +27,18 @@ SKILL_PRIOR = 0.5
 SKILL_PRIOR_STRENGTH = 2.0
 SKILL_WILSON_Z = 0.84
 SKILL_SCORE_MODEL = "sequential-irt-v1"
+
+
+def _use_sequential(taxonomy_version: str) -> bool:
+    """Current taxonomies use sequential IRT; only explicit v1 remains Wilson."""
+
+    version = str(taxonomy_version)
+    return not (
+        version == "v1"
+        or version.startswith("v1-")
+        or version.startswith("legacy")
+    )
+
 SKILL_GRADE_CUTOFFS = ((1.0, "S"), (5.0, "A"), (15.0, "B"), (35.0, "C"),
                        (60.0, "D"), (85.0, "E"))
 
@@ -210,15 +222,15 @@ def build_player_skill_panels(
                     continue
                 scoped_evidence[player_key] = scoped
                 aggregates[player_key] = (
-                    aggregate_skill_mastery(scoped)
-                    if str(taxonomy_version).startswith("v1")
-                    else aggregate_skill_mastery_sequential(scoped)
+                    aggregate_skill_mastery_sequential(scoped)
+                    if _use_sequential(taxonomy_version)
+                    else aggregate_skill_mastery(scoped)
                 )
             if not aggregates:
                 continue
 
             cohorts: dict[str, list[float]] = {axis: [] for axis in PROBLEM_TYPE_AXES}
-            smooth_display = not str(taxonomy_version).startswith("v1")
+            smooth_display = _use_sequential(taxonomy_version)
             for aggregate in aggregates.values():
                 for axis in PROBLEM_TYPE_AXES:
                     derived = _axis_metrics(

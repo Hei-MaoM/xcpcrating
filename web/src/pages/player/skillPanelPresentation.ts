@@ -63,7 +63,7 @@ export function skillAxisRating(metric: PlayerSkillAxis | undefined): number | n
 }
 
 /**
- * Rank calibration of the seven-axis radar.
+ * Rank calibration of the thirteen-axis radar.
  *
  * The radar plots each dimension by the player's standing in that dimension's
  * own leaderboard rather than by the raw rating, so 第 1 名 always fills the
@@ -108,7 +108,7 @@ export function skillRankStrength(rank: number | null | undefined): number | nul
 }
 
 /**
- * Seven-axis radar scale, driven by each dimension's field rank.
+ * Thirteen-axis radar scale, driven by each dimension's field rank.
  *
  * A dimension without a published rank falls back to its share of the player's
  * best rating, so the chart still renders for partial records.
@@ -135,7 +135,7 @@ export function skillRadarScale(panel: PlayerSkillTier) {
   }
 }
 
-/** Sort the seven dimensions by the player's score, with missing values last. */
+/** Sort the thirteen dimensions by the player's score, with missing values last. */
 export function sortSkillAxes(panel: PlayerSkillTier): SkillAxisKey[] {
   return [...SKILL_AXIS_ORDER].sort((left, right) => {
     const leftScore = skillAxisRating(panel.axes[left])

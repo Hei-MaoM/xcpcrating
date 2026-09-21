@@ -17,10 +17,10 @@ import './player-metrics.css'
 
 const TIER_ORDER: readonly PanelScope[] = ['overall']
 
-const RADAR_CENTER_X = 180
-const RADAR_CENTER_Y = 136
-const RADAR_RADIUS = 88
-const RADAR_LABEL_RADIUS = 122
+const RADAR_CENTER_X = 200
+const RADAR_CENTER_Y = 168
+const RADAR_RADIUS = 102
+const RADAR_LABEL_RADIUS = 144
 
 function SkillRadar({ tier, panel }: { tier: PanelScope; panel: PlayerSkillTier }) {
   const { strengths, ratings, ranks, levels } = skillRadarScale(panel)
@@ -47,8 +47,8 @@ function SkillRadar({ tier, panel }: { tier: PanelScope; panel: PlayerSkillTier 
 
   return (
     <figure className="skill-radar">
-      <svg className="skill-radar__svg" viewBox="0 0 360 270" role="img" aria-labelledby={titleId}>
-        <title id={titleId}>总体题型能力七边形。{summary}</title>
+      <svg className="skill-radar__svg" viewBox="0 0 400 336" role="img" aria-labelledby={titleId}>
+        <title id={titleId}>总体题型能力十三边形。{summary}</title>
         <g aria-hidden="true">
           {levels.map((level, index) => (
             <polygon
@@ -178,10 +178,10 @@ export function PlayerSkillPanel({ player, official }: { player: PlayerDetail; o
     <section className="wrap skill-panel" aria-labelledby="skill-panel-title">
       <div className="skill-panel__heading">
         <div className="section-label">
-          <span id="skill-panel-title" className="eyebrow">题型能力七维</span>
+          <span id="skill-panel-title" className="eyebrow">题型能力十三维</span>
           <RuleDraw className="section-label__rule" />
         </div>
-        <p className="skill-panel__caption">2025+ 题面/题解分类 · 按题目预期通过率校准 · 当前为{official ? '正式参赛' : '全部参赛'}口径</p>
+        <p className="skill-panel__caption">已更新标签的题目 · 按题目预期通过率校准 · 当前为{official ? '正式参赛' : '全部参赛'}口径</p>
       </div>
       {hasData ? (
         <div className="skill-panel__grid">
