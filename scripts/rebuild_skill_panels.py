@@ -43,18 +43,25 @@ PUBLIC = ROOT / "web" / "public" / "data"
 PREVIEW = ROOT / "web" / "public" / "preview-data"
 SRK_ROOT = ROOT / "vendor" / "srk-collection" / "official"
 TAXONOMY_VERSION = "problem-types-audited-v4"
-SKILL_SOURCE_WINDOW = "2025 retagged contests; 13-axis sequential IRT"
-SKILL_CONTEST_IDS = (
-    "icpc/icpc2025/icpc2025xi_an",
-    "icpc/icpc2025/icpc2025chengdu",
-    "icpc/icpc2025/icpc2025wuhan",
-    "icpc/icpc2025/icpc2025nanjing",
-    "icpc/icpc2025/icpc2025shenyang",
-    "icpc/icpc2025/icpc2025shanghai",
-    "icpc/icpc2025/icpc2025hongkong",
-    "icpc/icpc2025/icpc2025preliminary-1",
-    "icpc/icpc2025/icpc2025preliminary-2",
-    "ccpc/ccpc2025/ccpc2025preliminary",
+QUEUE_PATH = ROOT / "tmp" / "retag" / "queue.json"
+
+
+def _skill_contest_ids() -> tuple[str, ...]:
+    queue = json.loads(QUEUE_PATH.read_text(encoding="utf-8"))
+    ids = [
+        item["contestKey"]
+        for item in queue.get("items") or []
+        if item.get("status") == "applied" and item.get("contestKey")
+    ]
+    if not ids:
+        raise SystemExit(f"no applied contests in {QUEUE_PATH}")
+    return tuple(ids)
+
+
+SKILL_CONTEST_IDS = _skill_contest_ids()
+SKILL_SOURCE_WINDOW = (
+    f"2022-2026 retagged final/regional/online ({len(SKILL_CONTEST_IDS)} contests); "
+    "13-axis sequential IRT"
 )
 
 
@@ -313,20 +320,9 @@ def rebuild_skill_panels(manifest: dict, records: dict[str, dict]) -> dict:
 
 
 def write_preview(manifest: dict, records: dict[str, dict], *, skill_problem_count: int) -> None:
-    players_root = PREVIEW / "players"
-    players_root.mkdir(parents=True, exist_ok=True)
     shards: dict[str, dict] = {}
     for key, record in records.items():
         shards.setdefault(player_shard(key), {})[key] = record
-    for shard, bucket in shards.items():
-        _dump_json(str(players_root / f"{shard}.json"), bucket)
-    print(f"wrote {len(shards)} player shards", flush=True)
-
-    skill_root = PREVIEW / "skill-leaderboards"
-    skill_root.mkdir(parents=True, exist_ok=True)
-    _dump_json(str(skill_root / "index.json"), build_skill_leaderboard_index(records))
-    _write_skill_leaderboard_assets(str(PREVIEW), records)
-    print("wrote skill leaderboards", flush=True)
 
     meta_path = PUBLIC / "meta.json"
     meta = _load_json(meta_path) if meta_path.exists() else {}
@@ -339,8 +335,24 @@ def write_preview(manifest: dict, records: dict[str, dict], *, skill_problem_cou
         {"key": axis, "label": PROBLEM_TYPE_LABELS[axis]}
         for axis in PROBLEM_TYPE_AXES
     ]
-    _dump_json(str(PREVIEW / "meta.json"), meta)
-    print("wrote preview meta", flush=True)
+
+    for root in (PREVIEW, PUBLIC):
+        players_root = root / "players"
+        players_root.mkdir(parents=True, exist_ok=True)
+        for shard, bucket in shards.items():
+            _dump_json(str(players_root / f"{shard}.json"), bucket)
+        skill_root = root / "skill-leaderboards"
+        skill_root.mkdir(parents=True, exist_ok=True)
+        _dump_json(str(skill_root / "index.json"), build_skill_leaderboard_index(records))
+        _write_skill_leaderboard_assets(str(root), records)
+        for stale in (
+            skill_root / "all" / "overall" / "basic.json",
+            skill_root / "official" / "overall" / "basic.json",
+        ):
+            if stale.exists():
+                stale.unlink()
+        _dump_json(str(root / "meta.json"), meta)
+        print(f"wrote {root}", flush=True)
 
 
 def main() -> int:
