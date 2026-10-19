@@ -107,7 +107,6 @@ xcpcrating/
 - 主数据源：[algoux/srk-collection](https://github.com/algoux/srk-collection)（官方榜单）
 - 收录范围：ICPC、CCPC、省赛三类官方比赛
 - 同场去重：同一物理比赛的双榜只保留一份（网络预选赛除外）
-- 题型数据：集成 QOJ 题型标注，计算十三维能力分布
 
 ## 技术栈
 
@@ -152,7 +151,6 @@ MIT License
 ## 致谢
 
 - 数据源：[algoux/srk-collection](https://github.com/algoux/srk-collection)
-- 题型标注：[QOJ](https://qoj.ac/) 问题分类体系
 - 评分算法灵感：Codeforces rating system
 
 ---
