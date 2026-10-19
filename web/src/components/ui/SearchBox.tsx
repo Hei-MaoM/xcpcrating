@@ -15,6 +15,7 @@ import { useDebounce } from '../../lib/useDebounce'
 import { pinyinInitials } from '../../lib/pinyin'
 import { SearchIcon } from './primitives'
 import { shouldLoadSearchIndexes } from './searchPresentation'
+import { searchCache } from '../../lib/searchCache'
 
 const DEBOUNCE_MS = 180
 const MAX_PER_GROUP = 6
@@ -59,7 +60,7 @@ function toSearchSchool(s: SchoolRow): SearchSchool {
   return { org: s.org, rating: s.rating, contests: s.contests, hay: `${s.org} ${pinyinInitials(s.org)}`.toLowerCase() }
 }
 function toSearchContest(c: ContestIndexEntry): SearchContest {
-  return { slug: c.slug, title: c.title, category: c.category, hay: `${c.title}${c.category}${pinyinInitials(c.title)}${pinyinInitials(c.category)}`.toLowerCase() }
+  return { slug: c.slug, title: c.title, category: c.category, hay: `${c.title}${c.category}${pinyinInitials(c.title)}${pinyinInitials(c.category)}`.toLowerCase() }
 }
 
 function matchSchools(schools: SearchSchool[], q: string): SchoolHit[] {
@@ -90,6 +91,37 @@ function matchContests(contests: SearchContest[], q: string): ContestHit[] {
 }
 
 /**
+ * Module-level singleton for preloading popular names.
+ * Ensures we only load once across all SearchBox instances.
+ */
+let popularNamesPromise: Promise<PlayerSearchEntry[]> | null = null
+
+function preloadPopularNames(): Promise<PlayerSearchEntry[]> {
+  if (popularNamesPromise) return popularNamesPromise
+
+  popularNamesPromise = fetch('/data/search-index/popular-names.json')
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      return res.json()
+    })
+    .then((data: Array<{ key: string; name: string; org: string; contests: number; rating: number | null }>) => {
+      return data.map((item) => ({
+        key: item.key,
+        name: item.name,
+        org: item.org,
+        contests: item.contests,
+        hay: `${item.name}\u0001${item.org}\u0001${pinyinInitials(item.name)}\u0001${pinyinInitials(item.org)}`.toLowerCase(),
+      }))
+    })
+    .catch((err) => {
+      console.warn('Failed to preload popular names:', err)
+      return []
+    })
+
+  return popularNamesPromise
+}
+
+/**
  * Global search styled per the Light Luxury topbar. Small school/contest indexes
  * load on focus; the player index loads one prefix shard per debounced query.
  */
@@ -105,8 +137,36 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
   const [schools, setSchools] = useState<SearchSchool[] | null>(null)
   const [contests, setContests] = useState<SearchContest[] | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [popularNames, setPopularNames] = useState<PlayerSearchEntry[] | null>(null)
 
   const debounced = useDebounce(query.trim(), DEBOUNCE_MS)
+
+  // Preload popular names on idle
+  useEffect(() => {
+    if (typeof requestIdleCallback !== 'undefined') {
+      const idleId = requestIdleCallback(() => {
+        preloadPopularNames().then((names) => {
+          setPopularNames(names)
+          // Pre-cache popular names for instant lookup
+          if (names.length > 0) {
+            searchCache.set('__popular__', names)
+          }
+        })
+      })
+      return () => cancelIdleCallback(idleId)
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      const timeoutId = setTimeout(() => {
+        preloadPopularNames().then((names) => {
+          setPopularNames(names)
+          if (names.length > 0) {
+            searchCache.set('__popular__', names)
+          }
+        })
+      }, 100)
+      return () => clearTimeout(timeoutId)
+    }
+  }, [])
 
   useEffect(() => {
     if (!shouldLoadSearchIndexes(open, query)) return
@@ -118,10 +178,23 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
 
   useEffect(() => {
     if (!open || debounced.length === 0) return
+
+    // Check cache first
+    const cacheKey = debounced.toLowerCase()
+    const cached = searchCache.get(cacheKey) as PlayerSearchEntry[] | undefined
+    if (cached) {
+      setPlayerResult({ query: debounced, rows: cached })
+      return
+    }
+
     let active = true
     getPlayerSearchPrefix(debounced)
       .then((rows) => {
-        if (active) setPlayerResult({ query: debounced, rows })
+        if (active) {
+          setPlayerResult({ query: debounced, rows })
+          // Cache the result
+          searchCache.set(cacheKey, rows)
+        }
       })
       .catch(() => {
         if (active) setPlayerResult({ query: debounced, rows: [] })
@@ -191,6 +264,18 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
     }
   }
 
+  // Trigger preload on mouse hover
+  const handleMouseEnter = () => {
+    if (!popularNames) {
+      preloadPopularNames().then((names) => {
+        setPopularNames(names)
+        if (names.length > 0) {
+          searchCache.set('__popular__', names)
+        }
+      })
+    }
+  }
+
   const showPanel = open && debounced.length > 0
 
   return (
@@ -205,6 +290,7 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
           setActiveIndex(0)
         }}
         onFocus={() => setOpen(true)}
+        onMouseEnter={handleMouseEnter}
         onKeyDown={onKeyDown}
         role="combobox"
         aria-expanded={showPanel}

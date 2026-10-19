@@ -125,6 +125,9 @@ SHARD_HEX_LEN = 2
 # route therefore downloads one page instead of the complete 50k+ player board.
 LEADERBOARD_PAGE_SIZE = 100
 
+# Skill leaderboard page size for Phase 2 pagination
+SKILL_LEADERBOARD_PAGE_SIZE = 100
+
 # The type leaderboard is a deliberately small, independent index.  It keeps
 # the player shards useful for detail pages while allowing the leaderboard page
 # to load one JSON document instead of scanning all 256 player shards.
@@ -1487,6 +1490,236 @@ def _yyyymmdd(iso: str) -> int:
     return int(iso[:10].replace("-", ""))
 
 
+def _write_skill_leaderboard_paginated(out_dir: str, records) -> int:
+    """Write paginated skill leaderboard data for on-demand loading.
+    
+    Splits each mode/tier/axis combination into pages of 100 players each.
+    Each page is approximately 50-100 KB, dramatically reducing initial load time.
+    The old monolithic per-axis files are kept for backward compatibility.
+    
+    Directory structure:
+        skill-leaderboards/
+            {mode}/{tier}/{axis}/
+                meta.json         # { totalPlayers, totalPages, version }
+                page-1.json       # First 100 players
+                page-2.json       # Next 100 players
+                ...
+    """
+    root = os.path.join(out_dir, "skill-leaderboards")
+    os.makedirs(root, exist_ok=True)
+    file_count = 0
+    
+    for mode in ("all", "official"):
+        for tier in ("overall",):
+            for axis in PROBLEM_TYPE_AXES:
+                # Collect and sort all players for this axis
+                rows = []
+                for record in records.values():
+                    tier_data = (
+                        record.get("skillPanel", {})
+                        .get(mode, {})
+                        .get(tier)
+                    )
+                    if not isinstance(tier_data, Mapping):
+                        continue
+                    metrics = tier_data.get("axes")
+                    if not isinstance(metrics, list):
+                        continue
+                    axis_index = PROBLEM_TYPE_AXES.index(axis)
+                    if axis_index >= len(metrics) or not isinstance(metrics[axis_index], list):
+                        continue
+                    metric = metrics[axis_index]
+                    score = metric[0] if len(metric) > 0 else None
+                    rank_score = metric[9] if len(metric) > 9 else score
+                    if not isinstance(score, (int, float)) or not isinstance(rank_score, (int, float)):
+                        continue
+                    rows.append({
+                        "key": record["key"],
+                        "name": record["name"],
+                        "org": record["org"],
+                        "score": score,
+                        "topPercent": metric[2] if len(metric) > 2 else None,
+                        "grade": metric[3] if len(metric) > 3 else None,
+                        "uniqueProblems": metric[5] if len(metric) > 5 else 0,
+                        "coverage": metric[4] if len(metric) > 4 else 0.0,
+                        "rankScore": rank_score,
+                        "effectiveProblems": metric[11] if len(metric) > 11 else metric[5] if len(metric) > 5 else 0,
+                        "evidenceLevel": metric[13] if len(metric) > 13 else "legacy",
+                        "confidence": metric[12] if len(metric) > 12 else 1.0,
+                    })
+                
+                rows.sort(key=lambda row: (-row["rankScore"], row["key"]))
+                total_players = len(rows)
+                total_pages = (total_players + SKILL_LEADERBOARD_PAGE_SIZE - 1) // SKILL_LEADERBOARD_PAGE_SIZE
+                
+                # Create axis directory
+                axis_dir = os.path.join(root, mode, tier, axis)
+                os.makedirs(axis_dir, exist_ok=True)
+                
+                # Write metadata
+                _dump_json(
+                    os.path.join(axis_dir, "meta.json"),
+                    {
+                        "version": "skill-panel-v5-paginated",
+                        "mode": mode,
+                        "tier": tier,
+                        "axis": axis,
+                        "totalPlayers": total_players,
+                        "totalPages": total_pages,
+                        "pageSize": SKILL_LEADERBOARD_PAGE_SIZE,
+                        "rowFields": list(SKILL_LEADERBOARD_AXIS_FIELDS),
+                    },
+                )
+                file_count += 1
+                
+                # Write paginated data
+                for page_num in range(1, total_pages + 1):
+                    start_idx = (page_num - 1) * SKILL_LEADERBOARD_PAGE_SIZE
+                    end_idx = min(start_idx + SKILL_LEADERBOARD_PAGE_SIZE, total_players)
+                    page_rows = rows[start_idx:end_idx]
+                    
+                    _dump_json(
+                        os.path.join(axis_dir, f"page-{page_num}.json"),
+                        {
+                            "page": page_num,
+                            "rows": [
+                                [row[field] for field in SKILL_LEADERBOARD_AXIS_FIELDS]
+                                for row in page_rows
+                            ],
+                        },
+                    )
+                    file_count += 1
+    
+    return file_count
+
+
+def export_trie_index(records) -> dict:
+    """Build a Trie index for fast player search with Chinese and Pinyin support.
+    
+    Returns a structure ready for JSON export:
+    {
+        "version": "trie-v1",
+        "root": {
+            "children": {"a": {...}, "b": {...}, ...},
+            "results": [...],  # Inline results for short prefixes
+        }
+    }
+    
+    Each node can have:
+    - children: dict mapping next character to child node
+    - results: list of [key, name, org, contests] for terminal/popular prefixes
+    """
+    from .pinyin_simple import pinyin_initials
+    
+    class TrieNode:
+        def __init__(self):
+            self.children = {}
+            self.results = []
+    
+    root = TrieNode()
+    
+    # Collect all players with their search keys
+    players = []
+    for record in records.values():
+        if record.get("contests", 0) > 0:
+            key = record["key"]
+            name = record["name"]
+            org = record.get("org", "")
+            contests = record["contests"]
+            rating = record.get("rating")
+            
+            players.append({
+                "key": key,
+                "name": name,
+                "org": org,
+                "contests": contests,
+                "rating": rating if rating is not None else -float('inf'),
+            })
+    
+    # Sort by contests (descending), then rating (descending)
+    players.sort(key=lambda x: (x["contests"], x["rating"]), reverse=True)
+    
+    # Build Trie for both Chinese characters and Pinyin
+    MAX_INLINE_RESULTS = 20
+    MAX_PREFIX_DEPTH = 4
+    
+    for player in players:
+        name_lower = player["name"].lower()
+        org_lower = player["org"].lower()
+        
+        # Index by name (Chinese characters)
+        for i in range(len(name_lower)):
+            prefix = name_lower[:i+1]
+            if len(prefix) <= MAX_PREFIX_DEPTH:
+                node = root
+                for char in prefix:
+                    if char not in node.children:
+                        node.children[char] = TrieNode()
+                    node = node.children[char]
+                
+                if len(node.results) < MAX_INLINE_RESULTS:
+                    node.results.append([
+                        player["key"],
+                        player["name"],
+                        player["org"],
+                        player["contests"],
+                    ])
+        
+        # Index by pinyin initials
+        name_pinyin = pinyin_initials(player["name"]).lower()
+        if name_pinyin and len(name_pinyin) <= MAX_PREFIX_DEPTH:
+            node = root
+            for char in name_pinyin:
+                if char not in node.children:
+                    node.children[char] = TrieNode()
+                node = node.children[char]
+            
+            if len(node.results) < MAX_INLINE_RESULTS:
+                node.results.append([
+                    player["key"],
+                    player["name"],
+                    player["org"],
+                    player["contests"],
+                ])
+        
+        # Index by organization
+        for i in range(min(len(org_lower), MAX_PREFIX_DEPTH)):
+            prefix = org_lower[:i+1]
+            node = root
+            for char in prefix:
+                if char not in node.children:
+                    node.children[char] = TrieNode()
+                node = node.children[char]
+            
+            if len(node.results) < MAX_INLINE_RESULTS:
+                node.results.append([
+                    player["key"],
+                    player["name"],
+                    player["org"],
+                    player["contests"],
+                ])
+    
+    # Convert Trie to JSON-serializable dict
+    def node_to_dict(node):
+        result = {}
+        if node.children:
+            result["children"] = {
+                char: node_to_dict(child)
+                for char, child in sorted(node.children.items())
+            }
+        if node.results:
+            result["results"] = node.results
+        return result
+    
+    return {
+        "version": "trie-v1",
+        "maxInlineResults": MAX_INLINE_RESULTS,
+        "maxPrefixDepth": MAX_PREFIX_DEPTH,
+        "totalPlayers": len(players),
+        "root": node_to_dict(root),
+    }
+
+
 def build_period_index(records) -> list[list]:
     """Per-player official-participation timeline for the 时间段 (period) board.
 
@@ -1633,6 +1866,35 @@ def build_player_search_shards(records) -> dict[str, list[list]]:
         rows.sort(key=lambda row: (row[1].lower(), row[2].lower(), row[0]))
     return shards
 
+
+def export_popular_names(records) -> list[dict]:
+    """Export top 1000 players by contest count for preloading popular names.
+    
+    Returns a list of {key, name, org, contests, rating} sorted by descending
+    contest participation count. Used by the frontend for intelligent preloading
+    of frequently searched players.
+    """
+    # Filter to players with at least one contest
+    candidates = [
+        {
+            "key": record["key"],
+            "name": record["name"],
+            "org": record["org"],
+            "contests": record["contests"],
+            "rating": record.get("rating"),  # May be None for unrated players
+        }
+        for record in records.values()
+        if record["contests"] > 0
+    ]
+    
+    # Sort by contest count (descending), then by rating (descending, nulls last)
+    candidates.sort(
+        key=lambda x: (x["contests"], x["rating"] if x["rating"] is not None else -float('inf')),
+        reverse=True
+    )
+    
+    # Return top 1000
+    return candidates[:1000]
 
 def _dump_json(path: str, obj) -> int:
     """Write ``obj`` as compact UTF-8 JSON; return the byte size written."""
@@ -2093,6 +2355,18 @@ def write_bundle(
         _dump_json(os.path.join(search_root, shard + ".json"), rows)
         file_count += 1
 
+    # search-index/popular-names.json: Top 1000 players by contest count
+    search_index_dir = os.path.join(out_dir, "search-index")
+    popular_names = export_popular_names(records)
+    _dump_json(os.path.join(search_index_dir, "popular-names.json"), popular_names)
+    file_count += 1
+
+    # Phase 3: Trie index for fast prefix search with pinyin support
+    trie_data = export_trie_index(records)
+    _dump_json(os.path.join(search_index_dir, "trie-meta.json"), trie_data)
+    file_count += 1
+
+
     # Delete superseded monolithic indexes when exporting over an older bundle.
     for legacy_name in (
         "players-index.json",
@@ -2133,6 +2407,9 @@ def write_bundle(
     # records are compacted so the wire format stays exactly in sync with the
     # player detail decoder.
     file_count += _write_skill_leaderboard_assets(out_dir, records)
+    # Phase 2: Paginated skill leaderboards for on-demand loading
+    file_count += _write_skill_leaderboard_paginated(out_dir, records)
+    
     # Keep a complete manifest for diagnostics and future server-side paging;
     # the UI requests the smaller per-axis files above.
     _dump_json(
