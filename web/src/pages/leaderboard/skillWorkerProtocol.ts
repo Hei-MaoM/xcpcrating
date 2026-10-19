@@ -8,7 +8,6 @@ import type { SkillAxisKey, PanelScope } from '../../lib/data'
  */
 export type SkillWorkerRequest =
   | { type: 'init'; base: string }
-  | { type: 'warm'; mode: 'all' | 'official'; tier: PanelScope; axis: SkillAxisKey }
   | {
       type: 'query'
       id: number
@@ -21,7 +20,6 @@ export type SkillWorkerRequest =
     }
 
 export type SkillWorkerResponse =
-  | { type: 'warmed'; mode: 'all' | 'official'; tier: PanelScope; axis: SkillAxisKey }
   | {
       type: 'result'
       id: number

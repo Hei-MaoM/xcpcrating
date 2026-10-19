@@ -71,7 +71,6 @@ function createWorker(): Worker | null {
 }
 
 function handleMessage(message: SkillWorkerResponse): void {
-  if (message.type === 'warmed') return
   if (message.type === 'error') {
     if (message.id === undefined) return
     const entry = pending.get(message.id)
@@ -97,18 +96,6 @@ function handleMessage(message: SkillWorkerResponse): void {
 async function queryOnMainThread(request: SkillBoardQuery): Promise<SkillBoardPage> {
   const board = await getSkillLeaderboardIndex(request.mode, request.tier, request.axis)
   return buildSkillBoardPage(board.rows, request.query, request.page, request.pageSize)
-}
-
-/** Fetch, decode and cache one caliber ahead of the first board render. */
-export function warmSkillBoard(
-  mode: 'all' | 'official',
-  tier: PanelScope,
-  axis: SkillAxisKey,
-): void {
-  const instance = createWorker()
-  if (!instance) return
-  const request: SkillWorkerRequest = { type: 'warm', mode, tier, axis }
-  instance.postMessage(request)
 }
 
 /** Resolve one page of the thirteen-dimension board. */

@@ -384,29 +384,14 @@ export default function ContestDetailPage() {
   const viewKey = `${slug ?? ''}|${tab}|${board}`
   const [page, setPage] = useState(1)
 
-
   // Reset state when slug changes
   useEffect(() => {
-     
     setContest(null) // eslint-disable-line react-hooks/set-state-in-effect
-    setError(null)  
+    setError(null)
   }, [slug])
 
   // Reset page when view changes
   useEffect(() => {
-     
-    setPage(1) // eslint-disable-line react-hooks/set-state-in-effect
-  }, [viewKey])
-  // Reset state when slug changes
-  useEffect(() => {
-     
-    setContest(null) // eslint-disable-line react-hooks/set-state-in-effect
-    setError(null)  
-  }, [slug])
-
-  // Reset page when view changes
-  useEffect(() => {
-     
     setPage(1) // eslint-disable-line react-hooks/set-state-in-effect
   }, [viewKey])
 
