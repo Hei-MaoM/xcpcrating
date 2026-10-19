@@ -88,12 +88,10 @@ export default function ContestsPage() {
       .catch((err: unknown) => setError(err instanceof Error ? err.message : '加载失败'))
   }, [])
 
-  // Reset the reveal budget whenever the series filter changes (during render).
-  const [revealedFor, setRevealedFor] = useState(series)
-  if (series !== revealedFor) {
-    setRevealedFor(series)
+  // Reset the reveal budget whenever the series filter changes
+  useEffect(() => {
     setVisibleCount(INITIAL_VISIBLE)
-  }
+  }, [series])
 
   const groups = useMemo(() => (contests ? buildGroups(contests, series) : []), [contests, series])
   const totalMatches = useMemo(() => countContests(groups), [groups])

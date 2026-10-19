@@ -9,6 +9,11 @@ import {
   type ContestTeam,
 } from '../../lib/data'
 import {
+  contestXCPCRatingReview,
+  formatReviewRho,
+  type ContestReviewScore,
+} from '../../lib/review'
+import {
   formatDate,
   formatPenalty,
   formatScore,
@@ -102,8 +107,45 @@ function ContestMetricsStrip({ metrics }: { metrics?: ContestMetrics }) {
   )
 }
 
-function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
-  if (!problems?.length) return null
+function ContestReviewChip({ review }: { review: ContestReviewScore }) {
+  const label = formatReviewRho(review.value)
+  const title =
+    review.value === null
+      ? "有效队伍不足，无法计算符合度"
+      : `XCPC Rating 前瞻排名与实际排名的 Spearman ρ，${review.sampleSize} 支有提交且有赛前分的正式队伍。符合度不是百分制。`
+  return (
+    <span className="contest-problems-review" title={title}>
+      符合度 <b className="tnum">{label}</b>
+      {review.value === null ? null : (
+        <span className="contest-problems-review__n"> · {review.sampleSize} 队</span>
+      )}
+    </span>
+  )
+}
+
+function ContestProblemsTable({
+  problems,
+  review,
+}: {
+  problems?: ContestProblem[]
+  review: ContestReviewScore
+}) {
+  if (!problems?.length) {
+    return (
+      <section className="wrap contest-problems-wrap" aria-labelledby="contest-problems-title">
+        <div className="section-label">
+          <h2 id="contest-problems-title" className="section-label__text">
+            题目概览
+          </h2>
+          <span className="section-label__rule" />
+          <ContestReviewChip review={review} />
+        </div>
+        <p className="contest-problems__hint">
+          符合度是 XCPC Rating 前瞻排名与实际排名的 Spearman ρ，只统计有提交且有赛前分的正式队，不是百分制。
+        </p>
+      </section>
+    )
+  }
 
   return (
     <section className="wrap contest-problems-wrap" aria-labelledby="contest-problems-title">
@@ -113,9 +155,10 @@ function ContestProblemsTable({ problems }: { problems?: ContestProblem[] }) {
         </h2>
         <span className="section-label__rule" />
         <span className="contest-problems-count">共 {problems.length} 题</span>
+        <ContestReviewChip review={review} />
       </div>
       <p className="contest-problems__hint">
-        题目分与队伍赛前分使用同一尺度。实心标签是粗题型，下方描边标签是这题用到的具体算法。
+        题目分与队伍赛前分使用同一尺度。实心标签是粗题型，下方描边标签是这题用到的具体算法。符合度是 XCPC Rating 前瞻排名与实际排名的 Spearman ρ，不是百分制。
       </p>
       <div className="table-scroll contest-problems-table-wrap">
         <table className="tbl contest-problems-table">
@@ -338,20 +381,30 @@ export default function ContestDetailPage() {
     searchParams.get('board') === 'official' ? 'official' : 'all'
   const isOfficial = board === 'official'
 
-  const [loadedSlug, setLoadedSlug] = useState<string | undefined>(undefined)
-  if (slug !== loadedSlug) {
-    setLoadedSlug(slug)
+  const viewKey = `${slug ?? ''}|${tab}|${board}`
+  const [page, setPage] = useState(1)
+
+
+  // Reset state when slug changes
+  useEffect(() => {
     setContest(null)
     setError(null)
-  }
+  }, [slug])
 
-  const viewKey = `${slug ?? ''}|${tab}|${board}`
-  const [pagedView, setPagedView] = useState(viewKey)
-  const [page, setPage] = useState(1)
-  if (viewKey !== pagedView) {
-    setPagedView(viewKey)
+  // Reset page when view changes
+  useEffect(() => {
     setPage(1)
-  }
+  }, [viewKey])
+  // Reset state when slug changes
+  useEffect(() => {
+    setContest(null)
+    setError(null)
+  }, [slug])
+
+  // Reset page when view changes
+  useEffect(() => {
+    setPage(1)
+  }, [viewKey])
 
   useEffect(() => {
     if (!slug) return
@@ -366,6 +419,7 @@ export default function ContestDetailPage() {
 
   const setter = contest ? findSetterByContestId(SETTER_GROUPS, contest.id) : null
   const allTeams = useMemo(() => contest?.teams ?? [], [contest])
+  const review = useMemo(() => contestXCPCRatingReview(allTeams), [allTeams])
   // In 仅正式 mode, drop 打星 teams and swap each row's rank / prediction / perf /
   // preRating / muDelta to the official-only fields so the tables render unchanged.
   const teams = useMemo<ContestTeam[]>(() => {
@@ -470,7 +524,7 @@ export default function ContestDetailPage() {
         </section>
       ) : null}
 
-      <ContestProblemsTable problems={contest.problems} />
+      <ContestProblemsTable problems={contest.problems} review={review} />
 
       <section className="wrap">
         <div className="detail-toolbar">
