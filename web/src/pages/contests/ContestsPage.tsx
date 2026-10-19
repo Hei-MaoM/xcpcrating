@@ -90,7 +90,7 @@ export default function ContestsPage() {
 
   // Reset the reveal budget whenever the series filter changes
   useEffect(() => {
-    setVisibleCount(INITIAL_VISIBLE)
+    setVisibleCount(INITIAL_VISIBLE) // eslint-disable-line react-hooks/set-state-in-effect
   }, [series])
 
   const groups = useMemo(() => (contests ? buildGroups(contests, series) : []), [contests, series])

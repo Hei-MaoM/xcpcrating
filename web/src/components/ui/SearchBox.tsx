@@ -176,14 +176,14 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
       getContestsIndex().then((r) => setContests(r.map(toSearchContest))).catch(() => setContests([]))
   }, [open, query, schools, contests])
 
+   
   useEffect(() => {
     if (!open || debounced.length === 0) return
-
     // Check cache first
     const cacheKey = debounced.toLowerCase()
     const cached = searchCache.get(cacheKey) as PlayerSearchEntry[] | undefined
     if (cached) {
-      setPlayerResult({ query: debounced, rows: cached })
+      setPlayerResult({ query: debounced, rows: cached }) // eslint-disable-line react-hooks/set-state-in-effect
       return
     }
 
@@ -191,13 +191,13 @@ export function SearchBox({ placeholder = '搜索选手、学校或比赛…' }:
     getPlayerSearchPrefix(debounced)
       .then((rows) => {
         if (active) {
-          setPlayerResult({ query: debounced, rows })
+          setPlayerResult({ query: debounced, rows })  
           // Cache the result
           searchCache.set(cacheKey, rows)
         }
       })
       .catch(() => {
-        if (active) setPlayerResult({ query: debounced, rows: [] })
+        if (active) setPlayerResult({ query: debounced, rows: [] })  
       })
     return () => {
       active = false

@@ -86,12 +86,12 @@ async function loadPaginatedPage(
   const pageData = (await response.json()) as { page: number; rows: unknown[][] }
   
   // Expand array rows to objects
-  const expandedRows: SkillLeaderboardIndexRow[] = pageData.rows.map((row): any => {
-    const obj: any = {}
+  const expandedRows: SkillLeaderboardIndexRow[] = pageData.rows.map((row): SkillLeaderboardIndexRow => {
+    const obj: Record<string, unknown> = {}
     meta.rowFields.forEach((field, index) => {
       obj[field] = row[index]
     })
-    return obj as SkillLeaderboardIndexRow
+    return obj as unknown as SkillLeaderboardIndexRow
   })
 
   // LRU cache

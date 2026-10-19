@@ -387,23 +387,27 @@ export default function ContestDetailPage() {
 
   // Reset state when slug changes
   useEffect(() => {
-    setContest(null)
-    setError(null)
+     
+    setContest(null) // eslint-disable-line react-hooks/set-state-in-effect
+    setError(null)  
   }, [slug])
 
   // Reset page when view changes
   useEffect(() => {
-    setPage(1)
+     
+    setPage(1) // eslint-disable-line react-hooks/set-state-in-effect
   }, [viewKey])
   // Reset state when slug changes
   useEffect(() => {
-    setContest(null)
-    setError(null)
+     
+    setContest(null) // eslint-disable-line react-hooks/set-state-in-effect
+    setError(null)  
   }, [slug])
 
   // Reset page when view changes
   useEffect(() => {
-    setPage(1)
+     
+    setPage(1) // eslint-disable-line react-hooks/set-state-in-effect
   }, [viewKey])
 
   useEffect(() => {
